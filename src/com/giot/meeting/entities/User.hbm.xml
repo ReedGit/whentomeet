@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.giot.meeting.entities.User" table="USER">
+		<id name="userid" type="int">
+			<column name="USERID" />
+			<generator class="native" />
+		</id>
+		<property name="nameid" type="java.lang.String">
+			<column name="NAMEID" />
+		</property>
+		<property name="username" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="PASSWORD" />
+		</property>
+		<property name="image" type="java.lang.String">
+			<column name="IMAGE" />
+		</property>
+	</class>
+</hibernate-mapping>
