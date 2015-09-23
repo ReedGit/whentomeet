@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.giot.meeting.dao.PersonDao;
 import com.giot.meeting.entities.Person;
+import com.giot.meeting.utils.CountTime;
 import com.giot.meeting.utils.Invitee;
 
 @Service
@@ -29,6 +30,10 @@ public class PersonService {
 
 	public long getPersonCount(int meetid) {
 		return personDao.getPersonCount(meetid);
+	}
+	
+	public List<CountTime> getTimeCount(int meetid){
+		return personDao.getTimeCount(meetid);
 	}
 
 }
