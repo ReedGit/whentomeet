@@ -2,7 +2,7 @@ package com.giot.meeting.entities;
 
 public class Meeting {
 
-	private int meetid;
+	private String meetid;
 	private String title;
 	private String content;
 	private String duration;
@@ -11,11 +11,11 @@ public class Meeting {
 	private String remark;
 	private String location;
 
-	public int getMeetid() {
+	public String getMeetid() {
 		return meetid;
 	}
 
-	public void setMeetid(int meetid) {
+	public void setMeetid(String meetid) {
 		this.meetid = meetid;
 	}
 

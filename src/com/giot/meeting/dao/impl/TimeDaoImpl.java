@@ -33,10 +33,10 @@ public class TimeDaoImpl implements TimeDao {
 	}
 
 	@Override
-	public void deleteTime(int meetid) {
+	public void deleteTime(String meetid) {
 		try {
 			String sql = "delete from Time where meetid = :meetid";
-			getSession().createQuery(sql).setInteger("meetid", meetid)
+			getSession().createQuery(sql).setString("meetid", meetid)
 					.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,10 +46,10 @@ public class TimeDaoImpl implements TimeDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Time> findAllTime(int meetid) {
+	public List<Time> findAllTime(String meetid) {
 		try {
 			String sql = "from Time where meetid = :meetid";
-			return getSession().createQuery(sql).setInteger("meetid", meetid)
+			return getSession().createQuery(sql).setString("meetid", meetid)
 					.list();
 		} catch (Exception e) {
 			e.printStackTrace();

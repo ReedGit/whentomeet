@@ -18,15 +18,15 @@ public class ContactService {
 		contactDao.addContact(contact);
 	}
 
-	public void deleteContact(int contactid) {
+	public void deleteContact(String contactid) {
 		contactDao.deleteContact(contactid);
 	}
 
-	public List<Contact> findAllContact(int userid) {
+	public List<Contact> findAllContact(String userid) {
 		return contactDao.findAllContact(userid);
 	}
 
-	public Contact findContact(int contactid) {
+	public Contact findContact(String contactid) {
 		return contactDao.findContact(contactid);
 	}
 

@@ -11,12 +11,12 @@ public interface PersonDao {
 
 	public void addPerson(Person person);
 
-	public void deletePerson(int meetid);
+	public void deletePerson(String meetid);
 
-	public List<Invitee> findAllPerson(int meetid);
+	public List<Invitee> findAllPerson(String meetid);
 
-	public long getPersonCount(int meetid);
+	public long getPersonCount(String meetid);
 	
-	public List<CountTime> getTimeCount(int meetid);
+	public List<CountTime> getTimeCount(String meetid);
 	
 }

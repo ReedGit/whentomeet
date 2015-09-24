@@ -37,9 +37,8 @@ public class UserDaoImpl implements UserDao {
 	public void addUser(User user) {
 		try {
 			getSession().save(user);
-		} catch (Exception e) {
+		} catch (RuntimeException  e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
 		}
 	}
 

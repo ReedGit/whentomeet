@@ -8,10 +8,10 @@ public interface ContactDao {
 
 	public void addContact(Contact contact);
 
-	public void deleteContact(int contactid);
+	public void deleteContact(String contactid);
 
-	public List<Contact> findAllContact(int userid);
+	public List<Contact> findAllContact(String userid);
 
-	public Contact findContact(int contactid);
+	public Contact findContact(String contactid);
 
 }

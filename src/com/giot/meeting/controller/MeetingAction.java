@@ -24,13 +24,14 @@ public class MeetingAction {
 
 	@ResponseBody
 	@RequestMapping("/addMeeting.do")
-	public void addMeeting(Meeting meeting) {
+	public String addMeeting(Meeting meeting) {
 		meetingService.addMeeting(meeting);
+		return meeting.getMeetid();
 	}
 
 	@ResponseBody
 	@RequestMapping("/findMeeting.do")
-	public Meeting findMeeting(int meetid) {
+	public Meeting findMeeting(String meetid) {
 		return meetingService.findMeeting(meetid);
 	}
 
@@ -42,7 +43,7 @@ public class MeetingAction {
 
 	@ResponseBody
 	@RequestMapping("/deleteMeeting.do")
-	public void deleteMeeting(int meetid) {
+	public void deleteMeeting(String meetid) {
 		personService.deletePerson(meetid);
 		timeService.deleteTime(meetid);
 		meetingService.deleteMeeting(meetid);

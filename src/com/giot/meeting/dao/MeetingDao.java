@@ -8,10 +8,10 @@ public interface MeetingDao {
 
 	public void addMeeting(Meeting meeting);
 
-	public void deleteMeeting(int meetid);
+	public void deleteMeeting(String meetid);
 
 	public List<Meeting> findAllMeeting(String organiser);
 
-	public Meeting findMeeting(int meetid);
+	public Meeting findMeeting(String meetid);
 
 }

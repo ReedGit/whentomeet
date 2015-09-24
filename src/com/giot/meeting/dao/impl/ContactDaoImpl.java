@@ -33,10 +33,10 @@ public class ContactDaoImpl implements ContactDao {
 	}
 
 	@Override
-	public void deleteContact(int contactid) {
+	public void deleteContact(String contactid) {
 		try {
 			String sql="delete from Contact where contactid = :contactid";
-			getSession().createQuery(sql).setInteger("contactid", contactid).executeUpdate();
+			getSession().createQuery(sql).setString("contactid", contactid).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -45,10 +45,10 @@ public class ContactDaoImpl implements ContactDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Contact> findAllContact(int userid) {
+	public List<Contact> findAllContact(String userid) {
 		try {
 			String sql ="from Contact where userid = :userid";
-			return getSession().createQuery(sql).setInteger("userid", userid).list();
+			return getSession().createQuery(sql).setString("userid", userid).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -56,11 +56,11 @@ public class ContactDaoImpl implements ContactDao {
 	}
 
 	@Override
-	public Contact findContact(int contactid) {
+	public Contact findContact(String contactid) {
 		try {
 			String sql="from Contact where contactid = :contactid";
 			return (Contact) getSession().createQuery(sql)
-					.setInteger("contactid", contactid).uniqueResult();
+					.setString("contactid", contactid).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

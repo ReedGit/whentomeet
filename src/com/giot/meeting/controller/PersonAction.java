@@ -26,19 +26,19 @@ public class PersonAction {
 
 	@ResponseBody
 	@RequestMapping("/findAllPerson.do")
-	public List<Invitee> findAllPerson(int meetid) {
+	public List<Invitee> findAllPerson(String meetid) {
 		return personService.findAllPerson(meetid);
 	}
 
 	@ResponseBody
 	@RequestMapping("/getPersonCount.do")
-	public long getPersonCount(int meetid) {
+	public long getPersonCount(String meetid) {
 		return personService.getPersonCount(meetid);
 	}
 
 	@ResponseBody
 	@RequestMapping("/getTimeCount.do")
-	public List<CountTime> getTimeCount(int meetid) {
+	public List<CountTime> getTimeCount(String meetid) {
 		return personService.getTimeCount(meetid);
 	}
 

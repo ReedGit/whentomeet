@@ -2,17 +2,17 @@ package com.giot.meeting.entities;
 
 public class User {
 
-	private int userid;
+	private String userid;
 	private String nameid;
 	private String username;
 	private String password;
 	private String image;
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 

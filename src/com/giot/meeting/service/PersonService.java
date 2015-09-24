@@ -20,19 +20,19 @@ public class PersonService {
 		personDao.addPerson(person);
 	}
 
-	public void deletePerson(int meetid) {
+	public void deletePerson(String meetid) {
 		personDao.deletePerson(meetid);
 	}
 
-	public List<Invitee> findAllPerson(int meetid) {
+	public List<Invitee> findAllPerson(String meetid) {
 		return personDao.findAllPerson(meetid);
 	}
 
-	public long getPersonCount(int meetid) {
+	public long getPersonCount(String meetid) {
 		return personDao.getPersonCount(meetid);
 	}
 	
-	public List<CountTime> getTimeCount(int meetid){
+	public List<CountTime> getTimeCount(String meetid){
 		return personDao.getTimeCount(meetid);
 	}
 

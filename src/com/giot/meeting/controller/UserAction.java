@@ -35,9 +35,10 @@ public class UserAction {
 
 	@ResponseBody
 	@RequestMapping("/addUser.do")
-	public void addUser(User user) {
+	public String addUser(User user) {
 		user.setPassword(MD5.compute(user.getPassword()));
 		userService.addUser(user);
+		return user.getUserid();
 	}
 
 	@ResponseBody

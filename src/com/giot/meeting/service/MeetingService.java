@@ -18,7 +18,7 @@ public class MeetingService {
 		meetingDao.addMeeting(meeting);
 	}
 
-	public void deleteMeeting(int meetid) {
+	public void deleteMeeting(String meetid) {
 		meetingDao.deleteMeeting(meetid);
 	}
 
@@ -26,7 +26,7 @@ public class MeetingService {
 		return meetingDao.findAllMeeting(organiser);
 	}
 
-	public Meeting findMeeting(int meetid) {
+	public Meeting findMeeting(String meetid) {
 		return meetingDao.findMeeting(meetid);
 	}
 

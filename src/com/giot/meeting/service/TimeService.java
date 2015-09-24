@@ -18,11 +18,11 @@ public class TimeService {
 		timeDao.addTime(time);
 	}
 
-	public void deleteTime(int meetid) {
+	public void deleteTime(String meetid) {
 		timeDao.deleteTime(meetid);
 	}
 
-	public List<Time> findAllTime(int meetid) {
+	public List<Time> findAllTime(String meetid) {
 		return timeDao.findAllTime(meetid);
 	}
 

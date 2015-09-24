@@ -33,10 +33,10 @@ public class MeetingDaoImpl implements MeetingDao {
 	}
 
 	@Override
-	public void deleteMeeting(int meetid) {
+	public void deleteMeeting(String meetid) {
 		try {
 			String sql = "delete from Meeting where meetid = :meetid";
-			getSession().createQuery(sql).setInteger("meetid", meetid)
+			getSession().createQuery(sql).setString("meetid", meetid)
 					.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,11 +58,11 @@ public class MeetingDaoImpl implements MeetingDao {
 	}
 
 	@Override
-	public Meeting findMeeting(int meetid) {
+	public Meeting findMeeting(String meetid) {
 		try {
 			String sql = "from Meeting where meetid = :meetid";
 			return (Meeting) getSession().createQuery(sql)
-					.setInteger("meetid", meetid).uniqueResult();
+					.setString("meetid", meetid).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
 	<class name="com.giot.meeting.entities.Meeting" table="MEETING">
-		<id name="meetid">
+		<id name="meetid" type="java.lang.String">
 			<column name="MEETID" />
-			<generator class="native" />
+			<generator class="uuid" />
 		</id>
 		<property name="title" type="java.lang.String">
 			<column name="TITLE" />

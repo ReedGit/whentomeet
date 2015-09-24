@@ -2,26 +2,26 @@ package com.giot.meeting.entities;
 
 public class Person {
 	
-	private int personid;
-	private int meetid;
+	private String personid;
+	private String meetid;
 	private String invited;
 	private String name;
 	private String comment;
 	private String date;
 
-	public int getPersonid() {
+	public String getPersonid() {
 		return personid;
 	}
 
-	public void setPersonid(int personid) {
+	public void setPersonid(String personid) {
 		this.personid = personid;
 	}
 
-	public int getMeetid() {
+	public String getMeetid() {
 		return meetid;
 	}
 
-	public void setMeetid(int meetid) {
+	public void setMeetid(String meetid) {
 		this.meetid = meetid;
 	}
 

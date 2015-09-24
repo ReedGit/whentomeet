@@ -24,7 +24,7 @@ public class TimeAction {
 	
 	@ResponseBody
 	@RequestMapping("/findAllTime.do")
-	public List<Time> findAllTime(int meetid){
+	public List<Time> findAllTime(String meetid){
 		return timeService.findAllTime(meetid);
 	}
 

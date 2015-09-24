@@ -18,25 +18,26 @@ public class ContactAction {
 
 	@ResponseBody
 	@RequestMapping("/addContact.do")
-	public void addContact(Contact contact) {
+	public String addContact(Contact contact) {
 		contactService.addContact(contact);
+		return contact.getContactid();
 	}
 
 	@ResponseBody
 	@RequestMapping("/deleteContact.do")
-	public void deleteContact(int contactid) {
+	public void deleteContact(String contactid) {
 		contactService.deleteContact(contactid);
 	}
 
 	@ResponseBody
 	@RequestMapping("/findContact.do")
-	public Contact findContact(int contactid) {
+	public Contact findContact(String contactid) {
 		return contactService.findContact(contactid);
 	}
 
 	@ResponseBody
 	@RequestMapping("/findAllContact.do")
-	public List<Contact> findAllContact(int userid) {
+	public List<Contact> findAllContact(String userid) {
 		return contactService.findAllContact(userid);
 	}
 
