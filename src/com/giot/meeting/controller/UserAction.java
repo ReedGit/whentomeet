@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -35,8 +36,10 @@ public class UserAction {
 
 	@ResponseBody
 	@RequestMapping("/addUser.do")
-	public String addUser(User user) {
+	public String addUser(User user,@RequestParam("imagefile")CommonsMultipartFile file,
+			HttpServletRequest request) {
 		user.setPassword(MD5.compute(user.getPassword()));
+		user.setImage(uploadImage(file,request,user.getNameid()));
 		userService.addUser(user);
 		return user.getUserid();
 	}
