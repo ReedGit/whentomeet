@@ -50,9 +50,9 @@ public class PersonDaoImpl implements PersonDao {
 	@Override
 	public List<Invitee> findAllPerson(String meetid) {
 		try {
-			String sql = "select invited,name,comment,group_concat(date separator ';') as date from Person where meetid = :meetid";
-			return getSession().createSQLQuery(sql)
-					.setString("meetid", meetid).list();
+			String sql = "select meetid,invited,name,comment,group_concat(date separator ';') as date from Person where meetid = :meetid";
+			return getSession().createSQLQuery(sql).setString("meetid", meetid)
+					.list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -78,6 +78,18 @@ public class PersonDaoImpl implements PersonDao {
 			String sql = "select * from (select date,count(date) as count from Person  where meetid = :meetid group by date) a where count = (select max(count) from (select count(date) as count from Person where meetid = :meetid group by date) b)";
 			return getSession().createSQLQuery(sql).setString("meetid", meetid)
 					.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public void deletePeronTime(String meetid, String invited) {
+		try {
+			String sql = "delete from Person where meetid = :meetid and invited = :invited";
+			getSession().createQuery(sql).setString("meetid", meetid)
+					.setString("invited", invited).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

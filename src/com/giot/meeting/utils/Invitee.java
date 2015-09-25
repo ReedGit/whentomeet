@@ -6,6 +6,7 @@ public class Invitee {
 	private String name;
 	private String comment;
 	private String date;
+	private String meetid;
 
 	public String getInvited() {
 		return invited;
@@ -37,6 +38,14 @@ public class Invitee {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getMeetid() {
+		return meetid;
+	}
+
+	public void setMeetid(String meetid) {
+		this.meetid = meetid;
 	}
 
 }

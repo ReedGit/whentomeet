@@ -31,9 +31,13 @@ public class PersonService {
 	public long getPersonCount(String meetid) {
 		return personDao.getPersonCount(meetid);
 	}
-	
-	public List<CountTime> getTimeCount(String meetid){
+
+	public List<CountTime> getTimeCount(String meetid) {
 		return personDao.getTimeCount(meetid);
+	}
+
+	public void deletePersonTime(String meetid, String invited) {
+		personDao.deletePeronTime(meetid, invited);
 	}
 
 }

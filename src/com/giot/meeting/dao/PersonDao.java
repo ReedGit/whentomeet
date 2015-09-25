@@ -1,6 +1,5 @@
 package com.giot.meeting.dao;
 
-
 import java.util.List;
 
 import com.giot.meeting.entities.Person;
@@ -16,7 +15,9 @@ public interface PersonDao {
 	public List<Invitee> findAllPerson(String meetid);
 
 	public long getPersonCount(String meetid);
-	
+
 	public List<CountTime> getTimeCount(String meetid);
-	
+
+	public void deletePeronTime(String meetid, String invited);
+
 }

@@ -36,19 +36,42 @@ public class UserAction {
 
 	@ResponseBody
 	@RequestMapping("/addUser.do")
-	public String addUser(User user,@RequestParam("imagefile")CommonsMultipartFile file,
+	public String addUser(User user,
+			@RequestParam("imagefile") CommonsMultipartFile file,
 			HttpServletRequest request) {
 		user.setPassword(MD5.compute(user.getPassword()));
-		user.setImage(uploadImage(file,request,user.getNameid()));
+		user.setImage(uploadImage(file, request, user.getNameid()));
 		userService.addUser(user);
 		return user.getUserid();
 	}
 
 	@ResponseBody
-	@RequestMapping("/updateUser.do")
-	public void updateUser(User user) {
-		user.setUserid(userService.findUser(user.getNameid()).getUserid());
-		user.setPassword(MD5.compute(user.getPassword()));
+	@RequestMapping("/updatePassword.do")
+	public void updatePassword(String nameid, String oldPassword, String password) {
+		User user = userService.getUser(nameid, MD5.compute(oldPassword));
+		if (user != null) {
+			user.setPassword(MD5.compute(password));
+			userService.updateUser(user);
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateUsername.do")
+	public void updateUsername(User user,String username) {
+		if (user != null) {
+			user.setUsername(username);
+			userService.updateUser(user);
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping("/updateImage.do")
+	public void updateImage(User user,
+			@RequestParam("imagefile") CommonsMultipartFile file,
+			HttpServletRequest request) {
+		String image = uploadImage(file, request, user.getNameid());
+		if (image != null)
+			user.setImage(image);
 		userService.updateUser(user);
 	}
 
