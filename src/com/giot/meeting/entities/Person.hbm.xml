@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
 	<class name="com.giot.meeting.entities.Person">
-		<id name="personid" type="int">
+		<id name="personid" type="java.lang.String">
 			<column name="PERSONID" />
 			<generator class="native" />
 		</id>
-		<property name="meetid" type="int">
+		<property name="meetid" type="java.lang.String">
 			<column name="MEETID" />
 		</property>
 		<property name="invited" type="java.lang.String">

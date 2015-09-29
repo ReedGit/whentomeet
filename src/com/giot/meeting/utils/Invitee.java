@@ -1,29 +1,12 @@
-package com.giot.meeting.entities;
+package com.giot.meeting.utils;
 
-public class Person {
-	
-	private String personid;
-	private String meetid;
+public class Invitee {
+
 	private String invited;
 	private String name;
 	private String comment;
 	private String date;
-
-	public String getPersonid() {
-		return personid;
-	}
-
-	public void setPersonid(String personid) {
-		this.personid = personid;
-	}
-
-	public String getMeetid() {
-		return meetid;
-	}
-
-	public void setMeetid(String meetid) {
-		this.meetid = meetid;
-	}
+	private String meetid;
 
 	public String getInvited() {
 		return invited;
@@ -56,6 +39,13 @@ public class Person {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
+	public String getMeetid() {
+		return meetid;
+	}
+
+	public void setMeetid(String meetid) {
+		this.meetid = meetid;
+	}
 
 }

@@ -2,23 +2,23 @@ package com.giot.meeting.entities;
 
 public class Time {
 	
-	private int timeid;
-	private int meetid;
+	private String timeid;
+	private String meetid;
 	private String date;
 
-	public int getTimeid() {
+	public String getTimeid() {
 		return timeid;
 	}
 
-	public void setTimeid(int timeid) {
+	public void setTimeid(String timeid) {
 		this.timeid = timeid;
 	}
 
-	public int getMeetid() {
+	public String getMeetid() {
 		return meetid;
 	}
 
-	public void setMeetid(int meetid) {
+	public void setMeetid(String meetid) {
 		this.meetid = meetid;
 	}
 

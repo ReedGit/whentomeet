@@ -2,24 +2,24 @@ package com.giot.meeting.entities;
 
 public class Contact {
 
-	private int contactid;
-	private int userid;
+	private String contactid;
+	private String userid;
 	private String invited;
 	private String name;
 
-	public int getContactid() {
+	public String getContactid() {
 		return contactid;
 	}
 
-	public void setContactid(int contactid) {
+	public void setContactid(String contactid) {
 		this.contactid = contactid;
 	}
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 

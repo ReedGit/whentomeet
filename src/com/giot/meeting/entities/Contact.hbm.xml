@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
 	<class name="com.giot.meeting.entities.Contact" table="CONTACT">
-		<id name="contactid" type="int">
+		<id name="contactid" type="java.lang.String">
 			<column name="CONTACTID" />
-			<generator class="native" />
+			<generator class="uuid" />
 		</id>
-		<property name="userid" type="int">
+		<property name="userid" type="java.lang.String">
 			<column name="USERID" />
 		</property>
 		<property name="invited" type="java.lang.String">
