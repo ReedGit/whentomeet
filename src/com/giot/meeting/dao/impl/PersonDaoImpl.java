@@ -96,4 +96,29 @@ public class PersonDaoImpl implements PersonDao {
 		}
 	}
 
+	@Override
+	public void addPersonTime(String personid,String ptime,String name) {
+		try {
+			String sql = "update Person set ptime=? ,name=? where personid=?";
+			getSession().createQuery(sql).setString(0, ptime).setString(1, name)
+					.setString(2, personid).executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+	}
+
+	@Override
+	public List<Person> getAllPersonTime(String meetId){
+		try {
+			String sql = "from Person where meetid = ?";
+			return getSession().createQuery(sql).setString(0, meetId).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+	}
+
 }

@@ -1,5 +1,15 @@
 package com.giot.meeting.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="MEETING")
 public class Meeting {
 
 	private String meetid;
@@ -11,6 +21,9 @@ public class Meeting {
 	private String remark;
 	private String location;
 
+	@Id
+    @GenericGenerator(name = "generator", strategy = "uuid")
+	@GeneratedValue(generator = "generator")// ×ÔÔö³¤
 	public String getMeetid() {
 		return meetid;
 	}
@@ -73,6 +86,14 @@ public class Meeting {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	@Override
+	public String toString() {
+		return "Meeting [meetid=" + meetid + ", title=" + title + ", content="
+				+ content + ", duration=" + duration + ", visible=" + visible
+				+ ", organiser=" + organiser + ", remark=" + remark
+				+ ", location=" + location + "]";
 	}
 
 }

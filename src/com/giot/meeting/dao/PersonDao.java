@@ -19,5 +19,9 @@ public interface PersonDao {
 	public List<CountTime> getTimeCount(String meetid);
 
 	public void deletePeronTime(String meetid, String invited);
+	
+	public void addPersonTime(String personid,String ptime,String name);
+	
+	public List<Person> getAllPersonTime(String meetId);
 
 }

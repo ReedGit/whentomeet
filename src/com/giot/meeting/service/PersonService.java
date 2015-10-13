@@ -19,6 +19,10 @@ public class PersonService {
 	public void addPerson(Person person) {
 		personDao.addPerson(person);
 	}
+	
+	public void addPersonTime(String personid,String ptime,String name) {
+		personDao.addPersonTime(personid, ptime,name);
+	}
 
 	public void deletePerson(String meetid) {
 		personDao.deletePerson(meetid);
@@ -38,6 +42,10 @@ public class PersonService {
 
 	public void deletePersonTime(String meetid, String invited) {
 		personDao.deletePeronTime(meetid, invited);
+	}
+	
+	public List<Person> getAllPersonTime(String meetid) {
+		return personDao.getAllPersonTime(meetid);
 	}
 
 }

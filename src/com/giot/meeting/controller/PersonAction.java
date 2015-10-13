@@ -20,18 +20,8 @@ public class PersonAction {
 
 	@ResponseBody
 	@RequestMapping("/addPerson.do")
-	public void addPerson(Invitee invitee) {
-		Person person = new Person();
-		person.setMeetid(invitee.getMeetid());
-		person.setInvited(invitee.getInvited());
-		person.setName(invitee.getName());
-		person.setComment(invitee.getComment());
-		String date = invitee.getDate();
-		String[] dateArray = date.split(";");
-		for (int i = 0; i < dateArray.length; i++) {
-			person.setDate(dateArray[i]);
-			personService.addPerson(person);
-		}
+	public void addPerson(String personId,String ptime,String name) {
+			personService.addPersonTime(personId, ptime,name);
 	}
 
 	@ResponseBody
@@ -52,11 +42,18 @@ public class PersonAction {
 		return personService.getTimeCount(meetid);
 	}
 
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("updatePersonTime.do")
 	public void updatePersonTime(Invitee invitee) {
 		personService.deletePersonTime(invitee.getMeetid(), invitee.getInvited());
 		addPerson(invitee);
 	}
-
+*/
+	@ResponseBody
+	@RequestMapping("/getAllPersonTime.do")
+	public List<Person> getAllPersonTime(String meetid) {
+		
+		List<Person> personTime = personService.getAllPersonTime(meetid);
+		return personTime;
+	}
 }

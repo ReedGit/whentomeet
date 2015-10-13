@@ -163,15 +163,18 @@
 		width: 88px;
 		height: 39px;
 	}
-	
+	.selected,.selectedTail{
+		backgroundColor : #ffde7d;
+	}
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/zxx.color_exchange.js"></script>
 <script type="text/javascript">
-$(function(){
 	/* 定义时间间隔 */
-	var duration =1;
-	var tds = duration/0.25;
+	var tds = parseInt("${duraValue}");
+	var pencil = false;
+	var eraser = false;
+$(function(){
 	
 	/* 每四行划线 */
 	$('td.showTime').nextAll().css('border-top', 'solid 1px #bbb');
@@ -179,165 +182,13 @@ $(function(){
 	$("#containTable td").not(".timeLable").not(".withBg").not(".midFill").css("backgroundColor","#fff");
 	
 	/* console.log($(this).index()+" : "+$(this).parent().index()); */
-	var pencil = false;
-	var eraser = false;
 	$("#containTable td").not(".timeLable").not(".midFill").css('cursor', 'url(img/pencil.png), auto');
 	
 	
-	$("#containTable td").not(".timeLable").not(".midFill").hover(
-		function(){
-			/*设置跨度*/
-			var className = $(this).attr("class");
-			var col = className.split(/\s/);
-			var $rows = $(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
-			if(pencil){
-				$(this).css("backgroundColor","#ffde7d");
-				$(this).css('cursor', 'url(img/pencil.png), auto');
-				if(!$(this).hasClass("selected")&&!$(this).hasClass("selectedTail")){
-					$(this).addClass("selected");
-					$rows.not(".selectedTail").not(".selected").addClass("selectedTail").css("backgroundColor","#ffde7d");
-				}
-				$rows.not(".selectedTail").not(".selected").css("backgroundColor","#ffde7d");
-			}else if(eraser){
-				$(this).css("backgroundColor","#fff");
-				$(this).css('cursor', 'url(img/eraser.png), auto');
-			}else {
-				/* var offColor  =$(this).css("backgroundColor").colorHex(); */
-				if($(this).hasClass("selected")){
-					$(this).css('cursor', 'url(img/eraser.png), auto');
-					$("#containTable td").not(".selected").not(".selectedTail").not(".withBg").not(".midFill").css("backgroundColor","#fff");
-					if($(this).hasClass("withBg")){
-						$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
-					}else{
-						$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#fff");
-						
-					}
-					
-				}else if($(this).hasClass("selectedTail")){
-					$("#containTable td").not(".selected").not(".selectedTail").not(".withBg").not(".midFill").css("backgroundColor","#fff");
-					if($(this).hasClass("withBg")){
-						$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
-					}else{
-						$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#fff");
-						
-					}
-					$rows.not(".selectedTail").not(".selected").css("backgroundColor","#FFF1CA");
-				}else{
-					$(this).css('cursor', 'url(img/pencil.png), auto');
-					$("#containTable td").not(".selected").not(".selectedTail").not(".withBg").not(".midFill").css("backgroundColor","#fff");
-					$(this).css("backgroundColor","#FFF1CA");
-					
-					$rows.not(".selected").not(".selectedTail").css("backgroundColor","#FFF1CA")
-				}
-			}
-			
-			$(".timeLable").css("backgroundColor","#F8F8F8");
-			var $tl = $(this).prevAll(".timeLable");
-			$tl.css("backgroundColor","#FFF1CA");
-			$tl.parent().nextAll(":lt("+(tds-1)+")").children(".timeLable").css("backgroundColor","#FFF1CA");
-		},
-		function(){
-			$(".timeLable").css("backgroundColor","#F8F8F8");
-			var offColor =  $(this).css("backgroundColor").colorHex();
-			
-			var className = $(this).attr("class");
-			var col = className.split(/\s/);
-			var $cols = $(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
-			if(offColor=="#ffde7d"){
-				$(".withBg").not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
-			}else if($(this).hasClass("withBg")){
-				$(this).css("backgroundColor","#F5F5F8");
-				/*设置跨度*/
-				$cols.not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
-			}else{
-				$(this).css("backgroundColor","#fff");
-				/*设置跨度*/
-				$cols.not(".selected").not(".selectedTail").css("backgroundColor","#fff");
-			}
-		}
-	);
+	$("#containTable td").not(".timeLable").not(".midFill").hover(moveIn,moveOut);
 	
 	
-	$("#containTable td").not(".timeLable").not(".midFill").mousedown(function(){
-		var currentColor =  $(this).css("backgroundColor").colorHex();
-		/*设置跨度*/
-		var className = $(this).attr("class");
-		var col = className.split(/\s/);
-		col = col[0];
-		var $sel =$(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
-		if(currentColor=="#fff1ca"){
-			pencil = true;
-			/* $(this).css({"backgroundColor":"#ffde7d","border":"solid 1px #836202"}); */
-			$(this).css("backgroundColor","#ffde7d");
-			$(this).addClass("selected");
-			/*设置跨度*/
-			$sel.css("backgroundColor","#ffde7d");
-			$sel.addClass("selectedTail");
-		} /* if(currentColor=="#ffde7d"){ */
-			else if($(this).hasClass("selected")){
-				var selectedIndex = $(this).parent().index();
-				var mixIndex = $(this).parent().nextAll().children(".selected."+col).first().parent().index();
-				var mixIndex_prev = $(this).parent().prevAll().children(".selected."+col).first().parent().index();
-				eraser = true;
-				$(this).css("backgroundColor","#fff1ca");
-				$(this).removeClass("selected");
-				if($(this).hasClass("selectedTail")){
-					$(this).removeClass("selectedTail");
-				}
-				if($sel.hasClass("selected")){
-					var $v = $(this).parent().nextAll(":lt("+(mixIndex-selectedIndex-1)+")").children("."+col);
-					$v.css("backgroundColor","#fff1ca");
-					$v.removeClass("selectedTail");
-					var j = selectedIndex-mixIndex_prev;
-					if(mixIndex_prev>=0&&j<tds){
-						$(this).addClass("selectedTail");
-						$(this).css("backgroundColor","#ffde7d");
-						var tds1 =tds-2;
-						for(var i=0;i<tds-j-1;i++){
-							$($sel[i]).css("backgroundColor","#ffde7d");
-						}
-						
-					}
-					
-				}else{
-					var j = selectedIndex-mixIndex_prev;
-					if(mixIndex_prev>=0 && j<tds){
-						$(this).addClass("selectedTail");
-						$(this).css("backgroundColor","#ffde7d");
-						var tds1 =tds-2;
-						for(var i=j;i>0;i--){
-							$($sel[tds1--]).css("backgroundColor","#fff1ca").removeClass("selectedTail");
-						}
-					}else{
-						$sel.css("backgroundColor","#fff1ca");
-						$sel.removeClass("selectedTail");
-					}
-				}
-				
-			}else if($(this).hasClass("selectedTail")){
-				console.log("sss");
-				pencil = true;
-				/* $(this).removeClass("selectedTail");
-				$sel.removeClass("selectedTail"); */
-				$sel.css("backgroundColor","#ffde7d");
-				$(this).addClass("selected");
-				$sel.addClass("selectedTail");
-			}
-			
-		
-	}).mouseup(function(){
-		$(this).css('cursor', 'url(img/eraser.png), auto'); 
-		var className = $(this).attr("class");
-		var col = className.split(/\s/);
-		var $rows = $(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
-		if(pencil){
-			pencil = false;
-			$(this).addClass("selected");
-			$rows.not(".selectedTail").not(".selected").addClass("selectedTail").css("backgroundColor","#ffde7d");
-		}
-		
-		eraser = false;
-	});
+	$("#containTable td").not(".timeLable").not(".midFill").mousedown(mouseDown).mouseup(mouseUp);
 	
 	/* 转换时间格式 24/12h */
 	var showTime = $(".showTime");
@@ -386,7 +237,7 @@ $(function(){
 	/* 初始化 date*/
 	var isChange = false;
 	var month0 = null;
-	$(".date").each(function(index){
+	$(".date").not(".midFill").each(function(index){
 		var date = new Date();
 		var week = date.getDay();
 		var day  = date.getDate();
@@ -437,7 +288,7 @@ $(function(){
 				$("div.prevArrow").show();
 				$(".date").eq(weekB).parent().css("backgroundColor","#F8F8F8");
 			}
-			$(".date").each(function(index){
+			$(".date").not(".midFill").each(function(index){
 				date2 = new Date();
 				var week2 = date2.getDay();
 				var day2  = date2.getDate();
@@ -458,7 +309,52 @@ $(function(){
 				$("#dateLable h2").text(date2.getFullYear()+"年   "+(month0+1)+"月");
 				
 			}
+			
+			/* 移动timeTable */
+			var classNm = $("#selectTime tr:first-child td:last-child").attr("class");
+			var showNm = $("#selectTime tr:first-child td:not(:hidden,.showTime,timeLable)").last().attr("class");
+			var cn = classNm.split(/[_\s]/);
+			var sn = showNm.split(/[_\s]/);
+			var cn_num = parseInt(cn[1]);
+			var sn_num = parseInt(sn[1]);
+			if(cn_num==sn_num){
+				var t = cn_num;
+				$("#selectTime tr").append('<td class="col_'+(++cn_num)+' withBg"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+' withBg"></td>'
+											+'<td class="midFill col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+' withBg"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+'"></td>'
+											+'<td class="col_'+(++cn_num)+' withBg"></td>');
+				/* 每四行划线 */
+				$('td.showTime').nextAll().css('border-top', 'solid 1px #bbb');
+				$('td.showTime').first().nextAll().css('border-top', 'solid 0 #bbb');
+				for(var i=0;i<15;i++){
+					$(".col_"+(t-i)).hide();
+					$(".col_"+(t+1+i)).not(".midFill").mousedown(mouseDown).mouseup(mouseUp);
+					$(".col_"+(t+1+i)).not(".midFill").hover(moveIn,moveOut);
+				}
+			}else{
+				
+				for(var i=0;i<15;i++){
+					$(".col_"+(sn_num-i)).hide();
+					$(".col_"+(sn_num+1+i)).show();
+				}
+			}
+			$("#containTable td").not(".timeLable").not(".withBg").not(".midFill").css("backgroundColor","#fff");
+			$("#containTable td").not(".timeLable").not(".midFill").css('cursor', 'url(img/pencil.png), auto');
+			$("td.selected,td.selectedTail").css("backgroundColor","#ffde7d");
+			
 	});
+	
 	
 	$("div.prevArrow").click(function(){
 		isChange = false;
@@ -471,7 +367,7 @@ $(function(){
 			$(".date").eq(weekB).parent().css("backgroundColor","#FFFDD0");
 		}
 		var tempDate = null;
-		$(".date").each(function(index){
+		$(".date").not(".midFill").each(function(index){
 			tempDate = new Date(date2);
 			
 			/* tempDate.setDate(tempDate.getDate()-13-step2+index); */
@@ -495,15 +391,27 @@ $(function(){
 			
 		}
 		
+		/* 移动timeTable */
+		var classNm = $("#selectTime tr:first-child td:not(:hidden,.showTime,timeLable)").first().attr("class");
+		var cn = classNm.split(/[_\s]/);
+		var cn_num = parseInt(cn[1]);
+		for(var i=0;i<15;i++){
+			$(".col_"+(cn_num+i)).hide();
+			$(".col_"+(cn_num-1-i)).show();
+		}
 		
+		$(".selected,.selectedTail").css("backgroundColor","#ffde7d");
 	});
 	
 	
 	/* 提交 */
 	$("#step2Submit").click(function(){
+		var classNm = $("#selectTime tr:first-child td:last-child").attr("class");
+		var cn = classNm.split(/[_\s]/);
+		var cn_num = parseInt(cn[1]);
 		var timeArray = [];
-		for(var i=1;i<=14;i++){
-			var time = [];
+		for(var i=1;i<=cn_num;i++){
+			/* var time = []; */
 			var temp;
 			var timeItem;
 			var last;
@@ -514,35 +422,204 @@ $(function(){
 						temp = cur;
 						timeItem = {};
 						timeItem.startTime = cur;
-						timeItem.day = $(".date").eq(i-1).text();
+						timeItem.day = $(".date").eq((i%15)-1).text();
+						timeItem.week = $(".date").eq((i%15)-1).parent().contents().first().text();
 						flag = true;
 					}
 					if(temp++!=cur){
-						console.log(temp-2+"***"+cur);
-						timeItem.endTime = temp-2;
-						time.push(timeItem);
+						timeItem.endTime = temp-1;
+						/* time.push(timeItem); */
+						timeArray.push(timeItem);
 						temp = cur+1;
 						timeItem = {};
 						timeItem.startTime = cur;
-						timeItem.day = $(".date").eq(i-1).text();
+						timeItem.day = $(".date").eq((i%15)-1).text();
+						timeItem.week = $(".date").eq((i%15)-1).parent().contents().first().text();
 					}
 					last = cur;
 				
 			});
 			if(flag){
-				timeItem.endTime = last;	
-				time.push(timeItem);
-				timeArray.push(time);
+				 timeItem.endTime = last+1;	
+				 /*time.push(timeItem);
+				timeArray.push(time); */
+				timeArray.push(timeItem);
 			}
 		}
 		
-		console.log(timeArray);
+		
+		$.ajax({
+			url:'addTime.do',
+			type:"post",
+			data:{"times":JSON.stringify(timeArray),"meetId":"${meetId}"},
+			dataType:"text",
+			success:function(){
+				window.location.href="createTime.jsp?meetId=${meetId}";
+			}
+		
+		});
+		
 		
 	});
 	
 	
 })
+
+var mouseDown = function(){
+	var currentColor =  $(this).css("backgroundColor").colorHex();
+	/*设置跨度*/
+	var className = $(this).attr("class");
+	var col = className.split(/\s/);
+	col = col[0];
+	var $sel =$(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
+	if(currentColor=="#fff1ca"){
+		pencil = true;
+		/* $(this).css({"backgroundColor":"#ffde7d","border":"solid 1px #836202"}); */
+		$(this).css("backgroundColor","#ffde7d");
+		$(this).addClass("selected");
+		/*设置跨度*/
+		$sel.css("backgroundColor","#ffde7d");
+		$sel.addClass("selectedTail");
+	} /* if(currentColor=="#ffde7d"){ */
+		else if($(this).hasClass("selected")){
+			var selectedIndex = $(this).parent().index();
+			var mixIndex = $(this).parent().nextAll().children(".selected."+col).first().parent().index();
+			var mixIndex_prev = $(this).parent().prevAll().children(".selected."+col).first().parent().index();
+			eraser = true;
+			$(this).css("backgroundColor","#fff1ca");
+			$(this).removeClass("selected");
+			if($(this).hasClass("selectedTail")){
+				$(this).removeClass("selectedTail");
+			}
+			if($sel.hasClass("selected")){
+				var $v = $(this).parent().nextAll(":lt("+(mixIndex-selectedIndex-1)+")").children("."+col);
+				$v.css("backgroundColor","#fff1ca");
+				$v.removeClass("selectedTail");
+				var j = selectedIndex-mixIndex_prev;
+				if(mixIndex_prev>=0&&j<tds){
+					$(this).addClass("selectedTail");
+					$(this).css("backgroundColor","#ffde7d");
+					var tds1 =tds-2;
+					for(var i=0;i<tds-j-1;i++){
+						$($sel[i]).css("backgroundColor","#ffde7d");
+					}
+					
+				}
+				
+			}else{
+				var j = selectedIndex-mixIndex_prev;
+				if(mixIndex_prev>=0 && j<tds){
+					$(this).addClass("selectedTail");
+					$(this).css("backgroundColor","#ffde7d");
+					var tds1 =tds-2;
+					for(var i=j;i>0;i--){
+						$($sel[tds1--]).css("backgroundColor","#fff1ca").removeClass("selectedTail");
+					}
+				}else{
+					$sel.css("backgroundColor","#fff1ca");
+					$sel.removeClass("selectedTail");
+				}
+			}
+			
+		}else if($(this).hasClass("selectedTail")){
+			console.log("sss");
+			pencil = true;
+			/* $(this).removeClass("selectedTail");
+			$sel.removeClass("selectedTail"); */
+			$sel.css("backgroundColor","#ffde7d");
+			$(this).addClass("selected");
+			$sel.addClass("selectedTail");
+		}
+		
 	
+}
+	
+var mouseUp = function(){
+	$(this).css('cursor', 'url(img/eraser.png), auto'); 
+	var className = $(this).attr("class");
+	var col = className.split(/\s/);
+	var $rows = $(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
+	if(pencil){
+		pencil = false;
+		$(this).addClass("selected");
+		$rows.not(".selectedTail").not(".selected").addClass("selectedTail").css("backgroundColor","#ffde7d");
+	}
+	
+	eraser = false;
+}
+
+var moveIn = function(){
+	/*设置跨度*/
+	var className = $(this).attr("class");
+	var col = className.split(/\s/);
+	var $rows = $(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
+	if(pencil){
+		$(this).css("backgroundColor","#ffde7d");
+		$(this).css('cursor', 'url(img/pencil.png), auto');
+		if(!$(this).hasClass("selected")&&!$(this).hasClass("selectedTail")){
+			$(this).addClass("selected");
+			$rows.not(".selectedTail").not(".selected").addClass("selectedTail").css("backgroundColor","#ffde7d");
+		}
+		$rows.not(".selectedTail").not(".selected").css("backgroundColor","#ffde7d");
+	}else if(eraser){
+		$(this).css("backgroundColor","#fff");
+		$(this).css('cursor', 'url(img/eraser.png), auto');
+	}else {
+		/* var offColor  =$(this).css("backgroundColor").colorHex(); */
+		if($(this).hasClass("selected")){
+			$(this).css('cursor', 'url(img/eraser.png), auto');
+			$("#containTable td").not(".selected").not(".selectedTail").not(".withBg").not(".midFill").css("backgroundColor","#fff");
+			if($(this).hasClass("withBg")){
+				$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
+			}else{
+				$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#fff");
+				
+			}
+			
+		}else if($(this).hasClass("selectedTail")){
+			$("#containTable td").not(".selected").not(".selectedTail").not(".withBg").not(".midFill").css("backgroundColor","#fff");
+			if($(this).hasClass("withBg")){
+				$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
+			}else{
+				$(this).parent().nextAll().children("."+col).not(".selected").not(".selectedTail").css("backgroundColor","#fff");
+				
+			}
+			$rows.not(".selectedTail").not(".selected").css("backgroundColor","#FFF1CA");
+		}else{
+			$(this).css('cursor', 'url(img/pencil.png), auto');
+			$("#containTable td").not(".selected").not(".selectedTail").not(".withBg").not(".midFill").css("backgroundColor","#fff");
+			$(this).css("backgroundColor","#FFF1CA");
+			
+			$rows.not(".selected").not(".selectedTail").css("backgroundColor","#FFF1CA")
+		}
+	}
+	
+	$(".timeLable").css("backgroundColor","#F8F8F8");
+	var $tl = $(this).prevAll(".timeLable");
+	$tl.css("backgroundColor","#FFF1CA");
+	$tl.parent().nextAll(":lt("+(tds-1)+")").children(".timeLable").css("backgroundColor","#FFF1CA");
+}
+
+
+var moveOut = function(){
+	$(".timeLable").css("backgroundColor","#F8F8F8");
+	var offColor =  $(this).css("backgroundColor").colorHex();
+	
+	var className = $(this).attr("class");
+	var col = className.split(/\s/);
+	var $cols = $(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
+	if(offColor=="#ffde7d"){
+		$(".withBg").not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
+	}else if($(this).hasClass("withBg")){
+		$(this).css("backgroundColor","#F5F5F8");
+		/*设置跨度*/
+		$cols.not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
+	}else{
+		$(this).css("backgroundColor","#fff");
+		/*设置跨度*/
+		$cols.not(".selected").not(".selectedTail").css("backgroundColor","#fff");
+	}
+}
 </script>
 </head>
 <body>
@@ -561,7 +638,7 @@ $(function(){
 			<td>星期四<br><span class="date"></span></td>
 			<td>星期五<br><span class="date"></span></td>
 			<td>星期六<br><span class="date"></span></td>
-			<td class="midFill"></td>
+			<td class="midFill date"></td>
 			<td>星期日<br><span class="date"></span></td>
 			<td>星期一<br><span class="date"></span></td>
 			<td>星期二<br><span class="date"></span></td>
@@ -575,7 +652,7 @@ $(function(){
 <div id="containTable">
 
 	<div class="prevArrow"></div>
-	<table border="1">
+	<table border="1" id="selectTime">
 		<c:forEach var="t" begin="0" end="95">
 			<tr>
 				<c:choose>
@@ -593,14 +670,14 @@ $(function(){
 				<td class="col_5"></td>
 				<td class="col_6"></td>
 				<td class="col_7 withBg"></td>
-				<td class="midFill"></td>
-				<td class="col_8 withBg"></td>
-				<td class="col_9"></td>
+				<td class="col_8 midFill"></td>
+				<td class="col_9 withBg"></td>
 				<td class="col_10"></td>
 				<td class="col_11"></td>
 				<td class="col_12"></td>
 				<td class="col_13"></td>
-				<td class="col_14 withBg"></td>
+				<td class="col_14"></td>
+				<td class="col_15 withBg"></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -608,9 +685,9 @@ $(function(){
 	
 </div>
 <div class="submitArea">
-	<button id="step2Back" class="btn btnLargeGray" onclick="location.href = '#/step1';return false;">Go Back</button>
+	<button id="step2Back" class="btn btnLargeGray" onclick="location.href = '#/step1';return false;">返回</button>
        
-    <button id="step2Submit" type="submit" class="btn btn-primary btn-large">Invite Attendees</button>
+    <button id="step2Submit" type="submit" class="btn btn-primary btn-large">邀请参与人</button>
 </div>
 
 </div>

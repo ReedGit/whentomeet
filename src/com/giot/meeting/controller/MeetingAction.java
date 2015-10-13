@@ -1,6 +1,7 @@
 package com.giot.meeting.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +23,14 @@ public class MeetingAction {
 	@Autowired
 	private PersonService personService;
 
-	@ResponseBody
+	//@ResponseBody
 	@RequestMapping("/addMeeting.do")
-	public String addMeeting(Meeting meeting) {
+	public String addMeeting(Meeting meeting,Map<String,Object> map) {
 		meetingService.addMeeting(meeting);
-		return meeting.getMeetid();
+		//return meeting.getMeetid();
+		map.put("duraValue", meeting.getDuration());
+		map.put("meetId", meeting.getMeetid());
+		return "timeTable";
 	}
 
 	@ResponseBody

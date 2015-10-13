@@ -1,5 +1,15 @@
 package com.giot.meeting.entities;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="CONTACT")
 public class Contact {
 
 	private String contactid;
@@ -7,6 +17,9 @@ public class Contact {
 	private String invited;
 	private String name;
 
+	@Id
+    @GenericGenerator(name = "generator", strategy = "uuid")
+	@GeneratedValue(generator = "generator")// ×ÔÔö³¤
 	public String getContactid() {
 		return contactid;
 	}

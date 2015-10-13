@@ -1,5 +1,14 @@
 package com.giot.meeting.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="PERSON")
 public class Person {
 	
 	private String personid;
@@ -7,8 +16,11 @@ public class Person {
 	private String invited;
 	private String name;
 	private String comment;
-	private String date;
+	private String ptime;
 
+	@Id
+    @GenericGenerator(name = "generator", strategy = "uuid")
+	@GeneratedValue(generator = "generator")// ×ÔÔö³¤
 	public String getPersonid() {
 		return personid;
 	}
@@ -37,6 +49,14 @@ public class Person {
 		return name;
 	}
 
+	public String getPtime() {
+		return ptime;
+	}
+
+	public void setPtime(String ptime) {
+		this.ptime = ptime;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -49,13 +69,7 @@ public class Person {
 		this.comment = comment;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
+	
 	
 
 }
