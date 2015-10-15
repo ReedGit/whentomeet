@@ -6,15 +6,108 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/flat-ui.css">
 <style type="text/css">
+	body{
+		background-image: url("img/bg2.jpg");
+	}
+	
+	.main{
+		width: 1289px;
+	    height: 1111px;
+		border: solid 2px red;
+		margin: 0 auto;
+		background-color: #F5F5F5;
+		border-radius:8px;
+	}
+	.main .innerContent{
+		font-family:Georgia,"Arial";
+		margin-left: 40px;
+		margin-top: 40px;
+		margin-bottom: 40px;
+	}
+	.header {
+	    margin: 0;
+	    padding: 0;
+	    width: 100%;
+	    height: 80px;
+	    vertical-align: middle;
+    }
+    .logo {
+	    position: relative;
+	    width: 40%;
+	    float: left;
+	    /* border: 1px solid #e1af32; */
+	}
+	
+	.header h1
+{
+	font-family:"黑体";
+	color:#e1af32;
+	    font-size: 3em;
+}
+    
+    hr {
+    border: 1px solid #e1af32;
+    /* margin-left: -10px; */
+}
+    
+    .title h2 {
+    color: #e1af32;
+    letter-spacing: 2em;
+    font-family: "黑体";
+    }
+    
+    .title h2 span {
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 1em;
+}
+    
+    .resultsTable{
+    	margin-top: 75px;
+    	/* border: solid green 2px; */
+    }
 	.table_left,.table_right{
 		float: left;
 		border: 1px solid #bbb;
+		background: #fff;
+		
+	}
+	
+	#resultsArea{
+		background-color:#fff;
+		border: solid 1px #bbb;	
+/* 		border: solid 1px red;	 */
+		border-radius:8px;
+		width: 1209px;
+		height: 564px;
+		margin: 0 auto;
+	}
+	
+	#resultsArea .headingArea{
+		border-radius:8px;
+		background-color:#F6F6F6;
+		height: 67px;
+		width: 100%;
+		border-bottom: solid 1px #bbb;
+	}
+	
+	#resultsArea .headingArea span{
+		font-family:Georgia,"Arial";
+		font-size: 30px;
+		position: relative;
+		top: 25px;
+		left: 45px;
+		font-weight: bold;
 	}
 	.table_left{
 		background: #e0e0e0;
 		width:242px;
 		table-layout:fixed;
+		position: relative;
+		left: 40px;
+		
 	}
 	.table_right{
 		text-align: center;
@@ -52,8 +145,17 @@
 		border-left-width: 0;
 		border-right: solid 1px #bbb;
 		border-bottom: solid 1px #bbb;
+		position: relative;
+		left: 39px;
 	}
 	
+	.submitArea{
+		/* position: relative;
+		top:300px;
+		left:70px; */
+		margin-top: 45px;
+		margin-left: 14px;
+	}
 .submitArea .comment {
     float: left;
     width: 320px;
@@ -83,6 +185,17 @@
     height: 26px;
     margin-right: 7px;
 }
+
+#selectItem{
+	margin-top: 10px;
+	margin-left: 40px;
+}
+
+#selectItem .selectItems{
+	
+	margin-left: 83px;
+}
+
 </style>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
@@ -234,7 +347,8 @@ var getPt = function(){
 	
 		$.post('findMeeting.do',{"meetid":"${param.meetId}"}, function(data) {
 			 $("#title").text(data.title);
-			 $("#duration span").text(data.duration/4);
+			/*  $("span#location").text(data.location); */
+			 $("#durationLabel").text(data.duration/4);
 		});
 		
 		
@@ -297,30 +411,27 @@ var getPt = function(){
 </head>
 <body>
 
-<div class="main">
-	<div class="innerContent">
-		<h1 id="title">${meet.title}</h1>
-		<div id="duration">
-				Duration:	<span></span> hour
+	<div class="header">
+		<div class="logo">	
+			<h1>meeting</h1>
 		</div>
+		<button type="button"  class="btn btn-link2">register</button>
+		<button type="button"  class="btn btn-link2">login</button>
 	</div>
+<div class="main">
 	
-	<div id="resultsArea">
+	<div class="innerContent">
+           <h1 id="title"></h1>
+           <br>
+           	时长：<span id="durationLabel"></span>小时
+    </div>
+
+	<div id="resultsArea" >
+	
 		<div class="headingArea">
-                <h2>When can you attend?</h2>
-        </div>
-        
-        <div id="aboveTableArea">
-                    <div class="sortArea">
-                        Sort by:
-                        <div class="btn-group sortOptions">
-                            <button id="sortDates" class="btn disabled chosen">Date</button>
-                            <button id="sortAvail" class="btn">Availability</button>
-                        </div>
-                    </div>
-                    <div style="clear:both"></div>
-        </div>
-		
+			<span>你什么时候能参加呢？</span>
+		</div>
+	
 		<div class="resultsTable">
 			<table border="1" class="table_left">
 				<tr class="topFill1">
@@ -361,23 +472,32 @@ var getPt = function(){
 					</tr>
 				</table>
 			</div>
+			
+			<div class="submitArea" style="clear:both;">
+	           <!--    <div class="spinner">
+	                        <img src="/images/loading.gif"><br>
+	              </div>
+	 			-->
+	              <textarea name="comment" class="comment" id="comment" style="overflow: hidden; resize: none; height: 20px; color: rgb(153, 153, 153);">Add a comment (optional)</textarea>
+	              <button id="resultsTableSubmit" class="btn-primary btn-large">Submit</button>
+	              <!-- <button id="cancelBtn" class="btn btnLargeGray">Cancel</button> -->
+	
+	              <div style="clear:both"></div>
+	       </div>
+	       
+			<div id="selectItem">
+				<p>你已经提交了！请选择下列操作中的一个吧。</p>
+				<div class="selectItems">
+					<a  class="modifyLink">修改已选择的时间</a>
+					<br>
+					<a  class="removeLink">我不想参加，删除我！</a>
+					<br>
+					<a  class="modifyLink1">修改已选择的时间</a>
+				</div>
+			</div>
 		</div>
 
-		<div class="submitArea" style="clear:both;">
-           <!--    <div class="spinner">
-                        <img src="/images/loading.gif"><br>
-              </div>
- 			-->
-              <textarea name="comment" class="comment" id="comment" style="overflow: hidden; resize: none; height: 20px; color: rgb(153, 153, 153);">Add a comment (optional)</textarea>
-              <button id="resultsTableSubmit" class="btn-primary btn-large">Submit</button>
-              <!-- <button id="cancelBtn" class="btn btnLargeGray">Cancel</button> -->
 
-              <div style="clear:both"></div>
-       </div>
-
-		<div id="selectItem">
-			<a  class="modifyLink">修改已选择的时间</a>
-		</div>
 
 	</div>
 	
