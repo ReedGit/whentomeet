@@ -6259,3 +6259,12 @@ footer p {
   }
 
 /*# sourceMappingURL=flat-ui.css.map */
+.password
+{
+	height:20px;
+	width:250px;
+}
+.input
+{
+	height:20px;
+}

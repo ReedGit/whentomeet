@@ -1,0 +1,51 @@
+.account
+{
+	min-height:300px;
+	width:600px;
+	border:1px solid #fff;
+	position:relative;
+	
+	float:left;
+	margin-left:10%;
+	margin-top:5%;
+	text-align:left;
+	padding-left:5%;
+
+	/*background:rgba(0,0,0,0.2) none repeat scroll !important;*/
+	background:#fff;
+	
+	color:#000;
+	font-size:130%;
+	font-weight:900;
+
+	
+	
+	
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+/*	-webkit-box-shadow: #666 5px 5px 5px ;
+	-moz-box-shadow: #666 5px 5px 5px;
+	box-shadow:  #666 5px 5px 5px ;;background: #EEFF99;*/
+}
+.form_img
+{
+	position:relative;
+	margin-left:100px;
+	margin-bottom:30px;
+}
+.form_img img
+{
+	margin-bottom:20px;
+	margin-top:-20px;
+	padding:0;
+	height:100px;
+	width:100px;
+}
+.search
+{
+	padding:5px;
+	height:40px;
+	width:40px;
+	border:none;
+}
