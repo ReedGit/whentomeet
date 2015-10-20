@@ -18,6 +18,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -25,11 +26,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.giot.meeting.entities.Person;
+import com.giot.meeting.entities.User;
 import com.giot.meeting.service.PersonService;
 
 @Controller
 public class SendMail {
 	MimeMessage msg = null;
+	
 	@Autowired
 	private PersonService personService;
 	
@@ -59,7 +62,13 @@ public class SendMail {
 	@Async
 	@RequestMapping("/sendtoMail.do")
 	public String sendtoMail(String[] attendeeName, String[] attendeeEmail,
-			String meetId) throws AddressException {
+			String meetId,String selfEmail,HttpSession session) throws AddressException {
+		
+		User us = (User) session.getAttribute("user1");
+		if(us==null){
+			sendSigleMail(selfEmail, meetId, "-1");
+		}
+		
 		List<String> li = new ArrayList<String>();
 		List<String> attName = new ArrayList<String>();
 
@@ -104,4 +113,29 @@ public class SendMail {
 
 		}
 	}
+	
+	public void sendValidate(String registerEmail,String userid){
+		try {
+			// 设置收件人
+			msg.setRecipient(Message.RecipientType.TO,new InternetAddress(registerEmail));
+			// 构造Multipart
+			Multipart mp = new MimeMultipart();
+			// 向Multipart添加正文
+			MimeBodyPart mbpContent = new MimeBodyPart();
+			mbpContent.setContent("http://localhost:8282/whentomeet/updateValidateStatus.do?userid="+userid,"text/html;charset=utf-8");
+			// mbpContent.setText(content);
+			// 将BodyPart添加到MultiPart中
+			mp.addBodyPart(mbpContent);
+			msg.setContent(mp);
+			// 设置发送日期
+			msg.setSentDate(new Date());
+			// 发送邮件
+			Transport.send(msg);
+
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+
+		}
+	}
+	
 }

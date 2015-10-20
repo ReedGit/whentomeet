@@ -16,6 +16,8 @@ public class User {
 	private String username;
 	private String password;
 	private String image;
+	
+	private int validate;
 
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
@@ -58,6 +60,21 @@ public class User {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+	
+	
+
+	public int getValidate() {
+		return validate;
+	}
+
+	public void setValidate(int validate) {
+		this.validate = validate;
+	}
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + "]";
 	}
 
 }

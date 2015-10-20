@@ -7,8 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<!-- <link rel="stylesheet" href="css/bootstrap2.css"> -->
 <style type="text/css">
+	body{
+		width: 100%;
+		height: 100%;
+	}
 	#meetingTime{
 		font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 		-moz-user-select: none; 
@@ -16,23 +20,37 @@
 		user-select: none;
 		color: #333;
 		background-color: #F8F8F8;
+		width: 1270px;
+		height: 577px;
+		border: solid 0 #333;
+		margin: 35px auto auto auto;
+		border-radius:5px;
+		box-shadow: 0 0 30px #333;
 	}
 	#dateLable{
 		text-align: center;
 		width : 400px;
 		height: 30px;
 		margin: 0 auto;
+		width: 100%;
+		height: 45px;
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		border-bottom: 1px solid #ddd;
+		background: #f8f8f8;
+		padding-top: 15px;
 	}
 
 	#lable{
 		width: 318px;
-		border:dotted 1px;
+		border:dotted 1px #ccc;
 		text-align: center;
 		padding-top: 10px;
 		padding-bottom: 10px;
-		margin: 0 auto 20px;
+		margin: 11px auto;
 		background-color: #F3F3CC;
 		font-style: italic;
+		font-size: 20px;
 	}
 	table{
 	  table-layout:fixed;
@@ -159,15 +177,15 @@
 		right: 114px;
 		top:34px;
 	}
-	.submitArea #step2Back{
+	/* .submitArea #step2Back{
 		width: 88px;
 		height: 39px;
-	}
+	} */
 	.selected,.selectedTail{
 		backgroundColor : #ffde7d;
 	}
 </style>
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<%@ include file="public/headfile.html"%>
 <script type="text/javascript" src="js/zxx.color_exchange.js"></script>
 <script type="text/javascript">
 	/* 定义时间间隔 */
@@ -262,9 +280,9 @@ $(function(){
 	$(".date").eq(weekB).parent().css("backgroundColor","#FFFDD0");
 	/* 设置标题 */
 	if(isChange){
-		$("#dateLable h2").text(dateB.getFullYear()+"年   "+(month0+1)+"月 / "+((month0+2)>12?1:(month0+2))+"月");
+		$("#dateLable h2").text(dateB.getFullYear()+" 年 "+(month0+1)+"月 / "+((month0+2)>12?1:(month0+2))+"月");
 	}else{
-		$("#dateLable h2").text(dateB.getFullYear()+"年   "+(month0+1)+"月");
+		$("#dateLable h2").text(dateB.getFullYear()+" 年 "+(month0+1)+"月");
 		
 	}
 	
@@ -304,9 +322,9 @@ $(function(){
 				$(this).text(month+1+"月"+date2.getDate()+"日");
 			});
 			if(isChange){
-				$("#dateLable h2").text(date2.getFullYear()+"年   "+(month0+1)+"月 / "+((month0+2)>12?1:(month0+2))+"月");
+				$("#dateLable h2").text(date2.getFullYear()+" 年 "+(month0+1)+"月 / "+((month0+2)>12?1:(month0+2))+"月");
 			}else{
-				$("#dateLable h2").text(date2.getFullYear()+"年   "+(month0+1)+"月");
+				$("#dateLable h2").text(date2.getFullYear()+" 年 "+(month0+1)+"月");
 				
 			}
 			
@@ -385,9 +403,9 @@ $(function(){
 		});
 		
 		if(isChange){
-			$("#dateLable h2").text(tempDate.getFullYear()+"年   "+(month0+1)+"月 / "+((month0+2)>12?1:(month0+2))+"月");
+			$("#dateLable h2").text(tempDate.getFullYear()+" 年 "+(month0+1)+"月 / "+((month0+2)>12?1:(month0+2))+"月");
 		}else{
-			$("#dateLable h2").text(tempDate.getFullYear()+"年   "+(month0+1)+"月");
+			$("#dateLable h2").text(tempDate.getFullYear()+" 年 "+(month0+1)+"月");
 			
 		}
 		
@@ -622,11 +640,10 @@ var moveOut = function(){
 }
 </script>
 </head>
-<body>
-
+<body style="background-color: #669999;">
+<%@ include file="public/head.html"%>
 <div id="meetingTime" unselectable="on" onselectstart="return false;" style="-moz-user-select:none;">
 	<div id="dateLable"><h2></h2></div>
-	<hr>
 	<div id="lable"> 为见面选择可能的时间吧</div>
 	<table border="1" id="weekTitle">
 		<tr>
@@ -685,9 +702,9 @@ var moveOut = function(){
 	
 </div>
 <div class="submitArea">
-	<button id="step2Back" class="btn btnLargeGray" onclick="location.href = '#/step1';return false;">返回</button>
+	<button id="step2Back" class="btn btn-danger" onclick="location.href = '#';return false;">返回</button>
        
-    <button id="step2Submit" type="submit" class="btn btn-primary btn-large">邀请参与人</button>
+    <button id="step2Submit" type="submit" class="btn btn-success">邀请参与人</button>
 </div>
 
 </div>

@@ -120,7 +120,7 @@
 					<div class="inviteForm">
 						<label class="instruction">Your info</label> 
 						<input class="nameInput yourName" type="text" placeholder="your name">
-						<input class="emailInput yourEmail" type="text" placeholder="your email"> 
+						<input class="emailInput yourEmail" type="text" placeholder="your email" name="selfEmail"> 
 						
 						<span class="msg">invalid email</span> 
 						<br>
@@ -155,5 +155,7 @@
 			</div>
 			</form>
 	</div>
+	</div>
+	
 </body>
 </html>

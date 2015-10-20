@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.giot.meeting.entities.User;
 import com.giot.meeting.service.UserService;
@@ -21,7 +23,9 @@ public class UserAction {
 
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private SendMail sendmail;
+	
 	@ResponseBody
 	@RequestMapping("/findUser.do")
 	public User findUser(String nameid) {
@@ -30,21 +34,30 @@ public class UserAction {
 
 	@ResponseBody
 	@RequestMapping("/getUser.do")
-	public User getUser(String nameid, String password) {
-		return userService.getUser(nameid, MD5.compute(password));
+	public User getUser(String username, String password,HttpSession session) {
+		User u =  userService.getUser(username, MD5.compute(password));
+		if(u!=null){
+			session.setAttribute("user1", u);
+		}
+		return u;
 	}
 
-	@ResponseBody
 	@RequestMapping("/addUser.do")
-	public String addUser(User user,
-			@RequestParam("imagefile") CommonsMultipartFile file,
-			HttpServletRequest request) {
+	public String addUser(User user,RedirectAttributes redirectAttributes) {
 		user.setPassword(MD5.compute(user.getPassword()));
-		user.setImage(uploadImage(file, request, user.getNameid()));
+		/*user.setImage(uploadImage(file, request, user.getNameid()));*/
 		userService.addUser(user);
-		return user.getUserid();
+		sendmail.sendValidate(user.getUsername(), user.getUserid());
+		redirectAttributes.addFlashAttribute("provEmail", user.getUsername());
+		return "redirect:/redirectValidateEmail.do";
 	}
 
+	@RequestMapping("/redirectValidateEmail.do")
+	public String redirectValidateEmail(){
+		return "validateEmail";
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping("/updatePassword.do")
 	public void updatePassword(String nameid, String oldPassword, String password) {
@@ -98,6 +111,12 @@ public class UserAction {
 		}
 		return pathDir.substring(1) + File.separator + nameid + extension;
 
+	}
+	
+	@RequestMapping("/updateValidateStatus.do")
+	public String updateValidateStatus(String userid) {
+		userService.updateValidateStatus(userid);
+		return "redirect:login.html";
 	}
 
 }

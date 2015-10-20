@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUser(String nameid, String password) {
 		try {
-			String sql = "from User where nameid = :nameid and password = :password";
+			String sql = "from User where username = :nameid and password = :password";
 			return (User) getSession().createQuery(sql)
 					.setString("nameid", nameid)
 					.setString("password", password).uniqueResult();
@@ -62,6 +62,19 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public void updateValidateStatus(String userid) {
+		try {
+			String hql = "update User set validate=1 where userid=?";
+			 getSession().createQuery(hql)
+					.setString(0, userid).executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 }

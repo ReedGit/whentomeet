@@ -27,5 +27,8 @@ public class UserService {
 	public User findUser(String nameid) {
 		return userDao.findUser(nameid);
 	}
-
+	
+	public void updateValidateStatus(String userid){
+		userDao.updateValidateStatus(userid);
+	}
 }

@@ -86,7 +86,9 @@
 	}
 	
 	#resultsArea .headingArea{
-		border-radius:8px;
+		/* border-radius:8px; */
+		border-top-left-radius:8px;
+		border-top-right-radius:8px;
 		background-color:#F6F6F6;
 		height: 67px;
 		width: 100%;
@@ -123,7 +125,7 @@
 	.table_right .timeDura{
 		height: 41px;
 	}
-	.myTime,.reloadRemove,.check_box,.topFill2,.yourName{
+	.myTime,.reloadRemove,.check_box,.topFill2,.yourName,.response{
 		height: 35px;
 	}
 	.topFill1{
@@ -295,6 +297,32 @@ var getPt = function(){
 				});
 			});
 		}
+		
+		//聚会主办人
+		if("${param.personId}"==-1){
+			$(".yourName,.check_box,.submitArea,#selectItem").hide();
+			
+			$(".headingArea span").text("大家选择的时间");
+				var responseArr = [];
+				$(".myTime").nextAll().not(".check_box").each(function(){
+					$(this).children().each(function(index){
+						var res = responseArr[index]==undefined?0:responseArr[index];
+						if($(this).text()==""){
+							responseArr[index] =res;
+						}else{
+							responseArr[index] =res+1;
+						}
+						
+					});
+				});
+				$(".check_box").after("<tr class='response'></tr>");
+				$(".yourName").after("<tr class='response'><td>&nbsp;有&nbsp;"+$(".table_left .reloadRemove").length+"&nbsp;个人回复</td></tr>");
+				$.each(responseArr,function(index,value){
+					$(".table_right .response").append("<td>"+value+"</td>")
+				});
+		}
+		
+		
 	});
 }
 

@@ -12,11 +12,29 @@
 	 		height: 20px;
 	 	}
 	 </style>
+   <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+   <script type="text/javascript">
+   $(function(){
+			$("input[type=submit]").click(function(){
+				var email = $("input[type=email]").val();
+				var emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
+				if(!emailReg.test(email)){
+  					alert("请检查邮箱格式！");
+  					return false;
+				}
+				var p = $("input[name=password]").val();
+				var p1 =$("input[name=password1]").val();
+				if(p!=p1){
+					alert("密码不一致");
+  					return false;
+				}
+				
+				return true;
+			});
+		})
    
-   	<script type="text/javascript">
-   		
-   	
-   	</script>
+   </script>
+   
   </head>
  
   <body style="background:url(img/bg2.jpg);">
@@ -56,19 +74,19 @@
 	    <div class="container container1">
 		
           <h1>meeting</h1>
-          <form class="form-horizontal" role="form">
+          <form class="form-horizontal" role="form" action="addUser.do" method="post">
             <div class="form-group">
 			
               <label for="inputEmail1" class="tip_login" >邮箱</label>
                <div class=".clear">
-                <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+                <input type="email" class="form-control" id="inputEmail1" placeholder="Email" name="username">
 				</div>
             </div>
             <div class="form-group">
               <label for="inputPassword1" class="tip_login">密码</label><br/>
            
 					<div class=".clear">
-                <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
 					</div>
             </div>
 			
@@ -76,14 +94,14 @@
 			           <div class="form-group">
               <label for="inputPassword1" class="tip_login">&nbsp;&nbsp;确认密码</label><br/>
 							<div class=".clear">
-                <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id="inputPassword1" placeholder="Password" name="password1">
 					</div>
             </div>
 			
 
             <div class="form-group" style="margin-top:35px;">
             
-                <button type="submit" class="btn btn-warning btn-warning2">Register</button>
+                <input type="submit" class="btn btn-warning btn-warning2" value="立即注册">
             </div>
 
 				<div class="form-group" style="margin-top:25px;">
