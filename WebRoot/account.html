@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+	<title>meeting</title>
+    <meta charset="utf-8">
+	 <link href="css/style.css" rel="stylesheet">
+	 <link href="css/flat-ui.css" rel="stylesheet">
+	 <link href="css/account.css" rel="stylesheet">
+	 <script src="http://www.codefans.net/ajaxjs/jquery-1.6.2.min.js"></script>
+
+
+   
+  </head>
+ 
+  <body style="background:url(img/bg2.jpg);">
+	
+	<div class="header">
+	
+	<div class="logo">	
+	<h1>meeting</h1>
+	</div>
+	<a href="register.html" type="button"  class="btn btn-link2">register</a>
+	<a href="login.html" type="button"  class="btn btn-link2">login</a>
+	<a href="account.html" type="button"  class="btn btn-link2">Username</a>
+	</div>
+	<hr/>
+		
+		<div class="tip">
+	
+		<h1>我的账户</h1>
+		<a href="account.html" style="color:#e1af32;text-decoration:underline"><h2>设置</h2></a><br/>
+		<a href="contact.html"><h2>联系人</h2></a><br/>
+		<a href="changepassword.html"><h2>修改密码</h2></a><br/>
+	
+		</div>
+
+	
+
+<div class="account">
+			<h2 style="text-align:center;margin-left:-5%;">账户设置</h2>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+					用 户 名
+				<input type="text" class="form-control input" placeholder="主题">
+				
+            </div>
+            <div class="form-group">
+             
+					邮&nbsp;&nbsp;箱
+                  <input type="email" class="form-control input" placeholder="地点">
+				
+            </div>
+			   <div class="form-group">
+				回复提醒
+				<select class="selecttime">
+				<option value="0">邮件提醒我</option>
+				<option value="1">微信提醒我</option>
+				</select>	
+            </div>
+			 <div class="form-group">
+				等待时间
+				<select class="selecttime">
+				<option value="0">30 分钟</option>
+				<option value="1">1 小时</option>
+				<option value="2">2 小时</option>
+				<option value="3">3 小时</option>
+				<option value="4">4 小时</option>
+				<option value="5">6 小时</option>
+				<option value="6">半天</option>
+				<option value="7">全天</option>
+				</select>		
+            </div>	
+			   <div class="form-group" style="vertical-align:top;">
+					上传头像
+					<div class="form_img">
+					<img src="" id="img" >
+					</br>
+					<input type="file" name="image" id="image" multiple="multiple" accept=".jpg,.gif,.png" />
+					
+					
+				</div>
+				</div>
+			
+
+
+            <div class="form-group" style="margin-left:25%">
+                <button type="submit" class="btn btn-warning btn-warning2">保存</button>
+            </div>
+
+			
+          </form>
+</div>
+
+
+<script>	
+$("#image").change(function(){
+	var objUrl = getObjectURL(this.files[0]) ;
+	console.log("objUrl = "+objUrl) ;
+	if (objUrl) {
+		$("#img").attr("src", objUrl) ;
+	}
+}) ;
+
+function getObjectURL(file) {
+	var url = null ; 
+	if (window.createObjectURL!=undefined) { // basic
+		url = window.createObjectURL(file) ;
+	} else if (window.URL!=undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL!=undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
+</script>
+  </body>
+</html>
