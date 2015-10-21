@@ -10,7 +10,7 @@ public interface UserDao {
 
 	public void updateUser(User user);
 	
-	public User findUser(String nameid);
+	public boolean findUser(String nameid);
 
 	public void updateValidateStatus(String userid);
 }

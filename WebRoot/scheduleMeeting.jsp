@@ -20,7 +20,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 30px #333;
-    background: #eee;
+    background: #fff;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e8e8e8', GradientType=0);
     float:right;
     position: relative;
@@ -35,7 +35,9 @@
 }
 #step1Submit{
 	position: relative;
-	left: 368px;
+	left: 330px;
+	width: 120px;
+	height: 40px;
 }
 </style>
 

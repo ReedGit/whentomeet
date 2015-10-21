@@ -24,7 +24,7 @@ public class UserService {
 		userDao.updateUser(user);
 	}
 
-	public User findUser(String nameid) {
+	public boolean findUser(String nameid) {
 		return userDao.findUser(nameid);
 	}
 	

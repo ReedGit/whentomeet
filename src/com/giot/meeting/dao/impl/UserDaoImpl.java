@@ -53,11 +53,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User findUser(String nameid) {
+	public boolean findUser(String nameid) {
 		try {
-			String sql = "from User where nameid = :nameid";
-			return (User) getSession().createQuery(sql)
-					.setString("nameid", nameid).uniqueResult();
+			String sql = "from User where username = ?";
+			User u =  (User) getSession().createQuery(sql)
+					.setString(0, nameid).uniqueResult();
+			if(u==null){
+				return false;
+			}else
+				return true;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

@@ -63,11 +63,7 @@ public class SendMail {
 	@RequestMapping("/sendtoMail.do")
 	public String sendtoMail(String[] attendeeName, String[] attendeeEmail,
 			String meetId,String selfEmail,HttpSession session) throws AddressException {
-		
 		User us = (User) session.getAttribute("user1");
-		if(us==null){
-			sendSigleMail(selfEmail, meetId, "-1");
-		}
 		
 		List<String> li = new ArrayList<String>();
 		List<String> attName = new ArrayList<String>();
@@ -86,6 +82,11 @@ public class SendMail {
 			p1.setName(attName.get(i));
 			personService.addPerson(p1);
 			sendSigleMail(li.get(i), meetId, p1.getPersonid());
+		}
+		
+		if(us==null){
+			sendSigleMail(selfEmail, meetId, "-1");
+			return "redirect:sendSuccess.jsp?selfEmail="+selfEmail;
 		}
 		return "redirect:sendSuccess.jsp";
 	}

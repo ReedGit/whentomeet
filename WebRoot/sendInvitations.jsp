@@ -5,99 +5,82 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<%@ include file="public/headfile.html"%>
 <style type="text/css">
-#emails .leftSide {
-	padding: 25px 30px 0px 0px;
-	text-align: right;
-	float: left;
-	width: 100px;
+body{
+	background-color: #669999;
 }
 
-#emails .rightSide {
+#title{
+	width: 100%;
+	height: 70px;
+	border: solid 0px #ccc;
+	border-bottom: solid 1px #ccc;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	font-size: 30px;
+	font-weight:bolder;
+	padding-top: 10px;
+	padding-left: 35px;
+	background-color: #F8F8F8 ;
+	
+}
+#emails {
+	width: 638px;
+	/* height: 499px; */
+	border: 1px solid #ccc;
+	margin: 92px auto auto auto;
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0px 0px 30px #333333;
+	padding-bottom: 100px;
+	margin-bottom: 200px;
+}
+
+.inputName{
+	width: 172px;
+}
+.inputEmail{
+	width: 232px;
 	position: relative;
-	width: 480px;
-	float: left;
-	border-left: 1px solid #ddd;
-	padding: 20px 0px 10px 50px;
+	left: 180px;
+	bottom: 34px;
+	margin-bottom: -26px;
 }
 
-.inviteNoModal .instruction {
-	font-size: 16px;
-	margin: 30px 0px 4px 10px;
-	font-weight: bold;
+#inviteAttendees{
+	position: relative;
+	top:40px;
+	padding-left: 80px;
 }
-
-.reg_can_sync {
-	font-weight: normal;
-	font-size: 14px;
-	color: #4CAEE3;
-	padding-right: 80px;
+.fill{
+	height: 10px;
 }
-
-.inviteNoModal .msg {
-	display: none;
-	font-size: 13px;
-	padding-left: 6px;
-	color: #be1313;
+.btn-success{
+	position: relative;
+	top:37px;
+	left: 202px;
+	width: 112px;
+	
 }
-.submitArea .spinner {
-    display: none;
-    position: absolute;
-    bottom: 12px;
-    right: 20px;
-}
-
-.inviteNoModal .nameInput {
-    width: 150px;
-    margin-left: 10px;
-    padding: 5px;
-    font-size: 14px;
-}
-
-.inviteNoModal .addBtn {
-    height: 20px;
-    padding: 0px 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-}
-.sync_btn {
-    width: 200px;
-    float: left;
-    margin: 10px 0 0 10px;
-    text-decoration: underline;
-}
-.submitArea .btn-primary.btn-large.sendBtn{
-    float: right;
-    margin-right: 80px;
-    padding: 7px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+.privacyNote{
+	position: relative;
+	top:46px;
+	left: 102px;
 }
 </style>
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 
 <script type="text/javascript">
 	$(function(){
 		for(var i=0;i<3;i++){
-			$(".attendeeEmails").append('<div class="inviteRow">'
-											+'<input class="nameInput ui-autocomplete-input" type="text" placeholder="name" autocomplete="off" role="textbox"'
-											+'aria-autocomplete="list" aria-haspopup="true" name="attendeeName">'
-											+'&nbsp;<input class="emailInput" type="text" placeholder="email" name="attendeeEmail">'
-											+'</div>');
+			$(".attendeeEmails").append('<input type="text" class="form-control inputName"  placeholder="名字" name="attendeeName">'
+										+'<input type="text" class="form-control inputEmail"  placeholder="邮箱" name="attendeeEmail" >');
 		}
-		$(".btn.addBtn.moreEmails").click(function(){
+		$(".moreEmails").click(function(){
 			for(var i=0;i<3;i++){
-				$(".attendeeEmails").append('<div class="inviteRow">'
-												+'<input class="nameInput ui-autocomplete-input" type="text" placeholder="name" autocomplete="off" role="textbox"'
-												+'aria-autocomplete="list" aria-haspopup="true" name="attendeeName">'
-												+'&nbsp;<input class="emailInput" type="text" placeholder="email" name="attendeeEmail">'
-												+'</div>');
-			}
+				$(".attendeeEmails").append('<input type="text" class="form-control inputName"  placeholder="名字" name="attendeeName">'
+						+'<input type="text" class="form-control inputEmail"  placeholder="邮箱" name="attendeeEmail" >');
+			     }
 			
 		});
 	})
@@ -106,51 +89,36 @@
 </script>
 </head>
 <body>
-	<div id="emails" style="display: block;">
-		<div class="leftSide">
-			<a href="#" class="backLink"> ← go back</a>
-		</div>
-
+<%@ include file="public/head.html"%>
+	<div id="emails">
 		<div class="rightSide">
-			<h1>Send invitations by email</h1>
+			<div id="title">通过邮箱发送邀请</div>
 			<form action="sendtoMail.do" method="post">
 			<input type="hidden" name="meetId" value="${param.meetId}">
 			<div id="inviteAttendees">
 				<div class="inviteNoModal">
 					<div class="inviteForm">
-						<label class="instruction">Your info</label> 
-						<input class="nameInput yourName" type="text" placeholder="your name">
-						<input class="emailInput yourEmail" type="text" placeholder="your email" name="selfEmail"> 
+						<label for="name">我的信息</label>
+						<div class="fill"></div>
+      					<input type="text" class="form-control inputName"  placeholder="我的名字"  name="myName">
+      					<input type="text" class="form-control inputEmail"  placeholder="我的邮箱" name="selfEmail">
 						
-						<span class="msg">invalid email</span> 
 						<br>
 						
 						<div class="instruction">
-								Attendee info
-							<span class="reg_can_sync pull-right">
-								Registered users can sync &amp; save contacts
-							</span>
+								受邀人的信息 &nbsp;注册用户可以同步和保存联系人
 						</div>
+						<div class="fill"></div>
 						<div class="attendeeEmails">
 								<!-- 邀请人邮箱 -->						
 						</div>
-						<div class="btn addBtn moreEmails">+ more emails</div>
-					</div>
-					
-					<div class="submitArea">
-						<div>
-							<a href="#syncModal" data-toggle="modal" class="sync_btn">Sync your contacts</a>
+						<button type="button" class="btn btn-info  btn-xs moreEmails">+添加更多邮箱</button>      
+						<input type="submit" class="btn btn-success" value="发送邀请" >
+						<div class="privacyNote">
+							我们承诺绝不公开您的邮箱，查看我们的<a href="/privacy" target="_blank">隐私政策</a>.
 						</div>
-						<button class="btn-primary btn-large sendBtn">Send Invites</button>
-						<img class="spinner" src="img/loading.gif">
-						<div style="clear: both"></div>
 					</div>
 					
-					<div class="privacyNote">
-						We never share emails. See our <a href="/privacy" target="_blank">privacy
-							policy</a>.
-					</div>
-					<input type="hidden" name="group_ids" id="group_ids">
 				</div>
 			</div>
 			</form>

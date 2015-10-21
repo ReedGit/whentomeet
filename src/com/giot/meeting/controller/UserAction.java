@@ -28,8 +28,8 @@ public class UserAction {
 	
 	@ResponseBody
 	@RequestMapping("/findUser.do")
-	public User findUser(String nameid) {
-		return userService.findUser(nameid);
+	public boolean findUser(String username) {
+		return userService.findUser(username);
 	}
 
 	@ResponseBody
@@ -44,6 +44,7 @@ public class UserAction {
 
 	@RequestMapping("/addUser.do")
 	public String addUser(User user,RedirectAttributes redirectAttributes) {
+
 		user.setPassword(MD5.compute(user.getPassword()));
 		/*user.setImage(uploadImage(file, request, user.getNameid()));*/
 		userService.addUser(user);
