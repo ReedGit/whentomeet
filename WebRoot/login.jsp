@@ -52,6 +52,12 @@
 	left:30px;
 	top:30px;
 }
+label.error{
+	color: red;
+	position:relative;
+	left: 90px;
+	bottom: 10px;
+}
 </style>
 
 <script type="text/javascript">
@@ -61,14 +67,16 @@
 					url:"getUser.do",
 					type:"post",
 					data:$("#loginForm").serializeArray(),
-					dataType:"text",
+					dataType:"json",
 					success:function(data){
-						console.log(data);
-						if(data!=""&&data.validate==1){
+						if(data!=null&&data.validate==1){
 							window.location.href="scheduleMeeting.jsp";
-						}else{
-							alert("用户名或者密码不正确");
+						}else if(data!=null&&data.validate==0){
+							$("label.error").text("该邮箱尚未验证！");
 						}
+					},
+					error:function(){
+						$("label.error").text("用户名或密码不正确！");
 					}
 				});
 				return false;
@@ -83,6 +91,7 @@
 			<div class="title">
 				用户登录
 			</div>
+			<label class="error" for="login" ></label>
 			<div class="input-group">
 	  				<span class="input-group-addon">用户名</span>
 	 			 	<input type="text" class="form-control" placeholder="您注册的邮箱" name="username">

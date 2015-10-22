@@ -68,20 +68,33 @@ img[alt=error]{
 }
 </style>
  <script type="text/javascript">
+ var go  = false;
+ var go1 = false;
+ var go2 = false;
+
  var exist = function(text){
 	 $.get('findUser.do',{"username":text}, function(data) {
 			if(data==true){
 					$("label[for=username]").show().text("该邮箱已存在！");
 					$("img[for=username]").show().attr("src","img/error.png");
+					go = false;
 			  	}else{
 					$("label[for=username]").hide();
 					$("img[for=username]").show().attr("src","img/checkmark32.png");
+					go = true;
 			  	}
 		});
  }
  
  
    $(function(){
+	   $("input[type=submit]").click(function(){
+		   if(go && go1 && go2)
+			   return true;
+		   return false;
+	   });
+	   
+	   
 	   $("input[type=text],input[type=password]").change(function(){
 	   		var text = $(this).val();
 	   		var name = $(this).attr("name");
@@ -90,15 +103,31 @@ img[alt=error]{
 	   			if(!emailRex.test(text)){
 	   				//非法邮箱
 	   				$("label[for=username],img[for=username]").show();
+	   				go = false;
 	   			}else{
 	   				exist(text);
 	   			}
 	   		}else if(name=="password"){
 	   			if(text.length<8||text.length>20){
 	   				$("label[for=password],img[for=password]").show();
+	   				go1 = false;
 	   			}else{
 	   				$("label[for=password]").hide();
 					$("img[for=password]").show().attr("src","img/checkmark32.png");
+					var p2 = $("input[name=password1]").val();
+					go1 = true;
+					if(p2!=""){
+						if(p2==text){
+							$("label[for=password1]").hide();
+							$("img[for=password1]").show().attr("src","img/checkmark32.png");
+							go2 = true;
+						}else{
+							$("label[for=password1]").show();
+							$("img[for=password1]").show().attr("src","img/error.png");
+							go2 = false;
+						}
+						
+					}
 	   			}
 	   			
 	   			
@@ -106,8 +135,10 @@ img[alt=error]{
    				var p1 = $("input[name=password]").val();
    				if(text!=p1){
    					$("label[for=password1],img[for=password1]").show();
+   					go2 = false;
    				}else{
    					$("img[for=password1]").show().attr("src","img/checkmark32.png");
+   					go2 = true;
    				}
    			}
 	   		
@@ -128,11 +159,26 @@ img[alt=error]{
 		   				}
 		   				$("img[for=username]").attr("src","img/error.png");
 		   				$("label[for=username],img[for=username]").show();
+		   				go = false;
 		   			}
 	   			}else if(name=="password"){
 	   				if(text.length>=8&&text.length<=20){
-	   					$("label[for=password]").hide();
-						$("img[for=password]").show().attr("src","img/checkmark32.png");
+		   					$("label[for=password]").hide();
+							$("img[for=password]").show().attr("src","img/checkmark32.png");
+							var p2 = $("input[name=password1]").val();
+							go1 = true;
+							if(p2!=""){
+								if(p2==text){
+									$("label[for=password1]").hide();
+									$("img[for=password1]").show().attr("src","img/checkmark32.png");
+									go2 = true;
+								}else{
+									$("label[for=password1]").show();
+									$("img[for=password1]").show().attr("src","img/error.png");
+									go2 = false;
+								}
+								
+							}
 		   			}else{
 		   				if(text==""){
 		   					$("label[for=password]").text("此处为必填项！");
@@ -142,13 +188,15 @@ img[alt=error]{
 		   				}
 		   				$("img[for=password]").attr("src","img/error.png");
 		   				$("label[for=password],img[for=password]").show();
+		   				go1 = false;
 		   			}
 	   				
 	   			}else if(name=="password1"){
 	   				var p1 = $("input[name=password]").val();
-	   				if(text==p1){
+	   				if(text==p1&&text!=""){
 	   					$("label[for=password1]").hide();
 						$("img[for=password1]").show().attr("src","img/checkmark32.png");
+						go2 = true;
 	   				}else{
 	   					if(text==""){
 		   					$("label[for=password1]").text("此处为必填项！");
@@ -158,6 +206,7 @@ img[alt=error]{
 		   				}
 	   					$("img[for=password1]").attr("src","img/error.png");
 	   					$("label[for=password1],img[for=password1]").show();
+	   					go2 = false;
 	   				}
 	   			}
 	   			

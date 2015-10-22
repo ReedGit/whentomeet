@@ -18,6 +18,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 #head {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 </style>
 <!--//webfont-->
 <!--Animation-->
@@ -25,4 +26,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/animate.css" rel='stylesheet' type='text/css' />
 <script>
 	new WOW().init();
+	$(function(){
+		if("${sessionScope.user1}"!=""){
+			$(".user_icons .login,.user_icons .register").hide();
+			$(".user_icons .userName").text("${sessionScope.user1.username} |");
+			$(".removeUser").show();
+		}
+		$(".removeUser").click(function(){
+			$.ajax({
+				url:"removeUser.do",
+				type:"get",
+				dataType:"text",
+				success:function(data){
+					if(data=="true"){
+						window.location.href="index.html";
+						$(".user_icons .login,.user_icons .register").show();
+						$(".removeUser").hide();
+					}
+				}
+			});
+			return false;
+		});
+	})
 </script>

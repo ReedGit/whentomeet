@@ -5,6 +5,19 @@ body{
 	background:#fff;
 	position:relative;
 }
+.removeUser{
+	display: none;
+}
+.user_icons{
+	/* border: solid 0px red; */
+	width:250px;
+	float:right;
+	margin-top: 32px;
+	text-align: right;
+}
+.service-icon{
+	background-color: #669999;
+}
 body a{
     transition:0.5s all;
 	-webkit-transition:0.5s all;
@@ -369,9 +382,10 @@ i.linkedin:hover{
 	border:1px solid #fff;
 	background:#fff;
 }
+/* javabean */
 .callbacks_here a:after{
-	border: 1px solid #F7F0F0;
-	background:#EC5844;
+	border: 1px solid #99cccc;
+	background:#99cccc;
 }
 .callbacks_tabs a{
 	visibility:hidden;
@@ -419,9 +433,10 @@ position:absolute;
 .right-grid-1 {
    float:right;
 }
+/* javabean */
 .left-grid-1 h1,.left-grid-1 h2,.left-grid-1 h3 {
   color: #fff;
-  background:#EC5844;
+  background:#99cccc;
    padding: 0.2em 0.2em;
   width: 71%;
   font-size: 4em;
@@ -471,40 +486,41 @@ margin:0;
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;  padding: 0.5em  0;
 }
+/* 第二部分6个小图标 */
 i.rocket {
   width: 67px;
     height: 123px;
-  background: url('../img/s-icons.png') no-repeat 18px 43px #EC5844;
+  background: url('../img/s-icons.png') no-repeat 18px 43px #669999;
   display: inline-block;
 }
 i.plan {
    width: 67px;
     height: 123px;
-  background: url('../img/s-icons.png') no-repeat -66px 43px #EC5844;
+  background: url('../img/s-icons.png') no-repeat -66px 43px #669999;
   display: inline-block;
 }
 i.book {
     width: 67px;
     height: 123px;
-  background: url('../img/s-icons.png') no-repeat -144px 43px #EC5844;
+  background: url('../img/s-icons.png') no-repeat -144px 43px #669999;
   display: inline-block;
 }
 i.arrow{
   width: 67px;
     height: 123px;
-  background: url('../img/s-icons.png') no-repeat 22px -74px #EC5844;
+  background: url('../img/s-icons.png') no-repeat 22px -74px #669999;
   display: inline-block;
 }
 i.download {
    width: 67px;
     height: 123px;
-  background: url('../img/s-icons.png') no-repeat -64px -69px #EC5844;
+  background: url('../img/s-icons.png') no-repeat -64px -69px #669999;
   display: inline-block;
 }
 i.cloud {
     width: 67px;
    height: 123px;
-   background: url('../img/s-icons.png') no-repeat -142px -69px #EC5844;
+   background: url('../img/s-icons.png') no-repeat -142px -69px #669999;
   display: inline-block;
 }
 .serve-grids.two {
@@ -589,8 +605,9 @@ display:block;
 .port-grid.lost{
    margin-right:0%;
 }
+/* javabean */
 .port-grid:hover   {
- background:#EC5844;
+ background:#669999;
 }
 .box_type {
  background: #EC5844;

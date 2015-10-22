@@ -1,5 +1,7 @@
 package com.giot.meeting.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +18,7 @@ public class User {
 	private String username;
 	private String password;
 	private String image;
-	
+	private Date registerDate;
 	private int validate;
 
 	@Id
@@ -72,6 +74,13 @@ public class User {
 		this.validate = validate;
 	}
 
+	
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
+	}
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + "]";

@@ -2,6 +2,7 @@ package com.giot.meeting.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,6 +47,7 @@ public class UserAction {
 	public String addUser(User user,RedirectAttributes redirectAttributes) {
 
 		user.setPassword(MD5.compute(user.getPassword()));
+		user.setRegisterDate(new Date());
 		/*user.setImage(uploadImage(file, request, user.getNameid()));*/
 		userService.addUser(user);
 		sendmail.sendValidate(user.getUsername(), user.getUserid());
@@ -117,7 +119,13 @@ public class UserAction {
 	@RequestMapping("/updateValidateStatus.do")
 	public String updateValidateStatus(String userid) {
 		userService.updateValidateStatus(userid);
-		return "redirect:login.html";
+		return "redirect:login.jsp";
 	}
 
+	@ResponseBody
+	@RequestMapping("/removeUser.do")
+	public boolean removeUser(HttpSession session){
+		session.removeAttribute("user1");
+		return true;
+	}
 }

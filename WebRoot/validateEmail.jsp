@@ -5,9 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%@ include file="public/headfile.html"%>
 <style type="text/css">
 	body{
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		background-color: #669999;
 	}
 	.scheduleBox{
 		width: 522px;
@@ -18,12 +20,14 @@
 		position: relative;
 		top:100px;
 		background-color: #F4F4F4;
+		border-radius: 5px;
 	}
 
 </style>
 
 </head>
 <body>
+<%@ include file="public/head.html"%>
 	<div class="scheduleBox" style="padding:35px 30px 20px 30px!important;">
          <div class="titleBar">
              <h1>一封邮箱确认邮件已经发送到 ${provEmail }
