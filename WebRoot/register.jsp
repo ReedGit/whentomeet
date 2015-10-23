@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 <%@ include file="public/headfile.html"%>
 <style type="text/css">
-		body {
-	background-color: #669999;
-}
-
 #register{
 	width: 522px;
 	/* height: 446px; */
@@ -89,9 +85,14 @@ img[alt=error]{
  
    $(function(){
 	   $("input[type=submit]").click(function(){
-		   if(go && go1 && go2)
+		   if(go && go1 && go2 && $.trim($("input[name=nickname]").val())!=""){
 			   return true;
-		   return false;
+			   
+		   }else{
+				$("img[for=nickname]").attr("src","img/error.png");
+				$("label[for=nickname],img[for=nickname]").show();
+			   return false;
+		   }
 	   });
 	   
 	   
@@ -99,6 +100,17 @@ img[alt=error]{
 	   		var text = $(this).val();
 	   		var name = $(this).attr("name");
 	   		var emailRex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
+	   		if(name=="nickname"){
+	   			if($.trim($("input[name=nickname]").val())==""){
+	   				$("img[for=nickname]").attr("src","img/error.png");
+					$("label[for=nickname],img[for=nickname]").show();
+	   			}else{
+	   				$("img[for=nickname]").attr("src","img/checkmark32.png").show();
+					$("label[for=nickname]").hide();
+	   			}
+	   				
+	   		}else 
+	   			
 	   		if(name=="username"){
 	   			if(!emailRex.test(text)){
 	   				//非法邮箱
@@ -225,6 +237,14 @@ img[alt=error]{
 					<div class="title">
 						免费注册
 					</div>
+					<div class="input-group">
+			  				<span class="input-group-addon">昵  &nbsp; 称</span>
+			 			 	<input type="text" class="form-control" placeholder="请输入您的昵称" name="nickname">
+			      	</div>
+			      	<img alt="error" src="img/error.png" for="nickname">
+			      	<label class="error" for="nickname">昵称必填！</label>
+			      	<br>
+			      	<br>
 					<div class="input-group">
 			  				<span class="input-group-addon">用 户 名</span>
 			 			 	<input type="text" class="form-control" placeholder="请输入您的邮箱" name="username">

@@ -85,7 +85,7 @@ public class UserAction {
 	public void updateImage(User user,
 			@RequestParam("imagefile") CommonsMultipartFile file,
 			HttpServletRequest request) {
-		String image = uploadImage(file, request, user.getNameid());
+		String image = uploadImage(file, request, user.getUsername());
 		if (image != null)
 			user.setImage(image);
 		userService.updateUser(user);

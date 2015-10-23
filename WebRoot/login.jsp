@@ -70,6 +70,7 @@ label.error{
 					dataType:"json",
 					success:function(data){
 						if(data!=null&&data.validate==1){
+							document.cookie="user1="+data.nickname;
 							window.location.href="scheduleMeeting.jsp";
 						}else if(data!=null&&data.validate==0){
 							$("label.error").text("该邮箱尚未验证！");

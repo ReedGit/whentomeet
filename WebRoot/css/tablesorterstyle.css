@@ -1,0 +1,63 @@
+/* tables */
+table.tablesorter {
+	font-family:arial;
+	margin:0 auto;
+	font-size: 8pt;
+	width: 85%;
+	text-align: left;
+	border: none;
+	table-layout : fixed;
+}
+table.tablesorter a{
+	color: #0088cc;
+}
+table.tablesorter a:hover {color: #005580;text-decoration: underline;}	/* 鼠标移动到链接上 */
+
+
+table.tablesorter thead,table.tablesorter tfoot{
+	border-top: 0 none #FFF;
+	border-bottom: 1px solid #111111;
+	border-left: 0 none #FFF;
+	border-right: 0 none #FFF;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	/* border: 1px solid #FFF; */
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter thead tr .header {
+	background-image: url(../img/updown.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	text-align: center;
+	line-height: 35px;
+}
+table.tablesorter tbody {
+	border: 0 none transparent;
+}
+table.tablesorter tbody td {
+	padding: 4px;
+	vertical-align: top;
+	line-height: 30px;
+	font-size: 15px;
+}
+
+table.tablesorter tbody tr:nth-child(odd) {
+	background-color:#E2E4FF;
+}
+table.tablesorter tbody tr td:nth-child(n+2) {
+	text-align: center;
+}
+table.tablesorter tbody tr td:nth-child(1) {
+	padding-left: 10px;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(../img/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(../img/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+	/* background-color: #8dbdd8; */
+}

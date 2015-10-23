@@ -1,6 +1,7 @@
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
 <!-- Custom Theme files -->
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- Custom Theme files -->
@@ -15,6 +16,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--webfont-->
 <!-- <link href='http://fonts.useso.com/css?family=Oswald:400,700,300|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'> -->
 <style type="text/css">
+body {
+	background-color: #669999;
+}
 #head {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -26,26 +30,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/animate.css" rel='stylesheet' type='text/css' />
 <script>
 	new WOW().init();
-	$(function(){
-		if("${sessionScope.user1}"!=""){
-			$(".user_icons .login,.user_icons .register").hide();
-			$(".user_icons .userName").text("${sessionScope.user1.username} |");
-			$(".removeUser").show();
-		}
-		$(".removeUser").click(function(){
-			$.ajax({
-				url:"removeUser.do",
-				type:"get",
-				dataType:"text",
-				success:function(data){
-					if(data=="true"){
-						window.location.href="index.html";
-						$(".user_icons .login,.user_icons .register").show();
-						$(".removeUser").hide();
-					}
-				}
-			});
-			return false;
-		});
-	})
 </script>

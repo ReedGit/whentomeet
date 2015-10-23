@@ -8,12 +8,14 @@ body{
 .removeUser{
 	display: none;
 }
+ul li a.mymeeting{
+	visibility: hidden;
+}
 .user_icons{
-	/* border: solid 0px red; */
-	width:250px;
-	float:right;
-	margin-top: 32px;
-	text-align: right;
+	/* border: solid 2px red; */
+	position: relative;
+	left: 104px;
+	top:34px;
 }
 .service-icon{
 	background-color: #669999;

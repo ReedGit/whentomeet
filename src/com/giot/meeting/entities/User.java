@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class User {
 
 	private String userid;
-	private String nameid;
+	private String nickname;
 	private String username;
 	private String password;
 	private String image;
@@ -32,12 +32,11 @@ public class User {
 		this.userid = userid;
 	}
 
-	public String getNameid() {
-		return nameid;
+	public String getNickname() {
+		return nickname;
 	}
-
-	public void setNameid(String nameid) {
-		this.nameid = nameid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getUsername() {
