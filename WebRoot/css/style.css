@@ -8,17 +8,84 @@ body{
 .removeUser{
 	display: none;
 }
+
+#reg{
+	
+    width: 1100px;
+    margin: 5px auto 0 auto;
+    position: relative;
+    z-index: 1;
+   /*  border: solid 2px red; */
+}
+div#aleft{
+	width:270px;
+	/* border: 2px solid red; */
+	float:left;
+	margin: 32px 0 0 0;
+	color: #fff;
+}
+div#aleft a{
+	color: #fff;
+}
+div#aleft a:hover{
+	text-decoration: underline;
+}
+div#aleft h2{
+	margin: 27px;
+}
+div#aleft .pointer{
+	background: url(../img/pointer.png) no-repeat;
+    width: 19px;
+    height: 28px;
+    margin: 3px 5px 0 -24px;
+    display: inline-block;
+}
 ul li a.mymeeting{
 	visibility: hidden;
 }
 .user_icons{
 	/* border: solid 2px red; */
-	position: relative;
-	left: 104px;
-	top:34px;
+	float:left;
+	margin: 31px 0 0 100px;
+	
 }
 .service-icon{
 	background-color: #669999;
+}
+.dropdownmenu{
+	width: 150px;
+	height:82px;
+	text-align: center;
+	border:solid 1px #ccc;
+	background-color: #fff;
+	border-radius:5px;
+	position: absolute;
+	/* left:71.8%; */
+	right:96px;
+	top:59px;
+	/* float:left; */
+	margin: 0;
+	display: none;
+}
+.dropdownmenu::before{
+	
+	border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-left: 7px solid transparent;
+    position:relative;
+    right:10%;
+    bottom:30%;
+    content: '';
+}
+.dropdownmenu::after{
+	
+	border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
+    border-left: 6px solid transparent;
+    position:relative;
+    right:43%;
+    bottom:79%;
+    content: '';
 }
 body a{
     transition:0.5s all;
@@ -1670,6 +1737,8 @@ float:left;
 .copyright{
   padding: 1em 0;
 	background:#232323;
+	height: 50px;
+	margin-top: 100px;
 }
 p.write {
   float: right;

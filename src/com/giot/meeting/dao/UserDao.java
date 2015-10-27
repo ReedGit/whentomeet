@@ -5,6 +5,8 @@ import com.giot.meeting.entities.User;
 public interface UserDao {
 
 	public User getUser(String nameid, String password);
+	
+	public User getUserById(String userid);
 
 	public void addUser(User user);
 

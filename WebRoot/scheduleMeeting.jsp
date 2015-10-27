@@ -24,7 +24,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e8e8e8', GradientType=0);
     float:right;
     position: relative;
-    top: 36px;
+    top: 57px;
     right: 100px;
 }
 
@@ -110,5 +110,27 @@
 
         </form>
     </div>
+    
+    
+<!--/start-copyright-section-->
+<div class="clearfix"></div>
+		<div class="copyright">
+			
+		</div>
+<!--//end-copyright-section-->
+
+<script type="text/javascript">
+	var u = getCookie("user1");
+	var uid = getCookie("organiser");
+	if(u!=""&&u!=null){
+		$.get('getUserById.do', {"userid":uid},function(data) {
+			var d = data.defaultDura;
+			$("#duration").val(d);
+			if(d=="0"){
+				$("#duration").val("4");
+			}
+		});
+	}
+</script>
 </body>
 </html>

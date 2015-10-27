@@ -19,7 +19,8 @@ public class User {
 	private String password;
 	private String image;
 	private Date registerDate;
-	private int validate;
+	private int validate;//0 未验证，1通过
+	private int defaultDura;
 
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
@@ -79,6 +80,14 @@ public class User {
 	}
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
+	}
+	
+	public int getDefaultDura() {
+		return defaultDura;
+	}
+	
+	public void setDefaultDura(int defaultDura) {
+		this.defaultDura = defaultDura;
 	}
 	@Override
 	public String toString() {

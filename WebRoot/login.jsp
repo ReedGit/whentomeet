@@ -70,7 +70,8 @@ label.error{
 					dataType:"json",
 					success:function(data){
 						if(data!=null&&data.validate==1){
-							document.cookie="user1="+data.nickname;
+							setCookie("user1",data.nickname);
+							setCookie("organiser",data.userid);
 							window.location.href="scheduleMeeting.jsp";
 						}else if(data!=null&&data.validate==0){
 							$("label.error").text("该邮箱尚未验证！");
@@ -120,5 +121,12 @@ label.error{
 			</div>
 		</div>
 	</form>
+	
+<!--/start-copyright-section-->
+<div class="clearfix"></div>
+		<div class="copyright">
+			
+		</div>
+<!--//end-copyright-section-->
 </body>
 </html>

@@ -46,11 +46,12 @@ public class MeetingDaoImpl implements MeetingDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Meeting> findAllMeeting(String organiser) {
+	public List<Meeting> findAllMeeting(String organiser, int start, int items) {
 		try {
 			String sql = "from Meeting where organiser = :organiser";
 			return getSession().createQuery(sql)
-					.setString("organiser", organiser).list();
+					.setString("organiser", organiser).setFirstResult(start)
+					.setMaxResults(items).list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

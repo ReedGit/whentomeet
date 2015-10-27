@@ -82,4 +82,17 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+	@Override
+	public User getUserById(String userid) {
+		try {
+			String hql = "from User where userid =?";
+			 User us = (User) getSession().createQuery(hql)
+					.setString(0, userid).uniqueResult();
+			 return us;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
 }

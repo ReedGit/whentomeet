@@ -281,5 +281,12 @@ img[alt=error]{
 					</div>
 			</div>
 		</form>
+
+<!--/start-copyright-section-->
+<div class="clearfix"></div>
+		<div class="copyright">
+			
+		</div>
+<!--//end-copyright-section-->
 </body>
 </html>

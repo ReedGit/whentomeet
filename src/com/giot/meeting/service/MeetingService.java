@@ -22,8 +22,8 @@ public class MeetingService {
 		meetingDao.deleteMeeting(meetid);
 	}
 
-	public List<Meeting> findAllMeeting(String organiser) {
-		return meetingDao.findAllMeeting(organiser);
+	public List<Meeting> findAllMeeting(String organiser,int start,int items) {
+		return meetingDao.findAllMeeting(organiser,start,items);
 	}
 
 	public Meeting findMeeting(String meetid) {

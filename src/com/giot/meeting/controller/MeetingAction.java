@@ -3,12 +3,15 @@ package com.giot.meeting.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.giot.meeting.entities.Meeting;
+import com.giot.meeting.entities.User;
 import com.giot.meeting.service.MeetingService;
 import com.giot.meeting.service.PersonService;
 import com.giot.meeting.service.TimeService;
@@ -25,7 +28,10 @@ public class MeetingAction {
 
 	//@ResponseBody
 	@RequestMapping("/addMeeting.do")
-	public String addMeeting(Meeting meeting,Map<String,Object> map) {
+	public String addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
+		User u = (User)session.getAttribute("user1");
+		if(u!=null)
+			meeting.setOrganiser(u.getUserid());
 		meetingService.addMeeting(meeting);
 		//return meeting.getMeetid();
 		map.put("duraValue", meeting.getDuration());
@@ -41,8 +47,8 @@ public class MeetingAction {
 
 	@ResponseBody
 	@RequestMapping("/findAllMeeting.do")
-	public List<Meeting> findAllMeeting(String organiser) {
-		return meetingService.findAllMeeting(organiser);
+	public List<Meeting> findAllMeeting(String organiser,int start,int items) {
+		return meetingService.findAllMeeting(organiser,start,items);
 	}
 
 	@ResponseBody

@@ -15,6 +15,8 @@ public class ContactService {
 	private ContactDao contactDao;
 
 	public void addContact(Contact contact) {
+		
+		
 		contactDao.addContact(contact);
 	}
 

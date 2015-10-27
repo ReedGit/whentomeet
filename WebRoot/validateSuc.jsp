@@ -8,5 +8,11 @@
 </head>
 <body>
 恭喜，邮箱验证成功
+<div class="clearfix"></div>
+<!--/start-copyright-section-->
+		<div class="copyright">
+			
+		</div>
+<!--//end-copyright-section-->
 </body>
 </html>

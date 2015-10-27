@@ -1,6 +1,7 @@
 package com.giot.meeting.entities;
 
-import javax.persistence.Column;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,10 @@ public class Meeting {
 	private String organiser;
 	private String remark;
 	private String location;
-
+	private Date createTime;
+	private int guys;//受邀人数
+	private int response;
+	
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
 	@GeneratedValue(generator = "generator")// 自增长
@@ -86,6 +90,30 @@ public class Meeting {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	
+	
+	public int getGuys() {
+		return guys;
+	}
+
+	public void setGuys(int guys) {
+		this.guys = guys;
+	}
+
+	public int getResponse() {
+		return response;
+	}
+
+	public void setResponse(int response) {
+		this.response = response;
 	}
 
 	@Override

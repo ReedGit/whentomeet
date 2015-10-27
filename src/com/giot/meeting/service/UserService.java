@@ -31,4 +31,9 @@ public class UserService {
 	public void updateValidateStatus(String userid){
 		userDao.updateValidateStatus(userid);
 	}
+	
+	public User getUserById(String userid){
+		return userDao.getUserById(userid);
+	}
+	
 }

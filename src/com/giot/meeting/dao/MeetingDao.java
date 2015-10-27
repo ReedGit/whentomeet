@@ -10,7 +10,7 @@ public interface MeetingDao {
 
 	public void deleteMeeting(String meetid);
 
-	public List<Meeting> findAllMeeting(String organiser);
+	public List<Meeting> findAllMeeting(String organiser,int start,int items);
 
 	public Meeting findMeeting(String meetid);
 

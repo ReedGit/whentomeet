@@ -42,6 +42,13 @@ public class UserAction {
 		}
 		return u;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/getUserById.do")
+	public User getUserById(String userid) {
+		User u =  userService.getUserById(userid);
+		return u;
+	}
 
 	@RequestMapping("/addUser.do")
 	public String addUser(User user,RedirectAttributes redirectAttributes) {
@@ -63,11 +70,15 @@ public class UserAction {
 	
 	@ResponseBody
 	@RequestMapping("/updatePassword.do")
-	public void updatePassword(String nameid, String oldPassword, String password) {
-		User user = userService.getUser(nameid, MD5.compute(oldPassword));
-		if (user != null) {
+	public boolean updatePassword(String userid, String oldpassword, String password) {
+		User user = userService.getUserById(userid);
+		
+		if (user.getPassword().endsWith(MD5.compute(oldpassword))) {
 			user.setPassword(MD5.compute(password));
 			userService.updateUser(user);
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
@@ -126,6 +137,13 @@ public class UserAction {
 	@RequestMapping("/removeUser.do")
 	public boolean removeUser(HttpSession session){
 		session.removeAttribute("user1");
+		return true;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateUser.do")
+	public boolean updateUser(User user){
+		userService.updateUser(user);
 		return true;
 	}
 }

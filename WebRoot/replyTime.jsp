@@ -531,6 +531,12 @@ var getPt = function(){
 	
 </div>
 
+<!--/start-copyright-section-->
+<div class="clearfix"></div>
+		<div class="copyright">
+			
+		</div>
+<!--//end-copyright-section-->
 
 </body>
 </html>
