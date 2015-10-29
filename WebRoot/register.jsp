@@ -85,8 +85,12 @@ img[alt=error]{
    $(function(){
 	   $("input[type=submit]").click(function(){
 		   if(go && go1 && go2 && $.trim($("input[name=nickname]").val())!=""){
-			   return true;
-			   
+			   $.post("addUser.do",$("#addUser").serializeArray(),function(data){
+				   if(data!=null && data!=""){
+					   window.location.href="validateEmail?provEmail="+data;
+				   }
+			   });
+			   return false;
 		   }else{
 				$("img[for=nickname]").attr("src","img/error.png");
 				$("label[for=nickname],img[for=nickname]").show();
@@ -232,7 +236,7 @@ img[alt=error]{
 <body>
 <%@ include file="public/head.html"%>
 <div id="wrapper">
-	<form action="addUser.do" method="post">
+	<form action="addUser.do" method="post" id="addUser">
 		<div id="register">
 					<div class="title">
 						免费注册

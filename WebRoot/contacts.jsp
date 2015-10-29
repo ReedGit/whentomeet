@@ -18,7 +18,7 @@ div.contacts{
 	background-color: #fff; 
 	border-radius: 10px;
 	float: right;
-	margin:32px 0 0 20px;
+	margin:32px 0 30px 20px;
 	padding-bottom: 30px;
  }
  
@@ -42,7 +42,7 @@ div.contacts{
 </head>
 <body>
 <%@ include file="public/head.html"%>
-<div id="reg">
+<div id="wrapper">
 <%@ include file="public/accountleft.html"%>
 <div class="contacts">
 	<div class="title">我的联系人</div>

@@ -52,16 +52,16 @@ public class UserAction {
 	
 	@ResponseBody
 	@RequestMapping("/addUser.do")
-	public boolean addUser(User user,RedirectAttributes redirectAttributes) {
+	public String addUser(User user,RedirectAttributes redirectAttributes) {
 
 		user.setPassword(MD5.compute(user.getPassword()));
 		user.setRegisterDate(new Date());
 		/*user.setImage(uploadImage(file, request, user.getNameid()));*/
-		boolean b = userService.addUser(user);
+		String s = userService.addUser(user);
 		sendmail.sendValidate(user.getUsername(), user.getUserid());
 		/*redirectAttributes.addFlashAttribute("provEmail", user.getUsername());
 		return "redirect:/redirectValidateEmail.do";*/
-		return b;
+		return s;
 	}
 
 	@RequestMapping("/redirectValidateEmail.do")

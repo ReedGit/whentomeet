@@ -29,7 +29,7 @@
 <%@ include file="public/head.html"%>
 	<div class="scheduleBox" style="padding:35px 30px 20px 30px!important;">
          <div class="titleBar">
-             <h1>一封邮箱确认邮件已经发送到 ${provEmail }
+             <h1>一封邮箱确认邮件已经发送到 ${param.provEmail }
              	                
              </h1>
          </div>

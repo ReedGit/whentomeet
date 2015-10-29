@@ -29,7 +29,7 @@ public class MeetingAction {
 
 	@ResponseBody
 	@RequestMapping("/addMeeting.do")
-	public String addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
+	public Meeting addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
 		User u = (User)session.getAttribute("user1");
 		if(u!=null){
 			meeting.setOrganiser(u.getUserid());

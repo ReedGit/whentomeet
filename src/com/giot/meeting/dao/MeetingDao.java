@@ -6,7 +6,7 @@ import com.giot.meeting.entities.Meeting;
 
 public interface MeetingDao {
 
-	public String addMeeting(Meeting meeting);
+	public Meeting addMeeting(Meeting meeting);
 
 	public void deleteMeeting(String meetid);
 

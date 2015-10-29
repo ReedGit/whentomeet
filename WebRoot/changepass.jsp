@@ -13,7 +13,7 @@
 	    height:396px;
 	    background: white;
 	    float:left;
-	    margin:35px 0 0 70px;
+	    margin:35px 0 30px 70px;
 	    border: 1px solid #ccc;
 	    border-radius: 5px;
 	    box-shadow: 0 0 30px #333;
@@ -43,6 +43,7 @@ height: 40px;
 margin-left: 93px;
 margin-top: 31px;
 }
+
 .tipMess{
 	width: 95%;
 	color: white;
@@ -54,7 +55,7 @@ margin-top: 31px;
 </head>
 <body>
 <%@ include file="public/head.html"%>
-<div id="reg">
+<div id="wrapper">
 	<%@ include file="public/accountleft.html"%>
 	<div class="changepass">
 		<div class="title">

@@ -24,17 +24,19 @@ public class MeetingDaoImpl implements MeetingDao {
 
 	@SuppressWarnings("finally")
 	@Override
-	public String addMeeting(Meeting meeting) {
+	public Meeting addMeeting(Meeting meeting) {
 		
+		Meeting m = new Meeting();
 		try {
 			getSession().save(meeting);
-			
+			m.setMeetid(meeting.getMeetid());
+			m.setDuration(meeting.getDuration());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 			
 		}finally{
-			return meeting.getMeetid();
+			return m;
 		}
 	}
 	

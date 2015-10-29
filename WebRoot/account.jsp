@@ -14,7 +14,7 @@
 	height: 550px;
 	width: 752px;
 	float: right;
-	padding: 35px 30px 0 30px;
+	padding: 35px 30px 30px 30px;
 	border: 1px solid #ccc;
 	border-radius: 5px;	
 	box-shadow: 0 0 30px #333;
@@ -62,8 +62,8 @@
 </head>
 <body>
 <%@ include file="public/head.html"%>
-<div id="reg">
 	
+<div id="wrapper">
 	<%@ include file="public/accountleft.html"%>
 	<div id="account">
 		<div class="title1">账号设置</div>
