@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <%@ include file="public/headfile.html"%>
 <script type="text/javascript" src="js/back2index.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <link rel="stylesheet" href="css/tablesorterstyle.css" type="text/css" id="" media="print, projection, screen" />
 <style type="text/css">
 div.contacts{
@@ -37,6 +38,7 @@ div.contacts{
  }
 
 </style>
+
 </head>
 <body>
 <%@ include file="public/head.html"%>
@@ -44,12 +46,13 @@ div.contacts{
 <%@ include file="public/accountleft.html"%>
 <div class="contacts">
 	<div class="title">我的联系人</div>
+	
 	<div class="search">
 		搜索：<input type="text" class="form-control" id="name" placeholder="请输入搜索内容" style="width: 220px; display: inline;">
 	</div>
 	
 	<div>
-		<table class="tablesorter" border="1">
+	<table class="tablesorter" border="1">
 			<thead>
 				<tr>
 					<th>姓名</th>
@@ -58,9 +61,9 @@ div.contacts{
 				</tr>
 			</thead>
 			<tbody>
-				
+			
 			</tbody>
-			<tfoot><tr><td colspan="4"></td></tr></tfoot>
+			<tfoot><tr><td colspan="3"></td></tr></tfoot>
 		</table>
 		
 		<ul class="pager">
@@ -77,5 +80,48 @@ div.contacts{
 			
 		</div>
 <!--//end-copyright-section-->
+
+<script type="text/javascript">
+var curpage = 0;
+var loadContacts = function(page){
+	$.get("findAllContactForpage.do",{"userid":uid,"start":page,"items":11},function(data){
+		$('tbody').empty();
+		if(data.length<11){
+			$(".pager .next").css("pointer-events","none").addClass("disabled");
+			$.each(data,function(){
+				$(".contacts tbody").append("<tr><td style='text-align:center;'>"+this.nickname+"</td><td>"+this.username+"</td><td></td></tr>");
+			});
+		}else{
+			for(var i=0;i<10;i++){
+				$("tbody").append("<tr><td style='text-align:center;'>"+data[i].nickname+"</td><td>"+data[i].username+"</td><td></td></tr>");
+			}
+		}
+		
+		$("table").tablesorter();
+	});
+}
+
+	$(function(){
+		loadContacts(0);
+		$(".pager .previous").css("pointer-events","none").addClass("disabled");
+		
+		$(".pager .previous").click(function(){
+			$(".pager .next").css("pointer-events","auto").removeClass("disabled");
+			curpage -=10;
+			
+			loadContacts(curpage);
+			if(curpage==0){
+				$(this).css("pointer-events","none").addClass("disabled");
+			}
+				
+		});
+		$(".pager .next").click(function(){
+			$(".pager .previous").css("pointer-events","auto").removeClass("disabled");
+			curpage +=10;
+			loadContacts(curpage);
+		});
+		
+	})
+</script>
 </body>
 </html>

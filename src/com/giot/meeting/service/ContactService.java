@@ -15,21 +15,29 @@ public class ContactService {
 	private ContactDao contactDao;
 
 	public void addContact(Contact contact) {
-		
-		
-		contactDao.addContact(contact);
+		String email = contact.getUsername();
+		Contact ct = findContactByEmail(email);
+		if(ct==null)
+			contactDao.addContact(contact);
 	}
 
 	public void deleteContact(String contactid) {
 		contactDao.deleteContact(contactid);
 	}
 
+	public List<Contact> findAllContactForpage(String userid, int start, int items) {
+		return contactDao.findAllContactForpage(userid,  start, items);
+	}
+
 	public List<Contact> findAllContact(String userid) {
 		return contactDao.findAllContact(userid);
 	}
-
 	public Contact findContact(String contactid) {
 		return contactDao.findContact(contactid);
+	}
+	
+	public Contact findContactByEmail(String username) {
+		return contactDao.findContactByEmail(username);
 	}
 
 }

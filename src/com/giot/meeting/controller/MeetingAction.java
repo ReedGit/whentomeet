@@ -1,5 +1,6 @@
 package com.giot.meeting.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,11 @@ public class MeetingAction {
 	@RequestMapping("/addMeeting.do")
 	public String addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
 		User u = (User)session.getAttribute("user1");
-		if(u!=null)
+		if(u!=null){
 			meeting.setOrganiser(u.getUserid());
+			meeting.setCreateTime(new Date());
+		}
+		
 		meetingService.addMeeting(meeting);
 		//return meeting.getMeetid();
 		map.put("duraValue", meeting.getDuration());

@@ -28,8 +28,15 @@ public class UserService {
 		return userDao.findUser(nameid);
 	}
 	
-	public void updateValidateStatus(String userid){
-		userDao.updateValidateStatus(userid);
+	public int updateValidateStatus(String userid){
+		//@javabean: 1:第一次验证    0：重复验证
+		int sta = userDao.getValidateStatus(userid);
+		if(sta==0){
+			userDao.updateValidateStatus(userid);
+			return 1;
+		}else{
+			return 0;
+		}
 	}
 	
 	public User getUserById(String userid){

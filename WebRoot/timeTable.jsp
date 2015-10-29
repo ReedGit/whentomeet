@@ -9,10 +9,6 @@
 <title>Insert title here</title>
 <!-- <link rel="stylesheet" href="css/bootstrap2.css"> -->
 <style type="text/css">
-	body{
-		width: 100%;
-		height: 100%;
-	}
 	#meetingTime{
 		font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 		-moz-user-select: none; 
@@ -23,7 +19,7 @@
 		width: 1270px;
 		height: 577px;
 		border: solid 0 #333;
-		margin: 35px auto auto auto;
+		margin: 35px auto 100px;
 		border-radius:5px;
 		box-shadow: 0 0 30px #333;
 	}
@@ -642,6 +638,7 @@ var moveOut = function(){
 </head>
 <body style="background-color: #669999;">
 <%@ include file="public/head.html"%>
+<div id="wrapper">
 <div id="meetingTime" unselectable="on" onselectstart="return false;" style="-moz-user-select:none;">
 	<div id="dateLable"><h2></h2></div>
 	<div id="lable"> 为见面选择可能的时间吧</div>
@@ -702,13 +699,13 @@ var moveOut = function(){
 	
 </div>
 <div class="submitArea">
-	<button id="step2Back" class="btn btn-danger" onclick="location.href = '#';return false;">返回</button>
+	<a id="step2Back" class="btn btn-danger" href="javascript:history.go(-1)">返回</a>
        
     <button id="step2Submit" type="submit" class="btn btn-success">邀请参与人</button>
 </div>
 
 </div>
-
+</div>
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
 		<div class="copyright">

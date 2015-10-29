@@ -13,17 +13,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Studeon Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- <script type="application/x-javascript"> 
+	addEventListener("load", function() { 
+							setTimeout(hideURLbar, 0); 
+						}, 
+					false); 
+				function hideURLbar() { 
+					window.scrollTo(0,1); 
+			} 
+</script> -->
 <!--webfont-->
-<link href='http://fonts.useso.com/css?family=Oswald:400,700,300|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.useso.com/css?family=Oswald:400,700,300|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'> -->
 <!--//webfont-->
 <!--Animation-->
 <script src="js/wow.min.js"></script>
 <link href="css/animate.css" rel='stylesheet' type='text/css' />
 <style type="text/css">
-.copyright{
-	margin-top: 0;
+body{
+	font-family: "Microsoft Yahei","微软雅黑",Helvetica,SimSun,SimHei;
+	background:#fff;
 }
+/* .footer-section{
+	margin-bottom: 50px;
+} */
 </style>
 <script>
 	new WOW().init();
@@ -37,22 +49,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<a href="index.html"><img src="img/logo.png" alt=""/></a>
 			 </div>
 		     <div class="h_menu4"><!-- start h_menu4 -->
-				<a class="toggleMenu" href="#">Menu</a>
+				<a class="toggleMenu" href="#">菜单</a>
 				<ul class="nav">
-					<li class="active"><a class="scroll" href="index.html">Home</a></li>
-						<li><a href="#about" class="scroll">About</a></li>
-						<li><a href="scheduleMeeting.jsp">Schedule</a>
-						<li><a href="feature.html">Features</a>
-							<ul>
+					<li class="active"><a class="scroll" href="index.html">首页</a></li>
+						<li><a href="#feature" class="scroll">特色</a></li>
+						<li><a href="#Quickstart" class="scroll">快速上手</a>
+						<li><a href="scheduleMeeting.jsp">安排聚会</a>
+							<!-- <ul>
 								<li><a href="feature.html">Typography</a></li>
 								<li><a href="feature.html">Shortcodes</a></li>
 								<li><a href="feature.html">Columns</a></li>
 								<li><a href="feature.html">Pricing plans</a></li>
 								<li><a href="feature.html">Alerts</a></li>
 								<li><a href="feature.html">Services</a></li>
-							</ul>
+							</ul> -->
 						</li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="#contactus" class="scroll">联系我们</a></li>
 					<li><a href="mymeeting.jsp" class="scroll mymeeting">我的聚会</a></li>
 
 				</ul>
@@ -128,7 +140,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 <!--//end-slider-->
 	<!--start-services-->
-		<div id="about" class="service-section">
+		<div id="feature" class="service-section">
 			<div class="container">
 				<div class="serve-grids wow bounceIn animated" data-wow-delay="0.4s">
 					<div class="col-md-4 services-section-grid">
@@ -217,9 +229,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 		<!--//end-services-->
-            <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
 			<!--/port-section-->
-			<div id="features" class="port-section">
+			<div id="Quickstart" class="port-section">
 				<div class="container">
 				<h2>快速上手</h2>
 					<div class="port-grids">
@@ -285,14 +296,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			
 			<!--/start-footer-section-->
-			<div class="footer-section">
+			<div class="footer-section" id="contactus">
 				<div class="container">
 					<div class="footer-grids wow bounceIn animated" data-wow-delay="0.4s">
 						<div class="col-md-3 footer-grid">
-						<h4>About studeon</h4>
+						<h4>关于汤姆聚会</h4>
 						<div class="border2"></div>
-						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id arcu neque, at convallis est felis.</p>
-						  <p class="sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id arcu neque, at convallis est felis.</p>
+						  <p>我们的工作并没有到此为止。
+							我们会继续收集用户反馈，了解用户的进一步需求，不断优化性能和增加新的功能，以帮助您更进一步。
+							我们还会提供各种技术支持，提供全方面的保障。
+						  </p>
 						</div>
 						<div class="col-md-3 footer-grid tags">
 								<h4>关键词</h4>
@@ -317,18 +330,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="icon-3-square">
 										<a href="#"><i class="square-3"></i></a>
 								</div>
-							<div class="icon-text">
-								<p>I like this awesome freebie. Check it out<a href="#"> @http://t.co/9vslJFpW </a></p>
-								<h5>About 15 mins</h5>
+							<div class="icon-text" style="color: #fff;">
+								<p>南京吉奥客电子科技有限公司</p>
+								<br>网址：<a href="#">http://www.geariot.com/</a>
+								<br>邮箱：info@geariot.com
+								<br>电话：025-52265323
+								<br>地址：南京市云锦路58号万达东坊1幢1536
 							</div>
-								<div class="clearfix"></div>
-								<div class="icon-3-square">
-										<a href="#"><i class="square-3"></i></a>
-								</div>
-								<div class="icon-text">
-								    <p>I like this awesome freebie. Check it out<a href="#"> @http://t.co/9vslJFpW </a></p>
-									<h5>About 15 mins</h5>
-								</div>
 								<div class="clearfix"></div>
 						</div>
 						<div class="col-md-3 footer-grid flickr">
@@ -336,7 +344,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="border2"></div>
 								<div class="flickr-grids">
 									<div>
-										<img alt="barcode" src="img/qrcode.png">
+										<img alt="barcode" src="img/qrcode.png" style="width: 100px;height: 100px;">
 									</div>
 									<div class="clearfix"> </div>
 								</div>

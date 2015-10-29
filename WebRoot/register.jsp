@@ -13,9 +13,8 @@
 	border: 1px solid #ccc;
 	box-shadow: 0 0 30px #333;
 	border-radius: 5px;
-	position: relative;
-	left: 700px;
-	top: 36px;
+	float:right;
+	margin:60px 60px 150px 0;
 	padding-bottom:50px;
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e8e8e8), color-stop(1, #fff));
     background: -ms-linear-gradient(bottom, #e8e8e8 0, #fff 100%);
@@ -232,6 +231,7 @@ img[alt=error]{
 </head>
 <body>
 <%@ include file="public/head.html"%>
+<div id="wrapper">
 	<form action="addUser.do" method="post">
 		<div id="register">
 					<div class="title">
@@ -281,7 +281,7 @@ img[alt=error]{
 					</div>
 			</div>
 		</form>
-
+</div>
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
 		<div class="copyright">

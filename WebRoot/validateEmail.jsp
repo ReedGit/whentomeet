@@ -9,7 +9,6 @@
 <style type="text/css">
 	body{
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		background-color: #669999;
 	}
 	.scheduleBox{
 		width: 522px;
@@ -36,7 +35,7 @@
          </div>
          
          <div>
-             	请检查您的收件箱，并按照说明完成注册^_^。
+             	我们给您的邮箱发送了帐户验证邮件，请查收并验证
              <br><br>
           		  如果您未收到邮件，请检查您的垃圾箱- -！
          </div>

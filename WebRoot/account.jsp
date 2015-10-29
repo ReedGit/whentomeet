@@ -131,7 +131,6 @@
 		</div>
 <!--//end-copyright-section-->
 <script type="text/javascript">
-	var uid = getCookie("organiser");
 	$(function(){
 		$.get('getUserById.do', {"userid":uid},function(data) {
 			  $("input[name=userid]").val(data.userid);

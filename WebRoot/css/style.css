@@ -1,9 +1,18 @@
+html{
+	height: 100%;
+}
 body{
 	padding:0;
 	margin:0;
-	font-family: 'Open Sans', sans-serif;
-	background:#fff;
+	/* font-family: 'Open Sans', sans-serif; */
 	position:relative;
+	height: 100%;
+	background-color: #669999;
+}
+#wrapper{
+	border :1px solid transparent;
+	height: 100%;
+	margin-bottom: -4em;
 }
 .removeUser{
 	display: none;
@@ -1737,8 +1746,11 @@ float:left;
 .copyright{
   padding: 1em 0;
 	background:#232323;
-	height: 50px;
-	margin-top: 100px;
+	height: 4em;
+	/* margin-top: 100px; */
+/* 	position: absolute; */
+	bottom: 0;
+	width: 100%;
 }
 p.write {
   float: right;

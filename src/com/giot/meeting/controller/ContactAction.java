@@ -36,6 +36,12 @@ public class ContactAction {
 	}
 
 	@ResponseBody
+	@RequestMapping("/findAllContactForpage.do")
+	public List<Contact> findAllContactForpage(String userid, int start, int items) {
+		return contactService.findAllContactForpage(userid, start, items);
+	}
+	
+	@ResponseBody
 	@RequestMapping("/findAllContact.do")
 	public List<Contact> findAllContact(String userid) {
 		return contactService.findAllContact(userid);

@@ -25,8 +25,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.giot.meeting.entities.Contact;
 import com.giot.meeting.entities.Person;
 import com.giot.meeting.entities.User;
+import com.giot.meeting.service.ContactService;
 import com.giot.meeting.service.PersonService;
 
 @Controller
@@ -35,6 +37,10 @@ public class SendMail {
 	
 	@Autowired
 	private PersonService personService;
+	
+	@Autowired
+	private ContactService contactService;
+	
 	
 	public SendMail() throws Exception {
 		ClassLoader classLoader = SendMail.class.getClassLoader();
@@ -81,6 +87,16 @@ public class SendMail {
 			p1.setMeetid(meetId); 
 			p1.setName(attName.get(i));
 			personService.addPerson(p1);
+			System.out.println(us+"################");
+			System.out.println(us!=null);
+			if(us!=null){
+				Contact con = new Contact();
+				con.setNickname(attName.get(i));
+				con.setUserid(us.getUserid());
+				con.setUsername(li.get(i));
+				contactService.addContact(con);
+				
+			}
 			sendSigleMail(li.get(i), meetId, p1.getPersonid());
 		}
 		

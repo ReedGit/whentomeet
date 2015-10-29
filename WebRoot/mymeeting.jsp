@@ -10,16 +10,13 @@
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 	var curpage = 0;
-	var or = getCookie("organiser");
-	
 	var loadData = function(page){
 		$.ajax({
 			url:"findAllMeeting.do",
-			data:{"organiser":or,"start":page,"items":11},
+			data:{"organiser":uid,"start":page,"items":11},
 			dataType:"json",
 			type:"get",
 			success:function(data){
-				console.log(data);
 				$('tbody').empty();
 				if(data.length<11){
 					$(".pager .next").css("pointer-events","none").addClass("disabled");
@@ -31,13 +28,13 @@
 						$("tbody").append("<tr><td><a>"+data[i].content+"</a></td><td>"+data[i].createTime+"</td><td>"+data[i].response+"/"+data[i].guys+"</td><td>0</td></tr>");
 					}
 				}
+				$("table").tablesorter({debug: true});
 			}
 		});
 	}
 
 
 		$(function() {
-			$("table").tablesorter({debug: true});
 			loadData(0);
 			$(".pager .previous").css("pointer-events","none").addClass("disabled");
 			
@@ -69,7 +66,7 @@ div.organize{
 	background-color: #fff; 
 	border-radius: 10px;
 	float: right;
-	margin:32px 105px 0 20px;
+	margin:32px 105px 50px 20px;
 	padding-bottom: 30px;
  }
  
@@ -91,7 +88,7 @@ div.organize{
 </head>
 <body>
 <%@ include file="public/head.html"%>
-
+<div id="wrapper">
 <div class="organize">
 	<div class="title">我组织的会议</div>
 	<div class="search">
@@ -121,7 +118,7 @@ div.organize{
 		
 	</div>
 </div>
-
+</div>
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
 		<div class="copyright">

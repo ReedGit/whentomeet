@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 <%@ include file="public/headfile.html"%>
 <style type="text/css">
-	body{
-	width: 100%;
-	height: 100%;
-	background-color: #669999;
-}
  .scheduleBox {
     width: 522px;
     height:492px;
@@ -23,9 +18,10 @@
     background: #fff;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e8e8e8', GradientType=0);
     float:right;
-    position: relative;
+   /*  position: relative;
     top: 57px;
-    right: 100px;
+    right: 100px; */
+    margin: 60px 60px 150px 0;
 }
 
  .scheduleBox h1 {
@@ -39,13 +35,20 @@
 	width: 120px;
 	height: 40px;
 }
+.tipMess{
+	width: 95%;
+	line-height: 30px;
+	background-color: #FF6666;
+	margin: 0 auto;
+	text-align: center;
+}
 </style>
 
 </head>
 <body>
 <%@ include file="public/head.html" %>
 <!-- end of head -->
-
+<div id="wrapper">
 	<div class="scheduleBox">
         <div class="titleBar">
             <h1>安排一次聚会吧</h1>
@@ -54,6 +57,7 @@
            <![endif]-->
 
         </div>
+        <div class="tipMess"></div>
         <form class="form-horizontal" action="addMeeting.do" method="post">
                   <div class="input-group">
          				<span class="input-group-addon">主题</span>
@@ -111,7 +115,7 @@
         </form>
     </div>
     
-    
+</div>
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
 		<div class="copyright">
@@ -122,15 +126,25 @@
 <script type="text/javascript">
 	var u = getCookie("user1");
 	var uid = getCookie("organiser");
-	if(u!=""&&u!=null){
-		$.get('getUserById.do', {"userid":uid},function(data) {
-			var d = data.defaultDura;
-			$("#duration").val(d);
-			if(d=="0"){
-				$("#duration").val("4");
+	$(function(){
+		$("#step1Submit").click(function(){
+			var title = $("input[name=title]").val();
+			if($.trim(title)==""){
+				$(".tipMess").text("主题不能为空");
+				return false;
 			}
+			
 		});
-	}
+		if(u!=""&&u!=null){
+			$.get('getUserById.do', {"userid":uid},function(data) {
+				var d = data.defaultDura;
+				$("#duration").val(d);
+				if(d=="0"){
+					$("#duration").val("4");
+				}
+			});
+		}
+	})
 </script>
 </body>
 </html>

@@ -117,8 +117,7 @@ margin-top: 31px;
 				return false;
 			}
 			
-			$.post("updatePassword.do",{"oldpassword":op,"password":p1,userid:getCookie("organiser")},function(data){
-				console.log(data);
+			$.post("updatePassword.do",{"oldpassword":op,"password":p1,userid:uid},function(data){
 				if(data){
 					$(".tipMess").css({"background":"#DFF0D8","color":"red"}).text("修改成功");
 				}else{

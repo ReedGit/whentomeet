@@ -20,16 +20,13 @@ var getCookie = function (name)
 }
 
 var loadFoot = function(){
-	console.log($(window).height());
-	console.log($(window).innerHeight());
-	console.log($(window).outerHeight());
 	$(".copyright").load("public/copyright.html"); 
-	
 }
 
 
 var USER_STA = function(){
 	var u = getCookie("user1");
+	var o = getCookie("organiser");
 	if(u!=""&&u!=null){
 		$(".user_icons .login,.user_icons .register").hide();
 		$(".user_icons .userName").text(u+" |");
@@ -48,6 +45,7 @@ var USER_STA = function(){
 					var exp = new Date();
 					exp.setTime(exp.getTime() - 1);
 					document.cookie= "user1="+u+";expires="+exp.toGMTString();
+					document.cookie= "organiser="+o+";expires="+exp.toGMTString();
 					window.location.href="index.html";
 					$(".user_icons .login,.user_icons .register").show();
 				}

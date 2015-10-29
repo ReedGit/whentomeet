@@ -5,23 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/flat-ui.css">
+<%@ include file="public/headfile.html"%>
 <style type="text/css">
-	body{
-		background-image: url("img/bg2.jpg");
-	}
-	
 	.main{
 		width: 1289px;
-	    height: 1111px;
-		border: solid 2px red;
-		margin: 0 auto;
+	    height: 800px;
+		border: solid 1px transparent;
+		margin: 60px auto 200px;
 		background-color: #F5F5F5;
-		border-radius:8px;
+		border-radius:5px;
+		box-shadow: 0 0 30px #333;
 	}
 	.main .innerContent{
-		font-family:Georgia,"Arial";
 		margin-left: 40px;
 		margin-top: 40px;
 		margin-bottom: 40px;
@@ -33,17 +28,9 @@
 	    height: 80px;
 	    vertical-align: middle;
     }
-    .logo {
-	    position: relative;
-	    width: 40%;
-	    float: left;
-	    /* border: 1px solid #e1af32; */
-	}
-	
 	.header h1
 {
-	font-family:"黑体";
-	color:#e1af32;
+		color:#e1af32;
 	    font-size: 3em;
 }
     
@@ -55,7 +42,6 @@
     .title h2 {
     color: #e1af32;
     letter-spacing: 2em;
-    font-family: "黑体";
     }
     
     .title h2 span {
@@ -96,7 +82,6 @@
 	}
 	
 	#resultsArea .headingArea span{
-		font-family:Georgia,"Arial";
 		font-size: 30px;
 		position: relative;
 		top: 25px;
@@ -157,11 +142,12 @@
 		left:70px; */
 		margin-top: 45px;
 		margin-left: 14px;
+		overflow: auto;
 	}
-.submitArea .comment {
+.submitArea #comment {
     float: left;
     width: 320px;
-    height: 20px;
+   /*  height: 20px; */
     line-height: 18px;
     padding: 6px;
     margin: 3px 20px 0 24px;
@@ -191,15 +177,113 @@
 #selectItem{
 	margin-top: 10px;
 	margin-left: 40px;
+	font-family: "Microsoft Yahei","微软雅黑",Helvetica,SimSun,SimHei;
+	line-height: 26px;
 }
 
 #selectItem .selectItems{
 	
 	margin-left: 83px;
 }
+#selectItem .selectItems a:hover{
+    color: #005580;
+    text-decoration: underline;
+}
+#selectItem .selectItems a{
+    color: #0088cc;
+}
 
 </style>
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+
+
+</head>
+<body>
+<%@ include file="public/head.html"%>
+<div class="main">
+	
+	<div class="innerContent">
+           <h1 id="title"></h1>
+           <br>
+           	时长：<span id="durationLabel"></span>小时
+    </div>
+
+	<div id="resultsArea" >
+	
+		<div class="headingArea">
+			<span>你什么时候能参加呢？</span>
+		</div>
+	
+		<div class="resultsTable">
+			<table border="1" class="table_left">
+				<tr class="topFill1">
+					<td>
+						<a>Select via calendar</a>
+						<a>24h</a>
+					</td>
+				</tr>
+				
+				<tr class="topFill2">
+					<td class="nameCell fixed" id="nameCell_0">
+						<img class="photo_small" width="26" height="26" src="img/defaultHeader.png">ewr (Organizer)
+					</td>
+				</tr>
+				<tr class="yourName">
+					<td id="nameCell_1" class="nameCell nameCellInput fixed ">
+						<input type="textbox" id="nameCellInput" placeholder="Your Name">
+					</td>
+				</tr>
+				
+				<tr class="tableTail">
+					<td></td>
+				</tr>
+			</table>
+			<div class="containRtalbe">
+				<table border="1" class="table_right">
+					<tr class="weekDate">
+					</tr>
+					
+					<tr class="timeDura">
+					</tr>
+					
+					<tr class="myTime">
+					</tr>
+					
+					<tr class="check_box">
+						
+					</tr>
+				</table>
+			</div>
+			
+			<div class="submitArea" style="clear:both;">
+	              <textarea class="form-control" id="comment" rows="1">增加一条评论 (可选)</textarea>
+	              <button type="button" class="btn btn-success" id="resultsTableSubmit">提交</button>
+	       </div>
+	       
+			<div id="selectItem">
+				<p>你已经提交了！请选择下列操作中的一个吧。</p>
+				<div class="selectItems">
+					<a  class="modifyLink">修改已选择的时间</a>
+					<br>
+					<a  class="removeLink">我不想参加，删除我！</a>
+					<br>
+					<a  class="modifyLink1">修改已选择的时间</a>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+	
+</div>
+
+<!--/start-copyright-section-->
+<div class="clearfix"></div>
+		<div class="copyright">
+			
+		</div>
+<!--//end-copyright-section-->
+
 <script type="text/javascript">
 var arr = [] ;
 var getPt = function(){
@@ -219,6 +303,8 @@ var getPt = function(){
 							 $(this).text("");
 						 }
 					});
+				}else{
+					$("#selectItem").hide();
 				}
 			}else{
 				if(ptime!=null){
@@ -435,108 +521,5 @@ var getPt = function(){
 	})
 	
 </script>
-
-</head>
-<body>
-
-	<div class="header">
-		<div class="logo">	
-			<h1>meeting</h1>
-		</div>
-		<button type="button"  class="btn btn-link2">register</button>
-		<button type="button"  class="btn btn-link2">login</button>
-	</div>
-<div class="main">
-	
-	<div class="innerContent">
-           <h1 id="title"></h1>
-           <br>
-           	时长：<span id="durationLabel"></span>小时
-    </div>
-
-	<div id="resultsArea" >
-	
-		<div class="headingArea">
-			<span>你什么时候能参加呢？</span>
-		</div>
-	
-		<div class="resultsTable">
-			<table border="1" class="table_left">
-				<tr class="topFill1">
-					<td>
-						<a>Select via calendar</a>
-						<a>24h</a>
-					</td>
-				</tr>
-				
-				<tr class="topFill2">
-					<td class="nameCell fixed" id="nameCell_0">
-						<img class="photo_small" width="26" height="26" src="img/defaultHeader.png">ewr (Organizer)
-					</td>
-				</tr>
-				<tr class="yourName">
-					<td id="nameCell_1" class="nameCell nameCellInput fixed ">
-						<input type="textbox" id="nameCellInput" placeholder="Your Name">
-					</td>
-				</tr>
-				
-				<tr class="tableTail">
-					<td></td>
-				</tr>
-			</table>
-			<div class="containRtalbe">
-				<table border="1" class="table_right">
-					<tr class="weekDate">
-					</tr>
-					
-					<tr class="timeDura">
-					</tr>
-					
-					<tr class="myTime">
-					</tr>
-					
-					<tr class="check_box">
-						
-					</tr>
-				</table>
-			</div>
-			
-			<div class="submitArea" style="clear:both;">
-	           <!--    <div class="spinner">
-	                        <img src="/images/loading.gif"><br>
-	              </div>
-	 			-->
-	              <textarea name="comment" class="comment" id="comment" style="overflow: hidden; resize: none; height: 20px; color: rgb(153, 153, 153);">Add a comment (optional)</textarea>
-	              <button id="resultsTableSubmit" class="btn-primary btn-large">Submit</button>
-	              <!-- <button id="cancelBtn" class="btn btnLargeGray">Cancel</button> -->
-	
-	              <div style="clear:both"></div>
-	       </div>
-	       
-			<div id="selectItem">
-				<p>你已经提交了！请选择下列操作中的一个吧。</p>
-				<div class="selectItems">
-					<a  class="modifyLink">修改已选择的时间</a>
-					<br>
-					<a  class="removeLink">我不想参加，删除我！</a>
-					<br>
-					<a  class="modifyLink1">修改已选择的时间</a>
-				</div>
-			</div>
-		</div>
-
-
-
-	</div>
-	
-</div>
-
-<!--/start-copyright-section-->
-<div class="clearfix"></div>
-		<div class="copyright">
-			
-		</div>
-<!--//end-copyright-section-->
-
 </body>
 </html>

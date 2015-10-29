@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 <%@ include file="public/headfile.html"%>
 <style type="text/css">
-	body{
-		background-color: #669999;
-	}
 	#sendInfo{
 		width: 742px;
 		height: 400px;
@@ -49,7 +46,7 @@
 
 <script type="text/javascript">
 	$(function(){
-		var u = "${sessionScope.user1}";
+		var u = getCookie("user1");
 		if(u!="" && u!=null && u!=undefined){
 			$(".loadOff").hide();
 		}else{
@@ -61,6 +58,7 @@
 </head>
 <body>
 <%@ include file="public/head.html"%>
+<div id="wrapper">
 <div id="sendInfo">
 	<div id="title">
 		您已成功发送邀请
@@ -79,7 +77,7 @@
 		感谢您的使用，祝你生活愉快！
 	</div>	
 </div>
-
+</div>
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
 		<div class="copyright">

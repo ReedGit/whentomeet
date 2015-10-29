@@ -1,8 +1,9 @@
 /**
  * 
  */
+var u = getCookie("user1");
+var uid = getCookie("organiser");
 $(function(){
-	var u = getCookie("user1");
 	if(u==""||u==null){
 		window.location.href= "index.html";
 	}

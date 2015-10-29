@@ -15,7 +15,9 @@ public class Contact {
 	private String contactid;
 	private String userid;
 	private String invited;
-	private String name;
+	private String nickname;
+	
+	private String username;
 
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
@@ -44,12 +46,19 @@ public class Contact {
 		this.invited = invited;
 	}
 
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

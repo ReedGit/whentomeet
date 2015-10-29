@@ -20,7 +20,6 @@ public class TimeAction {
 	@ResponseBody
 	@RequestMapping("/addTime.do")
 	public String addTime(String times,String meetId){
-		
 		Gson gson = new Gson();
 		List<Time> list = gson.fromJson(times, new TypeToken<List<Time>>(){}.getType());
 		

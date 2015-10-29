@@ -15,4 +15,7 @@ public interface UserDao {
 	public boolean findUser(String nameid);
 
 	public void updateValidateStatus(String userid);
+
+	public int getValidateStatus(String userid);
+	
 }

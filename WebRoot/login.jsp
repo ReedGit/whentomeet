@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 <%@ include file="public/headfile.html"%>
 <style type="text/css">
-	body {
-	background-color: #669999;
-}
 
 #login{
 	width: 522px;
@@ -17,9 +14,11 @@
 	border: 1px solid #ccc;
 	box-shadow: 0 0 30px #333;
 	border-radius: 5px;
-	position: relative;
+/* 	position: relative;
 	left: 700px;
-	top: 36px;
+	top: 36px; */
+	float:right;
+	margin:60px 60px 150px 0;
 	
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e8e8e8), color-stop(1, #fff));
     background: -ms-linear-gradient(bottom, #e8e8e8 0, #fff 100%);
@@ -88,6 +87,7 @@ label.error{
 </head>
 <body>
 <%@ include file="public/head.html"%>
+<div id="wrapper">
 	<form id="loginForm">
 		<div id="login">
 			<div class="title">
@@ -103,7 +103,7 @@ label.error{
 	      	<br>
 	        
 			<div class="input-group">
-	   				<span class="input-group-addon">密&nbsp;码</span>
+	   				<span class="input-group-addon">  密&nbsp;&nbsp;&nbsp;&nbsp;码  </span>
 	  			 	<input type="password" class="form-control" placeholder="密码" name="password">
 	      	</div>
 	      	<br>
@@ -121,7 +121,7 @@ label.error{
 			</div>
 		</div>
 	</form>
-	
+	</div>
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
 		<div class="copyright">

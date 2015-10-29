@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 	public void addUser(User user) {
 		try {
 			getSession().save(user);
-		} catch (RuntimeException  e) {
+		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
 	}
@@ -56,13 +56,13 @@ public class UserDaoImpl implements UserDao {
 	public boolean findUser(String nameid) {
 		try {
 			String sql = "from User where username = ?";
-			User u =  (User) getSession().createQuery(sql)
-					.setString(0, nameid).uniqueResult();
-			if(u==null){
+			User u = (User) getSession().createQuery(sql).setString(0, nameid)
+					.uniqueResult();
+			if (u == null) {
 				return false;
-			}else
+			} else
 				return true;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -72,23 +72,36 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void updateValidateStatus(String userid) {
 		try {
-			String hql = "update User set validate=1 where userid=?";
-			 getSession().createQuery(hql)
-					.setString(0, userid).executeUpdate();
+				String hql = "update User set validate=1 where userid=?";
+				getSession().createQuery(hql).setString(0, userid)
+						.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	@Override
 	public User getUserById(String userid) {
 		try {
 			String hql = "from User where userid =?";
-			 User us = (User) getSession().createQuery(hql)
-					.setString(0, userid).uniqueResult();
-			 return us;
+			User us = (User) getSession().createQuery(hql).setString(0, userid)
+					.uniqueResult();
+			return us;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public int getValidateStatus(String userid) {
+		try {
+			String hql = "select validate from User where userid=?";
+			int a = (int) getSession().createQuery(hql).setString(0, userid)
+					.uniqueResult();
+			return a;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
