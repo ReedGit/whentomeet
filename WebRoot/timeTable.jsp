@@ -185,7 +185,7 @@
 <script type="text/javascript" src="js/zxx.color_exchange.js"></script>
 <script type="text/javascript">
 	/* 定义时间间隔 */
-	var tds = parseInt("${duraValue}");
+	var tds = parseInt("${param.duraValue}");
 	var pencil = false;
 	var eraser = false;
 $(function(){
@@ -465,10 +465,10 @@ $(function(){
 		$.ajax({
 			url:'addTime.do',
 			type:"post",
-			data:{"times":JSON.stringify(timeArray),"meetId":"${meetId}"},
+			data:{"times":JSON.stringify(timeArray),"meetId":"${param.meetId}"},
 			dataType:"text",
 			success:function(){
-				window.location.href="createTime.jsp?meetId=${meetId}";
+				window.location.href="createTime.jsp?meetId=${param.meetId}";
 			}
 		
 		});

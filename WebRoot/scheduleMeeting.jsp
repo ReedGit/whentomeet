@@ -58,7 +58,7 @@
 
         </div>
         <div class="tipMess"></div>
-        <form class="form-horizontal" action="addMeeting.do" method="post">
+        <form class="form-horizontal" action="addMeeting.do" method="post" id="addMeeting">
                   <div class="input-group">
          				<span class="input-group-addon">主题</span>
         			 	<input type="text" class="form-control" placeholder="马尔代夫7日游" name="title">
@@ -131,6 +131,14 @@
 			var title = $("input[name=title]").val();
 			if($.trim(title)==""){
 				$(".tipMess").text("主题不能为空");
+				return false;
+			}else{
+				$.post("addMeeting.do",$("#addMeeting").serializeArray(),function(data){
+					console.log(data	);
+					if(data!=null){
+						window.location.href="timeTable?duraValue="+data.duration+"&meetId="+data.meetid;
+					}
+				});
 				return false;
 			}
 			

@@ -34,7 +34,7 @@ import com.giot.meeting.service.PersonService;
 @Controller
 public class SendMail {
 	MimeMessage msg = null;
-	
+	private String port = null;
 	@Autowired
 	private PersonService personService;
 	
@@ -62,6 +62,9 @@ public class SendMail {
 		// 设置发件人
 		msg.setFrom(new InternetAddress(p.getProperty("email.from")));
 		msg.setSubject(p.getProperty("email.subject"));
+		
+		
+		port = p.getProperty("email.port");
 	}
 
 	// 发送邮件
@@ -115,7 +118,8 @@ public class SendMail {
 			Multipart mp = new MimeMultipart();
 			// 向Multipart添加正文
 			MimeBodyPart mbpContent = new MimeBodyPart();
-			mbpContent.setContent("http://localhost:8282/whentomeet/replyTime.jsp?meetId="+meetId +"&personId="+personId,"text/html;charset=utf-8");
+			
+			mbpContent.setContent(port+"/whentomeet/replyTime.jsp?meetId="+meetId +"&personId="+personId,"text/html;charset=utf-8");
 			// mbpContent.setText(content);
 			// 将BodyPart添加到MultiPart中
 			mp.addBodyPart(mbpContent);
@@ -139,7 +143,7 @@ public class SendMail {
 			Multipart mp = new MimeMultipart();
 			// 向Multipart添加正文
 			MimeBodyPart mbpContent = new MimeBodyPart();
-			mbpContent.setContent("http://localhost:8282/whentomeet/updateValidateStatus.do?userid="+userid,"text/html;charset=utf-8");
+			mbpContent.setContent(port+"/whentomeet/updateValidateStatus.do?userid="+userid,"text/html;charset=utf-8");
 			// mbpContent.setText(content);
 			// 将BodyPart添加到MultiPart中
 			mp.addBodyPart(mbpContent);
