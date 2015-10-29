@@ -8,7 +8,7 @@ public interface UserDao {
 	
 	public User getUserById(String userid);
 
-	public void addUser(User user);
+	public boolean addUser(User user);
 
 	public void updateUser(User user);
 	

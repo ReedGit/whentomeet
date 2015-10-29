@@ -22,16 +22,22 @@ public class MeetingDaoImpl implements MeetingDao {
 		return sessionFactory.getCurrentSession();
 	}
 
+	@SuppressWarnings("finally")
 	@Override
-	public void addMeeting(Meeting meeting) {
+	public String addMeeting(Meeting meeting) {
+		
 		try {
 			getSession().save(meeting);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
+			
+		}finally{
+			return meeting.getMeetid();
 		}
 	}
-
+	
 	@Override
 	public void deleteMeeting(String meetid) {
 		try {

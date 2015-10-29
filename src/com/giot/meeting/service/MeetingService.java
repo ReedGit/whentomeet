@@ -14,8 +14,8 @@ public class MeetingService {
 	@Autowired
 	private MeetingDao meetingDao;
 
-	public void addMeeting(Meeting meeting) {
-		meetingDao.addMeeting(meeting);
+	public String addMeeting(Meeting meeting) {
+		return meetingDao.addMeeting(meeting);
 	}
 
 	public void deleteMeeting(String meetid) {

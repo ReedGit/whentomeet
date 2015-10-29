@@ -16,8 +16,8 @@ public class UserService {
 		return userDao.getUser(nameid, password);
 	}
 
-	public void addUser(User user) {
-		userDao.addUser(user);
+	public boolean addUser(User user) {
+		return userDao.addUser(user);
 	}
 
 	public void updateUser(User user) {

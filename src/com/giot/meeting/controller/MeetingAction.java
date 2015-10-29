@@ -27,7 +27,7 @@ public class MeetingAction {
 	@Autowired
 	private PersonService personService;
 
-	//@ResponseBody
+	@ResponseBody
 	@RequestMapping("/addMeeting.do")
 	public String addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
 		User u = (User)session.getAttribute("user1");
@@ -36,11 +36,11 @@ public class MeetingAction {
 			meeting.setCreateTime(new Date());
 		}
 		
-		meetingService.addMeeting(meeting);
+		return meetingService.addMeeting(meeting);
 		//return meeting.getMeetid();
-		map.put("duraValue", meeting.getDuration());
+		/*map.put("duraValue", meeting.getDuration());
 		map.put("meetId", meeting.getMeetid());
-		return "timeTable";
+		return "timeTable";*/
 	}
 
 	@ResponseBody

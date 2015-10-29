@@ -34,12 +34,15 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void addUser(User user) {
+	public boolean addUser(User user) {
 		try {
 			getSession().save(user);
+			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	@Override
