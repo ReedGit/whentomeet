@@ -237,6 +237,13 @@
 			     }
 		});
 		if(uid!=""&&uid!=null){
+			//用户登陆后，查询他的邮箱
+			$.get("getUserById.do",{"userid":uid},function(data){
+				console.log(data.username);
+				$("input[name=selfEmail]").val(data.username);
+			});
+			
+			
 			$(".contact").click(selectContact).css("visibility","visible");
 			$("#close").click(closeContactBox);
 			//loadContact
@@ -255,6 +262,9 @@
 				$ch.eq(index-2).val($ct_name.text())
 				
 			});
+		}else{
+			//没登陆从cookie中取值
+			$("input[name=selfEmail]").val(getCookie("organiser_mail"));
 		}
 		
 		

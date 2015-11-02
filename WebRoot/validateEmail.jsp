@@ -27,6 +27,7 @@
 </head>
 <body>
 <%@ include file="public/head.html"%>
+<div id="wrapper">
 	<div class="scheduleBox" style="padding:35px 30px 20px 30px!important;">
          <div class="titleBar">
              <h1>一封邮箱确认邮件已经发送到 ${param.provEmail }
@@ -40,7 +41,7 @@
           		  如果您未收到邮件，请检查您的垃圾箱- -！
          </div>
     </div>
-    
+ </div>  
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
 		<div class="copyright">

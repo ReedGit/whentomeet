@@ -32,9 +32,11 @@ public class MeetingAction {
 	public Meeting addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
 		User u = (User)session.getAttribute("user1");
 		if(u!=null){
+			//用户登录存入用户id,否则为空
 			meeting.setOrganiser(u.getUserid());
-			meeting.setCreateTime(new Date());
 		}
+		
+		meeting.setCreateTime(new Date());
 		
 		return meetingService.addMeeting(meeting);
 		//return meeting.getMeetid();

@@ -98,7 +98,7 @@
 </head>
 <body>
 <%@ include file="public/head.html"%>
-
+<div id="wrapper">
 <div id="validateBox">
 	<div class="img">
 		<img alt="success" src="img/success.png" id="stapic">
@@ -136,7 +136,7 @@
 	
 	
 </div>
-
+</div>
 <div class="clearfix"></div>
 <!--/start-copyright-section-->
 		<div class="copyright">

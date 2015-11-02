@@ -2,6 +2,7 @@ package com.giot.meeting.controller;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.giot.meeting.entities.Contact;
 import com.giot.meeting.entities.Person;
@@ -89,6 +91,7 @@ public class SendMail {
 			Person p1 = new Person();
 			p1.setMeetid(meetId); 
 			p1.setName(attName.get(i));
+			p1.setPersonEmail(li.get(i));
 			personService.addPerson(p1);
 			System.out.println(us+"################");
 			System.out.println(us!=null);
@@ -130,6 +133,7 @@ public class SendMail {
 			Transport.send(msg);
 
 		} catch (MessagingException mex) {
+			System.out.println("邮件发送失败。。请检查网络设置！！！！****************");
 			mex.printStackTrace();
 
 		}
@@ -137,6 +141,7 @@ public class SendMail {
 	
 	public void sendValidate(String registerEmail,String userid){
 		try {
+			System.out.println("发送验证邮件。。。。。。。。。。。。。。。。。。");
 			// 设置收件人
 			msg.setRecipient(Message.RecipientType.TO,new InternetAddress(registerEmail));
 			// 构造Multipart
@@ -158,5 +163,55 @@ public class SendMail {
 
 		}
 	}
+	
+	//群发决定消息
+	@ResponseBody
+	@RequestMapping("/sendDecideTime.do")
+	public boolean sendDecideTime(String personTime,String week,String time){
+		
+		personTime = clipBorder(personTime);
+		String arr[] = personTime.split(",");
+		for(int i=0;i<arr.length;i++){
+			arr[i] =  clipBorder(arr[i]);
+		}
+		
+		InternetAddress [] address = new InternetAddress[arr.length];
+		
+	               
+		try {
+			System.out.println("发送验证邮件。。。。。。。。。。。。。。。。。。");
+			System.out.println("发送的联系人：---》"+Arrays.toString(arr));
+			for(int i=0;i<arr.length;i++){
+				address[i] = new InternetAddress(arr[i]);
+			}
+			// 设置收件人
+			msg.setRecipients(Message.RecipientType.TO,address);
+			// 构造Multipart
+			Multipart mp = new MimeMultipart();
+			// 向Multipart添加正文
+			MimeBodyPart mbpContent = new MimeBodyPart();
+			mbpContent.setContent("此次聚会的时间定为："+week+" "+time,"text/html;charset=utf-8");
+			// mbpContent.setText(content);
+			// 将BodyPart添加到MultiPart中
+			mp.addBodyPart(mbpContent);
+			msg.setContent(mp);
+			// 设置发送日期
+			msg.setSentDate(new Date());
+			// 发送邮件
+			Transport.send(msg);
+
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+
+		}
+		
+		return true;
+		
+	}
+	
+	private String clipBorder(String string){
+		return string.substring(1,string.length()-1);
+	}
+	
 	
 }

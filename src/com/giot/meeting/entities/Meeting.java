@@ -18,16 +18,17 @@ public class Meeting {
 	private String content;
 	private String duration;
 	private String visible;
-	private String organiser;
+	private String organiser;//该用户登陆就存该用户的id,否则为空
+	private String organiser_mail;//次字段为组织者的邮箱，
 	private String remark;
 	private String location;
 	private Date createTime;
-	private int guys;//��������
+	private int guys;//受邀人数
 	private int response;
 	
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
-	@GeneratedValue(generator = "generator")// ������
+	@GeneratedValue(generator = "generator")// 自增长
 	public String getMeetid() {
 		return meetid;
 	}
@@ -74,6 +75,16 @@ public class Meeting {
 
 	public void setOrganiser(String organiser) {
 		this.organiser = organiser;
+	}
+
+	
+	
+	public String getOrganiser_mail() {
+		return organiser_mail;
+	}
+
+	public void setOrganiser_mail(String organiser_mail) {
+		this.organiser_mail = organiser_mail;
 	}
 
 	public String getRemark() {

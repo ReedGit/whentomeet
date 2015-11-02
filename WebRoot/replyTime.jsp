@@ -110,7 +110,7 @@
 	.table_right .timeDura{
 		height: 41px;
 	}
-	.myTime,.reloadRemove,.check_box,.topFill2,.yourName,.response{
+	.myTime,.reloadRemove,.check_box,.topFill2,.yourName,.response,.decideTime{
 		height: 35px;
 	}
 	.topFill1{
@@ -130,8 +130,8 @@
 		overflow: auto;
 		border-top-width: 0;
 		border-left-width: 0;
-		border-right: solid 1px #bbb;
-		border-bottom: solid 1px #bbb;
+		border-right: solid 1px transparent;
+		border-bottom: solid 1px transparent;
 		position: relative;
 		left: 39px;
 	}
@@ -193,6 +193,17 @@
     color: #0088cc;
 }
 
+.tipMess{
+	line-height: 30px;
+}
+.MeetingAdmin{
+	float: right;
+	margin-right: 50px;
+	color: #0088cc;
+}
+.MeetingAdmin a{
+	color: #0088cc;
+}
 </style>
 
 
@@ -203,8 +214,15 @@
 	
 	<div class="innerContent">
            <h1 id="title"></h1>
+           	
+           	<div class="MeetingAdmin">
+           		<i class="icon-plus-sign"></i><a href="sendInvitations.jsp?meetId=${param.meetId }">增加联系人</a>
+           	</div>
+           	
+           	
            <br>
            	时长：<span id="durationLabel"></span>小时
+           	
     </div>
 
 	<div id="resultsArea" >
@@ -224,7 +242,7 @@
 				
 				<tr class="topFill2">
 					<td class="nameCell fixed" id="nameCell_0">
-						<img class="photo_small" width="26" height="26" src="img/defaultHeader.png">ewr (Organizer)
+						<img class="photo_small" width="26" height="26" src="img/defaultHeader.png"> <span></span> (Organizer)
 					</td>
 				</tr>
 				<tr class="yourName">
@@ -252,6 +270,10 @@
 						
 					</tr>
 				</table>
+			</div>
+			
+			<div class="tipMess">
+				
 			</div>
 			
 			<div class="submitArea" style="clear:both;">
@@ -286,10 +308,12 @@
 
 <script type="text/javascript">
 var arr = [] ;
+var contactEmail = [];
 var getPt = function(){
 	$.post('getAllPersonTime.do',{"meetid":"${param.meetId}"}, function(data) {
 		$.each(data,function(index,data){
 			var ptime = data.ptime;
+			contactEmail.push(this.personEmail);
 			if(data.personid=="${param.personId}") {
 				$("#nameCell_1 #nameCellInput").val(data.name);
 				if(ptime!=null){
@@ -401,11 +425,44 @@ var getPt = function(){
 						
 					});
 				});
+				
 				$(".check_box").after("<tr class='response'></tr>");
 				$(".yourName").after("<tr class='response'><td>&nbsp;有&nbsp;"+$(".table_left .reloadRemove").length+"&nbsp;个人回复</td></tr>");
+				//没人回复的状态
+				var leh = $(".myTime").children().length;
+				if(responseArr.length==0){
+					for(var i=0;i<leh;i++){
+						$(".table_right .response").append("<td>"+0+"</td>")
+					}
+				}
+				//有人回复的状态
 				$.each(responseArr,function(index,value){
 					$(".table_right .response").append("<td>"+value+"</td>")
 				});
+				
+				
+				//登陆过后
+				var u = getCookie("user1");
+				if(u!=""&&u!=null){
+					$(".response").after("<tr class='decideTime'></tr>");
+					$(".table_left .decideTime").append("<td><div id='senddecideTime' style='background-image:url(img/email_icon.png);width:32px;height:32px;margin:0 auto;'></div></td>");
+						
+						for(var i=0;i<leh;i++){
+							$(".table_right .decideTime").append('<td><input type="radio" name="timeChoice" class="winnerCal"></td>')
+						}
+						//senddecideTime
+						$("#senddecideTime").click(function(){
+							var s = $(".table_right .decideTime td input[name=timeChoice]:checked").parent().index();
+							var weekd = $(".weekDate td[index~="+s+"]").text();
+							var timed = $(".timeDura").children().eq(s).text();
+							$.post("sendDecideTime.do",{"personTime":JSON.stringify(contactEmail),"week":weekd,"time":timed},function(data){
+								if(data==true){
+									$(".tipMess").text("此次的聚会时间已经通过邮件发送给大家了！");
+								}
+							});
+						});
+				}
+				
 		}
 		
 		
@@ -425,13 +482,14 @@ var getPt = function(){
 					var args  = value.date.split("#");
 					if(index==0){
 						weekDate = args[0];
-						$(".table_right .weekDate").append("<td colspan='1'>"+weekDate+"</td>");
+						$(".table_right .weekDate").append("<td colspan='1' index='"+index+"'>"+weekDate+"</td>");
 					}else if(args[0]==weekDate){
 						var $lastTd = $(".weekDate").children().last();
 						$lastTd.attr("colspan",parseInt($lastTd.attr("colspan"))+1);
+						$lastTd.attr("index",parseInt($lastTd.attr("index"))+" "+index);
 					}else{
 						weekDate = args[0];
-						$(".table_right .weekDate").append("<td colspan='1'>"+weekDate+"</td>");
+						$(".table_right .weekDate").append("<td colspan='1' index='"+index+"'>"+weekDate+"</td>");
 					}
 					
 					$(".table_right .timeDura").append("<td>"+args[1]+"</td>");
@@ -442,7 +500,7 @@ var getPt = function(){
 				});
 				 
 				 if($(".table_right").width()<$(".containRtalbe").width()){
-					 $(".table_right .tableTail").hide();
+					 $(".tableTail").hide();
 					 /* $(".containRtalbe").css("borderWidth","0"); */
 				 }
 				 
@@ -518,8 +576,12 @@ var getPt = function(){
 			return false;
 		});
 		
+		
+		
 	})
 	
 </script>
 </body>
 </html>
+
+

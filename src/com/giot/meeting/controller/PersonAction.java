@@ -29,7 +29,7 @@ public class PersonAction {
 	public List<Invitee> findAllPerson(String meetid) {
 		return personService.findAllPerson(meetid);
 	}
-
+	
 	@ResponseBody
 	@RequestMapping("/getPersonCount.do")
 	public long getPersonCount(String meetid) {

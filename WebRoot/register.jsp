@@ -87,7 +87,7 @@ img[alt=error]{
 		   if(go && go1 && go2 && $.trim($("input[name=nickname]").val())!=""){
 			   $.post("addUser.do",$("#addUser").serializeArray(),function(data){
 				   if(data!=null && data!=""){
-					   window.location.href="validateEmail?provEmail="+data;
+					   window.location.href="validateEmail.jsp?provEmail="+data;
 				   }
 			   });
 			   return false;
@@ -242,7 +242,7 @@ img[alt=error]{
 						免费注册
 					</div>
 					<div class="input-group">
-			  				<span class="input-group-addon">昵  &nbsp; 称</span>
+			  				<span class="input-group-addon">昵  &nbsp; &nbsp; &nbsp; 称</span>
 			 			 	<input type="text" class="form-control" placeholder="请输入您的昵称" name="nickname">
 			      	</div>
 			      	<img alt="error" src="img/error.png" for="nickname">
@@ -250,7 +250,7 @@ img[alt=error]{
 			      	<br>
 			      	<br>
 					<div class="input-group">
-			  				<span class="input-group-addon">用 户 名</span>
+			  				<span class="input-group-addon">&nbsp;用户名 &nbsp;</span>
 			 			 	<input type="text" class="form-control" placeholder="请输入您的邮箱" name="username">
 			      	</div>
 			      	<img alt="error" src="img/error.png" for="username">
@@ -273,7 +273,7 @@ img[alt=error]{
 			      	<img alt="error" src="img/error.png" for="password1">
 			      	<label class="error" for="password1">两次输入的密码不一致！</label>
 			      	<br>
-					<input type="submit" class="btn btn-success" value="注&nbsp;&nbsp;册">
+					<input type="submit" id="submit" class="btn btn-success" value="注&nbsp;&nbsp;册">
 					
 					<div class="note">
 							<br>

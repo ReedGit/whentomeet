@@ -10,6 +10,43 @@
 <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script type="text/javascript">
 	var curpage = 0;
+	Date.prototype.yyyymmdd = function() {         
+        
+        var yyyy = this.getFullYear().toString();                                    
+        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based         
+        var dd  = this.getDate().toString();             
+                            
+        return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
+   };
+	
+   
+   /* var getResponseNum = function(meetId){
+	   var guys = 0;
+	   var response = 0;
+	   $.ajax({
+		   url:"getAllPersonTime.do",
+		   data:{"meetid":meetId},
+		   async:false,
+		   success:function(data){
+			   guys = data.length;
+			   $.each(data,function(){
+				   if(this.ptime!=null){
+					   response++;
+				   }
+			   });
+		   }
+	   });
+	   return response+"/"+guys;
+   } */
+   var getResponseNum = function(meetId,callback){
+	   var guys = 0;
+	   var response = 0; 
+	   $.get("getAllPersonTime.do",{"meetid":meetId},function(){
+		   
+	   });
+	   
+   }
+	
 	var loadData = function(page){
 		$.ajax({
 			url:"findAllMeeting.do",
@@ -21,11 +58,13 @@
 				if(data.length<11){
 					$(".pager .next").css("pointer-events","none").addClass("disabled");
 					$.each(data,function(){
-						$("tbody").append("<tr><td><a>"+this.content+"</a></td><td>"+this.createTime+"</td><td>"+this.response+"/"+this.guys+"</td><td>0</td></tr>");
+						var date = new Date(this.createTime);
+						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+this.meetid+"&personId=-1'>"+this.title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
 					});
 				}else{
 					for(var i=0;i<10;i++){
-						$("tbody").append("<tr><td><a>"+data[i].content+"</a></td><td>"+data[i].createTime+"</td><td>"+data[i].response+"/"+data[i].guys+"</td><td>0</td></tr>");
+						var date = new Date(data[i].createTime);
+						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId=-1'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+data[i].response+"/"+data[i].guys+"</td><td>0</td></tr>");
 					}
 				}
 				$("table").tablesorter({debug: true});

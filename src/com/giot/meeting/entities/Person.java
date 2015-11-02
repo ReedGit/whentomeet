@@ -17,6 +17,7 @@ public class Person {
 	private String name;
 	private String comment;
 	private String ptime;
+	private String personEmail;
 
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
@@ -67,6 +68,14 @@ public class Person {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getPersonEmail() {
+		return personEmail;
+	}
+
+	public void setPersonEmail(String personEmail) {
+		this.personEmail = personEmail;
 	}
 
 	

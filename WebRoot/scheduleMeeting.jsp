@@ -21,7 +21,7 @@
    /*  position: relative;
     top: 57px;
     right: 100px; */
-    margin: 60px 60px 150px 0;
+    margin: 100px 17% 150px 0;
 }
 
  .scheduleBox h1 {
@@ -42,6 +42,21 @@
 	margin: 0 auto;
 	text-align: center;
 }
+
+#outtimeTableDiv{
+	width: 1270px;
+	position: relative;
+	margin: 0 auto;
+}
+
+
+
+#timeTableDiv{
+	position: absolute;
+	bottom:98%;
+	z-index: 10;
+}
+
 </style>
 
 </head>
@@ -58,7 +73,7 @@
 
         </div>
         <div class="tipMess"></div>
-        <form class="form-horizontal" action="addMeeting.do" method="post" id="addMeeting">
+        <form class="form-horizontal"  id="addMeeting">
                   <div class="input-group">
          				<span class="input-group-addon">主题</span>
         			 	<input type="text" class="form-control" placeholder="马尔代夫7日游" name="title">
@@ -95,25 +110,85 @@
       			<br>
 				  <div class="input-group">
          				<span class="input-group-addon">邮箱</span>
-        			 	<input type="text" class="form-control" placeholder="此邮箱会收到其他受邀者的时间更新哦~" name="email">
+        			 	<input type="text" class="form-control" placeholder="此邮箱会收到其他受邀者的时间更新哦~" name="organiser_mail">
       			  </div>
       			  <br>	
 					<input id="step1Submit" type="submit" class="btn btn-success" value="确认选择">
-               <!--  
-
-                <div class="submitArea">
-                    <button id="cancelBtn" class="btn btnLargeGray">Cancel</button>
-                             <button id="step1Submit" type="submit" class="btn-warning btn-large btnLargeOrange">
-                    <input id="step1Submit" type="submit" class="btn-primary btn-large" value="确认选择">
-                        	确认选择
-                    </button>
-                    <br>
-                    <div class="errMsg"></div>
-                    <div style="clear:both"></div>
-                </div> -->
 
         </form>
     </div>
+    
+</div>
+<div id="outtimeTableDiv">
+<div id="timeTableDiv">
+    	<%-- <div id="meetingTime" unselectable="on" onselectstart="return false;" style="-moz-user-select:none;">
+	<div id="dateLable"><h2></h2></div>
+	<div id="lable"> 为见面选择可能的时间吧</div>
+	<table border="1" id="weekTitle">
+		<tr>
+			<td id="changeTimeFormat"><br><a href="">12h</a></td>
+			<td>星期日<br><span class="date"></span></td>
+			<td>星期一<br><span class="date"></span></td>
+			<td>星期二<br><span class="date"></span></td>
+			<td>星期三<br><span class="date"></span></td>
+			<td>星期四<br><span class="date"></span></td>
+			<td>星期五<br><span class="date"></span></td>
+			<td>星期六<br><span class="date"></span></td>
+			<td class="midFill date"></td>
+			<td>星期日<br><span class="date"></span></td>
+			<td>星期一<br><span class="date"></span></td>
+			<td>星期二<br><span class="date"></span></td>
+			<td>星期三<br><span class="date"></span></td>
+			<td>星期四<br><span class="date"></span></td>
+			<td>星期五<br><span class="date"></span></td>
+			<td>星期六<br><span class="date"></span></td>
+		</tr>
+	</table>
+
+<div id="containTable">
+
+	<div class="prevArrow"></div>
+	<table border="1" id="selectTime">
+		<c:forEach var="t" begin="0" end="95">
+			<tr>
+				<c:choose>
+					<c:when test="${t%4==0 }">
+						<td class="timeLable showTime"></td>
+					</c:when>
+					<c:otherwise>
+						<td class="timeLable"></td>
+					</c:otherwise>
+				</c:choose>
+				<td class="col_1 withBg"></td>
+				<td class="col_2"></td>
+				<td class="col_3"></td>
+				<td class="col_4"></td>
+				<td class="col_5"></td>
+				<td class="col_6"></td>
+				<td class="col_7 withBg"></td>
+				<td class="col_8 midFill"></td>
+				<td class="col_9 withBg"></td>
+				<td class="col_10"></td>
+				<td class="col_11"></td>
+				<td class="col_12"></td>
+				<td class="col_13"></td>
+				<td class="col_14"></td>
+				<td class="col_15 withBg"></td>
+			</tr>
+		</c:forEach>
+	</table>
+	<div class="nextArrow"></div>
+	
+</div>
+<div class="submitArea">
+	<a id="step2Back" class="btn btn-danger" href="#">返回</a>
+       
+    <button id="step2Submit" type="submit" class="btn btn-success">邀请参与人</button>
+</div>
+
+</div> --%>
+</div>  
+    
     
 </div>
 <!--/start-copyright-section-->
@@ -127,22 +202,6 @@
 	var u = getCookie("user1");
 	var uid = getCookie("organiser");
 	$(function(){
-		$("#step1Submit").click(function(){
-			var title = $("input[name=title]").val();
-			if($.trim(title)==""){
-				$(".tipMess").text("主题不能为空");
-				return false;
-			}else{
-				$.post("addMeeting.do",$("#addMeeting").serializeArray(),function(data){
-					console.log(data	);
-					if(data!=null){
-						window.location.href="timeTable?duraValue="+data.duration+"&meetId="+data.meetid;
-					}
-				});
-				return false;
-			}
-			
-		});
 		if(u!=""&&u!=null){
 			$.get('getUserById.do', {"userid":uid},function(data) {
 				var d = data.defaultDura;
@@ -150,9 +209,38 @@
 				if(d=="0"){
 					$("#duration").val("4");
 				}
+				
+				$("input[name=organiser_mail]").val(data.username);
 			});
 		}
+		
+		
+		
+		$("#step1Submit").click(function(){
+			var title = $("input[name=title]").val();
+			if($.trim(title)==""){
+				$(".tipMess").text("主题不能为空");
+				return false;
+			}else{
+				
+				$.getScript("js/timeTable.js");
+				$.getScript("js/zxx.color_exchange.js");
+					
+				$("#timeTableDiv").load("timeTable.jsp",function(){
+					$.getScript("js/timeTable.js");
+					$.getScript("js/zxx.color_exchange.js");
+				});
+				
+				
+				setCookie("organiser_mail", $("input[name=organiser_mail]").val());
+				return false;
+			}
+			
+		});
+		
 	})
+	
 </script>
+
 </body>
 </html>
