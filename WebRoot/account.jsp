@@ -78,13 +78,13 @@
 				<input type="hidden" value="" name="password">
 				<input type="hidden" value="1" name="validate">
 				<div class="input-group">
-	  				<span class="input-group-addon">昵  &nbsp; 称</span>
+	  				<span class="input-group-addon"> &nbsp;昵  &nbsp; 称 &nbsp;</span>
 	 			 	<input type="text" class="form-control" placeholder="请输入您的昵称" name="nickname">
 			    </div>
 			    <br>
 			    <br>
 				<div class="input-group">
-	  				<span class="input-group-addon">邮  &nbsp; 箱</span>
+	  				<span class="input-group-addon"> &nbsp;邮  &nbsp; 箱 &nbsp;</span>
 	 			 	<input type="text" class="form-control" placeholder="请输入您的昵称" name="username">
 			    </div>
 			     <br>
@@ -108,7 +108,7 @@
 			     <br>
 			     <br>
 				<div class="input-group">
-	  				<span class="input-group-addon">头  &nbsp; 像</span>
+	  				<span class="input-group-addon"> &nbsp;头  &nbsp;  像 &nbsp;</span>
 	 			 	<input type="text" class="form-control" placeholder="请输入您的昵称" name="image">
 			    </div>
 			     <br>

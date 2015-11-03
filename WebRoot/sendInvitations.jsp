@@ -24,16 +24,17 @@
 	
 }
 #emails {
-	float:right;
+	/* float:right; */
 	width: 638px;
 	/* height: 550px; */
 	border: 1px solid #ccc;
-	margin: 92px 392px auto auto;
+	/* margin: 92px 392px auto auto; */
+	margin:5% auto 0 auto ;
 	border-radius: 10px;
 	background-color: #fff;
 	box-shadow: 0px 0px 30px #333333;
 	padding-bottom: 100px;
-	margin-bottom: 200px;
+	/* margin-bottom: 200px; */
 }
 
 .inputName{
@@ -79,18 +80,29 @@
 	top:46px;
 	left: 102px;
 }
-
+#outcontactBox{
+	/* width: 640px; */
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: -999em;
+	background-color: #333;
+	opacity:0.4;
+	filter:alpha(opacity=40); /* 针对 IE8 以及更早的版本 */
+}
 #contactBox{
 	width: 638px;
 	height: 426px;
-	border: 2px solid #ccc;
-	position: fixed;
+	border: 1px solid #ccc;
+	/* position: fixed;
 	top:176px;
-	left:356px;
+	left:356px; */
+	position:absolute;
+	top:-999em;
 	background-color: #fff;
-	border-radius: 10px;
+	border-radius: 5px;
 	box-shadow: 0px 0px 40px #333333;
-	display: none;
 }
 #contactBox .title{
 	font-size: 20px;
@@ -104,6 +116,7 @@
 	height:200px;
 	border: 1px solid #ccc;
 	overflow: auto;
+	margin: 0 auto;
 }
 
 #contactBox .list table{
@@ -111,6 +124,10 @@
 	height: 100%;
 	border: 0 solid transparent;
 	text-align: center;
+	
+}
+#contactBox .list table tr{
+	height: 35px;
 }
 
 #contactBox #confim{
@@ -119,10 +136,20 @@
 	margin: 30px 0 0 249px;
 }
 #contactBox #close{
-	border-radius: 10px;
+	border-radius: 5px;
 	position: absolute;
 	top: 0;
 	right: 0;
+	width: 20px;
+	height:20px;
+	line-height: 20px;
+	font-weight: 100;
+	text-align: center;
+	font-size: 10px;
+}
+#contactBox #close:hover{
+	cursor: pointer;
+	font-size: 20px;
 }
 .tipMess{
 
@@ -181,9 +208,11 @@
 			
 		</div>
 <!--//end-copyright-section-->
+<div id="outcontactBox">
+</div>
 <div id="contactBox">
 		<div class="title">我的联系人
-			<button type="button" class="btn btn-danger" id="close">X</button>
+			<div   id="close">X</div>
 		</div>
 		<div class="list">
 			<table border="1">
@@ -207,17 +236,19 @@
 	var index = 0;
 	var emailRex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 	var selectContact = function(){
-		$("body").css("backgroundColor","#fff");
-		$("#background").css("opacity",".6");
-		$("#contactBox").show();
+		var headHeight = $("#head").height();
+		var emailsOff = $("#emails").offset().top;
+		console.log(emailsOff);
+		$("#outcontactBox").css("top",headHeight+"px");
+ 		$("#contactBox").css({"top":0,"left":0,"right":0,"bottom":0,"margin":"auto"});
+ 		$("#contactBox").css("margin-top",(emailsOff+20)+"px");
 		$(window).scrollTop(0);
 		index = $(this).index();
 	}
 	
 	var closeContactBox =function(){
-		$("#contactBox").hide();
-		$("body").css("backgroundColor","#669999");
-		$("#background").css("opacity","1");
+		$("#contactBox").css("top","-999em");
+		$("#outcontactBox").css("top","-999em");
 	}
 
 	$(function(){
@@ -239,7 +270,6 @@
 		if(uid!=""&&uid!=null){
 			//用户登陆后，查询他的邮箱
 			$.get("getUserById.do",{"userid":uid},function(data){
-				console.log(data.username);
 				$("input[name=selfEmail]").val(data.username);
 			});
 			

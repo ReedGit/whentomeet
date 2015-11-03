@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/tablesorterstyle.css" type="text/css" id="" media="print, projection, screen" />
 <style type="text/css">
 div.contacts{
-	width: 791px;
+	width: 691px;
 	/* height: 519px; */
 	/* border: solid 2px red; */
 	box-shadow: 0 0 30px #333;
