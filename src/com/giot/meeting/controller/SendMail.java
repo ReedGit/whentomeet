@@ -21,6 +21,10 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 
+import jdk.nashorn.api.scripting.JSObject;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -32,6 +36,7 @@ import com.giot.meeting.entities.Person;
 import com.giot.meeting.entities.User;
 import com.giot.meeting.service.ContactService;
 import com.giot.meeting.service.PersonService;
+import com.google.gson.JsonObject;
 
 @Controller
 public class SendMail {
@@ -39,43 +44,46 @@ public class SendMail {
 	private String port = null;
 	@Autowired
 	private PersonService personService;
-	
+
 	@Autowired
 	private ContactService contactService;
-	
-	
+
 	public SendMail() throws Exception {
 		ClassLoader classLoader = SendMail.class.getClassLoader();
-		InputStream resourceAsStream = classLoader.getResourceAsStream("mail.properties");
+		InputStream resourceAsStream = classLoader
+				.getResourceAsStream("mail.properties");
 		final Properties p = new Properties();
 		p.load(resourceAsStream);
-		// ´´½¨ÓÊ¼þSessionËùÐèµÄProperties¶ÔÏó
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½Sessionï¿½ï¿½ï¿½ï¿½ï¿½Propertiesï¿½ï¿½ï¿½ï¿½
 		Properties props = new Properties();
 		props.put("mail.smtp.host", p.getProperty("email.smtpserver"));
 		props.put("mail.smtp.auth", "true");
-		// ´´½¨Session¶ÔÏó
-		Session session = Session.getDefaultInstance(props , new Authenticator() {
+		// ï¿½ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
+		Session session = Session.getDefaultInstance(props,
+				new Authenticator() {
 					public PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(p.getProperty("email.username"), p.getProperty("email.password"));
+						return new PasswordAuthentication(p
+								.getProperty("email.username"), p
+								.getProperty("email.password"));
 					}
 				});
-		// ¹¹ÔìMimeMessage²¢ÉèÖÃÏà¹ØÊôÐÔÖµ
-		 msg = new MimeMessage(session);
-		// ÉèÖÃ·¢¼þÈË
+		// ï¿½ï¿½ï¿½ï¿½MimeMessageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+		msg = new MimeMessage(session);
+		// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½
 		msg.setFrom(new InternetAddress(p.getProperty("email.from")));
 		msg.setSubject(p.getProperty("email.subject"));
-		
-		
+
 		port = p.getProperty("email.port");
 	}
 
-	// ·¢ËÍÓÊ¼þ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
 	@Async
 	@RequestMapping("/sendtoMail.do")
 	public String sendtoMail(String[] attendeeName, String[] attendeeEmail,
-			String meetId,String selfEmail,HttpSession session) throws AddressException {
+			String meetId, String selfEmail, HttpSession session)
+			throws AddressException {
 		User us = (User) session.getAttribute("user1");
-		
+
 		List<String> li = new ArrayList<String>();
 		List<String> attName = new ArrayList<String>();
 
@@ -86,76 +94,122 @@ public class SendMail {
 			}
 		}
 
-
 		for (int i = 0; i < li.size(); i++) {
 			Person p1 = new Person();
-			p1.setMeetid(meetId); 
+			p1.setMeetid(meetId);
 			p1.setName(attName.get(i));
 			p1.setPersonEmail(li.get(i));
 			personService.addPerson(p1);
-			System.out.println(us+"################");
-			System.out.println(us!=null);
-			if(us!=null){
+			System.out.println(us + "################");
+			System.out.println(us != null);
+			if (us != null) {
 				Contact con = new Contact();
 				con.setNickname(attName.get(i));
 				con.setUserid(us.getUserid());
 				con.setUsername(li.get(i));
 				contactService.addContact(con);
-				
+
 			}
 			sendSigleMail(li.get(i), meetId, p1.getPersonid());
 		}
-		
-		if(us==null){
+
+		if (us == null) {
 			sendSigleMail(selfEmail, meetId, "-1");
-			return "redirect:sendSuccess.jsp?selfEmail="+selfEmail;
+			return "redirect:sendSuccess.jsp?selfEmail=" + selfEmail;
 		}
 		return "redirect:sendSuccess.jsp";
 	}
 
-	public void sendSigleMail(String to,String meetId,String personId) {
+	/**
+	 * æ‰‹æœºç«¯å‘é€é‚®ä»¶æŽ¥å£
+	 * @param meetId
+	 * @param userId
+	 * @param emailString
+	 * @param nameString
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/sendMailForPhone.do")
+	public String sendMailForPhone(String meetId, String userId,
+			String emailString, String nameString) {
+		JSONObject result = new JSONObject();
+		List<String> li = new ArrayList<String>();
+		List<String> attName = new ArrayList<String>();
+		String[] attendeeEmail = emailString.split(";;");
+		String[] attendeeName = nameString.split(";;");
+		for (int i = 0; i < attendeeEmail.length - 1; i++) {
+			li.add(attendeeEmail[i]);
+			attName.add(attendeeName[i]);
+		}
+
+		for (int i = 0; i < li.size(); i++) {
+			Person p1 = new Person();
+			p1.setMeetid(meetId);
+			p1.setName(attName.get(i));
+			p1.setPersonEmail(li.get(i));
+			personService.addPerson(p1);
+			Contact con = new Contact();
+			con.setNickname(attName.get(i));
+			con.setUserid(userId);
+			con.setUsername(li.get(i));
+			contactService.addContact(con);
+			sendSigleMail(li.get(i), meetId, p1.getPersonid());
+		}
+		result.put("result", true);
+		return result.toString();
+
+	}
+
+	public void sendSigleMail(String to, String meetId, String personId) {
 		try {
-			// ÉèÖÃÊÕ¼þÈË
-			msg.setRecipient(Message.RecipientType.TO,new InternetAddress(to));
-			// ¹¹ÔìMultipart
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½
+			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			// ï¿½ï¿½ï¿½ï¿½Multipart
 			Multipart mp = new MimeMultipart();
-			// ÏòMultipartÌí¼ÓÕýÎÄ
+			// ï¿½ï¿½Multipartï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			MimeBodyPart mbpContent = new MimeBodyPart();
-			
-			mbpContent.setContent(port+"/whentomeet/replyTime.jsp?meetId="+meetId +"&personId="+personId,"text/html;charset=utf-8");
+
+			mbpContent.setContent(port + "/whentomeet/replyTime.jsp?meetId="
+					+ meetId + "&personId=" + personId,
+					"text/html;charset=utf-8");
 			// mbpContent.setText(content);
-			// ½«BodyPartÌí¼Óµ½MultiPartÖÐ
+			// ï¿½ï¿½BodyPartï¿½ï¿½Óµï¿½MultiPartï¿½ï¿½
 			mp.addBodyPart(mbpContent);
 			msg.setContent(mp);
-			// ÉèÖÃ·¢ËÍÈÕÆÚ
+			// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			msg.setSentDate(new Date());
-			// ·¢ËÍÓÊ¼þ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
 			Transport.send(msg);
 
 		} catch (MessagingException mex) {
-			System.out.println("ÓÊ¼þ·¢ËÍÊ§°Ü¡£¡£Çë¼ì²éÍøÂçÉèÖÃ£¡£¡£¡£¡****************");
+			System.out
+					.println("ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½****************");
 			mex.printStackTrace();
 
 		}
 	}
-	
-	public void sendValidate(String registerEmail,String userid){
+
+	public void sendValidate(String registerEmail, String userid) {
 		try {
-			System.out.println("·¢ËÍÑéÖ¤ÓÊ¼þ¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£");
-			// ÉèÖÃÊÕ¼þÈË
-			msg.setRecipient(Message.RecipientType.TO,new InternetAddress(registerEmail));
-			// ¹¹ÔìMultipart
+			System.out
+					.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½
+			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(
+					registerEmail));
+			// ï¿½ï¿½ï¿½ï¿½Multipart
 			Multipart mp = new MimeMultipart();
-			// ÏòMultipartÌí¼ÓÕýÎÄ
+			// ï¿½ï¿½Multipartï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			MimeBodyPart mbpContent = new MimeBodyPart();
-			mbpContent.setContent(port+"/whentomeet/updateValidateStatus.do?userid="+userid,"text/html;charset=utf-8");
+			mbpContent.setContent(port
+					+ "/whentomeet/updateValidateStatus.do?userid=" + userid,
+					"text/html;charset=utf-8");
 			// mbpContent.setText(content);
-			// ½«BodyPartÌí¼Óµ½MultiPartÖÐ
+			// ï¿½ï¿½BodyPartï¿½ï¿½Óµï¿½MultiPartï¿½ï¿½
 			mp.addBodyPart(mbpContent);
 			msg.setContent(mp);
-			// ÉèÖÃ·¢ËÍÈÕÆÚ
+			// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			msg.setSentDate(new Date());
-			// ·¢ËÍÓÊ¼þ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
 			Transport.send(msg);
 
 		} catch (MessagingException mex) {
@@ -163,55 +217,55 @@ public class SendMail {
 
 		}
 	}
-	
-	//Èº·¢¾ö¶¨ÏûÏ¢
+
+	// Èºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	@ResponseBody
 	@RequestMapping("/sendDecideTime.do")
-	public boolean sendDecideTime(String personTime,String week,String time){
-		
+	public boolean sendDecideTime(String personTime, String week, String time) {
+
 		personTime = clipBorder(personTime);
 		String arr[] = personTime.split(",");
-		for(int i=0;i<arr.length;i++){
-			arr[i] =  clipBorder(arr[i]);
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = clipBorder(arr[i]);
 		}
-		
-		InternetAddress [] address = new InternetAddress[arr.length];
-		
-	               
+
+		InternetAddress[] address = new InternetAddress[arr.length];
+
 		try {
-			System.out.println("·¢ËÍÑéÖ¤ÓÊ¼þ¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£");
-			System.out.println("·¢ËÍµÄÁªÏµÈË£º---¡·"+Arrays.toString(arr));
-			for(int i=0;i<arr.length;i++){
+			System.out
+					.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+			System.out.println("ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½Ïµï¿½Ë£ï¿½---ï¿½ï¿½" + Arrays.toString(arr));
+			for (int i = 0; i < arr.length; i++) {
 				address[i] = new InternetAddress(arr[i]);
 			}
-			// ÉèÖÃÊÕ¼þÈË
-			msg.setRecipients(Message.RecipientType.TO,address);
-			// ¹¹ÔìMultipart
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½
+			msg.setRecipients(Message.RecipientType.TO, address);
+			// ï¿½ï¿½ï¿½ï¿½Multipart
 			Multipart mp = new MimeMultipart();
-			// ÏòMultipartÌí¼ÓÕýÎÄ
+			// ï¿½ï¿½Multipartï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			MimeBodyPart mbpContent = new MimeBodyPart();
-			mbpContent.setContent("´Ë´Î¾Û»áµÄÊ±¼ä¶¨Îª£º"+week+" "+time,"text/html;charset=utf-8");
+			mbpContent.setContent("ï¿½Ë´Î¾Û»ï¿½ï¿½Ê±ï¿½ä¶¨Îªï¿½ï¿½" + week + " " + time,
+					"text/html;charset=utf-8");
 			// mbpContent.setText(content);
-			// ½«BodyPartÌí¼Óµ½MultiPartÖÐ
+			// ï¿½ï¿½BodyPartï¿½ï¿½Óµï¿½MultiPartï¿½ï¿½
 			mp.addBodyPart(mbpContent);
 			msg.setContent(mp);
-			// ÉèÖÃ·¢ËÍÈÕÆÚ
+			// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			msg.setSentDate(new Date());
-			// ·¢ËÍÓÊ¼þ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
 			Transport.send(msg);
 
 		} catch (MessagingException mex) {
 			mex.printStackTrace();
 
 		}
-		
+
 		return true;
-		
+
 	}
-	
-	private String clipBorder(String string){
-		return string.substring(1,string.length()-1);
+
+	private String clipBorder(String string) {
+		return string.substring(1, string.length() - 1);
 	}
-	
-	
+
 }
