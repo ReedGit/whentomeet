@@ -68,6 +68,7 @@ public class MeetingAction {
 		JSONArray jsonArray = new JSONArray();
 		for(int i = 0;i<list.size();i++){
 			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("meetId", list.get(i).getMeetid());
 			jsonObject.put("title", list.get(i).getTitle());
 			jsonObject.put("createTime", list.get(i).getCreateTime());
 			jsonObject.put("guys", list.get(i).getGuys());
