@@ -14,5 +14,5 @@ public interface MeetingDao {
 
 	public Meeting findMeeting(String meetid);
 
-	public long getMeetingCount();
+	public long getMeetingCount(String organiser);
 }

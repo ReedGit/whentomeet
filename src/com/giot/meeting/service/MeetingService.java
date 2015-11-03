@@ -29,5 +29,9 @@ public class MeetingService {
 	public Meeting findMeeting(String meetid) {
 		return meetingDao.findMeeting(meetid);
 	}
+	
+	public long getMeetingCount(String organiser){
+		return meetingDao.getMeetingCount(organiser);
+	}
 
 }

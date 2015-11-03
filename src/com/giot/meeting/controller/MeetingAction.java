@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +34,7 @@ public class MeetingAction {
 	public Meeting addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
 		User u = (User)session.getAttribute("user1");
 		if(u!=null){
-			//ÓÃ»§µÇÂ¼´æÈëÓÃ»§id,·ñÔòÎª¿Õ
+			//ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½id,ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
 			meeting.setOrganiser(u.getUserid());
 		}
 		
@@ -55,6 +57,29 @@ public class MeetingAction {
 	@RequestMapping("/findAllMeeting.do")
 	public List<Meeting> findAllMeeting(String organiser,int start,int items) {
 		return meetingService.findAllMeeting(organiser,start,items);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findAllMeetingForPhone.do")
+	public JSONObject findAllMeetingForPhone(String organiser,int start,int items){
+		List<Meeting> list = meetingService.findAllMeeting(organiser, start, items);
+		long count = meetingService.getMeetingCount(organiser);
+		double pageCount = Math.ceil(count / 10.0);
+		JSONArray jsonArray = new JSONArray();
+		for(int i = 0;i<list.size();i++){
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("title", list.get(i).getTitle());
+			jsonObject.put("createTime", list.get(i).getCreateTime());
+			jsonObject.put("guys", list.get(i).getGuys());
+			jsonObject.put("response", list.get(i).getResponse());
+			jsonArray.put(jsonObject);
+		}
+		JSONObject result = new JSONObject();
+		result.put("data", jsonArray);
+		result.put("page", pageCount);
+		System.out.println(result.toString());
+		return result;
+		
 	}
 
 	@ResponseBody

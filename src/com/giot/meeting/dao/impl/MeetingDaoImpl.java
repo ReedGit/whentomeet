@@ -79,11 +79,10 @@ public class MeetingDaoImpl implements MeetingDao {
 	}
 
 	@Override
-	public long getMeetingCount() {
+	public long getMeetingCount(String organiser) {
 		try {
-			String sql = "select count(id) from Meeting ";
-			return (long) getSession().createQuery(sql)
-					.uniqueResult();
+			String sql = "select count(id) from Meeting where organiser = :organiser";
+			return (long) getSession().createQuery(sql).setString("organiser", organiser).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
