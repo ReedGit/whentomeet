@@ -60,7 +60,7 @@ public class MeetingAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/findAllMeetingForPhone.do")
+	@RequestMapping(value="/findAllMeetingForPhone.do",produces = {"application/json;charset=UTF-8"})
 	public String findAllMeetingForPhone(String organiser,int start,int items){
 		List<Meeting> list = meetingService.findAllMeeting(organiser, start, items);
 		long count = meetingService.getMeetingCount(organiser);
