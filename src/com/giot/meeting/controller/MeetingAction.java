@@ -61,7 +61,7 @@ public class MeetingAction {
 	
 	@ResponseBody
 	@RequestMapping("/findAllMeetingForPhone.do")
-	public JSONObject findAllMeetingForPhone(String organiser,int start,int items){
+	public String findAllMeetingForPhone(String organiser,int start,int items){
 		List<Meeting> list = meetingService.findAllMeeting(organiser, start, items);
 		long count = meetingService.getMeetingCount(organiser);
 		double pageCount = Math.ceil(count / 10.0);
@@ -78,8 +78,7 @@ public class MeetingAction {
 		JSONObject result = new JSONObject();
 		result.put("data", jsonArray);
 		result.put("page", pageCount);
-		System.out.println(result.toString());
-		return result;
+		return result.toString();
 		
 	}
 
