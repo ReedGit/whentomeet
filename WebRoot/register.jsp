@@ -14,7 +14,7 @@
 	box-shadow: 0 0 30px #333;
 	border-radius: 5px;
 	float:right;
-	margin:60px 60px 150px 0;
+	margin:60px 13% 150px 0;
 	padding-bottom:50px;
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e8e8e8), color-stop(1, #fff));
     background: -ms-linear-gradient(bottom, #e8e8e8 0, #fff 100%);

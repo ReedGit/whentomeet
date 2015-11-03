@@ -21,9 +21,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 
-import jdk.nashorn.api.scripting.JSObject;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -36,7 +33,6 @@ import com.giot.meeting.entities.Person;
 import com.giot.meeting.entities.User;
 import com.giot.meeting.service.ContactService;
 import com.giot.meeting.service.PersonService;
-import com.google.gson.JsonObject;
 
 @Controller
 public class SendMail {

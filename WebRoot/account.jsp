@@ -10,10 +10,11 @@
 <style type="text/css">
 
 #account{
-	margin-top:35px;
+	/* margin-top:35px; */
 	height: 550px;
-	width: 752px;
+	width: 522px;
 	float: right;
+	margin:60px 13% 150px 0;
 	padding: 35px 30px 30px 30px;
 	border: 1px solid #ccc;
 	border-radius: 5px;	
@@ -36,7 +37,7 @@
 	
 }
 .input-group{
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
 }
 .submit1{

@@ -18,7 +18,7 @@ div.contacts{
 	background-color: #fff; 
 	border-radius: 10px;
 	float: right;
-	margin:32px 0 30px 20px;
+	margin:60px 13% 150px 0;
 	padding-bottom: 30px;
  }
  

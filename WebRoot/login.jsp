@@ -18,7 +18,7 @@
 	left: 700px;
 	top: 36px; */
 	float:right;
-	margin:60px 60px 150px 0;
+	margin:60px 13% 150px 0;
 	
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e8e8e8), color-stop(1, #fff));
     background: -ms-linear-gradient(bottom, #e8e8e8 0, #fff 100%);

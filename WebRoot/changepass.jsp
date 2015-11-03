@@ -9,11 +9,11 @@
 <script type="text/javascript" src="js/back2index.js"></script>
 <style type="text/css">
 	.changepass{
-	    width: 630px;
-	    height:396px;
+	    width:522px;
+	    height:496px;
 	    background: white;
-	    float:left;
-	    margin:35px 0 30px 70px;
+	    float:right;
+	    margin:60px 13% 150px 0;
 	    border: 1px solid #ccc;
 	    border-radius: 5px;
 	    box-shadow: 0 0 30px #333;

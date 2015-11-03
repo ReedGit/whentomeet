@@ -20,7 +20,7 @@
    };
 	
    
-   /* var getResponseNum = function(meetId){
+    var getResponseNum = function(meetId){
 	   var guys = 0;
 	   var response = 0;
 	   $.ajax({
@@ -37,16 +37,7 @@
 		   }
 	   });
 	   return response+"/"+guys;
-   } */
-   var getResponseNum = function(meetId,callback){
-	   var guys = 0;
-	   var response = 0; 
-	   $.get("getAllPersonTime.do",{"meetid":meetId},function(){
-		   
-	   });
-	   
    }
-	
 	var loadData = function(page){
 		$.ajax({
 			url:"findAllMeeting.do",
@@ -64,7 +55,7 @@
 				}else{
 					for(var i=0;i<10;i++){
 						var date = new Date(data[i].createTime);
-						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId=-1'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+data[i].response+"/"+data[i].guys+"</td><td>0</td></tr>");
+						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId=-1'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
 					}
 				}
 				$("table").tablesorter({debug: true});

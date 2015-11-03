@@ -45,7 +45,7 @@
 
 #outtimeTableDiv{
 	width: 1270px;
-	position: relative;
+	/* position: relative; */
 	margin: 0 auto;
 }
 
@@ -53,7 +53,7 @@
 
 #timeTableDiv{
 	position: absolute;
-	bottom:98%;
+	top:15%;
 	z-index: 10;
 }
 
