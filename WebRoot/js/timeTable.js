@@ -344,7 +344,7 @@ var mouseDown = function(){
 					$(this).css("backgroundColor","#ffde7d");
 					var tds1 =tds-2;
 					for(var i=0;i<tds-j-1;i++){
-						$($sel[i]).css("backgroundColor","#ffde7d");
+						$($sel[i]).addClass("selectedTail").css("backgroundColor","#ffde7d");
 					}
 					
 				}
@@ -365,7 +365,6 @@ var mouseDown = function(){
 			}
 			
 		}else if($(this).hasClass("selectedTail")){
-			console.log("sss");
 			pencil = true;
 			/* $(this).removeClass("selectedTail");
 			$sel.removeClass("selectedTail"); */
@@ -392,10 +391,12 @@ var mouseUp = function(){
 }
 
 var moveIn = function(){
+	
 	/*设置跨度*/
 	var className = $(this).attr("class");
 	var col = className.split(/\s/);
 	var $rows = $(this).parent().nextAll(":lt("+(tds-1)+")").children("."+col);
+	
 	if(pencil){
 		$(this).css("backgroundColor","#ffde7d");
 		$(this).css('cursor', 'url(img/pencil.png), auto');
@@ -405,7 +406,7 @@ var moveIn = function(){
 		}
 		$rows.not(".selectedTail").not(".selected").css("backgroundColor","#ffde7d");
 	}else if(eraser){
-		$(this).css("backgroundColor","#fff");
+		//$(this).css("backgroundColor","#fff");
 		$(this).css('cursor', 'url(img/eraser.png), auto');
 	}else {
 		/* var offColor  =$(this).css("backgroundColor").colorHex(); */
@@ -428,12 +429,19 @@ var moveIn = function(){
 				
 			}
 			$rows.not(".selectedTail").not(".selected").css("backgroundColor","#FFF1CA");
+			
+			if($(this).parent().index()>96-tds){
+				$(this).unbind('mouseenter mouseleave mousedown mouseup');
+				$rows.unbind('mouseenter mouseleave mousedown mouseup');
+			}
+			
+			
 		}else{
 			$(this).css('cursor', 'url(img/pencil.png), auto');
 			$("#containTable td").not(".selected").not(".selectedTail").not(".withBg").not(".midFill").css("backgroundColor","#fff");
 			$(this).css("backgroundColor","#FFF1CA");
 			
-			$rows.not(".selected").not(".selectedTail").css("backgroundColor","#FFF1CA")
+			$rows.not(".selected").not(".selectedTail").css("backgroundColor","#FFF1CA");
 		}
 	}
 	
@@ -441,6 +449,12 @@ var moveIn = function(){
 	var $tl = $(this).prevAll(".timeLable");
 	$tl.css("backgroundColor","#FFF1CA");
 	$tl.parent().nextAll(":lt("+(tds-1)+")").children(".timeLable").css("backgroundColor","#FFF1CA");
+	
+	
+	if($(this).parent().index()>96-tds){
+		$(this).not(".selected").not(".selectedTail").css("backgroundColor","#fff").unbind('mouseenter mouseleave mousedown mouseup');
+		$rows.not(".selected").not(".selectedTail").css("backgroundColor","#fff").unbind('mouseenter mouseleave mousedown mouseup');
+	}
 }
 
 
@@ -454,6 +468,7 @@ var moveOut = function(){
 	if(offColor=="#ffde7d"){
 		$(".withBg").not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");
 	}else if($(this).hasClass("withBg")){
+		
 		$(this).css("backgroundColor","#F5F5F8");
 		/*设置跨度*/
 		$cols.not(".selected").not(".selectedTail").css("backgroundColor","#F5F5F8");

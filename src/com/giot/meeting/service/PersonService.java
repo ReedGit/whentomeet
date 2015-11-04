@@ -48,4 +48,7 @@ public class PersonService {
 		return personDao.getAllPersonTime(meetid);
 	}
 
+	public List<Person> getMeetingAttend(String personEmail,int start,int items){
+		return personDao.getMeetingAttend(personEmail,start,items);
+	}
 }

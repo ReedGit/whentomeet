@@ -68,7 +68,7 @@
 		border-collapse:collapse;
 		text-align:center;
 		width: 1089px;
-		margin-left: 112px;
+		margin-left: 76px;
 		border-color: transparent;
 		font-size: 13px;
 		font-weight: bold;

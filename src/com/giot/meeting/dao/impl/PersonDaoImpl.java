@@ -121,4 +121,16 @@ public class PersonDaoImpl implements PersonDao {
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Person> getMeetingAttend(String personEmail,int start,int items) {
+		try {
+			String sql = "from Person where personEmail = ?";
+			return getSession().createQuery(sql).setString(0, personEmail).setFirstResult(start).setMaxResults(items).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
 }

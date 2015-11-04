@@ -20,10 +20,11 @@
 	float:right;
 	margin:60px 13% 150px 0;
 	
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e8e8e8), color-stop(1, #fff));
+	/* background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e8e8e8), color-stop(1, #fff));
     background: -ms-linear-gradient(bottom, #e8e8e8 0, #fff 100%);
     background: -moz-linear-gradient(center bottom, #e8e8e8 0, #fff 100%);
-    background: -o-linear-gradient(#fff, #e8e8e8);
+    background: -o-linear-gradient(#fff, #e8e8e8); */
+    background:#fff;
 }
 .title{
 	font-size: 30px;
@@ -71,6 +72,7 @@ label.error{
 						if(data!=null&&data.validate==1){
 							setCookie("user1",data.nickname);
 							setCookie("organiser",data.userid);
+							setCookie("usermail",data.username);
 							window.location.href="scheduleMeeting.jsp";
 						}else if(data!=null&&data.validate==0){
 							$("label.error").text("该邮箱尚未验证！");

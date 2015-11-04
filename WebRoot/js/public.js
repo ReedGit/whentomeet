@@ -27,6 +27,7 @@ var loadFoot = function(){
 var USER_STA = function(){
 	var u = getCookie("user1");
 	var o = getCookie("organiser");
+	var usermail = getCookie("usermail");
 	if(u!=""&&u!=null){
 		$(".user_icons .login,.user_icons .register").hide();
 		$(".user_icons .userName").text(u+" |");
@@ -46,6 +47,7 @@ var USER_STA = function(){
 					exp.setTime(exp.getTime() - 1);
 					document.cookie= "user1="+u+";expires="+exp.toGMTString();
 					document.cookie= "organiser="+o+";expires="+exp.toGMTString();
+					document.cookie= "usermail="+usermail+";expires="+exp.toGMTString();
 					window.location.href="index.html";
 					$(".user_icons .login,.user_icons .register").show();
 				}

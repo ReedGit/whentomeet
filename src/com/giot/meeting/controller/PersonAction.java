@@ -56,4 +56,11 @@ public class PersonAction {
 		List<Person> personTime = personService.getAllPersonTime(meetid);
 		return personTime;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/getMeetingAttend.do")
+	public List<Person> getMeetingAttend(String personEmail,int start,int items) {
+		
+		return personService.getMeetingAttend(personEmail, start,items);
+	}
 }

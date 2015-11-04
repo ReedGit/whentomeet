@@ -84,18 +84,20 @@ img[alt=error]{
  
    $(function(){
 	   $("input[type=submit]").click(function(){
-		   if(go && go1 && go2 && $.trim($("input[name=nickname]").val())!=""){
+		   var nickname = $.trim($("input[name=nickname]").val());
+		   if(go && go1 && go2 && nickname!=""){
 			   $.post("addUser.do",$("#addUser").serializeArray(),function(data){
 				   if(data!=null && data!=""){
 					   window.location.href="validateEmail.jsp?provEmail="+data;
 				   }
 			   });
 			   return false;
-		   }else{
+		   }else if(nickname==""){
 				$("img[for=nickname]").attr("src","img/error.png");
 				$("label[for=nickname],img[for=nickname]").show();
 			   return false;
 		   }
+		   return false;
 	   });
 	   
 	   

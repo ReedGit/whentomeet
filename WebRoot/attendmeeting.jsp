@@ -18,8 +18,30 @@
                             
         return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
    };
-	
-   
+   var loadData = function(page){	
+	   $.get("getMeetingAttend.do",{"personEmail":usermail,"start":page,"items":11},function(data){
+		   $('tbody').empty();
+		   if(data.length<11){
+			   $(".pager .next").css("pointer-events","none").addClass("disabled");
+			   $.each(data,function(data){
+				var personid = this.personid;
+				   $.get("findMeeting.do",{"meetid":this.meetid},function(data){
+					   var date = new Date(data.createTime);
+						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data.meetid+"&personId="+personid+"'>"+data.title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(data.meetid)+"</td><td>0</td></tr>");
+				   });
+			   });
+		   }else{
+			   for(var i=0;i<10;i++){
+				   $.get("findMeeting.do",{"meetid":data[i].meetid},function(){
+					   var date = new Date(data[i].createTime);
+						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId="+data[i].personid+"'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
+				   });
+			   }
+		   }
+		   $("table").tablesorter({debug: true});
+	    }); 
+   }
+    
     var getResponseNum = function(meetId){
 	   var guys = 0;
 	   var response = 0;
@@ -38,31 +60,7 @@
 	   });
 	   return response+"/"+guys;
    }
-	var loadData = function(page){
-		$.ajax({
-			url:"findAllMeeting.do",
-			data:{"organiser":uid,"start":page,"items":11},
-			dataType:"json",
-			type:"get",
-			success:function(data){
-				$('tbody').empty();
-				if(data.length<11){
-					$(".pager .next").css("pointer-events","none").addClass("disabled");
-					$.each(data,function(){
-						var date = new Date(this.createTime);
-						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+this.meetid+"&personId=-1'>"+this.title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
-					});
-				}else{
-					for(var i=0;i<10;i++){
-						var date = new Date(data[i].createTime);
-						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId=-1'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
-					}
-				}
-				$("table").tablesorter({debug: true});
-			}
-		});
-	}
-
+    
 
 		$(function() {
 			loadData(0);
@@ -125,8 +123,8 @@ div.organize{
 <%@ include file="public/head.html"%>
 <div id="wrapper">
 <div class="organize">
-	<div class="title">我组织的聚会</div>
-	<div class="changeView"><a href="attendmeeting.jsp"><p>查看我受邀请的聚会</p></a></div>
+	<div class="title">我受邀请的聚会</div>
+	<div class="changeView"><a href="mymeeting.jsp"><p>查看我组织的聚会</p></a></div>
 	<div class="search">
 		搜索：<input type="text" class="form-control" id="name" placeholder="请输入搜索内容" style="width: 220px; display: inline;">
 	</div>
