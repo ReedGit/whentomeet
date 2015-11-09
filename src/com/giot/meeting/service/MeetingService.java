@@ -33,5 +33,9 @@ public class MeetingService {
 	public long getMeetingCount(String organiser){
 		return meetingDao.getMeetingCount(organiser);
 	}
+	
+	public void setConfirmTime(String meetId,String confirmTime ,int confirmTimeOrder){
+		meetingDao.setConfirmTime(meetId, confirmTime,confirmTimeOrder);
+	}
 
 }

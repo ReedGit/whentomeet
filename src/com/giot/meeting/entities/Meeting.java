@@ -25,6 +25,9 @@ public class Meeting {
 	private Date createTime;
 	private int guys;//受邀人数
 	private int response;
+	private String confirmTime;//最终确认的时间
+	private int confirmTimeOrder;//在网页中，最终时间的位置
+	
 	
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
@@ -127,6 +130,20 @@ public class Meeting {
 		this.response = response;
 	}
 
+	
+	public String getConfirmTime() {
+		return confirmTime;
+	}
+	public void setConfirmTime(String confirmTime) {
+		this.confirmTime = confirmTime;
+	}
+	
+	public int getConfirmTimeOrder() {
+		return confirmTimeOrder;
+	}
+	public void setConfirmTimeOrder(int confirmTimeOrder) {
+		this.confirmTimeOrder = confirmTimeOrder;
+	}
 	@Override
 	public String toString() {
 		return "Meeting [meetid=" + meetid + ", title=" + title + ", content="

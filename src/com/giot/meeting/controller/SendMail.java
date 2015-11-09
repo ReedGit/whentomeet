@@ -2,7 +2,6 @@ package com.giot.meeting.controller;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -32,6 +31,7 @@ import com.giot.meeting.entities.Contact;
 import com.giot.meeting.entities.Person;
 import com.giot.meeting.entities.User;
 import com.giot.meeting.service.ContactService;
+import com.giot.meeting.service.MeetingService;
 import com.giot.meeting.service.PersonService;
 
 @Controller
@@ -43,6 +43,9 @@ public class SendMail {
 
 	@Autowired
 	private ContactService contactService;
+	
+	@Autowired
+	private MeetingService meetingService;
 
 	public SendMail() throws Exception {
 		ClassLoader classLoader = SendMail.class.getClassLoader();
@@ -178,8 +181,6 @@ public class SendMail {
 			Transport.send(msg);
 
 		} catch (MessagingException mex) {
-			System.out
-					.println("�ʼ�����ʧ�ܡ��������������ã�������****************");
 			mex.printStackTrace();
 
 		}
@@ -187,8 +188,6 @@ public class SendMail {
 
 	public void sendValidate(String registerEmail, String userid) {
 		try {
-			System.out
-					.println("������֤�ʼ�������������������������������������");
 			// �����ռ���
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(
 					registerEmail));
@@ -215,10 +214,13 @@ public class SendMail {
 	}
 
 	// Ⱥ��������Ϣ
+	@Async
 	@ResponseBody
 	@RequestMapping("/sendDecideTime.do")
-	public boolean sendDecideTime(String personTime, String week, String time) {
-
+	public boolean sendDecideTime(String personTime, String week, String time,String meetId,int confirmTimeOrder) {
+		System.out.println("发送给受邀人----------->"+personTime);
+		meetingService.setConfirmTime(meetId, week+"#"+time,confirmTimeOrder);
+		
 		personTime = clipBorder(personTime);
 		String arr[] = personTime.split(",");
 		for (int i = 0; i < arr.length; i++) {
@@ -228,9 +230,6 @@ public class SendMail {
 		InternetAddress[] address = new InternetAddress[arr.length];
 
 		try {
-			System.out
-					.println("������֤�ʼ�������������������������������������");
-			System.out.println("���͵���ϵ�ˣ�---��" + Arrays.toString(arr));
 			for (int i = 0; i < arr.length; i++) {
 				address[i] = new InternetAddress(arr[i]);
 			}
@@ -240,7 +239,7 @@ public class SendMail {
 			Multipart mp = new MimeMultipart();
 			// ��Multipart�������
 			MimeBodyPart mbpContent = new MimeBodyPart();
-			mbpContent.setContent("�˴ξۻ��ʱ�䶨Ϊ��" + week + " " + time,
+			mbpContent.setContent("今天的聚会时间定位：" + week + " " + time,
 					"text/html;charset=utf-8");
 			// mbpContent.setText(content);
 			// ��BodyPart��ӵ�MultiPart��

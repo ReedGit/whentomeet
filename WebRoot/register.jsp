@@ -4,7 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Expires" CONTENT="0"> 
+<meta http-equiv="Cache-Control" CONTENT="no-cache"> 
+<meta http-equiv="Pragma" CONTENT="no-cache"> 
 <title>Insert title here</title>
+<%
+response.setHeader("Cache-Control","no-store");
+response.setDateHeader("Expires", 0);
+response.setHeader("Pragma","no-cache"); 
+%>
 <%@ include file="public/headfile.html"%>
 <style type="text/css">
 #register{

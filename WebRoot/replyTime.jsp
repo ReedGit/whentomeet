@@ -408,6 +408,46 @@ var getPt = function(){
 			});
 		}
 		
+		$.post('findMeeting.do',{"meetid":"${param.meetId}"}, function(data) {
+			 $("#title").text(data.title);
+			/*  $("span#location").text(data.location); */
+			 $("#durationLabel").text(data.duration/4);
+			
+			 if("${param.personId}"==-1){
+				 var u = getCookie("user1");
+					if(u!=""&&u!=null){
+						$(".response").after("<tr class='decideTime'></tr>");
+						$(".table_left .decideTime").append("<td><div id='senddecideTime' style='background-image:url(img/email_icon.png);width:32px;height:32px;margin:0 auto;'></div></td>");
+							
+							for(var i=0;i<leh;i++){
+								$(".table_right .decideTime").append('<td><input type="radio" name="timeChoice" class="winnerCal"></td>')
+							}
+							
+							//回显最终时间
+							var cto = data.confirmTimeOrder;
+							$(".table_right .decideTime").children().eq(cto).children().prop("checked", true);
+							
+							
+							//senddecideTime
+							$("#senddecideTime").click(function(){
+								$(".tipMess").empty().append('<img class="spinner" src="img/loading.gif">');
+								
+								var s = $(".table_right .decideTime td input[name=timeChoice]:checked").parent().index();
+								var weekd = $(".weekDate td[index~="+s+"]").text();
+								var timed = $(".timeDura").children().eq(s).text();
+								$.post("sendDecideTime.do",{"personTime":JSON.stringify(contactEmail),"week":weekd,"time":timed,"meetId":"${param.meetId}","confirmTimeOrder":s},function(data){
+									if(data==true){
+										$(".spinner").remove();
+										$(".tipMess").text("此次的聚会时间已经通过邮件发送给大家了！");
+									}
+								});
+							});
+					}
+				 
+			 }
+			
+		});
+		
 		//聚会主办人
 		if("${param.personId}"==-1){
 			$(".yourName,.check_box,.submitArea,#selectItem").hide();
@@ -441,27 +481,6 @@ var getPt = function(){
 				});
 				
 				
-				//登陆过后
-				var u = getCookie("user1");
-				if(u!=""&&u!=null){
-					$(".response").after("<tr class='decideTime'></tr>");
-					$(".table_left .decideTime").append("<td><div id='senddecideTime' style='background-image:url(img/email_icon.png);width:32px;height:32px;margin:0 auto;'></div></td>");
-						
-						for(var i=0;i<leh;i++){
-							$(".table_right .decideTime").append('<td><input type="radio" name="timeChoice" class="winnerCal"></td>')
-						}
-						//senddecideTime
-						$("#senddecideTime").click(function(){
-							var s = $(".table_right .decideTime td input[name=timeChoice]:checked").parent().index();
-							var weekd = $(".weekDate td[index~="+s+"]").text();
-							var timed = $(".timeDura").children().eq(s).text();
-							$.post("sendDecideTime.do",{"personTime":JSON.stringify(contactEmail),"week":weekd,"time":timed},function(data){
-								if(data==true){
-									$(".tipMess").text("此次的聚会时间已经通过邮件发送给大家了！");
-								}
-							});
-						});
-				}
 				
 		}
 		
@@ -517,12 +536,6 @@ var getPt = function(){
 			
 		});
 	
-		$.post('findMeeting.do',{"meetid":"${param.meetId}"}, function(data) {
-			 $("#title").text(data.title);
-			/*  $("span#location").text(data.location); */
-			 $("#durationLabel").text(data.duration/4);
-		});
-		
 		
 		
 		$("#resultsTableSubmit").click(function(){

@@ -15,4 +15,6 @@ public interface MeetingDao {
 	public Meeting findMeeting(String meetid);
 
 	public long getMeetingCount(String organiser);
+	
+	public void setConfirmTime(String meetId,String confirmTime,int confirmTimeOrder);
 }

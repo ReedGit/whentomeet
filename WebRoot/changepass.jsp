@@ -120,9 +120,9 @@ margin-top: 31px;
 			
 			$.post("updatePassword.do",{"oldpassword":op,"password":p1,userid:uid},function(data){
 				if(data){
-					$(".tipMess").css({"background":"#DFF0D8","color":"red"}).text("修改成功");
+					$(".tipMess").css({"background":"transparent","color":"#F26752"}).text("修改成功");
 				}else{
-					$(".tipMess").css("background","#DFF0D8").text("密码错误");
+					$(".tipMess").css({"background":"#F26752","color":"#fff"}).text("密码错误");
 				}
 			});
 		});

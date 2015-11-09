@@ -89,4 +89,16 @@ public class MeetingDaoImpl implements MeetingDao {
 		}
 	}
 
+	@Override
+	public void setConfirmTime(String meetId,String confirmTime ,int confirmTimeOrder) {
+		try {
+			String sql = "update Meeting set confirmTime =? , confirmTimeOrder =? where meetid =?";
+			getSession().createQuery(sql).setString(0, confirmTime).setInteger(1, confirmTimeOrder).setString(2, meetId).executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+	}
+
 }

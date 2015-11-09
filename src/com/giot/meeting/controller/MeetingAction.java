@@ -89,5 +89,10 @@ public class MeetingAction {
 		timeService.deleteTime(meetid);
 		meetingService.deleteMeeting(meetid);
 	}
+	
+	@RequestMapping("/setConfirmTime.do")
+	public void setConfirmTime(String meetId,String confirmTime,int confirmTimeOrder){
+		meetingService.setConfirmTime(meetId, confirmTime,confirmTimeOrder);
+	}
 
 }
