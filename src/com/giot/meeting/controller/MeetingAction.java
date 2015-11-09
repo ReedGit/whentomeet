@@ -90,9 +90,11 @@ public class MeetingAction {
 		meetingService.deleteMeeting(meetid);
 	}
 	
+	@ResponseBody
 	@RequestMapping("/setConfirmTime.do")
-	public void setConfirmTime(String meetId,String confirmTime,int confirmTimeOrder){
+	public String setConfirmTime(String meetId,String confirmTime,int confirmTimeOrder){
 		meetingService.setConfirmTime(meetId, confirmTime,confirmTimeOrder);
+		return null;
 	}
 
 }
