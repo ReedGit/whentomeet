@@ -1,5 +1,7 @@
 package com.giot.meeting.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.giot.meeting.entities.Meeting;
+import com.giot.meeting.entities.Person;
 import com.giot.meeting.entities.User;
 import com.giot.meeting.service.MeetingService;
 import com.giot.meeting.service.PersonService;
@@ -31,20 +34,22 @@ public class MeetingAction {
 
 	@ResponseBody
 	@RequestMapping("/addMeeting.do")
-	public Meeting addMeeting(Meeting meeting,Map<String,Object> map,HttpSession session) {
-		User u = (User)session.getAttribute("user1");
-		if(u!=null){
-			//�û���¼�����û�id,����Ϊ��
+	public Meeting addMeeting(Meeting meeting, Map<String, Object> map,
+			HttpSession session) {
+		User u = (User) session.getAttribute("user1");
+		if (u != null) {
+			// �û���¼�����û�id,����Ϊ��
 			meeting.setOrganiser(u.getUserid());
 		}
-		
+
 		meeting.setCreateTime(new Date());
-		
+
 		return meetingService.addMeeting(meeting);
-		//return meeting.getMeetid();
-		/*map.put("duraValue", meeting.getDuration());
-		map.put("meetId", meeting.getMeetid());
-		return "timeTable";*/
+		// return meeting.getMeetid();
+		/*
+		 * map.put("duraValue", meeting.getDuration()); map.put("meetId",
+		 * meeting.getMeetid()); return "timeTable";
+		 */
 	}
 
 	@ResponseBody
@@ -55,31 +60,41 @@ public class MeetingAction {
 
 	@ResponseBody
 	@RequestMapping("/findAllMeeting.do")
-	public List<Meeting> findAllMeeting(String organiser,int start,int items) {
-		return meetingService.findAllMeeting(organiser,start,items);
+	public List<Meeting> findAllMeeting(String organiser, int start, int items) {
+		return meetingService.findAllMeeting(organiser, start, items);
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="/findAllMeetingForPhone.do",produces = {"application/json;charset=UTF-8"})
-	public String findAllMeetingForPhone(String organiser,int start,int items){
-		List<Meeting> list = meetingService.findAllMeeting(organiser, start, items);
+	@RequestMapping(value = "/findAllMeetingForPhone.do", produces = { "application/json;charset=UTF-8" })
+	public String findAllMeetingForPhone(String organiser, int start, int items) {
+		List<Meeting> list = meetingService.findAllMeeting(organiser, start,
+				items);
 		long count = meetingService.getMeetingCount(organiser);
 		double pageCount = Math.ceil(count / 10.0);
 		JSONArray jsonArray = new JSONArray();
-		for(int i = 0;i<list.size();i++){
+		for (int i = 0; i < list.size(); i++) {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("meetId", list.get(i).getMeetid());
+			String meetId = list.get(i).getMeetid();
+			jsonObject.put("meetId", meetId);
 			jsonObject.put("title", list.get(i).getTitle());
-			jsonObject.put("createTime", list.get(i).getCreateTime());
-			jsonObject.put("guys", list.get(i).getGuys());
-			jsonObject.put("response", list.get(i).getResponse());
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			jsonObject.put("createTime", sdf.format(list.get(i).getCreateTime()));
+			List<Person> persons = personService.getAllPersonTime(meetId);
+			jsonObject.put("guys", persons.size());
+			int sum = 0;
+			for (int j = 0; j < persons.size(); j++) {
+				if (persons.get(j).getPtime() != null) {
+					sum++;
+				}
+			}
+			jsonObject.put("response", sum);
 			jsonArray.put(jsonObject);
 		}
 		JSONObject result = new JSONObject();
 		result.put("data", jsonArray);
 		result.put("page", pageCount);
 		return result.toString();
-		
+
 	}
 
 	@ResponseBody
@@ -89,11 +104,12 @@ public class MeetingAction {
 		timeService.deleteTime(meetid);
 		meetingService.deleteMeeting(meetid);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/setConfirmTime.do")
-	public String setConfirmTime(String meetId,String confirmTime,int confirmTimeOrder){
-		meetingService.setConfirmTime(meetId, confirmTime,confirmTimeOrder);
+	public String setConfirmTime(String meetId, String confirmTime,
+			int confirmTimeOrder) {
+		meetingService.setConfirmTime(meetId, confirmTime, confirmTimeOrder);
 		return null;
 	}
 
