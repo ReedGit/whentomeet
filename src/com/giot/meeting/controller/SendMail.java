@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +36,7 @@ import com.giot.meeting.service.MeetingService;
 import com.giot.meeting.service.PersonService;
 
 @Controller
+@EnableAsync
 public class SendMail {
 	MimeMessage msg = null;
 	private String port = null;
@@ -217,7 +219,7 @@ public class SendMail {
 		}
 	}
 
-	
+	@Async
 	public void sendValidate(String registerEmail, String userid) {
 		try {
 			// �����ռ���
