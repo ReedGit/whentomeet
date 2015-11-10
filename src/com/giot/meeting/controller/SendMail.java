@@ -217,6 +217,7 @@ public class SendMail {
 		}
 	}
 
+	
 	public void sendValidate(String registerEmail, String userid) {
 		try {
 			// �����ռ���
