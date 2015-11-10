@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ import com.giot.meeting.service.PersonService;
 
 @Controller
 @EnableAsync
+@Configuration
 public class SendMail {
 	MimeMessage msg = null;
 	private String port = null;
@@ -78,7 +80,7 @@ public class SendMail {
 	}
 
 	// �����ʼ�
-	@Async
+	
 	@RequestMapping("/sendtoMail.do")
 	public String sendtoMail(String[] attendeeName, String[] attendeeEmail,
 			String meetId, String selfEmail, String myName,String meetTheme,HttpSession session)
@@ -161,6 +163,7 @@ public class SendMail {
 
 	}
 
+	@Async
 	public void sendSigleMail(String to, String toName,String meetTheme,String meetId, String personId) {
 		try {
 			// �����ռ���
