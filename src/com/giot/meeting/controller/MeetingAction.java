@@ -70,7 +70,7 @@ public class MeetingAction {
 		List<Meeting> list = meetingService.findAllMeeting(organiser, start,
 				items);
 		long count = meetingService.getMeetingCount(organiser);
-		double pageCount = Math.ceil(count / 10.0);
+		double pageCount = Math.ceil(count / (items*1.0));
 		JSONArray jsonArray = new JSONArray();
 		for (int i = 0; i < list.size(); i++) {
 			JSONObject jsonObject = new JSONObject();
