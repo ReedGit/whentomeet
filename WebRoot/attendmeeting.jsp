@@ -38,7 +38,7 @@
 				   });
 			   }
 		   }
-		   $("table").tablesorter({debug: true});
+		   $("table").tablesorter();
 	    }); 
    }
     

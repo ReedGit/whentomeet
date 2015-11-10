@@ -65,13 +65,13 @@ margin-top: 31px;
 			
 		</div>
 		<div class="input-group">
- 				<span class="input-group-addon">旧 密 码</span>
+ 				<span class="input-group-addon"> &nbsp;旧 密 码&nbsp;</span>
 			 	<input type="password" class="form-control" placeholder="请输入您的旧密码" name="oldpassword">
 		</div>
 		<br>
 		<br>
 		<div class="input-group">
- 				<span class="input-group-addon">新 密 码</span>
+ 				<span class="input-group-addon"> &nbsp;新 密 码&nbsp; </span>
 			 	<input type="password" class="form-control" placeholder="请输入您的新密码" name="password">
 		</div>
 		<br>
@@ -120,9 +120,9 @@ margin-top: 31px;
 			
 			$.post("updatePassword.do",{"oldpassword":op,"password":p1,userid:uid},function(data){
 				if(data){
-					$(".tipMess").css({"background":"transparent","color":"#F26752"}).text("修改成功");
+					$(".tipMess").css("background","#F26752").text("修改成功");
 				}else{
-					$(".tipMess").css({"background":"#F26752","color":"#fff"}).text("密码错误");
+					$(".tipMess").css("background","#F26752").text("密码错误");
 				}
 			});
 		});

@@ -24,6 +24,9 @@ $(window).bind('resize orientationchange', function() {
 var adjustMenu = function() {
 	if (ww < 800) {
 		$(".toggleMenu").css("display", "inline-block");
+		//$(".user_icons").css("top","-76px");
+		$("div.logo").append($(".user_icons"));
+		$(".user_icons").css("right","113px");
 		if (!$(".toggleMenu").hasClass("active")) {
 			$(".nav").hide();
 		} else {
@@ -38,6 +41,8 @@ var adjustMenu = function() {
 	} 
 	else if (ww >= 768) {
 		$(".toggleMenu").css("display", "none");
+		$(".user_icons").css("right","0px");
+		$(".h_menu4").after($(".user_icons"));
 		$(".nav").show();
 		$(".nav li").removeClass("hover");
 		$(".nav li a").unbind('click');

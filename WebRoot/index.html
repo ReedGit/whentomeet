@@ -37,6 +37,7 @@ body{
 } */
 </style>
 <script>
+	/* 首页动画效果 */
 	new WOW().init();
 </script>
 </head>
@@ -50,21 +51,13 @@ body{
 		     <div class="h_menu4"><!-- start h_menu4 -->
 				<a class="toggleMenu" href="#">菜单</a>
 				<ul class="nav">
-					<li class="active"><a class="scroll" href="index.html">首页</a></li>
+					<li class="active"><a  href="index.html">首页</a></li>
 						<li><a href="#feature" class="scroll">特色</a></li>
 						<li><a href="#Quickstart" class="scroll">快速上手</a>
 						<li><a href="scheduleMeeting.jsp">安排聚会</a>
-							<!-- <ul>
-								<li><a href="feature.html">Typography</a></li>
-								<li><a href="feature.html">Shortcodes</a></li>
-								<li><a href="feature.html">Columns</a></li>
-								<li><a href="feature.html">Pricing plans</a></li>
-								<li><a href="feature.html">Alerts</a></li>
-								<li><a href="feature.html">Services</a></li>
-							</ul> -->
 						</li>
 					<li><a href="#contactus" class="scroll">联系我们</a></li>
-					<li><a href="mymeeting.jsp" class="scroll mymeeting">我的聚会</a></li>
+					<li><a href="mymeeting.jsp" class="mymeeting">我的聚会</a></li>
 
 				</ul>
 				<script type="text/javascript" src="js/nav.js"></script>
@@ -83,9 +76,7 @@ body{
 								<a href="contacts.jsp">联系人</a>
 							</div>
 						</div>
-				</div>
-
-			<div class="clearfix"> </div>
+			</div>
 			
 		  </div><!-- end header_main4 -->
 	</div>
@@ -334,9 +325,6 @@ body{
 						<div class="col-md-3 footer-grid tweet">
 								<h4>公司信息</h4>
 								<div class="border2"></div>
-								<div class="icon-3-square">
-										<a href="#"><i class="square-3"></i></a>
-								</div>
 							<div class="icon-text" style="color: #fff;">
 								<p>南京吉奥客电子科技有限公司</p>
 								<br>网址：<a href="http://www.geariot.com/">http://www.geariot.com/</a>
@@ -375,7 +363,8 @@ body{
 								jQuery(document).ready(function($) {
 									$(".scroll").click(function(event){		
 										event.preventDefault();
-										//$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+										if($(this.hash).length!=0)
+											$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 									});
 								});
 								</script>

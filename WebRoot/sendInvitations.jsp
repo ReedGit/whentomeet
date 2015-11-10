@@ -172,6 +172,7 @@
 			<div class="tipMess"></div>
 			<form action="sendtoMail.do" method="post">
 			<input type="hidden" name="meetId" value="${param.meetId}">
+			<input type="hidden" name="meetTheme" value="">
 			<div id="inviteAttendees">
 				<div class="inviteNoModal">
 					<div class="inviteForm">
@@ -190,7 +191,7 @@
 								<!-- 邀请人邮箱 -->						
 						</div>
 						<button type="button" class="btn btn-info  btn-xs moreEmails">+添加更多邮箱</button>      
-						<input type="submit" class="btn btn-success" id="sendInv" value="发送邀请" >
+						<input type="submit" class="btn btn-success" disabled="disabled" id="sendInv" value="发送邀请" >
 						<div class="privacyNote">
 							我们承诺绝不公开您的邮箱，查看我们的<a href="/privacy" target="_blank">隐私政策</a>.
 						</div>
@@ -238,7 +239,6 @@
 	var selectContact = function(){
 		var headHeight = $("#head").height();
 		var emailsOff = $("#emails").offset().top;
-		console.log(emailsOff);
 		$("#outcontactBox").css("top",headHeight+"px");
  		$("#contactBox").css({"top":0,"left":0,"right":0,"bottom":0,"margin":"auto"});
  		$("#contactBox").css("margin-top",(emailsOff+20)+"px");
@@ -297,9 +297,12 @@
 			$("input[name=selfEmail]").val(getCookie("organiser_mail"));
 		}
 		
+		$.get("findMeeting.do",{"meetid":"${param.meetId}"},function(data){
+			$("input[name=meetTheme]").val(data.title);
+			$("#sendInv").prop("disabled",false);
+		});
 		
 		$("#sendInv").click(function(){
-			
 			var myEmail = $("input[name=selfEmail]").val();
 			if(!emailRex.test(myEmail)){
 				$(".tipMess").text("我的邮箱不合法");

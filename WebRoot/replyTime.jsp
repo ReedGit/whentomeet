@@ -322,7 +322,7 @@ var getPt = function(){
 					 var ptimeArr = ptime.split(",");
 					 $(".table_right .check_box td").each(function(index,value){
 						 if($.inArray(index+"",ptimeArr)!=-1){
-							$(this).text("✓");
+							$(this).html("&radic;");
 						 }else{
 							 $(this).text("");
 						 }
@@ -338,7 +338,7 @@ var getPt = function(){
 					var num = $(".table_right .check_box td").length;
 					for(var i=0;i<num;i++){
 						if($.inArray(i+"",ptimeArr)!=-1){
-							$(".table_right tr:nth-last-child(2)").append("<td>✓</td>");
+							$(".table_right tr:nth-last-child(2)").append("<td>&radic;</td>");
 						}else{
 							$(".table_right tr:nth-last-child(2)").append("<td></td>");
 						}
@@ -356,7 +356,7 @@ var getPt = function(){
 			}
 			if(index==0){
 				$(value).children().each(function(index,value){
-					if($(value).text()=="✓"){
+					if($(value).text()=="√"){
 						arr.push(index);
 					}
 				});
@@ -364,7 +364,7 @@ var getPt = function(){
 				if(arr.length==0)
 					return;
 				$(value).children().each(function(index,value){
-					if($(value).text()=="✓"){
+					if($(value).text()=="√"){
 						arr2.push(index);
 					}
 				});
@@ -501,19 +501,21 @@ var getPt = function(){
 					var args  = value.date.split("#");
 					if(index==0){
 						weekDate = args[0];
-						$(".table_right .weekDate").append("<td colspan='1' index='"+index+"'>"+weekDate+"</td>");
+						$(".table_right .weekDate").append("<td style='width:120px' colspan='1' index='"+index+"'>"+weekDate+"</td>");
 					}else if(args[0]==weekDate){
 						var $lastTd = $(".weekDate").children().last();
 						$lastTd.attr("colspan",parseInt($lastTd.attr("colspan"))+1);
 						$lastTd.attr("index",parseInt($lastTd.attr("index"))+" "+index);
+						$lastTd.css("width",($lastTd.width()*2)+"px");
 					}else{
 						weekDate = args[0];
-						$(".table_right .weekDate").append("<td colspan='1' index='"+index+"'>"+weekDate+"</td>");
+						//$(".table_right .weekDate").append("<td colspan='1' index='"+index+"'>"+weekDate+"</td>");
+						$(".table_right .weekDate").append("<td style='width:120px' colspan='1' index='"+index+"'>"+weekDate+"</td>");
 					}
 					
 					$(".table_right .timeDura").append("<td>"+args[1]+"</td>");
-					$(".table_right .myTime").append("<td>✓&nbsp;</td>");
-					$(".table_right .check_box").append("<td ><input value='"+index+"' type='checkbox'></td>");
+					$(".table_right .myTime").append("<td>&radic;&nbsp;</td>");
+					$(".table_right .check_box").append("<td><input value='"+index+"' type='checkbox'></td>");
 					$(".table_right").css("width",120*(index+1)+"px");
 					
 				});
@@ -556,7 +558,7 @@ var getPt = function(){
 		$("#selectItem a.modifyLink").click(function(){
 			$("#nameCell_1").html('<input type="textbox" id="nameCellInput" value="'+$("#nameCell_1").text()+'" placeholder="Your Name">');
 			 $(".table_right .check_box td").each(function(index,value){
-				 if($(this).text()=="✓"){
+				 if($(this).text()=="√"){
 					 $(this).html("<input value='"+index+"' type='checkbox' checked='checked'>");
 				 }else{
 					 $(this).html("<input value='"+index+"' type='checkbox'>");

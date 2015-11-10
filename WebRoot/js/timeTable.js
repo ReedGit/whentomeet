@@ -244,12 +244,11 @@ $(function(){
 		var cn_num = parseInt(cn[1]);
 		var timeArray = [];
 		for(var i=1;i<=cn_num;i++){
-			/* var time = []; */
-			var temp;
 			var timeItem;
+			/*var temp;
 			var last;
-			var flag = false;
-			$(".col_"+i+".selected,.col_"+i+".selectedTail").each(function(index){
+			var flag = false;*/
+			/*$(".col_"+i+".selected,.col_"+i+".selectedTail").each(function(index){
 					var cur = $(this).parent().index();
 					if(index==0){
 						temp = cur;
@@ -261,7 +260,6 @@ $(function(){
 					}
 					if(temp++!=cur){
 						timeItem.endTime = temp-1;
-						/* time.push(timeItem); */
 						timeArray.push(timeItem);
 						temp = cur+1;
 						timeItem = {};
@@ -271,15 +269,26 @@ $(function(){
 					}
 					last = cur;
 				
-			});
-			if(flag){
-				 timeItem.endTime = last+1;	
-				 /*time.push(timeItem);
-				timeArray.push(time); */
+			});*/
+			
+			
+			$(".col_"+i+".selected").each(function(){
+				timeItem = {};
+				var selectIndex = $(this).parent().index();
+				timeItem.startTime = selectIndex;
+				timeItem.endTime = selectIndex+tds;
+				timeItem.day = $(".date").eq((i%15)-1).text();
+				timeItem.week = $(".date").eq((i%15)-1).parent().contents().first().text();
 				timeArray.push(timeItem);
-			}
+			});
+			
+			/*if(flag){
+				 timeItem.endTime = last+1;	
+				 time.push(timeItem);
+				timeArray.push(time); 
+				timeArray.push(timeItem);
+			}*/
 		}
-		
 		$.post("addMeeting.do",$("#addMeeting").serializeArray(),function(data){
 			if(data!=null){
 				$.ajax({

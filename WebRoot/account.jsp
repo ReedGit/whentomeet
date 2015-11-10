@@ -85,7 +85,7 @@
 			    <br>
 				<div class="input-group">
 	  				<span class="input-group-addon"> &nbsp;邮  &nbsp; 箱 &nbsp;</span>
-	 			 	<input type="text" class="form-control" placeholder="请输入您的昵称" name="username">
+	 			 	<input type="text" class="form-control" placeholder="请输入您的昵称" name="username" disabled="disabled">
 			    </div>
 			     <br>
 			     <br>

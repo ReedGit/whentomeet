@@ -58,7 +58,7 @@
 						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId=-1'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
 					}
 				}
-				$("table").tablesorter({debug: true});
+				$("table").tablesorter();
 			}
 		});
 	}

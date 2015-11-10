@@ -79,7 +79,7 @@ public class SendMail {
 	@Async
 	@RequestMapping("/sendtoMail.do")
 	public String sendtoMail(String[] attendeeName, String[] attendeeEmail,
-			String meetId, String selfEmail, HttpSession session)
+			String meetId, String selfEmail, String myName,String meetTheme,HttpSession session)
 			throws AddressException {
 		User us = (User) session.getAttribute("user1");
 
@@ -109,11 +109,11 @@ public class SendMail {
 				contactService.addContact(con);
 
 			}
-			sendSigleMail(li.get(i), meetId, p1.getPersonid());
+			sendSigleMail(li.get(i),attName.get(i),meetTheme, meetId, p1.getPersonid());
 		}
 
 		if (us == null) {
-			sendSigleMail(selfEmail, meetId, "-1");
+			sendSigleMail(selfEmail, myName,meetTheme,meetId, "-1");
 			return "redirect:sendSuccess.jsp?selfEmail=" + selfEmail;
 		}
 		return "redirect:sendSuccess.jsp";
@@ -130,7 +130,7 @@ public class SendMail {
 	@ResponseBody
 	@RequestMapping("/sendMailForPhone.do")
 	public String sendMailForPhone(String meetId, String userId,
-			String emailString, String nameString) {
+			String emailString, String nameString,String meetTheme) {
 		JSONObject result = new JSONObject();
 		List<String> li = new ArrayList<String>();
 		List<String> attName = new ArrayList<String>();
@@ -152,14 +152,14 @@ public class SendMail {
 			con.setUserid(userId);
 			con.setUsername(li.get(i));
 			contactService.addContact(con);
-			sendSigleMail(li.get(i), meetId, p1.getPersonid());
+			sendSigleMail(li.get(i),attName.get(i),meetTheme, meetId, p1.getPersonid());
 		}
 		result.put("result", true);
 		return result.toString();
 
 	}
 
-	public void sendSigleMail(String to, String meetId, String personId) {
+	public void sendSigleMail(String to, String toName,String meetTheme,String meetId, String personId) {
 		try {
 			// �����ռ���
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -167,9 +167,40 @@ public class SendMail {
 			Multipart mp = new MimeMultipart();
 			// ��Multipart�������
 			MimeBodyPart mbpContent = new MimeBodyPart();
-
-			mbpContent.setContent(port + "/whentomeet/replyTime.jsp?meetId="
-					+ meetId + "&personId=" + personId,
+			String contentHTML = null;
+			if("-1".endsWith(personId)){
+				//组织者
+				contentHTML = "<h2>汤姆聚会</h2>"
+						+"哈喽"+toName+"，<br>"
+						+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您已成功发送邀请朋友们来参加 "+meetTheme+"。<br>"
+						+"请点击下面的链接来查看受邀人员的回复情况吧：<br>"
+						+"<a>"+port+"/whentomeet/replyTime.jsp?meetId="+meetId+"&personId="+personId+"</a>"
+						+"<br><br><br>"
+						+"感谢您使用汤姆聚会！"
+						+"<br>--------<br>"
+						+"南京吉奥客团队"
+						+"<br><br>"
+						+"南京吉奥客官网：<a href='http://www.geariot.com/'>http://www.geariot.com/</a><br>"
+						+"客户服务热线&nbsp;&nbsp;&nbsp;：025-52265323 ";
+			}else{
+				//受邀人员
+				contentHTML = "<h2>汤姆聚会</h2>"
+						+"哈喽"+toName+"，<br>"
+						+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邀请你去参加"+meetTheme+"。<br>"
+						+"请点击下面的链接来参加我们的聚会吧：<br>"
+						+"<a>"+port+"/whentomeet/replyTime.jsp?meetId="+meetId+"&personId="+personId+"</a>"
+						+"<br><br><br>"
+						+"感谢您使用汤姆聚会！"
+						+"<br>--------<br>"
+						+"南京吉奥客团队"
+						+"<br><br>"
+						+"南京吉奥客官网：<a href='http://www.geariot.com/'>http://www.geariot.com/</a><br>"
+						+"客户服务热线&nbsp;&nbsp;&nbsp;：025-52265323 ";
+			}
+			
+			
+			
+			mbpContent.setContent(contentHTML,
 					"text/html;charset=utf-8");
 			// mbpContent.setText(content);
 			// ��BodyPart��ӵ�MultiPart��
@@ -195,10 +226,24 @@ public class SendMail {
 			Multipart mp = new MimeMultipart();
 			// ��Multipart�������
 			MimeBodyPart mbpContent = new MimeBodyPart();
-			mbpContent.setContent(port
+			
+			String contentHTML = "<h3>"+registerEmail+"：</h3>"
+					+"<p style='text-indent:20px'>您好，感谢您注册<a href='#'>汤姆聚会</a>，请点击下面的链接验证您的邮箱：</p><br>"
+					+"<a href="+port+"'/whentomeet/updateValidateStatus.do?userid='"+userid+">"+port+"/whentomeet/updateValidateStatus.do?userid="+userid+"</a>"
+					+"<br><br><br>"
+					+"--------<br>"
+					+"南京吉奥客团队"
+					+"<br><br>"
+					+"南京吉奥客官网：<a href='http://www.geariot.com/'>http://www.geariot.com/</a><br>"
+					+"客户服务热线&nbsp;&nbsp;&nbsp;：025-52265323 ";
+			
+			
+			mbpContent.setContent(contentHTML,
+					"text/html;charset=utf-8");
+/*			mbpContent.setContent(port
 					+ "/whentomeet/updateValidateStatus.do?userid=" + userid,
 					"text/html;charset=utf-8");
-			// mbpContent.setText(content);
+*/			// mbpContent.setText(content);
 			// ��BodyPart��ӵ�MultiPart��
 			mp.addBodyPart(mbpContent);
 			msg.setContent(mp);

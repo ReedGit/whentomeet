@@ -146,7 +146,7 @@
 	#meetingTime div.prevArrow{
 		background: url("img/prevArrow.png");
 		position: absolute;
-	    top: 30%;
+	    top: 42%;
 	    left:4%;
 	    height: 120px;
 	    width: 30px;
@@ -156,8 +156,8 @@
 	#meetingTime div.nextArrow{
 		background: url("img/nextArrow.png");
 		position: absolute;
-	    top: 30%;
-	    right: 4%;
+	    top: 42%;
+	    right: 1%;
 	    height: 120px;
 	    width: 30px;
 	    opacity: 0.40;

@@ -58,6 +58,7 @@ ul li a.mymeeting{
 	position:relative;
 	top:20px;
 }
+
 .service-icon{
 	background-color: #669999;
 }
@@ -74,8 +75,7 @@ ul li a.mymeeting{
 	margin: 0;
 	display: none;
 }
-.dropdownmenu::before{
-	
+/* .dropdownmenu:before{
 	border-right: 7px solid transparent;
     border-bottom: 7px solid #ccc;
     border-left: 7px solid transparent;
@@ -84,7 +84,7 @@ ul li a.mymeeting{
     bottom:27px;
     content: '';
 }
-.dropdownmenu::after{
+.dropdownmenu:after{
 	
 	border-right: 6px solid transparent;
     border-bottom: 6px solid #fff;
@@ -93,11 +93,11 @@ ul li a.mymeeting{
     right:40px;
     bottom:70px;
     content: '';
-}
+} */
 
 .dropdownmenu .dropdownmenu_item{
 	width: 58px;
-	margin: -15px auto  0 auto;
+	margin: 4px auto  0 auto;
 }
 body a{
     transition:0.5s all;
@@ -353,9 +353,9 @@ a.toggleMenu {
 	}
 	}
 /**************/
-.logo a{
+/* .logo a{
 	display:block;
-}
+} */
 .social_icons{
 	float:right;
 	  margin-top: 2em;
