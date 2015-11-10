@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
@@ -38,7 +37,6 @@ import com.giot.meeting.service.PersonService;
 
 @Controller
 @EnableAsync
-@Configuration
 public class SendMail {
 	MimeMessage msg = null;
 	private String port = null;
