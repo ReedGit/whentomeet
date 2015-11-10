@@ -56,7 +56,7 @@ public class MeetingDaoImpl implements MeetingDao {
 	@Override
 	public List<Meeting> findAllMeeting(String organiser, int start, int items) {
 		try {
-			String sql = "from Meeting where organiser = :organiser";
+			String sql = "from Meeting where organiser = :organiser order by createTime desc";
 			return getSession().createQuery(sql)
 					.setString("organiser", organiser).setFirstResult(start)
 					.setMaxResults(items).list();

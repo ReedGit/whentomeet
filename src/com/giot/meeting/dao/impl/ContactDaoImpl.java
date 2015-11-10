@@ -85,7 +85,7 @@ public class ContactDaoImpl implements ContactDao {
 	@Override
 	public List<Contact> findAllContact(String userid) {
 		try {
-			String sql = "from Contact where userid = :userid";
+			String sql = "from Contact where userid = :userid order by contactid desc";
 			return getSession().createQuery(sql)
 					.setString("userid", userid).list();
 		} catch (Exception e) {
