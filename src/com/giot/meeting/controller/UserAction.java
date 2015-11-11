@@ -25,7 +25,7 @@ public class UserAction {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private SendMail sendmail;
+	private SendmailAction sendmail;
 	
 	@ResponseBody
 	@RequestMapping("/findUser.do")

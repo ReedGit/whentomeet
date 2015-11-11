@@ -309,11 +309,13 @@
 <script type="text/javascript">
 var arr = [] ;
 var contactEmail = [];
+var contactName = [];
 var getPt = function(){
 	$.post('getAllPersonTime.do',{"meetid":"${param.meetId}"}, function(data) {
 		$.each(data,function(index,data){
 			var ptime = data.ptime;
-			contactEmail.push(this.personEmail);
+			contactEmail.push($.trim(this.personEmail));
+			contactName.push($.trim(this.name));
 			if(data.personid=="${param.personId}") {
 				$("#nameCell_1 #nameCellInput").val(data.name);
 				if(ptime!=null){
@@ -435,7 +437,8 @@ var getPt = function(){
 								var s = $(".table_right .decideTime td input[name=timeChoice]:checked").parent().index();
 								var weekd = $(".weekDate td[index~="+s+"]").text();
 								var timed = $(".timeDura").children().eq(s).text();
-								$.post("sendDecideTime.do",{"personTime":JSON.stringify(contactEmail),"week":weekd,"time":timed,"meetId":"${param.meetId}","confirmTimeOrder":s},function(data){
+								
+								$.post("sendDecideTime.do",{"contactEmail":JSON.stringify(contactEmail),"contactName":JSON.stringify(contactName),"meetTheme":$("#title").text(),"week":weekd,"time":timed,"meetId":"${param.meetId}","confirmTimeOrder":s},function(data){
 									if(data==true){
 										$(".spinner").remove();
 										$(".tipMess").text("此次的聚会时间已经通过邮件发送给大家了！");
