@@ -97,20 +97,20 @@ public class PersonDaoImpl implements PersonDao {
 	}
 
 	@Override
-	public void addPersonTime(String personid,String ptime,String name) {
+	public void addPersonTime(String personid, String ptime, String name) {
 		try {
 			String sql = "update Person set ptime=? ,name=? where personid=?";
-			getSession().createQuery(sql).setString(0, ptime).setString(1, name)
-					.setString(2, personid).executeUpdate();
+			getSession().createQuery(sql).setString(0, ptime)
+					.setString(1, name).setString(2, personid).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	@Override
-	public List<Person> getAllPersonTime(String meetId){
+	public List<Person> getAllPersonTime(String meetId) {
 		try {
 			String sql = "from Person where meetid = ?";
 			return getSession().createQuery(sql).setString(0, meetId).list();
@@ -118,15 +118,30 @@ public class PersonDaoImpl implements PersonDao {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Person> getMeetingAttend(String personEmail,int start,int items) {
+	public List<Person> getMeetingAttend(String personEmail, int start,
+			int items) {
 		try {
 			String sql = "from Person where personEmail = ?";
-			return getSession().createQuery(sql).setString(0, personEmail).setFirstResult(start).setMaxResults(items).list();
+			return getSession().createQuery(sql).setString(0, personEmail)
+					.setFirstResult(start).setMaxResults(items).list();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public Person getPerson(String meetId, String personName) {
+		try {
+			String sql = "from Person where personEmail = ? and meetid =?";
+			return (Person) getSession().createQuery(sql)
+					.setString(0, personName).setString(1, meetId)
+					.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

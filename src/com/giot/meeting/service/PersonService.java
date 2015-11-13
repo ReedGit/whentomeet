@@ -19,9 +19,9 @@ public class PersonService {
 	public void addPerson(Person person) {
 		personDao.addPerson(person);
 	}
-	
-	public void addPersonTime(String personid,String ptime,String name) {
-		personDao.addPersonTime(personid, ptime,name);
+
+	public void addPersonTime(String personid, String ptime, String name) {
+		personDao.addPersonTime(personid, ptime, name);
 	}
 
 	public void deletePerson(String meetid) {
@@ -43,12 +43,23 @@ public class PersonService {
 	public void deletePersonTime(String meetid, String invited) {
 		personDao.deletePeronTime(meetid, invited);
 	}
-	
+
 	public List<Person> getAllPersonTime(String meetid) {
 		return personDao.getAllPersonTime(meetid);
 	}
 
-	public List<Person> getMeetingAttend(String personEmail,int start,int items){
-		return personDao.getMeetingAttend(personEmail,start,items);
+	public List<Person> getMeetingAttend(String personEmail, int start,
+			int items) {
+		return personDao.getMeetingAttend(personEmail, start, items);
+	}
+
+	public boolean getPerson(String meetId, String personName) {
+		Person person = personDao.getPerson(meetId, personName);
+		if (person == null) {
+			return false;
+		} else {
+			return true;
+		}
+
 	}
 }

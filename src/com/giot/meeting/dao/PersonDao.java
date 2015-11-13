@@ -25,5 +25,7 @@ public interface PersonDao {
 	public List<Person> getAllPersonTime(String meetId);
 	
 	public List<Person> getMeetingAttend(String personEmail,int start,int items);
+	
+	public Person getPerson(String meetId,String personName);
 
 }

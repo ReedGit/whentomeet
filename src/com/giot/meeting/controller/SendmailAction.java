@@ -51,11 +51,14 @@ public class SendmailAction {
 		}
 
 		for (int i = 0; i < li.size(); i++) {
-			Person p1 = new Person();
-			p1.setMeetid(meetId);
-			p1.setName(attName.get(i));
-			p1.setPersonEmail(li.get(i));
-			personService.addPerson(p1);
+			//增加对重复联系人的发送邮件以及添加进行过滤 @javebean
+			if(!personService.getPerson(meetId, attendeeEmail[i])){
+				Person p1 = new Person();
+				p1.setMeetid(meetId);
+				p1.setName(attName.get(i));
+				p1.setPersonEmail(li.get(i));
+				personService.addPerson(p1);
+			
 			System.out.println(us + "################");
 			System.out.println(us != null);
 			if (us != null) {
@@ -67,8 +70,9 @@ public class SendmailAction {
 
 			}
 
-			mu.sendSigleMail(li.get(i), attName.get(i), meetTheme, meetId,
+				mu.sendSigleMail(li.get(i), attName.get(i), meetTheme, meetId,
 					p1.getPersonid());
+			}
 		}
 
 		if (us == null) {
@@ -91,22 +95,26 @@ public class SendmailAction {
 		String[] attendeeName = nameString.split(";;");
 
 		for (int i = 0; i < attendeeEmail.length - 1; i++) {
+			
 			String attName = attendeeName[i];
 			String attEmail = attendeeEmail[i];
-
-			Person p1 = new Person();
-			p1.setMeetid(meetId);
-			p1.setName(attName);
-			p1.setPersonEmail(attEmail);
-			personService.addPerson(p1);
-			Contact con = new Contact();
-			con.setNickname(attName);
-			con.setUserid(userId);
-			con.setUsername(attEmail);
-			contactService.addContact(con);
-
-			mu.sendSigleMail(attEmail, attName, meetTheme, meetId,
-					p1.getPersonid());
+			//增加对重复联系人的发送邮件以及添加进行过滤 @javebean
+			if(!personService.getPerson(meetId, attEmail)){
+				Person p1 = new Person();
+				p1.setMeetid(meetId);
+				p1.setName(attName);
+				p1.setPersonEmail(attEmail);
+				personService.addPerson(p1);
+				Contact con = new Contact();
+				con.setNickname(attName);
+				con.setUserid(userId);
+				con.setUsername(attEmail);
+				contactService.addContact(con);
+				
+				mu.sendSigleMail(attEmail, attName, meetTheme, meetId,
+						p1.getPersonid());
+			}
+			
 		}
 		result.put("result", true);
 		return result.toString();
