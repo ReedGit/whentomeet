@@ -1,5 +1,7 @@
 package com.giot.meeting.dao.impl;
 
+import java.sql.Timestamp;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 	public String addUser(User user) {
 		try {
 			getSession().save(user);
-			
+
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			return null;
@@ -75,9 +77,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void updateValidateStatus(String userid) {
 		try {
-				String hql = "update User set validate=1 where userid=?";
-				getSession().createQuery(hql).setString(0, userid)
-						.executeUpdate();
+			String hql = "update User set validate=1 where userid=?";
+			getSession().createQuery(hql).setString(0, userid).executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -109,6 +110,49 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public void createResetPasswordLink(String username, String secretKey,
+			Timestamp outDate) {
+		try {
+			String hql = "update User set secretKey =?,outDate = ? where username = ?";
+			getSession().createQuery(hql).setString(0, secretKey)
+					.setTimestamp(1, outDate).setString(2, username)
+					.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
+	}
+
+	@Override
+	public User getOneUser(String username) {
+		try {
+			String sql = "from User where username = ?";
+			User u = (User) getSession().createQuery(sql)
+					.setString(0, username).uniqueResult();
+			return u;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public void resetPassword(String username, String password) {
+		try {
+			String sql = "update User set password = ? where username = ?";
+			getSession().createQuery(sql).setString(0, password)
+					.setString(1, username).executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
 	}
 
 }

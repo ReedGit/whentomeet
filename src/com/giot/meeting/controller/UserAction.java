@@ -2,7 +2,9 @@ package com.giot.meeting.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -75,13 +77,45 @@ public class UserAction {
 	public boolean updatePassword(String userid, String oldpassword, String password) {
 		User user = userService.getUserById(userid);
 		
-		if (user.getPassword().endsWith(MD5.compute(oldpassword))) {
+		if (user.getPassword().equals(MD5.compute(oldpassword))) {
 			user.setPassword(MD5.compute(password));
 			userService.updateUser(user);
 			return true;
 		}else{
 			return false;
 		}
+	}
+	
+	@RequestMapping("/resetPasswordLink.do")
+	public String resetPasswordLink(String username,String sid,Map<String,Object> map){
+		if ("".equals(username)  || "".equals(sid)||username==null||sid==null) {
+			map.put("mesg", "链接不完整,请重新生成");
+			return  "resetPassValidate";
+        }
+		
+		User user = userService.getOneUser(username);
+		 Timestamp outDate = (Timestamp) user.getOutDate();
+		 if(outDate.getTime() <= System.currentTimeMillis()){ //表示已经过期
+			 map.put("mesg", "链接已经过期,请重新申请找回密码.");
+			 return  "resetPassValidate";
+         }
+		 
+		 String key = user.getUsername()+"$"+outDate.getTime()/1000*1000+"$"+user.getSecretKey();//数字签名
+		 String digitalSignature = MD5.compute(key);// 数字签名
+		 
+		 if(!digitalSignature.equals(sid)) {
+			 map.put("mesg", "链接不正确,是否已经过期了?重新申请吧.");
+			 return  "resetPassValidate";
+         }else {
+           return "resetpass";
+       }
+		 
+	}
+	
+	@ResponseBody
+	@RequestMapping("/resetPassword.do")
+	public void resetPassword(String username,String password){
+		userService.resetPassword(username, password);
 	}
 	
 	@ResponseBody

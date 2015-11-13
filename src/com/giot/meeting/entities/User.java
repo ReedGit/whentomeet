@@ -1,5 +1,6 @@
 package com.giot.meeting.entities;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -19,12 +20,15 @@ public class User {
 	private String password;
 	private String image;
 	private Date registerDate;
-	private int validate;//0 Î´ÑéÖ¤£¬1Í¨¹ı
+	private int validate;//0 æ³¨å†ŒéªŒè¯é‚®ç®±
 	private int defaultDura;
+	private String secretKey;//å¯†é’¥
+	private Timestamp outDate;//è¿‡æœŸæ—¶é—´
+	
 
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
-	@GeneratedValue(generator = "generator")// ×ÔÔö³¤
+	@GeneratedValue(generator = "generator")// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String getUserid() {
 		return userid;
 	}
@@ -89,6 +93,25 @@ public class User {
 	public void setDefaultDura(int defaultDura) {
 		this.defaultDura = defaultDura;
 	}
+	
+	
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
+
+
+	public Timestamp getOutDate() {
+		return outDate;
+	}
+
+	public void setOutDate(Timestamp outDate) {
+		this.outDate = outDate;
+	}
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + "]";

@@ -48,9 +48,9 @@ public class MailUtil {
 		 session = Session.getDefaultInstance(props,
 				new Authenticator() {
 					public PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(p
-								.getProperty("email.username"), p
-								.getProperty("email.password"));
+						return new PasswordAuthentication(
+								p.getProperty("email.username"), 
+								p.getProperty("email.password"));
 					}
 				});
 	
@@ -115,6 +115,18 @@ public class MailUtil {
 						+"南京吉奥客官网：<a href='http://www.geariot.com/'>http://www.geariot.com/</a><br>"
 						+"客户服务热线&nbsp;&nbsp;&nbsp;：025-52265323 ";
 				
+			}else if("3".equals(personId)){
+				//发送重置密码链接
+				contentHTML = "<p style='text-indent:20px'>您好，请点击下面的链接来重置你的密码：</p><br>"
+						+"<a href="+port+"'/whentomeet/resetPasswordLink.do?sid='"+meetTheme+"&username="+meetId+">"+port+"/whentomeet/resetPasswordLink.do?sid="+meetTheme+"&username="+meetId+"</a>"
+						+"<br><br><br>"
+						+"请勿回复本邮件!<br>"
+						+"--------<br>"
+						+"南京吉奥客团队"
+						+"<br><br>"
+						+"南京吉奥客官网：<a href='http://www.geariot.com/'>http://www.geariot.com/</a><br>"
+						+"客户服务热线&nbsp;&nbsp;&nbsp;：025-52265323 ";
+			
 			}else{
 				//受邀人员
 				contentHTML = "<h2>汤姆聚会</h2>"

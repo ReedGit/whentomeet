@@ -18,6 +18,7 @@ import com.giot.meeting.entities.User;
 import com.giot.meeting.service.ContactService;
 import com.giot.meeting.service.MeetingService;
 import com.giot.meeting.service.PersonService;
+import com.giot.meeting.service.UserService;
 import com.giot.meeting.utils.MailUtil;
 
 @Controller
@@ -28,6 +29,8 @@ public class SendmailAction {
 	private ContactService contactService;
 	@Autowired
 	private MeetingService meetingService;
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private MailUtil mu;
 
@@ -145,6 +148,13 @@ public class SendmailAction {
 	
 	private String clipBorder(String str){
 		return str.substring(1, str.length() - 1);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/sendResetPasswordLink.do")
+	public void sendResetPasswordLink(String email){
+		String digitalSignature = userService.createResetPasswordLink(email);
+		mu.sendSigleMail(email, null, digitalSignature, email, "3");
 	}
 
 }

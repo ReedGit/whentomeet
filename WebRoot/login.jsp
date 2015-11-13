@@ -112,7 +112,7 @@ label.error{
 			<input type="submit" class="btn btn-success" value="登&nbsp;&nbsp;陆">
 			
 			<div class="note">
-				<a href="#">忘记密码？点击这儿重置</a><br>
+				<a href="sendresetpasslink.jsp">忘记密码？点击这儿重置</a><br>
 					<br>
 				
 				其他方式登录
