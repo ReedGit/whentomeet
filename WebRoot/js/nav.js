@@ -22,34 +22,12 @@ $(window).bind('resize orientationchange', function() {
 });
 
 var adjustMenu = function() {
-	if (ww < 800) {
-		$(".toggleMenu").css("display", "inline-block");
-		//$(".user_icons").css("top","-76px");
-		$("div.logo").append($(".user_icons"));
-		$(".user_icons").css("right","113px");
-		if (!$(".toggleMenu").hasClass("active")) {
-			$(".nav").hide();
-		} else {
-			$(".nav").show();
-		}
-		$(".nav li").unbind('mouseenter mouseleave');
-		$(".nav li a.parent").unbind('click').bind('click', function(e) {
-			// must be attached to anchor element to prevent bubbling
-			e.preventDefault();
-			$(this).parent("li").toggleClass("hover");
+	if (ww < 768) {
+		$(".toggleMenu").click(function(){
+			$(".nav").removeClass("hidden-xs");
 		});
-	} 
-	else if (ww >= 768) {
-		$(".toggleMenu").css("display", "none");
-		$(".user_icons").css("right","0px");
-		$(".h_menu4").after($(".user_icons"));
+	}else{
 		$(".nav").show();
-		$(".nav li").removeClass("hover");
-		$(".nav li a").unbind('click');
-		$(".nav li").unbind('mouseenter mouseleave').bind('mouseenter mouseleave', function() {
-		 	// must be attached to li so that mouseleave is not triggered when hover over submenu
-		 	$(this).toggleClass('hover');
-		});
-	}
+	} 
 }
 

@@ -8,10 +8,10 @@
 <%@ include file="public/headfile.html"%>
 <style type="text/css">
  .scheduleBox {
-    width: 522px;
+    /* width: 522px; */
     height:492px;
     background: white;
-    padding: 35px 30px 0 30px;
+    padding: 35px 4% 0 4%;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 30px #333;
@@ -21,7 +21,7 @@
    /*  position: relative;
     top: 57px;
     right: 100px; */
-    margin: 100px 17% 150px 0;
+    margin: 100px 0 150px 0;
 }
 
  .scheduleBox h1 {
@@ -30,10 +30,10 @@
     margin-bottom: 40px;
 }
 #step1Submit{
-	position: relative;
+	/* position: relative;
 	left: 330px;
 	width: 120px;
-	height: 40px;
+	height: 40px; */
 }
 .tipMess{
 	width: 95%;
@@ -58,13 +58,13 @@
 }
 
 </style>
-
 </head>
 <body>
 <%@ include file="public/head.html" %>
 <!-- end of head -->
-<div id="wrapper">
-	<div class="scheduleBox">
+<div class="container">
+<div id="wrapper" class="row">
+	<div class="scheduleBox col-xs-12 col-lg-5">
         <div class="titleBar">
             <h1>安排一次聚会吧</h1>
             <!--[if lt IE 9 ]> 
@@ -113,83 +113,15 @@
         			 	<input type="text" class="form-control" placeholder="此邮箱会收到其他受邀者的时间更新哦~" name="organiser_mail">
       			  </div>
       			  <br>	
-					<input id="step1Submit" type="submit" class="btn btn-success" value="确认选择">
+				<input id="step1Submit" type="submit" class="btn btn-success" value="确认选择">
 
         </form>
     </div>
     
 </div>
-<div id="outtimeTableDiv">
-<div id="timeTableDiv">
-    	<%-- <div id="meetingTime" unselectable="on" onselectstart="return false;" style="-moz-user-select:none;">
-	<div id="dateLable"><h2></h2></div>
-	<div id="lable"> 为见面选择可能的时间吧</div>
-	<table border="1" id="weekTitle">
-		<tr>
-			<td id="changeTimeFormat"><br><a href="">12h</a></td>
-			<td>星期日<br><span class="date"></span></td>
-			<td>星期一<br><span class="date"></span></td>
-			<td>星期二<br><span class="date"></span></td>
-			<td>星期三<br><span class="date"></span></td>
-			<td>星期四<br><span class="date"></span></td>
-			<td>星期五<br><span class="date"></span></td>
-			<td>星期六<br><span class="date"></span></td>
-			<td class="midFill date"></td>
-			<td>星期日<br><span class="date"></span></td>
-			<td>星期一<br><span class="date"></span></td>
-			<td>星期二<br><span class="date"></span></td>
-			<td>星期三<br><span class="date"></span></td>
-			<td>星期四<br><span class="date"></span></td>
-			<td>星期五<br><span class="date"></span></td>
-			<td>星期六<br><span class="date"></span></td>
-		</tr>
-	</table>
-
-<div id="containTable">
-
-	<div class="prevArrow"></div>
-	<table border="1" id="selectTime">
-		<c:forEach var="t" begin="0" end="95">
-			<tr>
-				<c:choose>
-					<c:when test="${t%4==0 }">
-						<td class="timeLable showTime"></td>
-					</c:when>
-					<c:otherwise>
-						<td class="timeLable"></td>
-					</c:otherwise>
-				</c:choose>
-				<td class="col_1 withBg"></td>
-				<td class="col_2"></td>
-				<td class="col_3"></td>
-				<td class="col_4"></td>
-				<td class="col_5"></td>
-				<td class="col_6"></td>
-				<td class="col_7 withBg"></td>
-				<td class="col_8 midFill"></td>
-				<td class="col_9 withBg"></td>
-				<td class="col_10"></td>
-				<td class="col_11"></td>
-				<td class="col_12"></td>
-				<td class="col_13"></td>
-				<td class="col_14"></td>
-				<td class="col_15 withBg"></td>
-			</tr>
-		</c:forEach>
-	</table>
-	<div class="nextArrow"></div>
-	
-</div>
-<div class="submitArea">
-	<a id="step2Back" class="btn btn-danger" href="#">返回</a>
-       
-    <button id="step2Submit" type="submit" class="btn btn-success">邀请参与人</button>
-</div>
-
-</div> --%>
-</div>  
-    
-    
+<div id="outtimeTableDiv" class="row">
+	<div id="timeTableDiv" class="col-lg-12">
+	</div>  
 </div>
 <!--/start-copyright-section-->
 <div class="clearfix"></div>
@@ -197,7 +129,7 @@
 			
 		</div>
 <!--//end-copyright-section-->
-
+</div>
 <script type="text/javascript">
 	var u = getCookie("user1");
 	var uid = getCookie("organiser");

@@ -1,314 +1,191 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/public.js"></script>
-<!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- Custom Theme files -->
+<title>Hi,来冒泡吧</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="keyword" />
-<!-- <script type="application/x-javascript"> 
-	addEventListener("load", function() { 
-							setTimeout(hideURLbar, 0); 
-						}, 
-					false); 
-				function hideURLbar() { 
-					window.scrollTo(0,1); 
-			} 
-</script> -->
-<!--webfont-->
-<!-- <link href='http://fonts.useso.com/css?family=Oswald:400,700,300|Open+Sans:300italic,400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'> -->
-<!--//webfont-->
-<!--Animation-->
-<script src="js/wow.min.js"></script>
-<link href="css/animate.css" rel='stylesheet' type='text/css' />
+<meta name="keywords" content="bubble time" />
+
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/customer.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
 <style type="text/css">
 body{
-	font-family: "Microsoft Yahei","微软雅黑",Helvetica,SimSun,SimHei;
 	background:#fff;
 }
-/* .footer-section{
-	margin-bottom: 50px;
-} */
 </style>
-<script>
-	/* 首页动画效果 */
-	new WOW().init();
-</script>
+
 </head>
 <body>
-	<div class="header box css3-shadow" id="head">
- 	<div class="container">
-	  <div class="header-top">
-	        <div class="logo wow bounceInLeft" data-wow-delay="0.4s">
-				<a href="index.html"><img src="img/logo.png" alt=""/></a>
-			 </div>
-		     <div class="h_menu4"><!-- start h_menu4 -->
-				<a class="toggleMenu" href="#">菜单</a>
-				<ul class="nav">
-					<li class="active"><a  href="index.html">首页</a></li>
-						<li><a href="#feature" class="scroll">特色</a></li>
-						<li><a href="#Quickstart" class="scroll">快速上手</a>
-						<li><a href="scheduleMeeting.jsp">安排聚会</a>
-						</li>
-					<li><a href="#contactus" class="scroll">联系我们</a></li>
-					<li><a href="mymeeting.jsp" class="mymeeting">我的聚会</a></li>
-
-				</ul>
-				<script type="text/javascript" src="js/nav.js"></script>
-			</div><!-- end h_menu4 -->
-			<div class="user_icons wow bounceInRight" data-wow-delay="0.4s">
-						<img src="img/peop.png">
-						<a class="login" href="login.jsp">登陆 |</a>
-						<a class="register" href="register.jsp">注册</a>
-						<a  class="userName"href="#"></a>
-						<a href="#" class="removeUser">注销</a>
-						
-						<div class="dropdownmenu">
-							<div class="dropdownmenu_item">
-								<a href="account.jsp">我的账户</a>
-								<br>
-								<a href="contacts.jsp">联系人</a>
-							</div>
-						</div>
-			</div>
+<nav class="navbar navbar-default" role="navigation">
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" 
+         data-target="#bubble-navbar-collapse">
+         <span class="sr-only">切换导航</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">BubbleTime</a>
+      <a class="navbar-brand visible-xs" href="#">登陆</a>
+      <a class="navbar-brand visible-xs" href="#">注册</a>
+   </div>
+   <div class="collapse navbar-collapse" id="bubble-navbar-collapse">
+      <ul class="nav navbar-nav" >
+         	<li class="active"><a href="index.html">首页</a></li>
+			<li><a href="#feature" class="scroll">特色</a></li>
+			<li><a href="#Quickstart" class="scroll">快速上手</a>
+			<li><a href="scheduleMeeting.jsp">安排聚会</a></li>
+			<li><a href="#contactus" class="scroll">联系我们</a></li>
+			<li><a href="mymeeting.jsp" class="mymeeting2">我的聚会</a></li>
 			
-		  </div><!-- end header_main4 -->
-	</div>
-</div>
-<!-- ------- -->
-<!-- <div class="dropdownmenu">
-		<a href="account.jsp">我的账户</a>
-		<br>
-		<a href="contacts.jsp">联系人</a>
-		<br>
-		<a href="#">退出</a>
-</div> -->
-<!-- ------- -->
+			<li class="pull-right hidden-xs"><a>登陆</a></li>
+			<li class="pull-right hidden-xs"><a>注册</a></li>
+      </ul>
+   </div>
+</nav>
+
+<div id="myCarousel" class="carousel slide">
+   <!-- 轮播（Carousel）指标 -->
+   <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+	  <li data-target="#myCarousel" data-slide-to="3"></li>
+   </ol>   
+   <!-- 轮播（Carousel）项目 -->
+   <div class="carousel-inner">
+      <div class="item active">
+         <img src="img/slide11.jpg" alt="First slide">
+      </div>
+      <div class="item">
+         <img src="img/slide22.jpg" alt="Second slide">
+      </div>
+      <div class="item">
+         <img src="img/slide33.jpg" alt="Third slide">
+      </div>
+	   <div class="item">
+         <img src="img/slide44.jpg" alt="Third slide">
+      </div>
+   </div>
+ 
+</div> 
+
 <!--start-slider-->
-	<div class="slider-bg">
-		<div class="container">
-			<div class="grid-1">
-				<div class="col-md-5 left-grid-1 wow bounceInLeft" data-wow-delay="0.4s">
-					<h1>为你的见面</h1>	
-					<h2 style="text-align: right;">安排好</h2>
-					<h3 style="text-align: center;">时间吧！</h3>
-				</div>
-				<div class="col-md-7 right-grid-1 wow bounceInRight" data-wow-delay="0.7s">
-					<div class="slider">
-						<div class="callbacks_container">
-								<ul class="rslides" id="slider">
-									<li>
-									<img src="img/slide1.png" class="img-responsive" alt="" />
-									</li>
-									<li>
-									<img src="img/slide2.png" class="img-responsive" alt="" />
-									</li>
-									<li>
-									<img src="img/slide3.png" class="img-responsive" alt="" />
-									</li>
-									<li>
-									<img src="img/slide4.png" class="img-responsive" alt="" />
-									</li>
-								 </ul>
-							</div>
-						</div>
-					</div>	
-				 </script><script src="js/responsiveslides.min.js"></script>
-						   <script>
-					    $(function () {
-					      $("#slider").responsiveSlides({
-					      	auto: true,
-					      	nav: true,
-					      	speed: 500,
-					        namespace: "callbacks",
-					        pager: true,
-					      });
-					    });
-					  </script>
-
-                    </div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
 <!--//end-slider-->
-	<!--start-services-->
-		<div id="feature" class="service-section">
-			<div class="container">
-				<div class="serve-grids wow bounceIn animated" data-wow-delay="0.4s">
-					<div class="col-md-4 services-section-grid">
-						<div class="services-section-grid-head">
-							<div class="service-icon">
-								<!-- <i class="rocket"></i> -->
-								<img alt="show1" src="img/show1.png">
-							</div>
-							<div class="service-icon-heading">
-								<h4>方便</h4>
-								<p>只需简单三步，输入内容、分享可选时间给参与者，即可得到一个最优日程安排</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-						<div class="col-md-4 services-section-grid">
-						<div class="services-section-grid-head">
-							<div class="service-icon">
-								<!-- <i class="plan"></i> -->
-								<img alt="show1" src="img/show2.png">
-							</div>
-							<div class="service-icon-heading">
-								<h4>共同参与</h4>
-								<p>每一个参与者都是重要的一份子，您的时间安排不再被忽略，TOM为每一个人都找到了合适的时间</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-						<div class="col-md-4 services-section-grid lost">
-						<div class="services-section-grid-head">
-							<div class="service-icon">
-								<!-- <i class="book"></i> -->
-								<img alt="show1" src="img/show3.png">
-							</div>
-							<div class="service-icon-heading">
-								<h4>快捷</h4>
-								<p>会议、party时间安排太麻烦？NO！TOM为您快速统计所有参与者共同空闲时间，轻松安排schedule</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-					<div class="serve-grids two  wow bounceIn animated" data-wow-delay="0.4s">
-					<div class="col-md-4 services-section-grid act">
-						<div class="services-section-grid-head">
-							<div class="service-icon">
-								<!-- <i class="arrow"></i> -->
-								<img alt="show1" src="img/show4.png">
-							</div>
-							<div class="service-icon-heading">
-								<h4>分享</h4>
-								<p>一键分享给好友，邀请大家一起来happy</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-						<div class="col-md-4 services-section-grid">
-						<div class="services-section-grid-head">
-							<div class="service-icon">
-								<!-- <i class="download"></i> -->
-								<img alt="show1" src="img/show5.png">
-							</div>
-							<div class="service-icon-heading">
-								<h4>准确</h4>
-								<p>快速准确的统计出所有参与者的共有时间，不再有遗漏，日程安排一目了然</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-						<div class="col-md-4 services-section-grid lost">
-						<div class="services-section-grid-head">
-							<div class="service-icon">
-								<!-- <i class="cloud"></i> -->
-								<img alt="show1" src="img/show6.png">
-							</div>
-							<div class="service-icon-heading">
-								<h4>拉近距离</h4>
-								<p>只需通过微信或者邮件，在线发送或者选择您合适的时间即可得到让您满意的安排</p>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
+	<div class="container" >
+		<div class="page-header">
+			<h2>产品特点</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-sm-6 col-xs-12 mywell">
+				<img alt="xx" src="img/show1.png" style="background-color: #0091ea;" class="img-circle col-xs-3">
+				<div class="col-xs-9">
+					<div class="feat_title"><h4><b>方便（Convenient）</b></h4></div>
+					<div class="para">只需简单三步，输入内容、分享可选时间给参与者，即可得到一个最优日程安排</div>
 				</div>
 			</div>
-		</div>
-		<!--//end-services-->
-			<!--/port-section-->
-			<div id="Quickstart" class="port-section">
-				<div class="container">
-				<h2>快速上手</h2>
-					<div class="port-grids">
-						<div class="col-md-3 port-grid wow zoomInLeft animated">
-							<a><img  src="img/step1.jpg" class="img-responsive" alt="" /></a>
-							<!-- <div class="box_type">WEB DESIGN</div>
-							<div class="box-hover">
-								<ul class="port-icons">
-								<li><i class="per"></i></li>
-								<li><i class="loca"></i></li>
-								</ul>
-							</div> -->
-							<div class="text">
-								<a><h3>Step 1 </h3></a>
-								<p>输入此次聚会的内容。<br>标题，地点，时长。。。</p>
-							</div>
-						</div>
-						<div class="col-md-3 port-grid wow zoomInLeft animated" >
-							<a><img src="img/step2.jpg" class="img-responsive" alt="" /></a>
-							<!-- <div class="box_type">WEB DESIGN</div>
-							<div class="box-hover">
-								<ul class="port-icons">
-								<li><i class="per"></i></li>
-								<li><i class="loca"></i></li>
-								</ul>
-							</div> -->
-							<div class="text">
-								<a><h3>Step 2 </h3></a>
-								<p>选择备选时间<br>可以在我们的日历控件中选择不同日期以及不同的时间段</p>
-							</div>
-						</div>
-						<div class="col-md-3 port-grid wow zoomInRight animated">
-							<a><img src="img/step3.jpg" class="img-responsive" alt="" /></a>
-							<!-- <div class="box_type">WEB DESIGN</div>
-							<div class="box-hover">
-								<ul class="port-icons">
-								<li><i class="per"></i></li>
-								<li><i class="loca"></i></li>
-								</ul>
-							</div> -->
-							<div class="text">
-								<a><h3>Step 3 </h3></a>
-								<p>发送给你的好朋友们<br>可以通过邮箱或微信分享给小伙伴们，和好朋友们来一次party是一个不错的主意哦</p>
-							</div>
-						</div>
-						<div class="col-md-3 port-grid lost wow zoomInRight animated">
-							<a><img src="img/step4.jpg" class="img-responsive" alt="" /></a>
-							<!-- <div class="box_type">WEB DESIGN</div>
-							<div class="box-hover">
-								<ul class="port-icons">
-								<li><i class="per"></i></li>
-								<li><i class="loca"></i></li>
-								</ul>
-							</div> -->
-							<div class="text">
-								<a><h3>Step 4 </h3></a>
-								<p>受邀小伙伴从被选时间中确认自己的时间<br>每个人都可以查看别人已选的时间哦，尽情享受聚会给我们带来的快乐吧！</p>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 mywell">
+				<img alt="xx" src="img/show2.png" style="background-color: #0091ea;" class="img-circle col-xs-3">
+				<div class="col-xs-9">
+					<div class="feat_title"><h4><b>共同参与（Together）</b></h4></div>
+					<div class="para">每一个参与者都是重要的一份子，您的时间安排不再被忽略，TOM为每一个人都找到了合适的时间</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 mywell">
+				<img alt="xx" src="img/show3.png" style="background-color: #0091ea;" class="img-circle col-xs-3">
+				<div class="col-xs-9">
+					<div class="feat_title"><h4><b>快捷（Efficient）</b></h4></div>
+					<div class="para">会议、party时间安排太麻烦？NO！TOM为您快速统计所有参与者共同空闲时间，轻松安排</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 mywell">
+				<img alt="xx" src="img/show4.png" style="background-color: #0091ea;" class="img-circle col-xs-3">
+				<div class="col-xs-9">
+					<div><h4><b>分享（Share）</b></h4></div>
+					<div class="para">一键分享给好友，邀请大家一起来happy</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 mywell">
+				<img alt="xx" src="img/show5.png" style="background-color: #0091ea;" class="img-circle col-xs-3">
+				<div class="col-xs-9">
+					<div class="feat_title"><h4><b>准确（Exact）</b></h4></div>
+					<div class="para">快速准确的统计出所有参与者的共有时间，不再有遗漏，日程安排一目了然</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 mywell">
+				<img alt="xx" src="img/show6.png" style="background-color: #0091ea;" class="img-circle col-xs-3">
+				<div class="col-xs-9">
+					<div class="feat_title"><h4><b>拉近距离（Close）</b></h4></div>
+					<div class="para">只需通过微信或者邮件，在线发送或者选择您合适的时间即可得到让您满意的安排</div>
 				</div>
 			</div>
 			
-			<!--/start-footer-section-->
-			<div class="footer-section" id="contactus">
-				<div class="container">
-					<div class="footer-grids wow bounceIn animated" data-wow-delay="0.4s">
-						<div class="col-md-3 footer-grid">
-						<h4>关于汤姆聚会</h4>
-						<div class="border2"></div>
-						  <p>我们的工作并没有到此为止。
-							我们会继续收集用户反馈，了解用户的进一步需求，不断优化性能和增加新的功能，以帮助您更进一步。
-							我们还会提供各种技术支持，提供全方面的保障。
-						  </p>
-						</div>
-						<div class="col-md-3 footer-grid tags">
-								<h4>关键词</h4>
-								<div class="border2"></div>
-							<ul class="tag">
+		</div><!-- 6个特点的row -->
+		
+		<div class="page-header">
+			<h2>快速上手</h2>
+		</div>
+		<div class="row" id="quickstart">
+			<div class="col-md-3 col-smd-6 col-sm-6 col-xs-12">
+				<div class="well">
+					<img alt="xx" src="img/step1.jpg" class="img-responsive">
+					<br>
+					<div><h4><b>step1</b></h4></div>
+					<div class="para">输入此次聚会的内容。<br>标题，地点，时长。。。</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-smd-6 col-sm-6 col-xs-12">
+				<div class="well">
+					<img alt="xx" src="img/step2.jpg" class="img-responsive">
+					<br>
+					<div><h4><b>step2</b></h4></div>
+					<div class="para">选择备选时间可以在我们的日历控件中选择不同日期以及不同的时间段</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-smd-6 col-sm-6 col-xs-12">
+				<div class="well">
+					<img alt="xx" src="img/step3.jpg" class="img-responsive">
+					<br>
+					<div><h4><b>step3</b></h4></div>
+					<div class="para">发送给你的好朋友们可以通过邮箱或微信分享给小伙伴们，和好朋友们来一次party是一个不错的主意哦</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-smd-6 col-sm-6 col-xs-12">
+				<div class="well">
+					<img alt="xx" src="img/step4.jpg" class="img-responsive">
+					<br>
+					<div><h4><b>step4</b></h4></div>
+					<div class="para">受邀小伙伴从被选时间中确认自己的时间<br>每个人都可以查看别人已选的时间哦，尽情享受聚会给我们带来的快乐吧！</div>
+				</div>
+			</div>
+			
+		</div><!-- 快速上手的row -->
+	</div><!-- end of container  -->
+		
+	<div style="border: 1px solid red; width: 100%;">
+		<div class="container">
+			<div class="row" style="background: #E2E2E2;height: 300px;width: 100%;">
+			<div class="col-xs-12 col-md-3">
+				<div class="page-header">
+   					<h4>关于ButtonTime</h4>
+				</div>
+				<div class="para">
+					我们的工作并没有到此为止。 我们会继续收集用户反馈，了解用户的进一步需求，
+					不断优化性能和增加新的功能，以帮助您更进一步。 我们还会提供各种技术支持，
+					提供全方面的保障。 
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<div class="page-header">
+   					<h4>关键词</h4>
+				</div>
+				<div class="para">
+					<div class="row">
+						<ul class="tag">
 								<li><a href="#">高效</a></li>
 								<li><a href="#">分享快乐</a></li>
 								<li><a href="#">便捷</a></li>
@@ -321,70 +198,46 @@ body{
 								<li><a href="#">便于沟通</a></li>
 								<li><a href="#">高端</a></li>
 							</ul>
-						</div>
-						<div class="col-md-3 footer-grid tweet">
-								<h4>公司信息</h4>
-								<div class="border2"></div>
-							<div class="icon-text" style="color: #fff;">
-								<p>南京吉奥客电子科技有限公司</p>
-								<br>网址：<a href="http://www.geariot.com/">http://www.geariot.com/</a>
-								<br>邮箱：info@geariot.com
-								<br>电话：025-52265323
-								<br>地址：南京市云锦路58号万达东坊1幢1536
-							</div>
-								<div class="clearfix"></div>
-						</div>
-						<div class="col-md-3 footer-grid flickr">
-								<h4>APP 下载</h4>
-								<div class="border2"></div>
-								<div class="flickr-grids">
-									<div>
-										<img alt="barcode" src="img/qrcode.png" style="width: 100px;height: 100px;">
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
+					</div> 
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<div class="page-header">
+   					<h4>公司信息</h4>
+				</div>
+				<div class="para">
+					<p>南京吉奥客电子科技有限公司</p>
+					<br>网址：<a href="http://www.geariot.com/">http://www.geariot.com/</a>
+					<br>邮箱：info@geariot.com
+					<br>电话：025-52265323
+					<br>地址：南京市云锦路58号万达东坊1幢1536
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<div class="page-header">
+   					<h4>App 下载</h4>
+				</div>
+				<div>
+					<img alt="ButtonTimeApp" src="img/qrcode.png" class="img-thumbnail img-responsive" style="width: 100px;height: 100px;">
+				</div>
 			</div>
 		</div>
-	<!--//end-footer-section-->
-			<!--/start-copyright-section-->
-			<div class="clearfix"></div>
-				<div class="copyright">
-					
-				</div>
+		
+		
+		</div>
+	</div>
+		
+		
 			
-			<!--//end-copyright-section-->
-			<!--start-smoth-scrolling-->
-			<script type="text/javascript" src="js/move-top.js"></script>
-			<script type="text/javascript" src="js/easing.js"></script>
-			<script type="text/javascript">
-								jQuery(document).ready(function($) {
-									$(".scroll").click(function(event){		
-										event.preventDefault();
-										if($(this.hash).length!=0)
-											$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-									});
-								});
-								</script>
-							<!--start-smoth-scrolling-->
-						<script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear' 
-								 		};
-										*/
-										
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script>
-		<a href="#head" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	<!--/start-copyright-section-->
+	<div class="clearfix"></div>
+	<div class="copyright">
+		
+	</div>
+		
+	<a href="#head" id="toTop" class="scroll" style="display: block;"> 
+		<span id="toTopHover" style="opacity: 1;"> </span>
+	</a>
 
 
 			
