@@ -60,13 +60,22 @@
 		margin-left: 0;
 		margin-right: 0;
 	}
+	/*自定义page-header 去除下划线*/
+	.mypage-header{
+		border-bottom:0 solid;
+	}
+	
+	
 	/*必填项*/
 	.required{
 		color: red;
 	}
 	/*此时是用来 调正确认密码的padding*/
-	.no-padding{
+	.min-padding{
 		padding: 9px;
+	}
+	.no-padding{
+		padding: 0;
 	}
 	
 	.bg-white{

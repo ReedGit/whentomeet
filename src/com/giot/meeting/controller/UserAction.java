@@ -157,7 +157,7 @@ public class UserAction {
 	@RequestMapping("/updateValidateStatus.do")
 	public String updateValidateStatus(String userid) {
 		int sta = userService.updateValidateStatus(userid);
-		return "redirect:validateSuc.jsp?sta="+sta;
+		return "redirect:validateState.html?sta="+sta;
 	}
 
 	@ResponseBody
