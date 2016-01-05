@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hi,来冒泡吧</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="bubble time" />
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/customer.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+</head>
+<body>
+<!-- 导航 头-->
+<div class="header"></div>
+
+<div class="container">
+ <div class="row">
+	<br>
+		<div id="login" class="well col-xs-12 col-sm-5 col-sm-offset-6 bg-white">
+			<div class="page-header text-center">
+  				 <h3>用户注册</h3>
+			</div>
+			<label class="error" for="login" ></label>
+			<form id="form">
+				<div class="row">
+					<div class="input-group col-xs-10 col-xs-offset-1 pull-left">
+		  				<span class="input-group-addon"><b class="required">*</b>昵&nbsp;&nbsp;&nbsp;&nbsp;称&nbsp;&nbsp; </span>
+		 			 	<input id="nickname" type="text" class="form-control" placeholder="请输入昵称" name="nickname">
+			      	</div>
+	 			 	<span class="glyphicon glyphicon-remove error-icon col-xs-1 hidden"></span>
+				</div>
+		      	
+		      	<br>
+				<div class="row">
+					<div class="input-group col-xs-10 col-xs-offset-1 pull-left">
+		  				<span class="input-group-addon"><b class="required">*</b>邮&nbsp;&nbsp;&nbsp;&nbsp;箱 &nbsp; </span>
+		 			 	<input id="username" type="text" class="form-control" placeholder="请输入邮箱" name="username">
+			      	</div>
+			      	<span class="glyphicon glyphicon-remove error-icon col-xs-1 hidden"></span>
+				</div>
+		      	
+		      	<br>
+		        <div class="row">
+					<div class="input-group col-xs-10 col-xs-offset-1 pull-left">
+		   				<span class="input-group-addon"><b class="required">*</b>密&nbsp;&nbsp;&nbsp;&nbsp;码 &nbsp; </span>
+		  			 	<input id="password" type="password" class="form-control" placeholder="最长不超过16位" name="password">
+			      	</div>
+			      	<span class="glyphicon glyphicon-remove error-icon col-xs-1 hidden"></span>
+			    </div>
+		      	<br>
+		        <div class="row">
+					<div class="input-group col-xs-10 col-xs-offset-1 pull-left">
+		   				<span class="input-group-addon no-padding"><b class="required">*</b>确认密码</span>
+		  			 	<input id="password1" type="password" class="form-control" placeholder="请再次输入您的密码" name="password1">
+			      	</div>
+			      	<span class="glyphicon glyphicon-remove error-icon col-xs-1 hidden"></span>
+			    </div>
+		    </form>
+	      	<br>
+	      	
+	      	<div class="row">
+				<button id="submit" class="btn btn-primary col-xs-10 col-xs-offset-1">立&nbsp;即&nbsp;注&nbsp;册</button>
+	      	</div>
+	      	<!-- load图片 -->
+	      	<div class="text-center">
+	      		<div class="error-tip"></div>
+	      		<img class="loading center-block hidden" alt="loading" src="img/loading.gif">
+	      	</div>
+			<div class="row">
+				<a href="login.html" class="col-xs-10 col-xs-offset-1 text-right">已有账号？点击登陆</a><br>
+			</div>
+				
+			<div class="para row">
+				<div class="col-xs-12">
+					其他方式登录:
+					<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
+				</div>
+			</div>
+		</div>
+ </div>
+</div>
+
+<div class="container mycontainer">
+	 <div class="row">
+		<!-- copyright -->
+		<div class="copyright"></div>
+	 </div>
+</div>
+
+ <script type="text/javascript">
+   $(function(){
+	   $("#submit").click(function(){
+		  var nickname = $("#nickname").val();
+		   //邮箱是作为用户名用的，所以此处为username
+		  var email    = $("#username").val();
+		  var password = $("#password").val();
+		  var password1= $("#password1").val();
+		  var email_rex =/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+		 
+		  if(""==$.trim(nickname)){
+			  //nick为空
+			  $(".error-tip").text("昵称不能为空");
+			  return false;
+		  }
+		  if(""==$.trim(email)){
+			  //邮箱为空
+			  $(".error-tip").text("邮箱不能为空");
+			  return false;
+		  }
+		  if(!email_rex.test(email)){
+			  //邮箱验证bu通过
+		 		$(".error-tip").text("邮箱格式不正确");
+			  	return false;
+		  } 
+			
+		  if(""==$.trim(password)){
+			  //密码为空
+			  $(".error-tip").text("密码不能为空");
+			  return false;
+		  }
+		  var pass_len =password.length;
+		  if(pass_len<6 || pass_len>17){
+			  //邮箱验证bu通过
+	 		  $(".error-tip").text("密码位数为6-16位");
+		  	  return false;
+		  }
+		  
+		  if(""==$.trim(password1)){
+			  //确认密码为空
+			  $(".error-tip").text("确认密码不能为空");
+			  return false;
+		  }
+		
+		  if(password1!=password){
+			  //俩次密码不同
+			  $(".error-tip").text("请输入相同的密码");
+			  return false;
+		  }
+		$(".error-tip").empty();
+		$(".loading").removeClass("hidden");
+		$.get("addUser.do",$("#form").serializeArray(),function(data){
+			var obj = $.parseJSON(data);
+			var code = obj.code;	
+				if(code==2||code==1){
+					//2：该用户已存在    1：注册失败
+					$(".error-tip").text(obj.message);
+					$(".loading").addClass("hidden");
+				}
+				if(code==0){
+					//注册成功
+				   window.location.href="validateEmail.html?provEmail="+email;
+				}
+		 }); 
+		return false;
+	});
+})
+	
+   
+</script>
+
+</body>
+</html>

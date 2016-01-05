@@ -64,6 +64,8 @@ public class MailUtil {
 	@Async
 	public void sendSigleMail(String to, String toName,String meetTheme,String meetId, String personId) {
 		try {
+			
+			
 			// MimeMessageֵ
 			MimeMessage msg = new MimeMessage(session);
 			msg.setFrom(new InternetAddress(p.getProperty("email.from")));

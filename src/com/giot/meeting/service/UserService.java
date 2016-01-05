@@ -3,11 +3,14 @@ package com.giot.meeting.service;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.giot.meeting.controller.SendmailAction;
 import com.giot.meeting.dao.UserDao;
 import com.giot.meeting.entities.User;
+import com.giot.meeting.utils.Iso8859_utf8;
 import com.giot.meeting.utils.MD5;
 
 @Service
@@ -15,13 +18,37 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
-
+	
 	public User getUser(String nameid, String password) {
 		return userDao.getUser(nameid, password);
 	}
 
-	public String addUser(User user) {
-		return  userDao.addUser(user);
+	public String addUser(User user,SendmailAction sendmail ) {
+		String username = user.getUsername();
+		System.out.println("注册的用户名："+username);
+		User u = userDao.getUserByUsername(username);
+		System.out.println(u);
+		JSONObject obj = new JSONObject();
+		if(u!=null){
+			//用户已存在
+			obj.put("code", 2);
+			obj.put("message", "该邮箱已存在");
+			return obj.toString();
+		}
+		user.setNickname(Iso8859_utf8.transfrom(user.getNickname()));
+		user.setPassword(MD5.compute(user.getPassword()));
+		
+		boolean b=  userDao.addUser(user);
+		if(b){
+			obj.put("code", 0);
+			obj.put("message", "注册成功");
+			sendmail.sendValidate(user.getUsername(), user.getUserid());
+			return obj.toString();
+		}else{
+			obj.put("code", 1);
+			obj.put("message", "注册失败");
+			return obj.toString();
+		}
 	}
 
 	public void updateUser(User user) {

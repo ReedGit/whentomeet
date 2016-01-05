@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="bubble time" />
 
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/customer.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
@@ -20,33 +20,8 @@ body{
 
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-   <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" 
-         data-target="#bubble-navbar-collapse">
-         <span class="sr-only">切换导航</span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">BubbleTime</a>
-      <a class="navbar-brand visible-xs" href="#">登陆</a>
-      <a class="navbar-brand visible-xs" href="#">注册</a>
-   </div>
-   <div class="collapse navbar-collapse" id="bubble-navbar-collapse">
-      <ul class="nav navbar-nav" >
-         	<li class="active"><a href="index.html">首页</a></li>
-			<li><a href="#feature" class="scroll">特色</a></li>
-			<li><a href="#Quickstart" class="scroll">快速上手</a>
-			<li><a href="scheduleMeeting.jsp">安排聚会</a></li>
-			<li><a href="#contactus" class="scroll">联系我们</a></li>
-			<li><a href="mymeeting.jsp" class="mymeeting2">我的聚会</a></li>
-			
-			<li class="pull-right hidden-xs"><a>登陆</a></li>
-			<li class="pull-right hidden-xs"><a>注册</a></li>
-      </ul>
-   </div>
-</nav>
+<!-- 导航 头-->
+<div class="header"></div>
 
 <div id="myCarousel" class="carousel slide">
    <!-- 轮播（Carousel）指标 -->
@@ -166,9 +141,9 @@ body{
 		</div><!-- 快速上手的row -->
 	</div><!-- end of container  -->
 		
-	<div style="border: 1px solid red; width: 100%;">
+	<div class="footer">
 		<div class="container">
-			<div class="row" style="background: #E2E2E2;height: 300px;width: 100%;">
+			<div class="row">
 			<div class="col-xs-12 col-md-3">
 				<div class="page-header">
    					<h4>关于ButtonTime</h4>
@@ -179,33 +154,33 @@ body{
 					提供全方面的保障。 
 				</div>
 			</div>
+			
+			
 			<div class="col-xs-12 col-md-3">
 				<div class="page-header">
    					<h4>关键词</h4>
 				</div>
-				<div class="para">
-					<div class="row">
-						<ul class="tag">
-								<li><a href="#">高效</a></li>
-								<li><a href="#">分享快乐</a></li>
-								<li><a href="#">便捷</a></li>
-								<li><a href="#">共同参与</a></li>
-								<li><a href="#">科学</a></li>
-								<li><a href="#">见面时间</a></li>
-								<li><a href="#">计划</a></li>
-								<li><a href="#">井井有条</a></li>
-								<li><a href="#">简单</a></li>
-								<li><a href="#">便于沟通</a></li>
-								<li><a href="#">高端</a></li>
-							</ul>
-					</div> 
-				</div>
+				<div class="row">
+					<ul>
+						<li class="col-xs-4">高效</li>
+						<li class="col-xs-4">分享快乐</li>
+						<li class="col-xs-4">便捷</li>
+						<li class="col-xs-4">共同参与</li>
+						<li class="col-xs-4">科学</li>
+						<li class="col-xs-4">见面时间</li>
+						<li class="col-xs-4">计划</li>
+						<li class="col-xs-4">井井有条</li>
+						<li class="col-xs-4">简单</li>
+						<li class="col-xs-4">便于沟通</li>
+						<li class="col-xs-4">高端</li>
+					</ul>
+				</div> 
 			</div>
 			<div class="col-xs-12 col-md-3">
 				<div class="page-header">
    					<h4>公司信息</h4>
 				</div>
-				<div class="para">
+				<div>
 					<p>南京吉奥客电子科技有限公司</p>
 					<br>网址：<a href="http://www.geariot.com/">http://www.geariot.com/</a>
 					<br>邮箱：info@geariot.com
@@ -222,24 +197,13 @@ body{
 				</div>
 			</div>
 		</div>
-		
-		
 		</div>
-	</div>
 		
-		
-			
-	<!--/start-copyright-section-->
-	<div class="clearfix"></div>
-	<div class="copyright">
+		<!-- copyright -->
+		<div class="copyright"></div>
 		
 	</div>
 		
-	<a href="#head" id="toTop" class="scroll" style="display: block;"> 
-		<span id="toTopHover" style="opacity: 1;"> </span>
-	</a>
-
-
 			
 </body>
 </html>

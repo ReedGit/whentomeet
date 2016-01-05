@@ -22,6 +22,9 @@ var getCookie = function (name)
 var loadFoot = function(){
 	$(".copyright").load("public/copyright.html"); 
 }
+var loadHead = function(){
+	$(".header").load("public/head.html"); 
+}
 
 
 var USER_STA = function(){
@@ -66,4 +69,5 @@ var USER_STA = function(){
 $(function(){
 	USER_STA();
 	loadFoot();
+	loadHead();
 })

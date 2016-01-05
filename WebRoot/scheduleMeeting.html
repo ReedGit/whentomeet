@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hi,来冒泡吧</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="bubble time" />
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/customer.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+</head>
+<body>
+<!-- 导航 头-->
+<div class="header"></div>
+
+<div class="container">
+ <div class="row">
+	<form id="loginForm">
+	<br>
+		<div id="login" class="well col-xs-12 col-sm-5 col-sm-offset-6">
+			<div class="page-header text-center">
+  				 <h3>安排一次聚会吧</h3>
+			</div>
+			<label class="error" for="login" ></label>
+			<div class="row">
+				<div class="input-group col-xs-10 col-xs-offset-1">
+	  				<span class="input-group-addon">  &nbsp;主&nbsp;&nbsp;&nbsp;&nbsp;题&nbsp;&nbsp; </span>
+	 			 	<input type="text" class="form-control" placeholder="马尔代夫7日游" name="title">
+		      	</div>
+			</div>
+	      	
+	      	<br>
+			<div class="row">
+				<div class="input-group col-xs-10 col-xs-offset-1">
+	  				<span class="input-group-addon">  &nbsp;地&nbsp;&nbsp;&nbsp;&nbsp;点 &nbsp; </span>
+	 			 	<input type="text" class="form-control" placeholder="马尔代夫" name="location">
+		      	</div>
+			</div>
+	      	
+	      	<br>
+	        <div class="row">
+				<div class="input-group col-xs-10 col-xs-offset-1">
+	   				<span class="input-group-addon">  &nbsp;时&nbsp;&nbsp;&nbsp;&nbsp;长 &nbsp; </span>
+	  			 	<select class="form-control" id="duration" name="duration">
+                          <option value="1">15 分钟</option>
+                          <option value="2">0.5 小时</option>
+                          <option value="4" selected="selected">1.0 小时</option>
+                          <option value="6">1.5 小时</option>
+                          <option value="8">2.0 小时</option>
+                          <option value="10">2.5 小时</option>
+                          <option value="12">3.0 小时</option>
+                          <option value="16">4.0 小时</option>
+                          <option value="20">5.0 小时</option>
+                          <option value="24">6.0 小时</option>
+                          <option value="96">全天</option>
+                    </select>
+		      	</div>
+		    </div>
+	      	<br>
+	        <div class="row">
+				<div class="input-group col-xs-10 col-xs-offset-1">
+	   				<span class="input-group-addon">  &nbsp;细&nbsp;&nbsp;&nbsp;&nbsp;节 &nbsp; </span>
+	  			 	<input type="password" class="form-control" placeholder="描述一下此次聚会的细节吧" name="content">
+		      	</div>
+		    </div>
+		    <br>
+	        <div class="row">
+				<div class="input-group col-xs-10 col-xs-offset-1">
+	   				<span class="input-group-addon">  &nbsp;邮&nbsp;&nbsp;&nbsp;&nbsp;箱 &nbsp; </span>
+	  			 	<input type="password" class="form-control" placeholder="此邮箱会收到其他受邀者的时间更新哦~" name="organiser_mail">
+		      	</div>
+		    </div>
+	      	<br>
+	      	
+	      	<div class="row">
+				<button id="step1Submit" class="btn btn-primary col-xs-10 col-xs-offset-1">安&nbsp;排&nbsp;聚&nbsp;会</button>
+	      	</div>
+			<br>
+			<div class="row">
+				<a href="login.html" class="col-xs-10 col-xs-offset-1 text-right">已有账号？点击登陆</a><br>
+			</div>
+				
+				<div class="para row">
+					<div class="col-xs-12">
+						其他方式登录:
+						<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
+					</div>
+				</div>
+		</div>
+	</form>
+ </div>
+</div>
+
+<div class="container mycontainer">
+	 <div class="row">
+		<!-- copyright -->
+		<div class="copyright"></div>
+	 </div>
+</div>
+
+<script type="text/javascript">
+	var u = getCookie("user1");
+	var uid = getCookie("organiser");
+	$(function(){
+		if(u!=""&&u!=null){
+			$.get('getUserById.do', {"userid":uid},function(data) {
+				var d = data.defaultDura;
+				$("#duration").val(d);
+				if(d=="0"){
+					$("#duration").val("4");
+				}
+				
+				$("input[name=organiser_mail]").val(data.username);
+			});
+		}
+		
+		
+		
+		$("#step1Submit").click(function(){
+			var title = $("input[name=title]").val();
+			if($.trim(title)==""){
+				$(".tipMess").text("主题不能为空");
+				return false;
+			}else{
+				
+				$.getScript("js/timeTable.js");
+				$.getScript("js/zxx.color_exchange.js");
+					
+				$("#timeTableDiv").load("timeTable.jsp",function(){
+					$.getScript("js/timeTable.js");
+					$.getScript("js/zxx.color_exchange.js");
+				});
+				
+				
+				setCookie("organiser_mail", $("input[name=organiser_mail]").val());
+				return false;
+			}
+			
+		});
+		
+	})
+	
+</script>
+
+</body>
+</html>

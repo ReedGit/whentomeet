@@ -36,15 +36,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public String addUser(User user) {
+	public boolean addUser(User user) {
 		try {
 			getSession().save(user);
-
+			return true;
 		} catch (RuntimeException e) {
 			e.printStackTrace();
-			return null;
+			return false;
 		}
-		return user.getUsername();
 	}
 
 	@Override
@@ -153,6 +152,19 @@ public class UserDaoImpl implements UserDao {
 			throw new RuntimeException(e);
 		}
 
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		try {
+			String hql = "from User where username =? and validate = 1";
+			User u = (User) getSession().createQuery(hql)
+					.setString(0, username).uniqueResult();
+			return u;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

@@ -15,13 +15,86 @@
 	    margin-top: 12px;
 	    margin-bottom: -6px;
 	    height: 5em;
-	    width: 17em;
+	    width: 100%;
 	}
 	.mywell img{
 		height: 67px;
 		width: 67px;
 	}
+	
+	
+	/*设置footer 包括公司的信息和copyright*/
+	.footer{
+		width: 100%;
+		background: #E2E2E2;
+	}
+	ul {
+		list-style-type : none;
+	}
 		
+	.copyright{
+		background: #000;
+		color: #fff;
+		padding-top:8px;
+		margin-top: 10px;
+		height: 70px;
+	}
+	/*设置navbar为直角*/
+	.navbar {
+   	 	 border-radius: 0;
+	}
+	/*是这个div 高度为100%*/
+	.fullHight{
+		height: 100%;
+		min-height: 100%;
+	}
+	/*自定义的container 可以宽度满屏*/
+	.mycontainer{
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 0;
+		padding-right: 0;
+		width: 100%;
+	}
+	.mycontainer .row{
+		margin-left: 0;
+		margin-right: 0;
+	}
+	/*必填项*/
+	.required{
+		color: red;
+	}
+	/*此时是用来 调正确认密码的padding*/
+	.no-padding{
+		padding: 9px;
+	}
+	
+	.bg-white{
+		background: #fff;
+	}
+	
+	
+	/*设置表单的错误小红叉*/
+	.error-icon{
+		color: red;
+		padding: 0;
+		margin-top: 10px;
+	}
+	/*设置错误提示*/
+	.error-tip{
+		color: red;
+		font-size: 0.9em;
+		padding-top: 5px;
+	}
+	
+	/*设置loading的图片大小*/
+	.loading{
+		width: 20px;
+		height: 20px;
+		margin-top: 5px;
+		margin-bottom: 3px;
+	}
+	
 	
 }
 /*导航的响应式布局*/
@@ -64,7 +137,6 @@
 	    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
 	    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.05);
 	}
-	
 }
 @media (min-width: 500px) and (max-width: 768px){
 	/*手机上，点击汉堡菜单，出现的下拉列表字体居中显示*/
@@ -130,6 +202,11 @@
 	    min-height: 20px;
 	    padding: 19px;
 	    margin-bottom: 10px;
+	}
+	/*在稍大屏幕上设置高度*/
+	.copyright{
+		height: 60px;
+		padding-top: 18px;
 	}
 	
 }

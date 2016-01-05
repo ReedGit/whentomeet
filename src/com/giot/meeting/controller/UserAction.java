@@ -3,7 +3,6 @@ package com.giot.meeting.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.giot.meeting.entities.User;
 import com.giot.meeting.service.UserService;
@@ -53,16 +51,9 @@ public class UserAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/addUser.do")
-	public String addUser(User user,RedirectAttributes redirectAttributes) {
-
-		user.setPassword(MD5.compute(user.getPassword()));
-		user.setRegisterDate(new Date());
-		/*user.setImage(uploadImage(file, request, user.getNameid()));*/
-		String s = userService.addUser(user);
-		sendmail.sendValidate(user.getUsername(), user.getUserid());
-		/*redirectAttributes.addFlashAttribute("provEmail", user.getUsername());
-		return "redirect:/redirectValidateEmail.do";*/
+	@RequestMapping(value="/addUser.do", produces = "text/html;charset=UTF-8")
+	public String addUser(User user) {
+		String s = userService.addUser(user,sendmail);
 		return s;
 	}
 

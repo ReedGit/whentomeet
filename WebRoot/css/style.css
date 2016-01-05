@@ -7,6 +7,7 @@ body{
 	/* font-family: 'Open Sans', sans-serif; */
 	position:relative;
 	height: 100%;
+	/* background-color: #00A8FF; */
 	background-color: #669999;
 }
 #wrapper{
@@ -1548,28 +1549,6 @@ float:left;
 }
 .icon-text a {
   color: #D7D7D8;
-}
-/*----copyright-------*/
-.copyright{
-  padding: 1em 0;
-	background:#232323;
-	height: 4em;
-	/* margin-top: 100px; */
-/* 	position: absolute; */
-	bottom: 0;
-	width: 100%;
-}
-p.write {
-  float: right;
-  color: #fff;
-  font-size:0.98em;
-  margin-top: 4px;
-}
-p.write a{
-color: #EC5844;
-}
-.logo2 {
-  float: left;
 }
 /*----top-move------*/
 #toTop {

@@ -123,6 +123,7 @@ public class SendmailAction {
 
 	public void sendValidate(String registerEmail, String userid) {
 		// ！！！！javabean:验证邮箱，将meetId这个参数作为 userid 传过去
+		System.out.println("ddddd-"+mu);
 		mu.sendSigleMail(registerEmail, "", "", userid, "2");
 	}
 
