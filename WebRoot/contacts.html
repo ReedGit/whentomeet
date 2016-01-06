@@ -7,11 +7,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="bubble time" />
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="css/tablesorterstyle.css" type="text/css" id="" media="print, projection, screen" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/customer.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 </head>
 <body>
 <!-- 导航 头-->
@@ -32,20 +34,20 @@
 			<li><a class="text-white" href="changepass.html">修改密码</a></li>
 		</ul>
  	</div>
- 
+ 	
 	<form id="form">
 		<input type="hidden" value="" name="userid">
 		<input type="hidden" value="" name="password">
 		<input type="hidden" value="1" name="validate">
 	
-		<div id="login" class="well col-xs-12 col-sm-5 col-sm-offset-1  bg-white">
+		<div class="well col-xs-12 col-sm-6  bg-white" style="height: 500px;">
 			<div class="page-header text-center hidden-xs">
-  				 <h3>修改密码</h3>
+  				 <h3>我的联系人</h3>
 			</div>
 			<ul class="nav nav-tabs visible-xs col-xs-10 col-xs-offset-1">
 			    <li><a href="myAccount.html">账号设置</a></li>
-				<li><a href="contacts.html">联系人</a></li>
-				<li class="active"><a href="changepass.html">修改密码</a></li>
+				<li class="active"><a href="contacts.html">联系人</a></li>
+				<li><a href="changepass.html">修改密码</a></li>
 			</ul>
 			<div class="visible-xs">
 				<br>
@@ -54,50 +56,26 @@
 			</div>
 			
 			<div class="row">
-				<div class="input-group col-xs-10 col-xs-offset-1">
-	  				<span class="input-group-addon"> &nbsp;旧 密 码&nbsp;</span>
-			 		<input type="password" class="form-control" placeholder="请输入您的旧密码" name="oldpassword">
+				<div class="input-group col-xs-12">
+	  				<table class="tablesorter" border="1">
+							<thead>
+								<tr>
+									<th>姓名</th>
+									<th>邮箱</th>
+									<th>分组</th>
+								</tr>
+							</thead>
+							<tbody>
+							
+							</tbody>
+							<tfoot><tr><td colspan="3"></td></tr></tfoot>
+					</table>
 		      	</div>
 			</div>
 			
 			<br>
 	      	<br>
 			
-			<div class="row">
-				<div class="input-group col-xs-10 col-xs-offset-1">
-	  				<span class="input-group-addon"> &nbsp;新 密 码&nbsp; </span>
-			 		<input type="password" class="form-control" placeholder="请输入您的新密码" name="password">
-		      	</div>
-			</div>
-	      	
-	      	<br>
-	      	<br>
-	        <div class="row">
-				<div class="input-group col-xs-10 col-xs-offset-1">
-	   				<span class="input-group-addon">确认密码</span>
-			 		<input type="password" class="form-control" placeholder="请输入您的确认密码" name="password1">
-		      	</div>
-		    </div>
-	      	<br>
-	      	<br>
-	      	
-	      	<div class="row">
-				<button id="submit" class="btn btn-primary col-xs-10 col-xs-offset-1">修&nbsp;&nbsp;&nbsp;改</button>
-	      	</div>
-			<!-- load图片 -->
-	      	<div class="text-center">
-	      		<div class="error-tip"></div>
-	      		<img class="loading center-block hidden" alt="loading" src="img/loading.gif">
-	      	</div>
-	      	
-			<br>
-			<br>
-			<div class="para row">
-				<div class="col-xs-12">
-					其他方式登录:
-					<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
-				</div>
-			</div>
 		</div>
 	</form>
  </div>

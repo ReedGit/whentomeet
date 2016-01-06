@@ -3,11 +3,16 @@ table.tablesorter {
 	font-family:arial;
 	margin:0 auto;
 	font-size: 8pt;
-	width: 85%;
+	width: 90%;
 	text-align: left;
 	border: none;
 	table-layout : fixed;
 }
+table.tablesorter th{
+	
+	text-align: center;
+}
+
 table.tablesorter a{
 	color: #0088cc;
 }
