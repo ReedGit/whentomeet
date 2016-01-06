@@ -19,8 +19,27 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	public User getUser(String nameid, String password) {
-		return userDao.getUser(nameid, password);
+	public String getUser(String username, String password) {
+		User u =  userDao.getUser(username, password);
+		JSONObject obj = new JSONObject();
+		if(u==null){
+			obj.put("code", 1);
+			obj.put("message", "用户名或者密码错误");
+			return obj.toString();
+		}else if(u.getValidate()==0){
+			obj.put("code", 1);
+			obj.put("message", "该邮箱没有验证");
+			return obj.toString();
+		}else{
+			JSONObject obj2 = new JSONObject();
+			obj2.put("nickname", u.getNickname());
+			obj2.put("username", u.getUsername());
+			obj2.put("userId", u.getUserid());
+			obj.put("code", 0);
+			obj.put("message", obj2);
+			return obj.toString();
+			
+		}
 	}
 
 	public String addUser(User user,SendmailAction sendmail ) {

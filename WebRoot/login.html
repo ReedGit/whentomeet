@@ -91,23 +91,26 @@
 			$(".error-tip").empty();
 			$(".loading").removeClass("hidden");
 			$.get("getUser.do",$("#loginForm").serializeArray(),function(data){
-					console.log(data);
-					if(data!=null&&data.validate==1){
-						setCookie("user1",data.nickname);
-						setCookie("organiser",data.userid);
-						setCookie("usermail",data.username);
-						window.location.href="scheduleMeeting.html";
-					}else if(data!=null&&data.validate==0){
-						$(".error-tip").text("该邮箱没有验证");
-						$(".loading").addClass("hidden");
-					}else if(""==data){
-						$(".error-tip").text("用户名或者密码不正确");
-						$(".loading").addClass("hidden");
-					}
-				});
-			return false;
+				var obj = $.parseJSON(data);	
+				var code = obj.code;
+				var mess = obj.message;
+				if(code==1){
+					//异常信息
+					$(".error-tip").text(mess);
+					$(".loading").addClass("hidden");
+				}
+				if(code==0){
+					//登陆成功
+					setCookie("nickname",mess.nickname);
+					setCookie("userId",mess.userId);
+					setCookie("username",mess.username);
+					window.location.href="scheduleMeeting.html";
+				}
+				
 			});
-		})
+			return false;
+		});
+})
 	</script>
 
 </body>

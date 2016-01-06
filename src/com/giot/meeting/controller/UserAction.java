@@ -34,13 +34,10 @@ public class UserAction {
 	}
 
 	@ResponseBody
-	@RequestMapping("/getUser.do")
-	public User getUser(String username, String password,HttpSession session) {
-		User u =  userService.getUser(username, MD5.compute(password));
-		if(u!=null){
-			session.setAttribute("user1", u);
-		}
-		return u;
+	@RequestMapping(value="/getUser.do",produces="text/html;charset=UTF-8")
+	public String getUser(String username, String password) {
+		String str =  userService.getUser(username, MD5.compute(password));
+		return str;
 	}
 	
 	@ResponseBody
