@@ -32,13 +32,8 @@
 			<li><a class="text-white" href="changepass.html">修改密码</a></li>
 		</ul>
  	</div>
- 
-	<form id="form">
-		<input type="hidden" value="" name="userid">
-		<input type="hidden" value="" name="password">
-		<input type="hidden" value="1" name="validate">
 	
-		<div id="login" class="well col-xs-12 col-sm-5 col-sm-offset-1  bg-white">
+		<div class="well col-xs-12 col-sm-5 col-sm-offset-1  bg-white">
 			<div class="page-header text-center hidden-xs">
   				 <h3>修改密码</h3>
 			</div>
@@ -53,10 +48,13 @@
 				<br>
 			</div>
 			
+	<form id="form">
+			<input type="text"  name="username" id="username" class="hidden">
+	
 			<div class="row">
 				<div class="input-group col-xs-10 col-xs-offset-1">
 	  				<span class="input-group-addon"> &nbsp;旧 密 码&nbsp;</span>
-			 		<input type="password" class="form-control" placeholder="请输入您的旧密码" name="oldpassword">
+			 		<input type="password" class="form-control" placeholder="请输入您的旧密码" id="oldpassword" name="password">
 		      	</div>
 			</div>
 			
@@ -66,7 +64,7 @@
 			<div class="row">
 				<div class="input-group col-xs-10 col-xs-offset-1">
 	  				<span class="input-group-addon"> &nbsp;新 密 码&nbsp; </span>
-			 		<input type="password" class="form-control" placeholder="请输入您的新密码" name="password">
+			 		<input id="password" type="password" class="form-control" placeholder="请输入您的新密码" name="password">
 		      	</div>
 			</div>
 	      	
@@ -75,11 +73,12 @@
 	        <div class="row">
 				<div class="input-group col-xs-10 col-xs-offset-1">
 	   				<span class="input-group-addon">确认密码</span>
-			 		<input type="password" class="form-control" placeholder="请输入您的确认密码" name="password1">
+			 		<input type="password" class="form-control" placeholder="请输入您的确认密码" id="password1">
 		      	</div>
 		    </div>
 	      	<br>
 	      	<br>
+	</form>
 	      	
 	      	<div class="row">
 				<button id="submit" class="btn btn-primary col-xs-10 col-xs-offset-1">修&nbsp;&nbsp;&nbsp;改</button>
@@ -99,7 +98,6 @@
 				</div>
 			</div>
 		</div>
-	</form>
  </div>
 </div>
 
@@ -112,38 +110,46 @@
 
 <script type="text/javascript">
 	$(function(){
-		$(".btn-success").click(function(){
-			var op = $("input[name=oldpassword]").val();
-			var p1 = $("input[name=password]").val();
-			var p2 = $("input[name=password1]").val();
-			if($.trim(op)==""){
-				$(".tipMess").css("backgroundColor","#F26752").text("请输入旧密码");
+		//邮箱作为用为名
+		var email = getCookie("username");
+		$("#username").val(email);
+		
+		$("#submit").click(function(){
+			$(".loading").removeClass("hidden");
+			$(".error-tip").text("");
+			var oldpassword = $("#oldpassword").val();
+			var password = $("#password").val();
+			var password1 = $("#password1").val();
+			if(""==$.trim(oldpassword)){
+				$(".error-tip").text("旧密码不能为空");
+				$(".loading").addClass("hidden");
 				return false;
 			}
-			if($.trim(p1)==""){
-				$(".tipMess").css("backgroundColor","#F26752").text("请输入新密码");
-				return false;
-			}
-			if($.trim(p1).length<8||$.trim(p1).length>20){
-				$(".tipMess").css("background","#F26752").text("新密码长度为8-20位");
-				return false;
-			}
-			if($.trim(p2)==""){
-				$(".tipMess").css("background","#F26752").text("请输入确认密码密码");
-				return false;
-			}
-			if(p1!=p2){
-				$(".tipMess").css("background","#F26752").text("两次密码不一致");
+			if(""==$.trim(password)){
+				$(".error-tip").text("新密码不能为空");
+				$(".loading").addClass("hidden");
 				return false;
 			}
 			
-			$.post("updatePassword.do",{"oldpassword":op,"password":p1,userid:uid},function(data){
-				if(data){
-					$(".tipMess").css("background","#F26752").text("修改成功");
-				}else{
-					$(".tipMess").css("background","#F26752").text("密码错误");
-				}
-			});
+			 var pass_len =password.length;
+			 if(pass_len<6 || pass_len>17){
+		 		  $(".error-tip").text("密码位数为6-16位");
+		 		  $(".loading").addClass("hidden");
+			  	  return false;
+			  }
+			
+			 if(password1!=password){
+				  //俩次密码不同
+				  $(".error-tip").text("请输入相同的密码");
+				  $(".loading").addClass("hidden");
+				  return false;
+			  }
+			 $.get("updateUser.do",$("#form").serializeArray(),function(data){
+				 var obj = $.parseJSON(data);	 
+				 $(".error-tip").text(obj.message);
+				 $(".loading").addClass("hidden");
+			  });
+			return false;
 		});
 	})
 </script>

@@ -39,9 +39,9 @@ var loadHead = function(){
 			$(".nav_login_xs").removeClass("visible-xs").addClass("hidden");
 			$(".nav_register_xs").removeClass("visible-xs").addClass("hidden");
 			//显示用户名 注销
-			$(".nav_user").removeClass("hidden").text("微微");
+			$(".nav_user").removeClass("hidden").text(nickname);
 			$(".nav_remove").removeClass("hidden");
-			$(".nav_user_xs").removeClass("hidden").addClass("visible-xs").text("微微");
+			$(".nav_user_xs").removeClass("hidden").addClass("visible-xs").text(nickname);
 			$(".nav_remove_xs").removeClass("hidden").addClass("visible-xs");
 			
 			//使用懒加载，登陆成功再绑定click事件

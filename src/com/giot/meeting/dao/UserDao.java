@@ -8,13 +8,17 @@ public interface UserDao {
 
 	public User getUser(String nameid, String password);
 	
+	public User getUserByup(String username,String password);
+	
 	public User getUserById(String userid);
 
 	public User getUserByUsername(String username);
 	
+	
+	
 	public boolean addUser(User user);
 
-	public void updateUser(User user);
+	public boolean updateUser(User user);
 	
 	public void createResetPasswordLink(String username,String secretKey,Timestamp outDate);
 	

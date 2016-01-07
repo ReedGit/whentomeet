@@ -70,8 +70,41 @@ public class UserService {
 		}
 	}
 
-	public void updateUser(User user) {
-		userDao.updateUser(user);
+	public String updateUser(User user) {
+		JSONObject obj = new JSONObject();
+		String pass = user.getPassword();
+		
+		
+		System.out.println("-------------"+pass);
+		
+		
+		if(null!=pass&&!"".equals(pass)){
+			//修改密码
+			String username = Iso8859_utf8.transfrom(user.getUsername());
+			String[] passes = pass.split(",");
+			System.out.println("查询的用户 "+ username+" 密码 "+passes[0]+"md5  "+MD5.compute(passes[0]));
+			User user2 = userDao.getUserByup(username, MD5.compute(passes[0]));
+			
+			if(user2==null){
+				obj.put("code", 1);
+				obj.put("message", "旧密码不正确");
+				return obj.toString();
+			}else{
+				String newPass = passes[1];
+				user.setPassword(newPass);
+			}
+			
+		}
+		
+		boolean b = userDao.updateUser(user);
+		if(b){
+			obj.put("code", 0);
+			obj.put("message", "更新成功");
+		}else{
+			obj.put("code", 1);
+			obj.put("message", "更新失败");
+		}
+		return obj.toString();
 	}
 
 	public boolean findUser(String nameid) {
@@ -115,6 +148,20 @@ public class UserService {
 		password = MD5.compute(password);
 		System.out.println(password);
 		userDao.resetPassword(username, password);
+	}
+	
+	public String getDefaultDura(String username){
+		User u = userDao.getUserByUsername(username);
+		JSONObject obj = new JSONObject();
+		if(null!=u){
+			int dura =  u.getDefaultDura();
+			obj.put("code", 0);
+			obj.put("message", dura);
+		}else{
+			obj.put("code", 1);
+			obj.put("message", "查询默认时长失败");
+		}
+		return obj.toString();
 	}
 	
 }

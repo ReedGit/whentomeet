@@ -165,9 +165,15 @@ public class UserAction {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/updateUser.do")
-	public boolean updateUser(User user){
-		userService.updateUser(user);
-		return true;
+	@RequestMapping(value="/updateUser.do",produces="text/html;charset=UTF-8")
+	public String updateUser(User user){
+		return userService.updateUser(user);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getdura.do",produces="text/html;charset=UTF-8")
+	public String getDefaultDura(String username){
+		return userService.getDefaultDura(username);
+	}
+	
 }
