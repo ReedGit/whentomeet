@@ -24,12 +24,12 @@ var deleteCookie = function ( name ) {
 }
 
 var loadFoot = function(){
-	$(".copyright").load("public/copyright.html"); 
+	$("div.copyright").load("public/copyright.html"); 
 }
 
 
 var loadHead = function(){
-	$(".header").load("public/head.html",function(){
+	$("div.header").load("public/head.html",function(){
 		var nickname = getCookie("nickname");
 		if(null!=nickname && ""!=nickname){
 			//进到if里面，说明登陆成功

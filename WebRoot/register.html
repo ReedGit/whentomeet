@@ -106,6 +106,12 @@
 			  $(".error-tip").text("昵称不能为空");
 			  return false;
 		  }
+		  if(nickname.length>7){
+			  $(".error-tip").text("昵称不能超过6个字符");
+			  return false;
+		  }
+		  
+		  
 		  if(""==$.trim(email)){
 			  //邮箱为空
 			  $(".error-tip").text("邮箱不能为空");

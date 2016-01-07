@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hi,来冒泡吧</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="bubble time" />
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="css/tablesorterstyle.css" type="text/css" media="print, projection, screen" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/customer.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+</head>
+<body>
+<!-- 导航 头-->
+<div class="header"></div>
+
+<div class="container">
+ <div class="row">
+	<form>
+	<br>
+		<div class="well col-xs-12 col-sm-8 col-sm-offset-4 bg-white">
+			<div class="page-header text-left">
+  				 <h2>我组织的聚会</h2>
+  				 <small><a href="myattendmeeting.html">查看我受邀的聚会</a></small>
+			</div>
+			
+			<div class="row">
+				<div class="input-group col-xs-12" style="height: 300px;">
+	  				<table class="tablesorter" border="1">
+						<thead>
+							<tr>
+								<th class="header">名称</th>
+								<th class="header">日期</th>
+								<th class="header">回复</th>
+								<th class="header">评论</th>
+							</tr>
+						</thead>
+					<tbody>
+				
+					</tbody>
+					<tfoot><tr><td colspan="4"></td></tr></tfoot>
+		</table>
+	  				
+	  				
+		      	</div>
+			</div>
+			
+			<br>
+			<br>
+			<div class="para row">
+				<div class="col-xs-12">
+					其他方式登录:
+					<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
+				</div>
+			</div>
+		</div>
+	</form>
+ </div>
+</div>
+
+<div class="container mycontainer">
+	 <div class="row">
+		<!-- copyright -->
+		<div class="copyright"></div>
+	 </div>
+</div>
+
+<script type="text/javascript">
+	var curpage = 0;
+	Date.prototype.yyyymmdd = function() {         
+        
+        var yyyy = this.getFullYear().toString();                                    
+        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based         
+        var dd  = this.getDate().toString();             
+                            
+        return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
+   };
+	
+   
+    var getResponseNum = function(meetId){
+	   var guys = 0;
+	   var response = 0;
+	   $.ajax({
+		   url:"getAllPersonTime.do",
+		   data:{"meetid":meetId},
+		   async:false,
+		   success:function(data){
+			   guys = data.length;
+			   $.each(data,function(){
+				   if(this.ptime!=null){
+					   response++;
+				   }
+			   });
+		   }
+	   });
+	   return response+"/"+guys;
+   }
+	var loadData = function(page){
+		//我临时加的
+		var uid = 0;
+		$.ajax({
+			url:"findAllMeeting.do",
+			data:{"organiser":uid,"start":page,"items":11},
+			dataType:"json",
+			type:"get",
+			success:function(data){
+				$('tbody').empty();
+				if(data.length<11){
+					$(".pager .next").css("pointer-events","none").addClass("disabled");
+					$.each(data,function(){
+						var date = new Date(this.createTime);
+						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+this.meetid+"&personId=-1'>"+this.title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
+					});
+				}else{
+					for(var i=0;i<10;i++){
+						var date = new Date(data[i].createTime);
+						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId=-1'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
+					}
+				}
+				$("table").tablesorter();
+			}
+		});
+	}
+
+
+		$(function() {
+			loadData(0);
+			$(".pager .previous").css("pointer-events","none").addClass("disabled");
+			
+			$(".pager .previous").click(function(){
+				$(".pager .next").css("pointer-events","auto").removeClass("disabled");
+				curpage -=10;
+				
+				loadData(curpage);
+				if(curpage==0){
+					$(this).css("pointer-events","none").addClass("disabled");
+				}
+					
+			});
+			$(".pager .next").click(function(){
+				$(".pager .previous").css("pointer-events","auto").removeClass("disabled");
+				curpage +=10;
+				loadData(curpage);
+			});
+			
+		});
+</script>
+
+</body>
+</html>

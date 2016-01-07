@@ -152,14 +152,14 @@
 				return false;
 			}
 			$.get("updateUser.do",$("#form").serializeArray(),function(data){
-					var obj = $.parseJSON(data);
-					//异常信息
-					$(".error-tip").text(obj.message);
-					$(".loading").addClass("hidden");
-					if(obj.code==0){
-						setCookie("nickname", nick);
-						//window.location.reload();
-					}
+				var obj = $.parseJSON(data);
+				//异常信息
+				$(".error-tip").text(obj.message);
+				$(".loading").addClass("hidden");
+				if(obj.code==0){
+					setCookie("nickname", nick);
+					//window.location.reload();
+				}
 			});
 			
 			return false;
