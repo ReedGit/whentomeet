@@ -22,15 +22,15 @@ public class TimeAction {
 	public String addTime(String times,String meetId){
 		Gson gson = new Gson();
 		List<Time> list = gson.fromJson(times, new TypeToken<List<Time>>(){}.getType());
-		
+		String timestr =null;
+		Time time = null;
 		for(Time t: list){
-			String timestr = t.getDay()+","+t.getWeek()
+			timestr = t.getDay()+","+t.getWeek()
 					+"#"+transformTime(t.getStartTime())+"-"+transformTime(t.getEndTime());
-			Time time = new Time();
+			time = new Time();
 			time.setDate(timestr);
 			time.setMeetid(meetId);
 			timeService.addTime(time);
-			
 		}
 		
 		return "success";

@@ -27,6 +27,28 @@ var loadFoot = function(){
 	$("div.copyright").load("public/copyright.html"); 
 }
 
+var chinaWeek = function(day){
+	switch (day)
+	{
+		case 0: x="周日"; break;
+		case 1: x="周一"; break;
+		case 2: x="周二"; break;
+		case 3: x="周三"; break;
+		case 4: x="周四"; break;
+		case 5: x="周五"; break;
+		case 6: x="周六"; break;
+	}
+	return x;
+}	
+
+var getDateStr = function (AddDayCount) {
+    var dd = new Date();
+    dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期
+    var m = dd.getMonth()+1;//获取当前月份的日期
+    var d = dd.getDate();
+    var week = dd.getDay();
+    return m+"月"+d+"日  "+chinaWeek(week);
+}
 
 var loadHead = function(){
 	$("div.header").load("public/head.html",function(){

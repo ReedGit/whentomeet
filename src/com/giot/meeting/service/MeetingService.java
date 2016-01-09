@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.giot.meeting.dao.MeetingDao;
 import com.giot.meeting.entities.Meeting;
+import com.giot.meeting.utils.Iso8859_utf8;
 
 @Service
 public class MeetingService {
@@ -15,6 +16,13 @@ public class MeetingService {
 	private MeetingDao meetingDao;
 
 	public Meeting addMeeting(Meeting meeting) {
+		String content =  Iso8859_utf8.transfrom(meeting.getContent());
+		String location = Iso8859_utf8.transfrom(meeting.getLocation());
+		String title =    Iso8859_utf8.transfrom(meeting.getTitle());
+		System.out.println(content+" "+location+" "+title);
+		meeting.setContent(content);
+		meeting.setLocation(location);
+		meeting.setTitle(title);
 		return meetingDao.addMeeting(meeting);
 	}
 

@@ -19,17 +19,17 @@
 
 <div class="container">
  <div class="row">
-	<form id="loginForm">
-	<br>
+		<br>
 		<div id="login" class="well col-xs-12 col-sm-5 col-sm-offset-6 bg-white">
 			<div class="page-header text-center">
   				 <h3>安排一次聚会吧</h3>
 			</div>
 			<label class="error" for="login" ></label>
+	<form id="form">
 			<div class="row">
 				<div class="input-group col-xs-10 col-xs-offset-1">
 	  				<span class="input-group-addon">  &nbsp;主&nbsp;&nbsp;&nbsp;&nbsp;题&nbsp;&nbsp; </span>
-	 			 	<input type="text" class="form-control" placeholder="马尔代夫7日游" name="title">
+	 			 	<input type="text" id="title" class="form-control" placeholder="马尔代夫7日游" name="title">
 		      	</div>
 			</div>
 	      	
@@ -64,34 +64,36 @@
 	        <div class="row">
 				<div class="input-group col-xs-10 col-xs-offset-1">
 	   				<span class="input-group-addon">  &nbsp;细&nbsp;&nbsp;&nbsp;&nbsp;节 &nbsp; </span>
-	  			 	<input type="password" class="form-control" placeholder="描述一下此次聚会的细节吧" name="content">
+	  			 	<input type="text" class="form-control" placeholder="描述一下此次聚会的细节吧" name="content">
 		      	</div>
 		    </div>
 		    <br>
 	        <div class="row">
 				<div class="input-group col-xs-10 col-xs-offset-1">
 	   				<span class="input-group-addon">  &nbsp;邮&nbsp;&nbsp;&nbsp;&nbsp;箱 &nbsp; </span>
-	  			 	<input type="password" class="form-control" placeholder="此邮箱会收到其他受邀者的时间更新哦~" name="organiser_mail">
+	  			 	<input type="text" class="form-control" placeholder="此邮箱会收到其他受邀者的时间更新哦~" name="organiser_mail">
 		      	</div>
 		    </div>
+	</form>
 	      	<br>
 	      	
 	      	<div class="row">
 				<button id="step1Submit" class="btn btn-primary col-xs-10 col-xs-offset-1">安&nbsp;排&nbsp;聚&nbsp;会</button>
 	      	</div>
-			<br>
-			<div class="row">
-				<a href="login.html" class="col-xs-10 col-xs-offset-1 text-right">已有账号？点击登陆</a><br>
-			</div>
+	      	
+			<!-- load图片 -->
+	      	<div class="text-center">
+	      		<div class="error-tip"></div>
+	      		<img class="loading center-block hidden" alt="loading" src="img/loading.gif">
+	      	</div>
 				
-				<div class="para row">
-					<div class="col-xs-12">
-						其他方式登录:
-						<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
-					</div>
+			<div class="para row">
+				<div class="col-xs-12">
+					其他方式登录:
+					<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
 				</div>
+			</div>
 		</div>
-	</form>
  </div>
 </div>
 
@@ -103,46 +105,22 @@
 </div>
 
 <script type="text/javascript">
-	var u = getCookie("user1");
-	var uid = getCookie("organiser");
-	$(function(){
-		if(u!=""&&u!=null){
-			$.get('getUserById.do', {"userid":uid},function(data) {
-				var d = data.defaultDura;
-				$("#duration").val(d);
-				if(d=="0"){
-					$("#duration").val("4");
-				}
-				
-				$("input[name=organiser_mail]").val(data.username);
-			});
+$(function(){
+	$("#step1Submit").click(function(){
+		var title = $("#title").val();
+		var duration = $("#duration").val();
+		console.log($("#form").serializeArray());
+		if(""==$.trim(title)){
+			$(".error-tip").text("标题不能为空");
+			$(".loading").addClass("hidden");
+			return false;
 		}
+		var url=encodeURI($.param($("#form").serializeArray()));
+		window.location.href="timeTable.jsp?"+url;
+		return false;
+	});
 		
-		
-		
-		$("#step1Submit").click(function(){
-			var title = $("input[name=title]").val();
-			if($.trim(title)==""){
-				$(".tipMess").text("主题不能为空");
-				return false;
-			}else{
-				
-				$.getScript("js/timeTable.js");
-				$.getScript("js/zxx.color_exchange.js");
-					
-				$("#timeTableDiv").load("timeTable.jsp",function(){
-					$.getScript("js/timeTable.js");
-					$.getScript("js/zxx.color_exchange.js");
-				});
-				
-				
-				setCookie("organiser_mail", $("input[name=organiser_mail]").val());
-				return false;
-			}
-			
-		});
-		
-	})
+})
 	
 </script>
 

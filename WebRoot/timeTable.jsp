@@ -5,191 +5,72 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	#meetingTime{
-		font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
-		-moz-user-select: none; 
-		-khtml-user-select: none; 
-		user-select: none;
-		color: #333;
-		background-color: #F8F8F8;
-		width: 1270px;
-		height: 577px;
-		border: solid 0 #333;
-		margin: 35px auto 100px;
-		border-radius:5px;
-		box-shadow: 0 0 30px #333;
-	}
-	#meetingTime #dateLable{
-		text-align: center;
-		width : 400px;
-		height: 30px;
-		margin: 0 auto;
-		width: 100%;
-		height: 45px;
-		border-top-left-radius:5px;
-		border-top-right-radius:5px;
-		border-bottom: 1px solid #ddd;
-		background: #f8f8f8;
-		padding-top: 15px;
-	}
-
-	#meetingTime #lable{
-		width: 318px;
-		border:dotted 1px #ccc;
-		text-align: center;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		margin: 11px auto;
-		background-color: #F3F3CC;
-		font-style: italic;
-		font-size: 20px;
-	}
-	#meetingTime table{
-	  table-layout:fixed;
-	}
-	
-	#meetingTime #containTable table{
-		width:1091px;
-		border-right:solid 1px #bbb;
-		border-top:none;
-		border-left:solid 0 #bbb;
-		border-bottom:solid 0 #bbb;
-		border-collapse:collapse;
-	}
-	
-	#meetingTime table tr td{
-		width: 70px;
-		height:18px;
-	}
-	#meetingTime #weekTitle{
-		border-collapse:collapse;
-		text-align:center;
-		width: 1089px;
-		margin-left: 76px;
-		border-color: transparent;
-		font-size: 13px;
-		font-weight: bold;
-	}
-	#meetingTime #weekTitle span.date{
-		font-weight: normal;
-	    font-size: 12px;
-	    padding: 0px;
-
-	}
-	#meetingTime #containTable{
-		width: 1119px;
-		height: 294px;
-		overflow: auto;
-		border-top:solid 1px #bbb;
-		border-bottom:solid 1px #bbb;
-		border-left:solid 0 #bbb;
-		border-right:solid 1px #bbb;
-		margin: 0 auto;
-	}
-	
-	#meetingTime .withBg{
-		background-color: #F5F5F8;
-	}
-	
-	
-	 #meetingTime #containTable td:nth-child(n+2){
-	 	border-bottom-style: dotted;
-	}
-	#meetingTime #containTable tr:last-child{
-	 	border-bottom: solid 0 #fff;
-	}
-	
-	/*  #containTable tr:nth-child(4n){
-	 	border-bottom: solid 1px #bbb;
-	} */
-	
-	#meetingTime #containTable .midFill{
-		width: 0.8px;
-    	background: #ddd;
-	}
-	
-	#meetingTime #weekTitle .midFill{
-		width: 0.8px;
-	}
-	
-	#meetingTime .timeLable{
-		border:none;
-		text-align: right;
-	}
-	
-	#meetingTime .showTime{
-		font-size: 12px;
-	    text-align: right;
-	    vertical-align: top;
-	    padding-right: 5px;
-	    line-height: 12px;
-	}
-	#meetingTime #changeTimeFormat a{
-		font-size: 13px;
-	   	color: #0088cc;
-		font-weight: bold;
-	    text-decoration: underline;
-	    z-index: 9999;
-	}
-	#meetingTime #changeTimeFormat{
-		text-align: right;
-	    padding-right: 7px;
-	    line-height: 12px;
-	}
-	#meetingTime #changeTimeFormat a:hover {
-		color: #005A8F;
-	}
-	
-	#meetingTime div.prevArrow{
-		background: url("img/prevArrow.png");
-		position: absolute;
-	    top: 42%;
-	    left:4%;
-	    height: 120px;
-	    width: 30px;
-	    opacity: 0.40;
-	}
-	
-	#meetingTime div.nextArrow{
-		background: url("img/nextArrow.png");
-		position: absolute;
-	    top: 42%;
-	    right: 1%;
-	    height: 120px;
-	    width: 30px;
-	    opacity: 0.40;
-	}
-	#meetingTime #dateLable{
-		white-space: pre;
-	}
-	
-	#meetingTime .submitArea{
-		position: relative;
-		float: right;
-		right: 114px;
-		top:34px;
-	}
-	/* .submitArea #step2Back{
-		width: 88px;
-		height: 39px;
-	} */
-	#meetingTime .selected,.selectedTail{
-		backgroundColor : #ffde7d;
-	}
-</style>
-<%-- <%@ include file="public/headfile.html"%> --%>
-<!-- <script type="text/javascript" src="js/zxx.color_exchange.js"></script>
-<script type="text/javascript" src="js/timeTable.js"></script> -->
+<title>hi,来冒泡吧</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/timeTable.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/customer.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/zxx.color_exchange.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/timeTable.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
 </head>
 <body style="background-color: #669999;">
+<div class="header"></div>
+<div class="visible-xs">
+	<br><br>
+</div>
+<div class="container visible-xs">
+	<div class="row">
+		<div class="well col-xs-12 bg-white">
+			<div class="page-header no-margin-top text-center">
+   				<h3 class="no-margin-top">为见面选择可能的时间吧</h3>
+   				<small>时长：<span id="dura"></span></small>
+			</div>
+			<div>
+				已选择的时间：
+				<p>关闭图标实例
+   					<button type="button" class="close" aria-hidden="true">&times;</button>
+				</p>
+			
+			</div>
+			
+			
+			<h4>&nbsp;&nbsp;选择日期</h4>
+			<select class="myform-control col-xs-9 col-xs-offset-1" id="select_data">
+			</select>
+			<div class="clearfix"></div>
+			<h4>&nbsp;&nbsp;选择开始时间（如 15:30）</h4>
+			<select class="myform-control col-xs-4 col-xs-offset-1" id="select_hour">
+			</select>
+			<div class="col-xs-1 text-center"><b>:</b></div>
+			<select class="myform-control col-xs-4">
+			  <option value="volvo">00</option>
+			  <option value="volvo">15</option>
+			  <option value="volvo">30</option>
+			  <option value="volvo">45</option>
+			</select>
+			<br>
+			<br>
+			<br>
+			<button type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">确定</button>
+			<br>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+<div class="visible-xs">
+	<br><br>
+</div>
 
-<%-- <%@ include file="public/head.html"%> --%>
-<div id="wrapper">
+
+
+<div id="wrapper" class="hidden-xs">
 <div id="meetingTime" unselectable="on" onselectstart="return false;" style="-moz-user-select:none;">
-	<div id="dateLable"><h2></h2></div>
+	<div id="dateLable"><h2 class="no-margin-top"></h2></div>
 	<div id="lable"> 为见面选择可能的时间吧</div>
 	<table border="1" id="weekTitle">
 		<tr>
@@ -247,19 +128,45 @@
 	<div class="nextArrow"></div>
 	
 </div>
-<div class="submitArea">
-	<a id="step2Back" class="btn btn-danger" href="#">返回</a>
-       
-    <button id="step2Submit" type="submit" class="btn btn-success">邀请参与人</button>
+	<div class="submitArea">
+		<a id="step2Back" class="btn btn-danger" href="#">返回</a>
+	    <button id="step2Submit" type="submit" class="btn btn-success">邀请参与人</button>
+	</div>
 </div>
+</div>
+<div class="copyright"></div>
 
-</div>
-</div>
-<!--/start-copyright-section-->
-<!-- <div class="clearfix"></div>
-		<div class="copyright">
-			
-		</div> -->
-<!--//end-copyright-section-->
+<script type="text/javascript">
+	$(function(){
+		var param = ${param.duration};
+		var text = "";
+		//当时长超过4，单位按小时，小于4单位按分钟，这样做的目的只是为了更人性化而已
+		if(param>=4){
+			$("#dura").text(param/4+"小时");
+		}else{
+			if(param==2){
+				text="30分钟";
+			}else if(param==1){
+				text="15分钟";
+			}
+			$("#dura").text(text);
+		}
+		//生成今天往后的14天时间，提供给手机用户
+		for(var i=0;i<14;i++){
+			$("#select_data").append('<option value="volvo">'+getDateStr(i)+'</option>');
+		}
+		//生成选择时间（小时）
+		for(var i=0;i<24;i++){
+			var length = (i+"").length;
+			if(length==1){
+				i="0"+i;
+			}
+			$("#select_hour").append('<option value="volvo">'+i+'</option>');
+				
+		}
+		
+		
+	})
+</script>
 </body>
 </html>

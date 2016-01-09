@@ -2,13 +2,14 @@
  * 
  */
 /* 定义时间间隔 */
-	/*var tds = parseInt("${param.duraValue}");*/
-	var pencil = false;
-	var eraser = false;
-	var tds;
+/*var tds = parseInt("${param.duraValue}");*/
+var pencil = false;
+var eraser = false;
+var tds;
 $(function(){
-	 tds = parseInt($("#duration").val());
-	
+	var url = decodeURI(decodeURI(window.location.href));
+	tds = parseInt(url.substring(url.indexOf("duration")+9,url.indexOf("&content")));
+	//tds = parseInt($("#duration").val());
 	/* 每四行划线 */
 	$('td.showTime').nextAll().css('border-top', 'solid 1px #bbb');
 	$('td.showTime').first().nextAll().css('border-top', 'solid 0 #bbb');
@@ -245,33 +246,6 @@ $(function(){
 		var timeArray = [];
 		for(var i=1;i<=cn_num;i++){
 			var timeItem;
-			/*var temp;
-			var last;
-			var flag = false;*/
-			/*$(".col_"+i+".selected,.col_"+i+".selectedTail").each(function(index){
-					var cur = $(this).parent().index();
-					if(index==0){
-						temp = cur;
-						timeItem = {};
-						timeItem.startTime = cur;
-						timeItem.day = $(".date").eq((i%15)-1).text();
-						timeItem.week = $(".date").eq((i%15)-1).parent().contents().first().text();
-						flag = true;
-					}
-					if(temp++!=cur){
-						timeItem.endTime = temp-1;
-						timeArray.push(timeItem);
-						temp = cur+1;
-						timeItem = {};
-						timeItem.startTime = cur;
-						timeItem.day = $(".date").eq((i%15)-1).text();
-						timeItem.week = $(".date").eq((i%15)-1).parent().contents().first().text();
-					}
-					last = cur;
-				
-			});*/
-			
-			
 			$(".col_"+i+".selected").each(function(){
 				timeItem = {};
 				var selectIndex = $(this).parent().index();
@@ -282,14 +256,10 @@ $(function(){
 				timeArray.push(timeItem);
 			});
 			
-			/*if(flag){
-				 timeItem.endTime = last+1;	
-				 time.push(timeItem);
-				timeArray.push(time); 
-				timeArray.push(timeItem);
-			}*/
 		}
-		$.post("addMeeting.do",$("#addMeeting").serializeArray(),function(data){
+		
+		var param = url.substring(url.indexOf("?"));
+		$.get("addMeeting.do"+param,function(data){
 			if(data!=null){
 				$.ajax({
 					url:'addTime.do',
@@ -311,7 +281,7 @@ $(function(){
 	});
 	
 	$("#step2Back").click(function(){
-		$('#timeTableDiv').empty();
+		//$('#timeTableDiv').empty();
 	});
 	
 	
