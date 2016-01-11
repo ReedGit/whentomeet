@@ -30,14 +30,13 @@
    				<small>时长：<span id="dura"></span></small>
 			</div>
 			<div>
-				已选择的时间：
-				<p>关闭图标实例
-   					<button type="button" class="close" aria-hidden="true">&times;</button>
-				</p>
+				<h4>&nbsp;&nbsp;已选择的时间：</h4>
+				<div id="selectedDate">
+				</div>
 			
 			</div>
 			
-			
+			<div class="clearfix"></div>
 			<h4>&nbsp;&nbsp;选择日期</h4>
 			<select class="myform-control col-xs-9 col-xs-offset-1" id="select_data">
 			</select>
@@ -46,18 +45,19 @@
 			<select class="myform-control col-xs-4 col-xs-offset-1" id="select_hour">
 			</select>
 			<div class="col-xs-1 text-center"><b>:</b></div>
-			<select class="myform-control col-xs-4">
-			  <option value="volvo">00</option>
-			  <option value="volvo">15</option>
-			  <option value="volvo">30</option>
-			  <option value="volvo">45</option>
+			<select class="myform-control col-xs-4" id="select_min">
+			  <option value="00">00</option>
+			  <option value="15">15</option>
+			  <option value="30">30</option>
+			  <option value="45">45</option>
 			</select>
 			<br>
 			<br>
 			<br>
-			<button type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">确定</button>
+			<button id="xs-selecttime" type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">选择时间</button>
 			<br>
 			<br>
+			<button id="xs-submit" type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">确定</button>
 			<br>
 		</div>
 	</div>
@@ -153,7 +153,7 @@
 		}
 		//生成今天往后的14天时间，提供给手机用户
 		for(var i=0;i<14;i++){
-			$("#select_data").append('<option value="volvo">'+getDateStr(i)+'</option>');
+			$("#select_data").append('<option value="'+getDateStr(i)+'">'+getDateStr(i)+'</option>');
 		}
 		//生成选择时间（小时）
 		for(var i=0;i<24;i++){
@@ -161,9 +161,55 @@
 			if(length==1){
 				i="0"+i;
 			}
-			$("#select_hour").append('<option value="volvo">'+i+'</option>');
-				
+			$("#select_hour").append('<option value="'+i+'">'+i+'</option>');
 		}
+		
+		
+		//小屏幕上的选择时间,得到世界附加到selectedDate div中
+		$("#xs-selecttime").click(function(){
+			var date = $("#select_data").val();
+			var hour = $("#select_hour").val();
+			var min = $("#select_min").val();
+			
+			var endtime = addHourMin(hour,min,param);
+			
+			html = '<p class="col-xs-9 col-xs-offset-1">'+date+'<i class="hidden">#</i>'+hour+':'+min+'-'+endtime
+   					+'<button type="button" class="close" aria-hidden="true">&times;</button>'
+   					+'</p>';
+			$("#selectedDate").append(html);
+			//绑定selectedDate div 中的关闭button (每次绑定最后一个) ,用来删除指定时间,
+			$("button.close").last().click(function(){
+				$(this).parent().remove();
+			});
+		});
+		
+		//小屏幕上的提交时间
+		
+		$("#xs-submit").click(function(){
+			//先插入 meeting信息
+			var urlp = url.substring(url.indexOf("?"));
+			console.log(urlp);
+			$.get("addMeeting.do"+urlp,function(data){
+				if(data!=null){
+					var timeArr = [];
+					$("#selectedDate p").each(function(){
+						//截取掉最后面的x
+						var text = $(this).text();
+						text = text.substring(0,text.length-1);
+						timeArr.push(text);
+					});
+					var p = {"times":JSON.stringify(timeArr),"meetId":data.meetid};
+					$.get("addTime.do",p,function(data){
+						console.log(data);
+					});
+				}
+				
+			});
+			
+			
+			
+			
+		});
 		
 		
 	})

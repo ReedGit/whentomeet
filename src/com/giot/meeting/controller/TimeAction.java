@@ -1,6 +1,7 @@
 package com.giot.meeting.controller;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,25 +21,39 @@ public class TimeAction {
 	@ResponseBody
 	@RequestMapping("/addTime.do")
 	public String addTime(String times,String meetId){
-		Gson gson = new Gson();
+		
+		timeService.addTime(times,meetId);
+	/*	Gson gson = new Gson();
 		List<Time> list = gson.fromJson(times, new TypeToken<List<Time>>(){}.getType());
 		String timestr =null;
 		Time time = null;
 		for(Time t: list){
-			timestr = t.getDay()+","+t.getWeek()
-					+"#"+transformTime(t.getStartTime())+"-"+transformTime(t.getEndTime());
+			if(!isNumeric(t.getStartTime())){
+				//传过来的开始时间如果不是数字 就是小屏幕传过来的。小屏幕传过来直接是格式化好的时间，无需转换
+				timestr = t.getDay()+","+t.getWeek()
+						+"#"+t.getStartTime()+"-"+t.getEndTime();
+			}else{
+				//拼成这样的字符串 1月16日,星期六#01:00-02:00
+				timestr = t.getDay()+","+t.getWeek()
+						+"#"+transformTime(t.getStartTime())+"-"+transformTime(t.getEndTime());
+			}
+			
 			time = new Time();
 			time.setDate(timestr);
 			time.setMeetid(meetId);
 			timeService.addTime(time);
-		}
+		}*/
 		
 		return "success";
 		
 	}
-	
+	public static boolean isNumeric(String str){ 
+	    Pattern pattern = Pattern.compile("[0-9]*"); 
+	    return pattern.matcher(str).matches();    
+	 } 
 	
 	public static String transformTime(String s){
+		
 		int a = Integer.parseInt(s);
 		String m = (a*15)%60+"";
 		String h = (a*15)/60+"";

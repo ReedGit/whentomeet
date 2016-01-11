@@ -6,8 +6,8 @@
 var pencil = false;
 var eraser = false;
 var tds;
+var url = decodeURI(decodeURI(window.location.href));
 $(function(){
-	var url = decodeURI(decodeURI(window.location.href));
 	tds = parseInt(url.substring(url.indexOf("duration")+9,url.indexOf("&content")));
 	//tds = parseInt($("#duration").val());
 	/* 每四行划线 */

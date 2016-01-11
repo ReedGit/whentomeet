@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.giot.meeting.dao.TimeDao;
 import com.giot.meeting.entities.Time;
+import com.giot.meeting.utils.Iso8859_utf8;
 
 @Service
 public class TimeService {
@@ -14,8 +15,12 @@ public class TimeService {
 	@Autowired
 	private TimeDao timeDao;
 
-	public void addTime(Time time) {
-		timeDao.addTime(time);
+	public void addTime(String time,String meetId) {
+		System.out.println("meetid    "+meetId);
+		time = Iso8859_utf8.transfrom(time);
+		System.out.println(time);
+		
+		//timeDao.addTime(time);
 	}
 
 	public void deleteTime(String meetid) {

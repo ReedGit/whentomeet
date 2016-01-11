@@ -47,7 +47,25 @@ var getDateStr = function (AddDayCount) {
     var m = dd.getMonth()+1;//获取当前月份的日期
     var d = dd.getDate();
     var week = dd.getDay();
-    return m+"月"+d+"日  "+chinaWeek(week);
+    return m+"月"+d+"日<i class='hidden'>,</i>"+chinaWeek(week);
+}
+//用户选择开始时间，根据时长算出结束时间
+var addHourMin = function(hour,min,dura){
+	var d = new Date();
+	d.setHours(hour); 
+	d.setMinutes(parseInt(min)+dura*15);
+	
+	var nhour = d.getHours();
+	var nmin  = d.getMinutes();
+	
+	if((nhour+"").length==1){
+		nhour="0"+nhour;
+	}
+	if((nmin+"").length==1){
+		nmin="0"+nmin;
+	}
+	return nhour+":"+nmin;
+	
 }
 
 var loadHead = function(){
