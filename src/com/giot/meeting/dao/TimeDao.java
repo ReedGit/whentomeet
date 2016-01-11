@@ -6,7 +6,7 @@ import com.giot.meeting.entities.Time;
 
 public interface TimeDao {
 
-	public void addTime(Time time);
+	public boolean addTime(Time time);
 
 	public void deleteTime(String meetid);
 

@@ -199,8 +199,13 @@
 						timeArr.push(text);
 					});
 					var p = {"times":JSON.stringify(timeArr),"meetId":data.meetid};
-					$.get("addTime.do",p,function(data){
-						console.log(data);
+					$.get("addTime.do",p,function(d){
+						if(d){
+							window.location.href="createTime.jsp?meetId="+data.meetid;
+						}else{
+							alert("增加时间失败");
+						}
+						
 					});
 				}
 				

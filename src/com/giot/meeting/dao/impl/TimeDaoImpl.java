@@ -23,12 +23,13 @@ public class TimeDaoImpl implements TimeDao {
 	}
 
 	@Override
-	public void addTime(Time time) {
+	public boolean addTime(Time time) {
 		try {
 			getSession().save(time);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
+			return false;
 		}
 	}
 

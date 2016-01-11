@@ -263,11 +263,15 @@ $(function(){
 			if(data!=null){
 				$.ajax({
 					url:'addTime.do',
-					type:"post",
+					type:"get",
 					data:{"times":JSON.stringify(timeArray),"meetId":data.meetid},
 					dataType:"text",
-					success:function(){
-						window.location.href="createTime.jsp?meetId="+data.meetid;
+					success:function(d){
+						if(d){
+							window.location.href="createTime.jsp?meetId="+data.meetid;
+						}else{
+							alert("增加时间失败");
+						}
 					}
 				
 				});
