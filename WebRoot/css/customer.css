@@ -144,7 +144,23 @@
 	    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
 	    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
+	}
+	/*使子类在父类中垂直居中*/
+	.vparent {
+	    display: table;
+	    table-layout: fixed;
+	}
+
+	.vchild {
+	    display:table-cell;
+	    vertical-align:middle;
+	    text-align:center;
+	}
+	
+	/*手型鼠标*/
+	.cursor-pointer{
+		cursor: pointer;
+	}
 	
 	
 }

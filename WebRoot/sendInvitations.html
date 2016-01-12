@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hi,来冒泡吧</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="bubble time" />
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/customer.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+</head>
+<body>
+<!-- 导航 头-->
+<div class="header"></div>
+
+<div class="container">
+ <div class="row">
+	<form id="loginForm">
+	<br>
+		<div id="login" class="well col-xs-12 col-sm-8 col-sm-offset-2 bg-white">
+			<div class="page-header text-center">
+  				 <h3>通过邮箱发送邀请</h3>
+			</div>
+			<div class="row hidden-xs">
+				<div class="page-header text-left col-xs-offset-1 no-margin-top">
+  				 	<h4>我的信息</h4>
+				</div>
+			</div>
+	      	<div class="visible-xs col-xs-offset-1">
+	      		我的信息
+	      	</div>
+	      	<div class="row">
+				<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
+      				<input type="text" class="form-control" placeholder="我的名字">
+   				</div>
+				<div class="form-group col-xs-7 col-sm-5">
+      				<input type="text" class="form-control" placeholder="我的邮箱">
+   				</div>
+			</div>
+	      	
+			<div class="row hidden-xs">
+				<div class="page-header text-left col-xs-offset-1 no-margin-top">
+  				 	<h4>受邀人的信息  注册用户可以同步和保存联系人</h4>
+				</div>
+			</div>
+	      	<div class="visible-xs col-xs-offset-1">
+	      		受邀人的信息  注册用户可以同步和保存联系人
+	      	</div>
+	      	<div id="otherInfo">
+		      	<div class="row">
+					<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
+	      				<input type="text" class="form-control" placeholder="名字">
+	   				</div>
+					<div class="form-group col-xs-7 col-sm-5">
+	      				<input type="text" class="form-control" placeholder="邮箱">
+	   				</div>
+				</div>
+		      	<div class="row">
+					<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
+	      				<input type="text" class="form-control" placeholder="名字">
+	   				</div>
+					<div class="form-group col-xs-7 col-sm-5">
+	      				<input type="text" class="form-control" placeholder="邮箱">
+	   				</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
+	      				<input type="text" class="form-control" placeholder="名字">
+	   				</div>
+					<div class="form-group col-xs-7 col-sm-5">
+	      				<input type="text" class="form-control" placeholder="邮箱">
+	   				</div>
+				</div>
+			</div>
+	      	<div id="addInput" style="background: #D9544F;width: 40px;height: 40px;color: #fff;" class="cursor-pointer img-circle text-center vparent col-xs-offset-10 col-sm-offset-9">
+	      		<div class="vchild"><h2>+</h2></div>
+	      	</div>
+	      	<br>
+	      	<div class="row">
+				<button id="submit" class="btn btn-primary col-xs-12 col-sm-9 col-sm-offset-1">发送邀请</button>
+	      	</div>
+			<!-- load图片 -->
+	      	<div class="text-center">
+	      		<div class="error-tip"></div>
+	      		<img class="loading center-block hidden" alt="loading" src="img/loading.gif">
+	      	</div>
+	      	
+			<div class="row">
+				<a href="sendresetpasslink.jsp" class="col-xs-10 col-xs-offset-1 col-sm-9 col-sm-offset-1 text-right">忘记密码？点击重置&gt;&gt;</a><br>
+				<a href="register.html" class="col-xs-10 col-xs-offset-1 col-sm-9 col-sm-offset-1 text-right">还没账号？点击注册&gt;&gt;</a>
+			</div>
+				
+			<div class="hidden-xs">
+		      	<br>
+		      	<br>
+	      	</div>
+			<div class="para row">
+				<div class="col-xs-12">
+					其他方式登录:
+					<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
+				</div>
+			</div>
+		</div>
+	</form>
+ </div>
+</div>
+
+<div class="container mycontainer">
+	 <div class="row">
+		<!-- copyright -->
+		<div class="copyright"></div>
+	 </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#addInput").click(function(){
+			var html ='<div class="row">'
+						+'<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">'
+						  +'<input type="text" class="form-control" placeholder="名字">'
+					    +'</div>'
+						+'<div class="form-group col-xs-7 col-sm-5">'
+						  +'<input type="text" class="form-control" placeholder="邮箱">'
+						+'</div>'
+					  +'</div>';
+			
+			$("#otherInfo").append(html);
+		});
+	});
+</script>
+
+</body>
+</html>

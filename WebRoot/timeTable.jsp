@@ -29,19 +29,19 @@
    				<h3 class="no-margin-top">为见面选择可能的时间吧</h3>
    				<small>时长：<span id="dura"></span></small>
 			</div>
-			<div>
+			<div class="well col-xs-12 col-xs-offset-0">
 				<h4>&nbsp;&nbsp;已选择的时间：</h4>
-				<div id="selectedDate">
+				<div id="selectedDate" class="col-xs-offset-1">
+					你还没有选择时间
 				</div>
 			
 			</div>
-			
 			<div class="clearfix"></div>
-			<h4>&nbsp;&nbsp;选择日期</h4>
+			<h4>&nbsp;&nbsp;日期</h4>
 			<select class="myform-control col-xs-9 col-xs-offset-1" id="select_data">
 			</select>
 			<div class="clearfix"></div>
-			<h4>&nbsp;&nbsp;选择开始时间（如 15:30）</h4>
+			<h4>&nbsp;&nbsp;开始时间</h4>
 			<select class="myform-control col-xs-4 col-xs-offset-1" id="select_hour">
 			</select>
 			<div class="col-xs-1 text-center"><b>:</b></div>
@@ -57,7 +57,7 @@
 			<button id="xs-selecttime" type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">选择时间</button>
 			<br>
 			<br>
-			<button id="xs-submit" type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">确定</button>
+			<button id="xs-submit" type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">完&nbsp;&nbsp;成</button>
 			<br>
 		</div>
 	</div>
