@@ -25,6 +25,17 @@ var deleteCookie = function ( name ) {
 	  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+
+var checkIsLogin = function(){
+	var n = getCookie("nickname");
+	if(null==n||""==n){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
 var loadFoot = function(){
 	$("div.copyright").load("public/copyright.html"); 
 }
