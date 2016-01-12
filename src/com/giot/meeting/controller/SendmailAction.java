@@ -1,6 +1,7 @@
 package com.giot.meeting.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.mail.internet.AddressException;
@@ -38,6 +39,14 @@ public class SendmailAction {
 	public String sendtoMail(String[] attendeeName, String[] attendeeEmail,
 			String meetId, String selfEmail, String myName, String meetTheme,
 			HttpSession session) throws AddressException {
+		System.out.println("发送邀请邮件信息 :受邀人姓名　"+Arrays.toString(attendeeName));
+		System.out.println("发送邀请邮件信息：受邀人邮箱　"+Arrays.toString(attendeeEmail));
+		System.out.println("发送邀请邮件信息：meetId　"+meetId);
+		System.out.println("发送邀请邮件信息：自己的邮箱　"+selfEmail);
+		System.out.println("发送邀请邮件信息：我的名字　"+myName);
+		System.out.println("发送邀请邮件信息：主题"+meetTheme);
+		
+		
 		User us = (User) session.getAttribute("user1");
 
 		List<String> li = new ArrayList<String>();

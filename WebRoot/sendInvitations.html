@@ -19,7 +19,9 @@
 
 <div class="container">
  <div class="row">
-	<form id="loginForm">
+	<form id="form" action="sendtoMail.do" method="post">
+	<input type="hidden" name="meetTheme" value="">
+	<input type="hidden" name="meetId" value="">
 	<br>
 		<div id="login" class="well col-xs-12 col-sm-8 col-sm-offset-2 bg-white">
 			<div class="page-header text-center">
@@ -35,10 +37,11 @@
 	      	</div>
 	      	<div class="row">
 				<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
-      				<input type="text" class="form-control" placeholder="我的名字">
+      				<input type="text" class="form-control" placeholder="我的名字" name="myName">  
+
    				</div>
 				<div class="form-group col-xs-7 col-sm-5">
-      				<input type="text" class="form-control" placeholder="我的邮箱">
+      				<input type="text" class="form-control email" placeholder="我的邮箱" name="selfEmail">
    				</div>
 			</div>
 	      	
@@ -53,26 +56,26 @@
 	      	<div id="otherInfo">
 		      	<div class="row">
 					<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
-	      				<input type="text" class="form-control" placeholder="名字">
+	      				<input type="text" class="form-control" placeholder="名字" name="attendeeName">
 	   				</div>
 					<div class="form-group col-xs-7 col-sm-5">
-	      				<input type="text" class="form-control" placeholder="邮箱">
+	      				<input type="text" class="form-control email" placeholder="邮箱" name="attendeeEmail">
 	   				</div>
 				</div>
 		      	<div class="row">
 					<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
-	      				<input type="text" class="form-control" placeholder="名字">
+	      				<input type="text" class="form-control" placeholder="名字" name="attendeeName">
 	   				</div>
 					<div class="form-group col-xs-7 col-sm-5">
-	      				<input type="text" class="form-control" placeholder="邮箱">
+	      				<input type="text" class="form-control email" placeholder="邮箱" name="attendeeEmail">
 	   				</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">
-	      				<input type="text" class="form-control" placeholder="名字">
+	      				<input type="text" class="form-control" placeholder="名字" name="attendeeName">
 	   				</div>
 					<div class="form-group col-xs-7 col-sm-5">
-	      				<input type="text" class="form-control" placeholder="邮箱">
+	      				<input type="text" class="form-control email" placeholder="邮箱" name="attendeeEmail">
 	   				</div>
 				</div>
 			</div>
@@ -84,7 +87,7 @@
 				<button id="submit" class="btn btn-primary col-xs-12 col-sm-9 col-sm-offset-1">发送邀请</button>
 	      	</div>
 			<!-- load图片 -->
-	      	<div class="text-center">
+	      	<div class="text-center col-xs-12 col-sm-9 col-sm-offset-1">
 	      		<div class="error-tip"></div>
 	      		<img class="loading center-block hidden" alt="loading" src="img/loading.gif">
 	      	</div>
@@ -116,19 +119,87 @@
 	 </div>
 </div>
 <script type="text/javascript">
+/*检查用户名是否为空，是否合法*/
+var checkMyEmail = function(){
+	var selfEmail = $("input[name=selfEmail]").val();
+	if(""==$.trim(selfEmail)){
+		$(".error-tip").text("请填写自己的邮箱");
+		$("input[name=selfEmail]").addClass("focus-red");
+		return false;
+	}
+	return true;
+}
+/*检查填的受邀人的个数，这里至少要选择一个*/
+var checkAttendeeEmailNums = function(){
+	var flag = true;
+	$("input[name=attendeeEmail]").each(function(){
+		var value = $(this).val();
+		if($.trim(value)!=""){
+			flag = false;
+			return false;
+		}
+	});
+	if(flag){
+		$(".error-tip").text("至少填写一个受邀人");
+		$("input[name=selfEmail]").addClass("focus-red");
+	}
+	return !flag;
+}
+
+
 	$(function(){
+		/*给表单中两个隐藏的input 赋值，*/
+		var url = window.location.href;
+		url = decodeURI(url);
+		var index = url.indexOf("&title");
+		var title = url.substring(index+7);
+		$("input[name=meetTheme]").val(title);
+		$("input[name=meetId]").val(url.substring(url.indexOf("?")+8,index));
+		
+		//点击增加一组输入框
 		$("#addInput").click(function(){
 			var html ='<div class="row">'
 						+'<div class="form-group col-xs-5 col-sm-4 col-sm-offset-1">'
-						  +'<input type="text" class="form-control" placeholder="名字">'
+						  +'<input type="text" class="form-control" placeholder="名字" name="attendeeName">'
 					    +'</div>'
 						+'<div class="form-group col-xs-7 col-sm-5">'
-						  +'<input type="text" class="form-control" placeholder="邮箱">'
+						  +'<input type="text" class="form-control email" placeholder="邮箱" name="attendeeEmail">'
 						+'</div>'
 					  +'</div>';
 			
 			$("#otherInfo").append(html);
 		});
+		
+	 	$("#submit").click(function(){
+	 		var f =  checkMyEmail();
+	 		if(!f){
+	 			return false;
+	 		}
+	 		var f1 =checkAttendeeEmailNums();
+	 		if(!f1){
+	 			return false;
+	 		}
+	 		var email ="";
+	 		var flag = true;
+	 		/*遍历.email 检查填的邮箱是否合法*/
+	 		$(".email").each(function(){
+	 			$(this).removeClass("focus-red");
+	 			email = $(this).val();
+	 			if(""!=email){
+	 				if(!emailRex.test(email)){
+	 					$(this).addClass("focus-red");
+	 					flag = false;
+	 					
+	 				}
+	 			}
+	 		});
+	 		//如果email有不合法的，给出提示
+	 		if(!flag){
+	 			$(".error-tip").text("请输入正确的邮箱");
+	 		}
+	 		return flag;
+	 	});	
+		
 	});
 </script>
 

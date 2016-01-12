@@ -1355,9 +1355,6 @@ form li.first,li.second{
 .user {
     background: url(../img/icons.png) no-repeat 14px 15px #f79d29;
 }
-.email{
-  background:url(../img/icons.png) no-repeat 15px -39px #f79d29;
-}
 .phone{
   background: url(../img/icons.png) no-repeat 15px -93px #f79d29;
 }

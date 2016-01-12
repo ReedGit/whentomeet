@@ -259,6 +259,7 @@ $(function(){
 		}
 		
 		var param = url.substring(url.indexOf("?"));
+		var theme = url.substring(url.indexOf("?")+7,url.indexOf("&location"));
 		$.get("addMeeting.do"+param,function(data){
 			if(data!=null){
 				$.ajax({
@@ -268,7 +269,7 @@ $(function(){
 					dataType:"text",
 					success:function(d){
 						if(d){
-							window.location.href="createTime.jsp?meetId="+data.meetid;
+							window.location.href="createTime.html?meetId="+data.meetid+"&title="+theme;
 						}else{
 							alert("增加时间失败");
 						}

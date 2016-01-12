@@ -1,6 +1,8 @@
 /**
  * 
  */
+var emailRex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+
 var setCookie = function (name,value)
 {
     var exp = new Date();
