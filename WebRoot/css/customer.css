@@ -147,8 +147,9 @@
 	}
 	/*使子类在父类中垂直居中*/
 	.vparent {
-	    display: table;
+	   display: table;
 	    table-layout: fixed;
+	   
 	}
 
 	.vchild {
