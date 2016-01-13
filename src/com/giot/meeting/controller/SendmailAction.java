@@ -86,9 +86,9 @@ public class SendmailAction {
 
 		if (us == null) {
 			mu.sendSigleMail(selfEmail, myName, meetTheme, meetId, "-1");
-			return "redirect:sendSuccess.jsp?selfEmail=" + selfEmail;
+			return "redirect:sendSuccess.html?selfEmail=" + selfEmail;
 		}
-		return "redirect:sendSuccess.jsp";
+		return "redirect:sendSuccess.html";
 	}
 
 	/**
