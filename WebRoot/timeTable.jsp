@@ -32,7 +32,6 @@
 			<div class="well col-xs-12 col-xs-offset-0">
 				<h4>&nbsp;&nbsp;已选择的时间：</h4>
 				<div id="selectedDate" class="col-xs-offset-1">
-					你还没有选择时间
 				</div>
 			
 			</div>
@@ -51,19 +50,16 @@
 			  <option value="30">30</option>
 			  <option value="45">45</option>
 			</select>
-			<br>
-			<br>
-			<br>
-			
-	      	<div style="background: red;width: 35px;height: 35px;color: #fff;" 
-       class="img-circle text-center pull-right vparent">
-	     
-      <div class="vchild">+</div>
-</div>
-
-			<br>
-			<br>
+			<div class="clearfix"></div>
+	      	<div id="xs-selecttime" class="img-circle text-center vparent col-xs-offset-9 cursor-pointer">
+      			<div class="vchild">+</div>
+			</div>
 			<button id="xs-submit" type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">完&nbsp;&nbsp;成</button>
+			<!-- load图片 -->
+	      	<div class="text-center  col-xs-9 col-xs-offset-1">
+	      		<div class="error-tip"></div>
+	      		<img class="loading center-block hidden" alt="loading" src="img/loading.gif">
+	      	</div>
 			<br>
 		</div>
 	</div>
@@ -173,6 +169,9 @@
 		
 		//小屏幕上的选择时间,得到世界附加到selectedDate div中
 		$("#xs-selecttime").click(function(){
+			//点击之前要先清空.error-tip文字
+			$(".error-tip").text("");
+			
 			var date = $("#select_data").val();
 			var hour = $("#select_hour").val();
 			var min = $("#select_min").val();
@@ -182,6 +181,21 @@
 			html = '<p class="col-xs-9 col-xs-offset-1">'+date+'<i class="hidden">#</i>'+hour+':'+min+'-'+endtime
    					+'<button type="button" class="close" aria-hidden="true">&times;</button>'
    					+'</p>';
+   					
+   			//div selectedDate append html 之前我们要进行重复过滤
+   			var ff = false;
+   			$("#selectedDate p").each(function(){
+   				if($(this).text()==$(html).text()){
+   					$(".error-tip").text("请勿选择相同的时间");
+   					ff = true;
+   					return false;
+   				} 
+   			});
+   			
+   			if(ff){
+   				return false;
+   			}
+   					
 			$("#selectedDate").append(html);
 			//绑定selectedDate div 中的关闭button (每次绑定最后一个) ,用来删除指定时间,
 			$("button.close").last().click(function(){
@@ -192,6 +206,16 @@
 		//小屏幕上的提交时间
 		
 		$("#xs-submit").click(function(){
+			//判断之前，先把error-tip置为空，loading图片显示出来
+			$(".error-tip").text("");
+			$(".loading").removeClass("hidden");
+			//提交之前，判断用户选择时间了没
+			var length = $("#selectedDate p").length;
+			if(!length){
+				$(".error-tip").text("请点击红色加号按钮选择一个时间");
+				$(".loading").addClass("hidden");
+				return false;
+			}
 			//先插入 meeting信息
 			var urlp = url.substring(url.indexOf("?"));
 			var theme = url.substring(url.indexOf("?")+7,url.indexOf("&location"));

@@ -145,17 +145,24 @@
 	    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	}
-	/*使子类在父类中垂直居中*/
+	/*使子类在父类中垂直居中,这个本次是用来只做一个圆形中间有"+"的按钮*/
 	.vparent {
 	   display: table;
-	    table-layout: fixed;
-	   
+	   table-layout: fixed;
+	   width: 40px;
+	   height: 40px;
+	   background: #D9544F;
+	   color: #fff;
+	   margin-top:10px;
+	   margin-bottom:10px;
+	   box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(217,84,79,.6);
 	}
 
 	.vchild {
 	    display:table-cell;
 	    vertical-align:middle;
 	    text-align:center;
+	    font-size: 28px;
 	}
 	
 	/*手型鼠标*/
