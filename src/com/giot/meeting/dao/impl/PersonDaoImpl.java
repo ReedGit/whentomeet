@@ -126,8 +126,8 @@ public class PersonDaoImpl implements PersonDao {
 	public List<Person> getMeetingAttend(String personEmail, int start,
 			int items) {
 		try {
-			String sql = "from Person where personEmail = ?";
-			return getSession().createQuery(sql).setString(0, personEmail)
+			String hql = "from Person where personEmail = ?";
+			return getSession().createQuery(hql).setString(0, personEmail)
 					.setFirstResult(start).setMaxResults(items).list();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,6 +145,19 @@ public class PersonDaoImpl implements PersonDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public long getMeetingAttendCount(String personEmail) {
+		try{
+			String hql ="select count(personid) from Person where personEmail = ?";
+			Long count = (Long) getSession().createQuery(hql).setString(0, personEmail).uniqueResult();
+			System.out.println("该邮箱被邀请的数目："+count);
+			return count;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
 		}
 	}
 

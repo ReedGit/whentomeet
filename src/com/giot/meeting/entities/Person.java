@@ -18,10 +18,12 @@ public class Person {
 	private String comment;
 	private String ptime;
 	private String personEmail;
+	
+	
 
 	@Id
     @GenericGenerator(name = "generator", strategy = "uuid")
-	@GeneratedValue(generator = "generator")// ×ÔÔö³¤
+	@GeneratedValue(generator = "generator")// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String getPersonid() {
 		return personid;
 	}
@@ -78,7 +80,5 @@ public class Person {
 		this.personEmail = personEmail;
 	}
 
-	
-	
 
 }

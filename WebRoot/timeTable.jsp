@@ -14,8 +14,8 @@
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/zxx.color_exchange.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/timeTable.js"></script>
 <script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/timeTable.js"></script>
 </head>
 <body style="background-color: #669999;">
 <div class="header"></div>
@@ -219,6 +219,13 @@
 			//先插入 meeting信息
 			var urlp = url.substring(url.indexOf("?"));
 			var theme = url.substring(url.indexOf("?")+7,url.indexOf("&location"));
+			//插入meeting，在判断用户是否登陆，登陆则把userid 插入meeting表
+			if(checkIsLogin()){
+				var userid = getCookie("userId");
+				urlp+="&organiser="+userid;
+			}
+			
+			
 			$.get("addMeeting.do"+urlp,function(data){
 				if(data!=null){
 					var timeArr = [];

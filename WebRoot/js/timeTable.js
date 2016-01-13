@@ -260,6 +260,13 @@ $(function(){
 		
 		var param = url.substring(url.indexOf("?"));
 		var theme = url.substring(url.indexOf("?")+7,url.indexOf("&location"));
+		//插入meeting，在判断用户是否登陆，登陆则把userid 插入meeting表
+		if(checkIsLogin()){
+			var userid = getCookie("userId");
+			param+="&organiser="+userid;
+		}
+		
+		
 		$.get("addMeeting.do"+param,function(data){
 			if(data!=null){
 				$.ajax({

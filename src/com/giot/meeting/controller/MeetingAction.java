@@ -112,5 +112,19 @@ public class MeetingAction {
 		meetingService.setConfirmTime(meetId, confirmTime, confirmTimeOrder);
 		return null;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getattendme.do",produces="text/html;charset=utf-8")
+	public String getAttendMeMeeting(String email,int page,int items){
+		return meetingService.getAttendMeMeeting(email, page, items);
+	}
 
+	@ResponseBody
+	@RequestMapping(value="/getattendmepages.do")
+	public int  getMeetingAttendPages(String personEmail,int items){
+		System.out.println("邮箱 "+personEmail);
+		System.out.println("items "+items);
+		return meetingService.getMeetingAttendPages(personEmail, items);
+	}
+	
 }

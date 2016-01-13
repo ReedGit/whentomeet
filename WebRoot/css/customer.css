@@ -175,6 +175,15 @@
 		outline: 0;
     	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(217,84,79,.6);
 	}
+	/*进制选中*/
+	.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 	
 }
 /*导航的响应式布局*/
@@ -264,7 +273,12 @@
 	}
 	
 }
-
+@media (max-width: 768px){
+	/*我参加的聚会，和我被邀请的聚会 当中的排序表格做媒体查询*/
+	table.tablesorter{
+		width: 100%;
+	}
+}
 @media (min-width: 768px){
 	
 	
@@ -290,6 +304,13 @@
 		height: 60px;
 		padding-top: 18px;
 	}
+	
+	/*我参加的聚会，和我被邀请的聚会 当中的排序表格做媒体查询*/
+	table.tablesorter{
+		width: 90%;
+	}
+	
+	
 	
 }
 @media (min-width: 992px){

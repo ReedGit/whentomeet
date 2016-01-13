@@ -40,12 +40,18 @@
 								<th class="header">评论</th>
 							</tr>
 						</thead>
-					<tbody>
-				
-					</tbody>
-					<tfoot><tr><td colspan="4"></td></tr></tfoot>
-		</table>
-	  				
+						<tbody class="abstract">
+						</tbody>
+						<tfoot><tr><td colspan="4"></td></tr></tfoot>
+					</table>
+					
+	  				<ul class="pager cursor-pointer noselect">
+			 			<li><a class ="pageButton" name="sy">首页</a></li>
+			 			<li><a class ="pageButton" name="syy">上一页</a></li>
+			 			<li><a class ="pageButton" name="xyy">下一页</a></li>
+			 			<li><a class ="pageButton" name="wy">尾页</a></li>
+			 			<li><a>当前页码：<span id="showCurrnetPage">1</span></a></li>
+					</ul>
 	  				
 		      	</div>
 			</div>
@@ -71,80 +77,27 @@
 </div>
 
 <script type="text/javascript">
-	var curpage = 0;
-	Date.prototype.yyyymmdd = function() {         
-        
-        var yyyy = this.getFullYear().toString();                                    
-        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based         
-        var dd  = this.getDate().toString();             
-                            
-        return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
-   };
-   var loadData = function(page){	
-	   $.get("getMeetingAttend.do",{"personEmail":usermail,"start":page,"items":11},function(data){
-		   $('tbody').empty();
-		   if(data.length<11){
-			   $(".pager .next").css("pointer-events","none").addClass("disabled");
-			   $.each(data,function(data){
-				var personid = this.personid;
-				   $.get("findMeeting.do",{"meetid":this.meetid},function(data){
-					   var date = new Date(data.createTime);
-						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data.meetid+"&personId="+personid+"'>"+data.title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(data.meetid)+"</td><td>0</td></tr>");
-				   });
-			   });
-		   }else{
-			   for(var i=0;i<10;i++){
-				   $.get("findMeeting.do",{"meetid":data[i].meetid},function(){
-					   var date = new Date(data[i].createTime);
-						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId="+data[i].personid+"'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
-				   });
-			   }
-		   }
-		   $("table").tablesorter();
-	    }); 
-   }
-    
-    var getResponseNum = function(meetId){
-	   var guys = 0;
-	   var response = 0;
-	   $.ajax({
-		   url:"getAllPersonTime.do",
-		   data:{"meetid":meetId},
-		   async:false,
-		   success:function(data){
-			   guys = data.length;
-			   $.each(data,function(){
-				   if(this.ptime!=null){
-					   response++;
-				   }
-			   });
-		   }
-	   });
-	   return response+"/"+guys;
-   }
-    
-
-		$(function() {
-			loadData(0);
-			$(".pager .previous").css("pointer-events","none").addClass("disabled");
-			
-			$(".pager .previous").click(function(){
-				$(".pager .next").css("pointer-events","auto").removeClass("disabled");
-				curpage -=10;
-				
-				loadData(curpage);
-				if(curpage==0){
-					$(this).css("pointer-events","none").addClass("disabled");
-				}
-					
-			});
-			$(".pager .next").click(function(){
-				$(".pager .previous").css("pointer-events","auto").removeClass("disabled");
-				curpage +=10;
-				loadData(curpage);
-			});
-			
+var items = 10;
+//获取cookie中的邮箱
+var email = getCookie("username");
+var loadMessages = function(page){
+	var param = {"email":email,"page":page,"items":items};
+	$.get("getattendme.do",param,function(data){
+		var arr = $.parseJSON(data);
+		$("tbody.abstract").empty();
+		$.each(arr,function(){
+			var html = '<tr><td class="text-center"><a href="replyTime.jsp?meetId='+this.meetId+'&personId='+this.personId+'">'+this.name+'</a></td><td>'+this.datetime+'</td><td>'+this.response+'</td><td></td></tr>';
+			$("tbody.abstract").append(html);
 		});
+		
+	});
+	
+}
+	
+	$(function(){
+		loadMessages(1);
+		pagebutton("getattendmepages.do",items,email);
+	});
 </script>
 
 </body>

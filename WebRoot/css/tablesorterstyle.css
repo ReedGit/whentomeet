@@ -3,7 +3,7 @@ table.tablesorter {
 	font-family:arial;
 	margin:0 auto;
 	font-size: 8pt;
-	width: 90%;
+	/* width: 100%; */ /* 此时写在cutomer.css中，适配不同的屏幕 */
 	text-align: left;
 	border: none;
 	table-layout : fixed;

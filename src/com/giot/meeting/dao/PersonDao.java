@@ -25,6 +25,8 @@ public interface PersonDao {
 	public List<Person> getAllPersonTime(String meetId);
 	
 	public List<Person> getMeetingAttend(String personEmail,int start,int items);
+	//和上面分页查询配套
+	public long getMeetingAttendCount(String personEmail);
 	
 	public Person getPerson(String meetId,String personName);
 
