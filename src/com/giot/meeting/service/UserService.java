@@ -43,18 +43,31 @@ public class UserService {
 	}
 
 	public String addUser(User user,SendmailAction sendmail ) {
+		//增加对nickname 惟一限制
+		String nickname =  Iso8859_utf8.transfrom(user.getNickname());
+		System.out.println("注册的用户名："+nickname);
+		User un = userDao.getUserByNickname(nickname);
+		JSONObject obj = new JSONObject();
+		if(un!=null){
+			//用户已存在
+			obj.put("code", 2);
+			obj.put("message", "该用户名已存在");
+			return obj.toString();
+		}
+		
+		
+		
 		String username = user.getUsername();
-		System.out.println("注册的用户名："+username);
+		System.out.println("注册的邮箱："+username);
 		User u = userDao.getUserByUsername(username);
 		System.out.println(u);
-		JSONObject obj = new JSONObject();
 		if(u!=null){
-			//用户已存在
+			//邮箱已存在
 			obj.put("code", 2);
 			obj.put("message", "该邮箱已存在");
 			return obj.toString();
 		}
-		user.setNickname(Iso8859_utf8.transfrom(user.getNickname()));
+		user.setNickname(nickname);
 		user.setPassword(MD5.compute(user.getPassword()));
 		
 		boolean b=  userDao.addUser(user);

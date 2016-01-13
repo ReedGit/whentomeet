@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="MEETING")
 public class Meeting {
@@ -109,6 +111,8 @@ public class Meeting {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	public Date getCreateTime() {
 		return createTime;
 	}

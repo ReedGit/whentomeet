@@ -14,7 +14,7 @@ public interface UserDao {
 
 	public User getUserByUsername(String username);
 	
-	
+	public User getUserByNickname(String nickname);
 	
 	public boolean addUser(User user);
 

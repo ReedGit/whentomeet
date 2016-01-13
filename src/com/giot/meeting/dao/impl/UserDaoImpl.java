@@ -210,4 +210,17 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	@Override
+	public User getUserByNickname(String nickname) {
+		try {
+			String hql = "from User where nickname =? and validate = 1";
+			User u = (User) getSession().createQuery(hql)
+					.setString(0, nickname).uniqueResult();
+			return u;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
