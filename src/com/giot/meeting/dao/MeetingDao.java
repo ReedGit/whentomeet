@@ -11,7 +11,9 @@ public interface MeetingDao {
 	public void deleteMeeting(String meetid);
 
 	public List<Meeting> findAllMeeting(String organiser,int start,int items);
-
+	//organiser 即为meetid
+	public long getMyAttendMeetsCount(String organiser);
+	
 	public Meeting findMeeting(String meetid);
 
 	public long getMeetingCount(String organiser);

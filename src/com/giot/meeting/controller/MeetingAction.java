@@ -113,6 +113,22 @@ public class MeetingAction {
 		return null;
 	}
 	
+	//下面两个是获取我邀请的聚会的信息
+	@ResponseBody
+	@RequestMapping(value="/getmyattend.do",produces="text/html;charset=utf-8")
+	public String getMyAttendMeeting(String userId,int page,int items){
+		return meetingService.getMyAttendMeetings(userId, page, items);
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/getmyattendpages.do")
+	//这里personEmail 解释一下：你把personEmail 就当成 useid吧
+	public int  getMyAttendMeetingPages(String personEmail,int items){
+		return meetingService.getMyAttendMeetingPages(personEmail, items);
+	}
+	
+	
+	//下面两个是获取我被邀请的聚会的信息
 	@ResponseBody
 	@RequestMapping(value="/getattendme.do",produces="text/html;charset=utf-8")
 	public String getAttendMeMeeting(String email,int page,int items){

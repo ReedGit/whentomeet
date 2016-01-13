@@ -101,4 +101,16 @@ public class MeetingDaoImpl implements MeetingDao {
 		
 	}
 
+	@Override
+	public long getMyAttendMeetsCount(String organiser) {
+		try{
+			String hql ="select count(meetid) from Meeting where organiser =?";
+			Long count = (Long) getSession().createQuery(hql).setString(0, organiser).uniqueResult();
+			return count;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 }

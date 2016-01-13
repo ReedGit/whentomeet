@@ -31,7 +31,7 @@
 			
 			<div class="row">
 				<div class="input-group col-xs-12" style="height: 300px;">
-	  				<table class="tablesorter" border="1">
+	  				<table class="tablesorter" border="1" id="mysortTable">
 						<thead>
 							<tr>
 								<th class="header">名称</th>
@@ -89,7 +89,7 @@ var loadMessages = function(page){
 			var html = '<tr><td class="text-center"><a href="replyTime.jsp?meetId='+this.meetId+'&personId='+this.personId+'">'+this.name+'</a></td><td>'+this.datetime+'</td><td>'+this.response+'</td><td></td></tr>';
 			$("tbody.abstract").append(html);
 		});
-		
+		$("#mysortTable").tablesorter(); 
 	});
 	
 }

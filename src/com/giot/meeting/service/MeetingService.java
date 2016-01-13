@@ -21,7 +21,7 @@ public class MeetingService {
 	private MeetingDao meetingDao;
 	@Autowired
 	private PersonDao pdao;
-	
+	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public Meeting addMeeting(Meeting meeting) {
 		String content =  Iso8859_utf8.transfrom(meeting.getContent());
 		String location = Iso8859_utf8.transfrom(meeting.getLocation());
@@ -54,6 +54,31 @@ public class MeetingService {
 	}
 
 	
+	public String getMyAttendMeetings(String userid,int page,int items){
+		int start = (page-1)*items;
+		List<Meeting> meet = meetingDao.findAllMeeting(userid, start, items);
+		JSONArray array = new JSONArray();
+		JSONObject obj = null;
+		for(Meeting m: meet){
+			obj = new JSONObject();
+			obj.put("meetId", m.getMeetid());
+			obj.put("name", m.getTitle());
+			String dateTime  =format.format(m.getCreateTime());
+			obj.put("datetime", dateTime);
+			obj.put("response", m.getResponse()+"/"+m.getGuys());
+			array.put(obj);
+		}
+		
+		return array.toString();
+	}
+	
+	public int getMyAttendMeetingPages(String userid,int items){
+		double count = meetingDao.getMeetingCount(userid);
+		int pages = (int) Math.ceil(count/items);
+		System.out.println("我邀请的多少页 "+pages);
+		return pages;
+	}
+	
 	public String getAttendMeMeeting(String email,int page,int items){
 		//查询邀请我的会议，用该用户注册的时候的email进行查询，
 		int start = (page-1)*items;
@@ -61,13 +86,11 @@ public class MeetingService {
 		JSONArray array = new JSONArray();
 		JSONObject obj = null;
 		Meeting findMeeting = null;
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		for(Person p: person){
 			String meetId = p.getMeetid();
 			findMeeting = meetingDao.findMeeting(meetId);
 			obj = new JSONObject();
-			
 			obj.put("meetId", findMeeting.getMeetid());
 			obj.put("personId", p.getPersonid());
 			obj.put("name", findMeeting.getTitle());

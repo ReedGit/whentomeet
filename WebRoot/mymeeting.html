@@ -31,7 +31,7 @@
 			
 			<div class="row">
 				<div class="input-group col-xs-12" style="height: 300px;">
-	  				<table class="tablesorter" border="1">
+	  				<table class="tablesorter" border="1" id="mysortTable">
 						<thead>
 							<tr>
 								<th class="header">名称</th>
@@ -40,12 +40,18 @@
 								<th class="header">评论</th>
 							</tr>
 						</thead>
-					<tbody>
+					<tbody class="abstract">
 				
 					</tbody>
 					<tfoot><tr><td colspan="4"></td></tr></tfoot>
-		</table>
-	  				
+				</table>
+  				<ul class="pager cursor-pointer noselect">
+		 			<li><a class ="pageButton" name="sy">首页</a></li>
+		 			<li><a class ="pageButton" name="syy">上一页</a></li>
+		 			<li><a class ="pageButton" name="xyy">下一页</a></li>
+		 			<li><a class ="pageButton" name="wy">尾页</a></li>
+		 			<li><a>当前页码：<span id="showCurrnetPage">1</span></a></li>
+				</ul>
 	  				
 		      	</div>
 			</div>
@@ -71,84 +77,27 @@
 </div>
 
 <script type="text/javascript">
-	var curpage = 0;
-	Date.prototype.yyyymmdd = function() {         
-        
-        var yyyy = this.getFullYear().toString();                                    
-        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based         
-        var dd  = this.getDate().toString();             
-                            
-        return yyyy + '-' + (mm[1]?mm:"0"+mm[0]) + '-' + (dd[1]?dd:"0"+dd[0]);
-   };
+var items = 2;
+//获取cookie中的邮箱
+var userId = getCookie("userId");
+var loadMessages = function(page){
+	var param = {"userId":userId,"page":page,"items":items};
+	$.get("getmyattend.do",param,function(data){
+		var arr = $.parseJSON(data);
+		$("tbody.abstract").empty();
+		$.each(arr,function(){
+			var html = '<tr><td class="text-center"><a href="replyTime.jsp?meetId='+this.meetId+'&personId=-1">'+this.name+'</a></td><td>'+this.datetime+'</td><td>'+this.response+'</td><td></td></tr>';
+			$("tbody.abstract").append(html);
+		});
+		$("#mysortTable").tablesorter(); 
+	});
 	
-   
-    var getResponseNum = function(meetId){
-	   var guys = 0;
-	   var response = 0;
-	   $.ajax({
-		   url:"getAllPersonTime.do",
-		   data:{"meetid":meetId},
-		   async:false,
-		   success:function(data){
-			   guys = data.length;
-			   $.each(data,function(){
-				   if(this.ptime!=null){
-					   response++;
-				   }
-			   });
-		   }
-	   });
-	   return response+"/"+guys;
-   }
-	var loadData = function(page){
-		//我临时加的
-		var uid = 0;
-		$.ajax({
-			url:"findAllMeeting.do",
-			data:{"organiser":uid,"start":page,"items":11},
-			dataType:"json",
-			type:"get",
-			success:function(data){
-				$('tbody').empty();
-				if(data.length<11){
-					$(".pager .next").css("pointer-events","none").addClass("disabled");
-					$.each(data,function(){
-						var date = new Date(this.createTime);
-						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+this.meetid+"&personId=-1'>"+this.title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
-					});
-				}else{
-					for(var i=0;i<10;i++){
-						var date = new Date(data[i].createTime);
-						$("tbody").append("<tr><td><a href='replyTime.jsp?meetId="+data[i].meetid+"&personId=-1'>"+data[i].title+"</a></td><td>"+date.yyyymmdd()+"</td><td>"+getResponseNum(this.meetid)+"</td><td>0</td></tr>");
-					}
-				}
-				$("table").tablesorter();
-			}
-		});
-	}
-
-
-		$(function() {
-			loadData(0);
-			$(".pager .previous").css("pointer-events","none").addClass("disabled");
-			
-			$(".pager .previous").click(function(){
-				$(".pager .next").css("pointer-events","auto").removeClass("disabled");
-				curpage -=10;
-				
-				loadData(curpage);
-				if(curpage==0){
-					$(this).css("pointer-events","none").addClass("disabled");
-				}
-					
-			});
-			$(".pager .next").click(function(){
-				$(".pager .previous").css("pointer-events","auto").removeClass("disabled");
-				curpage +=10;
-				loadData(curpage);
-			});
-			
-		});
+}
+	
+	$(function(){
+		loadMessages(1);
+		pagebutton("getmyattendpages.do",items,userId);
+	});
 </script>
 
 </body>
