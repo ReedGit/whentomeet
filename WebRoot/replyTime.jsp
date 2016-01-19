@@ -5,247 +5,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="css/customer.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="css/replyTime.css" rel="stylesheet" type="text/css" media="all"/>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<style type="text/css">
-	.main{
-		width: 1289px;
-	    height: 800px;
-		border: solid 1px transparent;
-		margin: 60px auto 200px;
-		background-color: #F5F5F5;
-		border-radius:5px;
-		box-shadow: 0 0 30px #333;
-	}
-	.main .innerContent{
-		margin-left: 40px;
-		margin-top: 40px;
-		margin-bottom: 40px;
-	}
-	.header {
-	    margin: 0;
-	    padding: 0;
-	    width: 100%;
-	    height: 80px;
-	    vertical-align: middle;
-    }
-	.header h1
-{
-		color:#e1af32;
-	    font-size: 3em;
-}
-    
-    hr {
-    border: 1px solid #e1af32;
-    /* margin-left: -10px; */
-}
-    
-    .title h2 {
-    color: #e1af32;
-    letter-spacing: 2em;
-    }
-    
-    .title h2 span {
-    color: #fff;
-    font-weight: 500;
-    letter-spacing: 1em;
-}
-    
-    .resultsTable{
-    	margin-top: 75px;
-    	/* border: solid green 2px; */
-    }
-	.table_left,.table_right{
-		float: left;
-		border: 1px solid #bbb;
-		background: #fff;
-		
-	}
-	
-	#resultsArea{
-		background-color:#fff;
-		border: solid 1px #bbb;	
-/* 		border: solid 1px red;	 */
-		border-radius:8px;
-		width: 1209px;
-		height: 564px;
-		margin: 0 auto;
-	}
-	
-	#resultsArea .headingArea{
-		/* border-radius:8px; */
-		border-top-left-radius:8px;
-		border-top-right-radius:8px;
-		background-color:#F6F6F6;
-		height: 67px;
-		width: 100%;
-		border-bottom: solid 1px #bbb;
-	}
-	
-	#resultsArea .headingArea span{
-		font-size: 30px;
-		position: relative;
-		top: 25px;
-		left: 45px;
-		font-weight: bold;
-	}
-	.table_left{
-		background: #e0e0e0;
-		width:242px;
-		table-layout:fixed;
-		position: relative;
-		left: 40px;
-		
-	}
-	.table_right{
-		text-align: center;
-		table-layout: fixed;
-	}
-	.table_right .weekDate,.table_right .timeDura{
-		background: #e0e0e0;
-	} 
-	.table_right .weekDate{
-		font-weight: bold;
-		height: 51px;
-	}
-	.table_right .timeDura{
-		height: 41px;
-	}
-	.myTime,.reloadRemove,.check_box,.topFill2,.yourName,.response,.decideTime{
-		height: 35px;
-	}
-	.topFill1{
-		height: 93px;
-	}
-	.yourName input#nameCellInput{
-		margin-top: 4px;
-		font-size: 14px;
-	    height: 20px;
-	    width: 229px;
-	}
-	.tableTail{
-		height: 17px;
-	}
-	div.containRtalbe{
-		width: 902px;
-		overflow: auto;
-		border-top-width: 0;
-		border-left-width: 0;
-		border-right: solid 1px transparent;
-		border-bottom: solid 1px transparent;
-		position: relative;
-		left: 39px;
-	}
-	
-	.submitArea{
-		/* position: relative;
-		top:300px;
-		left:70px; */
-		margin-top: 45px;
-		margin-left: 14px;
-		overflow: auto;
-	}
-.submitArea #comment {
-    float: left;
-    width: 320px;
-   /*  height: 20px; */
-    line-height: 18px;
-    padding: 6px;
-    margin: 3px 20px 0 24px;
-    font-size: 14px;
-    color: #999;
-}
-
-.submitArea #resultsTableSubmit {
-    width: 110px;
-    float: left;
-    margin: 0 0 0 25px;
-}
-
-.table_right tr td.highlight{
-	background-color: #F6F6F6;
-}
-.table_right tr td.checkedTogether{
-	background-color: #ffffbb;
-}
-
-.photo_small {
-    width: 26px;
-    height: 26px;
-    margin-right: 7px;
-}
-
-#selectItem{
-	margin-top: 10px;
-	margin-left: 40px;
-	font-family: "Microsoft Yahei","微软雅黑",Helvetica,SimSun,SimHei;
-	line-height: 26px;
-}
-
-#selectItem .selectItems{
-	
-	margin-left: 83px;
-}
-#selectItem .selectItems a:hover{
-    color: #005580;
-    text-decoration: underline;
-}
-#selectItem .selectItems a{
-    color: #0088cc;
-}
-
-.tipMess{
-	line-height: 30px;
-}
-.MeetingAdmin{
-	float: right;
-	margin-right: 50px;
-	color: #0088cc;
-}
-.MeetingAdmin a{
-	color: #0088cc;
-}
-</style>
-
-
+<script type="text/javascript" src="js/public.js"></script>
 </head>
 <body>
-<%@ include file="public/head.html"%>
-<div class="main">
-	
-	<div class="innerContent">
-           <h1 id="title"></h1>
-           	
-           	<div class="MeetingAdmin">
-           		<i class="icon-plus-sign"></i><a href="sendInvitations.jsp?meetId=${param.meetId }">增加联系人</a>
-           	</div>
-           	
-           	
-           <br>
-           	时长：<span id="durationLabel"></span>小时
-           	
+<!-- 导航 头-->
+<div class="header"></div>
+
+<!-- 桌面 -->
+<br>
+<br>
+<br>
+<div class="container well">
+	<div class="row">
+           	<div class="page-header mypage-header">
+   				<h1 id="title"></h1>
+   				<span class="col-xs-offset-1 col-sm-offset-0">时长：<small id="durationLabel"></small>小时</span>
+   				<small class="pull-right">
+   					<a href="sendInvitations.html?meetId=${param.meetId }">增加联系人</a>
+   				</small>
+			</div>
     </div>
 
-	<div id="resultsArea" >
+	<div class="row panel panel-default">
+		<div class="panel-heading">
+      		<h1 class="panel-title">选择合适的时间来参加聚会吧</h1>
+  		</div>
 	
-		<div class="headingArea">
-			<span>你什么时候能参加呢？</span>
-		</div>
-	
-		<div class="resultsTable">
-			<table border="1" class="table_left">
+		<br>
+		<!-- 包括tableLeft tableRight -->
+		<div class="col-xs-12 scroll tableall">
+			<table border="1" class="table_left table-border-bg col-xs-4 col-sm-2">
 				<tr class="topFill1">
 					<td>
-						<a>Select via calendar</a>
-						<a>24h</a>
 					</td>
 				</tr>
 				
 				<tr class="topFill2">
 					<td class="nameCell fixed" id="nameCell_0">
-						<img class="photo_small" width="26" height="26" src="img/defaultHeader.png"> <span></span> (Organizer)
+						<img class="photo_small" width="26" height="26" src="img/defaultHeader.png"> <span></span> (组织者)
 					</td>
 				</tr>
 				<tr class="yourName">
@@ -253,61 +56,58 @@
 						<input type="textbox" id="nameCellInput" placeholder="Your Name">
 					</td>
 				</tr>
-				
-				<tr class="tableTail">
-					<td></td>
-				</tr>
 			</table>
-			<div class="containRtalbe">
-				<table border="1" class="table_right">
-					<tr class="weekDate">
-					</tr>
-					
-					<tr class="timeDura">
-					</tr>
-					
-					<tr class="myTime">
-					</tr>
-					
-					<tr class="check_box">
-						
-					</tr>
-				</table>
-			</div>
 			
-			<div class="tipMess">
+			<div class="tableR col-xs-1 col-sm-7 no-padding-left">
+			<!-- tableRight -->
+			<table border="1" class="table_right text-center fixtable">
+				<tr class="weekDate table-border-bg" ></tr>
 				
-			</div>
-			
-			<div class="submitArea" style="clear:both;">
-	              <textarea class="form-control" id="comment" rows="1">增加一条评论 (可选)</textarea>
-	              <button type="button" class="btn btn-success" id="resultsTableSubmit">提交</button>
-	       </div>
-	       
-			<div id="selectItem">
-				<p>你已经提交了！请选择下列操作中的一个吧。</p>
-				<div class="selectItems">
-					<a  class="modifyLink">修改已选择的时间</a>
-					<br>
-					<a  class="removeLink">我不想参加，删除我！</a>
-					<br>
-					<a  class="modifyLink1">修改已选择的时间</a>
-				</div>
+				<tr class="timeDura table-border-bg"></tr>
+				
+				<tr class="myTime table-br"></tr>
+				
+				<tr class="check_box table-br"></tr>
+			</table>
 			</div>
 		</div>
-
-
-
 	</div>
-	
+	<div class="visible-xs"><br></div>
+	<div class="row submitArea">
+             <textarea class="myform-control col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0" rows="1">增加一条评论 (可选)</textarea>
+             <div class="visible-xs"><br><br><br></div>
+             <button type="button" class="btn btn-success col-xs-10 col-xs-offset-1 col-sm-2 col-sm-offset-1" id="resultsTableSubmit">提交</button>
+             
+             <!-- load图片 -->
+	      	 <div class="text-center">
+	      		<div class="error-tip"></div>
+	      		<img class="loading center-block hidden" alt="loading" src="img/loading.gif">
+	      	 </div>
+	      	 <br>
+	      	 <br>
+	      	 <br>
+    </div>
+    
+	<div id="selectItem" class="msyahei cursor-pointer">
+		<p>你已经提交了！请选择下列操作中的一个吧。</p>
+		<div>
+			<a  class="modifyLink">修改已选择的时间</a>
+			<br>
+			<a  class="removeLink">我不想参加，删除我！</a>
+			<br>
+			<a  class="modifyLink1">修改已选择的时间</a>
+		</div>
+	</div>
+	<br><br>
 </div>
 
-<!--/start-copyright-section-->
-<div class="clearfix"></div>
-		<div class="copyright">
-			
-		</div>
-<!--//end-copyright-section-->
+<br><br><br><br>
+<div class="container mycontainer">
+	 <div class="row">
+		<!-- copyright -->
+		<div class="copyright"></div>
+	 </div>
+</div>
 
 <script type="text/javascript">
 var arr = [] ;
@@ -327,7 +127,7 @@ var getPt = function(){
 					 var ptimeArr = ptime.split(",");
 					 $(".table_right .check_box td").each(function(index,value){
 						 if($.inArray(index+"",ptimeArr)!=-1){
-							$(this).html("&radic;");
+							$(this).html("&#10004;");
 						 }else{
 							 $(this).text("");
 						 }
@@ -338,12 +138,12 @@ var getPt = function(){
 			}else{
 				if(ptime!=null){
 					$(".table_right tr:nth-last-child(2)").after("<tr class='reloadRemove'></tr>");
-					$(".table_left tr:nth-last-child(3)").after("<tr class='reloadRemove'><td><img class='photo_small' width='26' height='26' src='img/defaultHeader.png'>"+data.name+"</td></tr>");
+					$(".table_left tr:nth-last-child(2)").after("<tr class='reloadRemove'><td><img class='photo_small' width='26' height='26' src='img/defaultHeader.png'>"+data.name+"</td></tr>");
 					var ptimeArr = ptime.split(",");
 					var num = $(".table_right .check_box td").length;
 					for(var i=0;i<num;i++){
 						if($.inArray(i+"",ptimeArr)!=-1){
-							$(".table_right tr:nth-last-child(2)").append("<td>&radic;</td>");
+							$(".table_right tr:nth-last-child(2)").append("<td>&#10004;</td>");
 						}else{
 							$(".table_right tr:nth-last-child(2)").append("<td></td>");
 						}
@@ -355,13 +155,14 @@ var getPt = function(){
 		//////backgroundcolor
 		
 		var arr2 = [] ;
+		arr = [];
 		$(".table_right .myTime").nextAll().each(function(index,value){
 			if($(value).children(":first-child").has("input").length>0){
 				return;
 			}
 			if(index==0){
 				$(value).children().each(function(index,value){
-					if($(value).text()=="√"){
+					if($(value).text()=="✔"){
 						arr.push(index);
 					}
 				});
@@ -369,7 +170,7 @@ var getPt = function(){
 				if(arr.length==0)
 					return;
 				$(value).children().each(function(index,value){
-					if($(value).text()=="√"){
+					if($(value).text()=="✔"){
 						arr2.push(index);
 					}
 				});
@@ -385,7 +186,6 @@ var getPt = function(){
 				arr2= [];
 			}
 		});
-		
 		if(arr.length>0){
 			$.each(arr,function(index1,value1){
 				$(".table_right .timeDura").children().eq(value1).addClass("checkedTogether");
@@ -415,7 +215,7 @@ var getPt = function(){
 		
 		$.post('findMeeting.do',{"meetid":"${param.meetId}"}, function(data) {
 			 $("#title").text(data.title);
-			/*  $("span#location").text(data.location); */
+			//  $("span#location").text(data.location); 
 			 $("#durationLabel").text(data.duration/4);
 			
 			 if("${param.personId}"==-1){
@@ -435,7 +235,7 @@ var getPt = function(){
 							
 							//senddecideTime
 							$("#senddecideTime").click(function(){
-								$(".tipMess").empty().append('<img class="spinner" src="img/loading.gif">');
+								$("img.loading").removeClass("hidden");
 								
 								var s = $(".table_right .decideTime td input[name=timeChoice]:checked").parent().index();
 								var weekd = $(".weekDate td[index~="+s+"]").text();
@@ -443,8 +243,8 @@ var getPt = function(){
 								
 								$.post("sendDecideTime.do",{"contactEmail":JSON.stringify(contactEmail),"contactName":JSON.stringify(contactName),"meetTheme":$("#title").text(),"week":weekd,"time":timed,"meetId":"${param.meetId}","confirmTimeOrder":s},function(data){
 									if(data==true){
-										$(".spinner").remove();
-										$(".tipMess").text("此次的聚会时间已经通过邮件发送给大家了！");
+										$("img.loading").addClass("hidden");
+										$(".error-tip").text("此次的聚会时间已经通过邮件发送给大家了！");
 									}
 								});
 							});
@@ -458,7 +258,7 @@ var getPt = function(){
 		if("${param.personId}"==-1){
 			$(".yourName,.check_box,.submitArea,#selectItem").hide();
 			
-			$(".headingArea span").text("大家选择的时间");
+			$(".panel-title").text("大家选择的时间");
 				var responseArr = [];
 				$(".myTime").nextAll().not(".check_box").each(function(){
 					$(this).children().each(function(index){
@@ -472,7 +272,7 @@ var getPt = function(){
 					});
 				});
 				
-				$(".check_box").after("<tr class='response'></tr>");
+				$(".check_box").after("<tr class='response table-br'></tr>");
 				$(".yourName").after("<tr class='response'><td>&nbsp;有&nbsp;"+$(".table_left .reloadRemove").length+"&nbsp;个人回复</td></tr>");
 				//没人回复的状态
 				var leh = $(".myTime").children().length;
@@ -485,7 +285,6 @@ var getPt = function(){
 				$.each(responseArr,function(index,value){
 					$(".table_right .response").append("<td>"+value+"</td>")
 				});
-				
 				
 				
 		}
@@ -503,6 +302,7 @@ var getPt = function(){
 			data:{"meetId":"${param.meetId}"},
 			success:function(data){
 				var weekDate; 
+				var temp = 0;
 				 $.each(data,function(index,value){
 					var args  = value.date.split("#");
 					if(index==0){
@@ -515,25 +315,20 @@ var getPt = function(){
 						$lastTd.css("width",($lastTd.width()*2)+"px");
 					}else{
 						weekDate = args[0];
-						//$(".table_right .weekDate").append("<td colspan='1' index='"+index+"'>"+weekDate+"</td>");
 						$(".table_right .weekDate").append("<td style='width:120px' colspan='1' index='"+index+"'>"+weekDate+"</td>");
 					}
 					
 					$(".table_right .timeDura").append("<td>"+args[1]+"</td>");
-					$(".table_right .myTime").append("<td>&radic;&nbsp;</td>");
+					$(".table_right .myTime").append("<td>&#10004;</td>");
 					$(".table_right .check_box").append("<td><input value='"+index+"' type='checkbox'></td>");
+					 /*循环结束，得到一个多少个cell,然后计算宽度*/
 					$(".table_right").css("width",120*(index+1)+"px");
-					
 				});
+				
 				 
-				 if($(".table_right").width()<$(".containRtalbe").width()){
-					 $(".tableTail").hide();
-					 /* $(".containRtalbe").css("borderWidth","0"); */
-				 }
-				 
-					$(".table_right tr.check_box td").hover(function(){
-							$(this).toggleClass("highlight");
-					});
+				$(".table_right tr.check_box td").hover(function(){
+						$(this).toggleClass("highlight");
+				});
 					
 					getPt();
 				
@@ -560,11 +355,11 @@ var getPt = function(){
 			}); 
 		});
 		
-		/*修改已选择的时间*/
+		//修改已选择的时间
 		$("#selectItem a.modifyLink").click(function(){
 			$("#nameCell_1").html('<input type="textbox" id="nameCellInput" value="'+$("#nameCell_1").text()+'" placeholder="Your Name">');
 			 $(".table_right .check_box td").each(function(index,value){
-				 if($(this).text()=="√"){
+				 if($(this).text()=="✔"){
 					 $(this).html("<input value='"+index+"' type='checkbox' checked='checked'>");
 				 }else{
 					 $(this).html("<input value='"+index+"' type='checkbox'>");

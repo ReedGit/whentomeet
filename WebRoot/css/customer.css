@@ -2,6 +2,35 @@
 
 
 @media all{
+	body{
+		background-color: #669999;
+	}
+	
+	.msyahei{
+		font-family: "Microsoft Yahei";
+	}
+	
+	
+	.fixtable{
+		table-layout: fixed;
+	}
+	
+	.scroll{
+		overflow: auto;
+	}
+	
+	
+	/* 单独对border样式 */
+	.table-br{
+		border: 1px solid #bbb;
+	}
+	
+	/*replytime那个表格中的cell样式*/
+	.table-border-bg{
+		border: 1px solid #bbb;
+		background: #e0e0e0;
+	}
+	
 	
 	/*固定6个特点的标题的宽度和下面段落的宽度和高度*/
 	.feat_title{
@@ -280,7 +309,6 @@
 	}
 }
 @media (min-width: 768px){
-	
 	
 	.container{
 		margin-top: 40px;/* 和轮播保持一定距离 */

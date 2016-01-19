@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+    
+	#resultsArea{
+		background-color:#fff;
+		border: solid 1px #bbb;	
+		border-radius:8px;
+		width: 1209px;
+		height: 564px;
+		margin: 0 auto;
+	}
+	
+	#resultsArea .headingArea{
+		border-top-left-radius:8px;
+		border-top-right-radius:8px;
+		background-color:#F6F6F6;
+		height: 67px;
+		width: 100%;
+		border-bottom: solid 1px #bbb;
+	}
+	
+	#resultsArea .headingArea span{
+		font-size: 30px;
+		position: relative;
+		top: 25px;
+		left: 45px;
+		font-weight: bold;
+	}
+	
+	.table_right .weekDate{
+		font-weight: bold;
+		height: 51px;
+	}
+	.table_right .timeDura{
+		height: 41px;
+	}
+	.myTime,.reloadRemove,.check_box,.topFill2,.yourName,.response,.decideTime{
+		height: 35px;
+	}
+	.topFill1{
+		height: 93px;
+	}
+	.yourName input#nameCellInput{
+		margin-top: 4px;
+		font-size: 14px;
+	    height: 20px;
+	    width: 229px;
+	}
+	
+
+
+.table_right tr td.highlight{
+	background-color: #F6F6F6;
+}
+.table_right tr td.checkedTogether{
+	background-color: #ffffbb;
+}
+
+.photo_small {
+    width: 26px;
+    height: 26px;
+    margin-right: 7px;
+}
+
+
+.tipMess{
+	line-height: 30px;
+}
+.MeetingAdmin{
+	float: right;
+	margin-right: 50px;
+	color: #0088cc;
+}
+.MeetingAdmin a{
+	color: #0088cc;
+}
