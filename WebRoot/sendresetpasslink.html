@@ -21,35 +21,21 @@
  <div class="row">
 	<form id="loginForm">
 	<br>
-		<div id="login" class="well col-xs-12 col-sm-8 col-sm-offset-2 bg-white">
-			<div class="page-header text-center visible-xs">
-  				 <h4>准备以何种方式分享给你的好友？</h4>
+		<div id="login" class="well col-xs-12 col-sm-5 col-sm-offset-6 bg-white">
+			<div class="page-header text-center">
+  				 <h3>输入验证邮箱</h3>
 			</div>
-			<div class="page-header text-center hidden-xs">
-  				 <h3>通过邮件的方式分享给好友吧</h3>
-			</div>
-			<br>
-			<div class="row visible-xs">
-				<div id="weixinButton" class="well col-xs-10 col-xs-offset-1 text-center">
-				    <h3>微信</h3>
-				    <br>
-		          	 快来分享到我的朋友圈吧~~
-				    <br>
-				    <br>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div id="emailButton" class="well col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4 text-center">
-				    <h3>邮箱</h3>
-		          	 <br>
-		          	 通过邮箱来邀请好友加入吧~~
-		          	 <br>
-		          	 <br>
-				</div>
-			</div>
+			<div class="row text-center">
+				<p>请输入你的注册邮箱，我们将给你发送一个重置密码的链接</p>
+		    </div>
+		    <br>
+		    <div class="row">
+		    	<input type="text" id="resetemail" class="myform-control col-xs-8 col-xs-offset-2" placeholder="请输入邮箱">
+		    </div>
 	      	<br>
-	      	
+	      	<div class="row">
+				<button id="submit" class="btn btn-primary col-xs-8 col-xs-offset-2">提&nbsp;&nbsp;&nbsp;交</button>
+	      	</div>
 			<!-- load图片 -->
 	      	<div class="text-center">
 	      		<div class="error-tip"></div>
@@ -57,34 +43,58 @@
 	      	</div>
 	      	
 			<div class="row">
-				<a href="sendresetpasslink.html" class="col-xs-10 col-xs-offset-1 text-right">忘记密码？点击重置&gt;&gt;</a><br>
 				<a href="register.html" class="col-xs-10 col-xs-offset-1 text-right">还没账号？点击注册&gt;&gt;</a>
 			</div>
+				
 			<br>
 			<br>
+			<div class="para row">
+				<div class="col-xs-12">
+					其他方式登录:
+					<img alt="wechat" src="img/weixin.png" class="img-circle" style="width: 32px;height: 32px;background: #fff;">
+				</div>
+			</div>
 		</div>
 	</form>
  </div>
 </div>
 <br>
-
+<br>
+<br>
 <div class="container mycontainer">
 	 <div class="row">
 		<!-- copyright -->
 		<div class="copyright"></div>
 	 </div>
 </div>
+
 <script type="text/javascript">
 $(function(){
-	var url = window.location.href;
-	var param = url.substring(url.indexOf("?"));
-	$("#emailButton").click(function(){
-		window.location.href="sendInvitations.html"+param;	
+	$("#submit").click(function(){
+		$("img.loading").removeClass("hidden");
+		$(".error-tip").text("");
+		
+		var resetemail = $("#resetemail").val();
+		var emailRex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
+		var flag = emailRex.test(resetemail);
+		console.log(flag);
+		if(flag){
+			$.get("sendResetPasswordLink.do",{"email":resetemail},function(){
+				$("img.loading").addClass("hidden");
+				$(".error-tip").text("链接已经发送");
+			});
+		}else{
+			$("img.loading").addClass("hidden");
+			$(".error-tip").text("邮箱格式不正确");
+		}
+		
+		return false;
+		
 	});
+	
 })
 
 </script>
-
 
 </body>
 </html>
