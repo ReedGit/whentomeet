@@ -3,13 +3,13 @@ package com.giot.meeting.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -75,27 +75,29 @@ public class UserAction {
 	}
 	
 	@RequestMapping("/resetPasswordLink.do")
-	public String resetPasswordLink(String username,String sid,Map<String,Object> map){
+	public String resetPasswordLink(String username,String sid,Model model){
 		if ("".equals(username)  || "".equals(sid)||username==null||sid==null) {
-			map.put("mesg", "链接不完整,请重新生成");
-			return  "resetPassValidate";
+			model.addAttribute("mes","链接不完整，请重新生成。");
+			return  "redirect:resetPassValidate.html?mes={mes}";
         }
 		
 		User user = userService.getOneUser(username);
 		 Timestamp outDate = (Timestamp) user.getOutDate();
 		 if(outDate.getTime() <= System.currentTimeMillis()){ //表示已经过期
-			 map.put("mesg", "链接已经过期,请重新申请找回密码.");
-			 return  "resetPassValidate";
+			 model.addAttribute("mes", "链接已经过期，请重新申请找回密码。");
+			 return  "redirect:resetPassValidate.html?mes={mes}";
          }
 		 
 		 String key = user.getUsername()+"$"+outDate.getTime()/1000*1000+"$"+user.getSecretKey();//数字签名
-		 String digitalSignature = MD5.compute(key);// 数字签名
+		 System.out.println("验证的key:"+key);
 		 
+		 String digitalSignature = MD5.compute(key);// 数字签名
+		 System.out.println("数字签名："+digitalSignature);
 		 if(!digitalSignature.equals(sid)) {
-			 map.put("mesg", "链接不正确,是否已经过期了?重新申请吧.");
-			 return  "resetPassValidate";
+			 model.addAttribute("mes", "链接不正确，是否已经过期了？重新申请吧。");
+			 return  "redirect:resetPassValidate.html?mes={mes}";
          }else {
-           return "resetpass";
+           return "redirect:resetpass.html";
        }
 		 
 	}

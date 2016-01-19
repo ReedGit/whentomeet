@@ -174,6 +174,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void resetPassword(String username, String password) {
 		try {
+			System.out.println("跟新密码："+password);
+			System.out.println("用户名："+username);
+			
 			String sql = "update User set password = ? where username = ?";
 			getSession().createQuery(sql).setString(0, password)
 					.setString(1, username).executeUpdate();

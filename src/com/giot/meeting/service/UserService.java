@@ -151,6 +151,7 @@ public class UserService {
 		userDao.createResetPasswordLink(username, secretKey, outDate);
 		
 		 String key =username + "$" + date + "$" + secretKey;
+		 System.out.println("生成的key:"+key);
 		 String digitalSignature = MD5.compute(key);// 数字签名
 		 return digitalSignature;
 	}

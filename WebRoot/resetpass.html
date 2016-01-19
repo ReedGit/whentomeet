@@ -23,18 +23,20 @@
 	<br>
 		<div id="login" class="well col-xs-12 col-sm-5 col-sm-offset-6 bg-white">
 			<div class="page-header text-center">
-  				 <h3>输入验证邮箱</h3>
+  				 <h3>重置您的密码</h3>
 			</div>
-			<div class="row text-center">
-				<p>请输入你的注册邮箱，我们将给你发送一个重置密码的链接</p>
-		    </div>
-		    <br>
-		    <div class="row">
-		    	<input type="text" id="resetemail" class="myform-control col-xs-8 col-xs-offset-2" placeholder="请输入邮箱">
-		    </div>
+			<div class="row">
+				<input type="password" id ="password1" class="myform-control col-xs-8 col-xs-offset-2"  placeholder="请输入密码"/>
+			</div>
+			<br>
+			<div class="row">
+				<input type="password" id ="password2" class="myform-control col-xs-8 col-xs-offset-2"  placeholder="请输入确认密码"/>
+			</div>
 	      	<br>
+	      	<br>
+	      	
 	      	<div class="row">
-				<button id="submit" class="btn btn-primary col-xs-8 col-xs-offset-2">提&nbsp;&nbsp;&nbsp;交</button>
+				<button id="submit" class="btn btn-primary col-xs-8 col-xs-offset-2">登&nbsp;&nbsp;&nbsp;陆</button>
 	      	</div>
 			<!-- load图片 -->
 	      	<div class="text-center">
@@ -58,42 +60,43 @@
 	</form>
  </div>
 </div>
-<br>
-<br>
-<br>
+
 <div class="container mycontainer">
 	 <div class="row">
 		<!-- copyright -->
 		<div class="copyright"></div>
 	 </div>
 </div>
-
 <script type="text/javascript">
-$(function(){
-	$("#submit").click(function(){
-		$("img.loading").removeClass("hidden");
-		$(".error-tip").text("");
-		
-		var resetemail = $("#resetemail").val();
-		var emailRex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
-		var flag = emailRex.test(resetemail);
-		console.log(flag);
-		if(flag){
-			$.get("sendResetPasswordLink.do",{"email":resetemail},function(){
-				setCookie("valiemail", resetemail);
+	$(function(){
+		$("#submit").click(function(){
+			$("img.loading").removeClass("hidden");
+			$(".error-tip").text("");
+			
+			var p1 = $("#password1").val();
+			var p2 = $("#password2").val();
+			if(p1.length<8||p1.length>20){
 				$("img.loading").addClass("hidden");
-				$(".error-tip").text("链接已经发送");
-			});
-		}else{
-			$("img.loading").addClass("hidden");
-			$(".error-tip").text("邮箱格式不正确");
-		}
+				$(".error-tip").text("密码的长度为8-20位！");
+				return false;
+			}
+			
+			if(p1==p2){
+				var un = getCookie("valiemail");
+				$.get("resetPassword.do",{"username":un,"password":p1},function(){
+					$("img.loading").addClass("hidden");
+					$(".error-tip").text("密码修改成功！");
+				});
+			}else{
+				$("img.loading").addClass("hidden");
+				$(".error-tip").text("两次密码不一致！");
+			}
+			return false;
+			
+		});
 		
-		return false;
 		
-	});
-	
-})
+	})
 
 </script>
 
