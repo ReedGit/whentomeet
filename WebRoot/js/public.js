@@ -40,6 +40,17 @@ var loadFoot = function(){
 	$("div.copyright").load("public/copyright.html"); 
 }
 
+//没登陆就隐藏“我的聚会”
+var hiddenMymeeting = function(n){
+	if(null==n||""==n){
+		$("#mymeet").addClass("hidden");
+	}else{
+		$("#mymeet").removeClass("hidden");
+	}
+}
+
+
+
 
 //分页按钮
 var pagebutton = function(pageNumUrl,items,email){
@@ -110,6 +121,9 @@ var addHourMin = function(hour,min,dura){
 var loadHead = function(){
 	$("div.header").load("public/head.html",function(){
 		var nickname = getCookie("nickname");
+		
+		hiddenMymeeting(nickname);
+		
 		if(null!=nickname && ""!=nickname){
 			//进到if里面，说明登陆成功
 			//隐藏 登陆注册 visible-xs和hidden互斥
