@@ -51,9 +51,13 @@
 			  <option value="45">45</option>
 			</select>
 			<div class="clearfix"></div>
-	      	<div id="xs-selecttime" class="img-circle text-center vparent col-xs-offset-9 cursor-pointer">
+			<br>
+			<span id="xs-selecttime" class="label label-default col-xs-offset-7 col-sm-offset-9 cursor-pointer">添加一行+</span>
+			<br>
+			<br>
+	      	<!-- <div id="xs-selecttime" class="img-circle text-center vparent col-xs-offset-9 cursor-pointer">
       			<div class="vchild">+</div>
-			</div>
+			</div> -->
 			<button id="xs-submit" type="button" class="btn btn-primary col-xs-9 col-xs-offset-1">完&nbsp;&nbsp;成</button>
 			<!-- load图片 -->
 	      	<div class="text-center  col-xs-9 col-xs-offset-1">
